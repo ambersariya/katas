@@ -1,0 +1,6 @@
+{
+    "jest.testExplorer": {
+        "testExplorer.useNativeTesting": true,
+        "enabled": true
+    }
+}
