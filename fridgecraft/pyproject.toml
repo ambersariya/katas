@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "corporate-hotel-booking"
+name = "fridgecraft"
 version = "0.1.0"
-description = "Kata"
-authors = ["Javed, Danish <Danish.Javed@F-Secure.com>"]
+description = "Fridgecraft Kata"
+authors = ["Javed, Danish <danish.javed@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
