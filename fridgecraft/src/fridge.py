@@ -5,18 +5,18 @@ from fridgecraft.src.item import Item
 
 
 class FridgeState(Enum):
-    OPENED = 'door_opened'
-    CLOSED = 'door_closed'
+    DOOR_OPENED = 'door_opened'
+    DOOR_CLOSED = 'door_closed'
 
 
 class Fridge:
     def __init__(self):
         self._items = []
-        self._state = FridgeState.CLOSED
+        self._state = FridgeState.DOOR_CLOSED
         self._current_time = None
 
     def signal_fridge_door_opened(self):
-        self._state = FridgeState.OPENED
+        self._state = FridgeState.DOOR_OPENED
 
     def show_display(self):
         pass
@@ -27,13 +27,22 @@ class Fridge:
 
     def scan_removed_item(self, name: str):
         self._ensure_fridge_opened()
+        found_item = None
+        for item in self._items:
+            if item.name == name:
+                found_item = item
+                break
+
+        if found_item:
+            self._items.remove(found_item)
+        raise self.CannotRemoveItem
 
     def _ensure_fridge_opened(self):
-        if self._state != FridgeState.OPENED:
-            raise self.CannotAddItem()
+        if self._state != FridgeState.DOOR_OPENED:
+            raise self.DoorClosed()
 
     def signal_fridge_door_closed(self):
-        pass
+        self._state = FridgeState.DOOR_CLOSED
 
     def set_current_date(self, date: str):
         self._current_time = datetime.datetime.strptime(date, '%d/%m/%y')
@@ -42,4 +51,10 @@ class Fridge:
         self._current_time = self._current_time + datetime.timedelta(days=1)
 
     class CannotAddItem(Exception):
+        pass
+
+    class DoorClosed(Exception):
+        pass
+
+    class CannotRemoveItem(Exception):
         pass

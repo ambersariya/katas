@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 from fridgecraft.src.fridge import Fridge
-from fridgecraft.src.item import Item
 
 
 class FridgeTestShould(TestCase):
@@ -10,10 +9,10 @@ class FridgeTestShould(TestCase):
         fridge = Fridge()
         fridge.set_current_date('18/10/21')
         fridge.signal_fridge_door_opened()
-        fridge.scan_added_item(item=Item(name='Milk', condition='sealed', expiry='17/10/21'))
-        fridge.scan_added_item(item=Item(name='Lettuce', condition='sealed', expiry='18/10/21'))
-        fridge.scan_added_item(item=Item(name='Peppers', condition='sealed', expiry='21/10/21'))
-        fridge.scan_added_item(item=Item(name='Cheese', condition='sealed', expiry='21/11/21'))
+        fridge.scan_added_item(name='Milk', condition='sealed', expiry='17/10/21')
+        fridge.scan_added_item(name='Lettuce', condition='sealed', expiry='18/10/21')
+        fridge.scan_added_item(name='Peppers', condition='sealed', expiry='21/10/21')
+        fridge.scan_added_item(name='Cheese', condition='sealed', expiry='21/11/21')
         fridge.signal_fridge_door_closed()
 
         return fridge
