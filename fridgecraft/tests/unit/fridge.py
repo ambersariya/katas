@@ -23,7 +23,8 @@ class TestFridge(unittest.TestCase):
     def test_be_able_to_add_items_when_door_is_opened(self):
         self.fridge.signal_fridge_door_opened()
         self.fridge.scan_added_item(name='thing', expiry='10/10/21', condition='opened')
-        self.assertEqual(1, len(self.fridge._items))
+        self.fridge.scan_added_item(name='thing-2', expiry='10/10/21', condition='opened')
+        self.assertEqual(2, len(self.fridge._items))
 
     def test_should_set_the_current_time_to_given_string(self):
         self.assertIsInstance(self.fridge._current_time, datetime.datetime)
@@ -48,7 +49,15 @@ class TestFridge(unittest.TestCase):
 
     def test_should_not_remove_item_when_there_is_no_matching_item_with_name(self):
         self.fridge.signal_fridge_door_opened()
-        self.fridge.scan_added_item(name='bread', expiry='2021', condition=str(ItemCondition.SEALED))
+        self.fridge.scan_added_item(name='bread', expiry='10/10/2021', condition=str(ItemCondition.SEALED))
 
         with self.assertRaises(self.fridge.CannotRemoveItem):
             self.fridge.scan_removed_item('jam')
+
+    def test_should_not_remove_item_with_name(self):
+        self.fridge.signal_fridge_door_opened()
+        self.fridge.scan_added_item(name='bread', expiry='10/10/2021', condition=str(ItemCondition.SEALED))
+        self.assertEqual(1, len(self.fridge._items))
+
+        self.fridge.scan_removed_item(name='bread')
+        self.assertEqual(0, len(self.fridge._items))

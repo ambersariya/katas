@@ -27,14 +27,9 @@ class Fridge:
 
     def scan_removed_item(self, name: str):
         self._ensure_fridge_opened()
-        found_item = None
         for item in self._items:
             if item.name == name:
-                found_item = item
-                break
-
-        if found_item:
-            self._items.remove(found_item)
+                return self._items.remove(item)
         raise self.CannotRemoveItem
 
     def _ensure_fridge_opened(self):
