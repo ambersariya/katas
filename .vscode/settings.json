@@ -2,5 +2,10 @@
     "jest.testExplorer": {
         "testExplorer.useNativeTesting": true,
         "enabled": true
-    }
+    },
+    "python.testing.pytestArgs": [
+        "fridgecraft"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

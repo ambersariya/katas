@@ -49,15 +49,40 @@ class TestFridge(unittest.TestCase):
 
     def test_should_not_remove_item_when_there_is_no_matching_item_with_name(self):
         self.fridge.signal_fridge_door_opened()
-        self.fridge.scan_added_item(name='bread', expiry='10/10/2021', condition=str(ItemCondition.SEALED))
+        self.fridge.scan_added_item(name='bread', expiry='10/10/21', condition=str(ItemCondition.SEALED))
 
         with self.assertRaises(self.fridge.CannotRemoveItem):
             self.fridge.scan_removed_item('jam')
 
     def test_should_not_remove_item_with_name(self):
         self.fridge.signal_fridge_door_opened()
-        self.fridge.scan_added_item(name='bread', expiry='10/10/2021', condition=str(ItemCondition.SEALED))
+        self.fridge.scan_added_item(name='bread', expiry='10/10/21', condition=str(ItemCondition.SEALED))
         self.assertEqual(1, len(self.fridge._items))
 
         self.fridge.scan_removed_item(name='bread')
         self.assertEqual(0, len(self.fridge._items))
+
+    def test_should_not_display_anything_when_there_are_no_items(self):
+        output = self.fridge.show_display()
+        self.assertIsNone(output)
+
+    def test_should_return_expiry_date_for_one_expired_item(self):
+        self.fridge.signal_fridge_door_opened()
+        self.fridge.scan_added_item(name='Lettuce', expiry='10/10/21', condition=str(ItemCondition.SEALED))
+        output = self.fridge.show_display()
+        self.assertEqual("EXPIRED: Lettuce", output)
+
+    def test_should_return_expiry_date_for_multiple_expired_item(self):
+        self.fridge.signal_fridge_door_opened()
+        self.fridge.scan_added_item(name='Lettuce', expiry='10/10/21', condition=str(ItemCondition.SEALED))
+        self.fridge.scan_added_item(name='Chicken', expiry='10/10/21', condition=str(ItemCondition.SEALED))
+        output = self.fridge.show_display()
+        self.assertEqual("EXPIRED: Lettuce\nEXPIRED: Chicken", output)
+
+    def test_should_return_expiry_date_for_multiple_item(self):
+        self.fridge.signal_fridge_door_opened()
+        self.fridge.scan_added_item(name='Lettuce', expiry='10/10/21', condition=str(ItemCondition.SEALED))
+        self.fridge.scan_added_item(name='Chicken', expiry='10/10/21', condition=str(ItemCondition.SEALED))
+        self.fridge.scan_added_item(name='Soup', expiry='19/10/21', condition=str(ItemCondition.SEALED))
+        output = self.fridge.show_display()
+        self.assertEqual("EXPIRED: Lettuce\nEXPIRED: Chicken\nSoup: 1 day remaining", output)
