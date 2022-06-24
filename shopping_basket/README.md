@@ -6,9 +6,9 @@ Outside-in kata for shopping basket, extracted from https://github.com/ambersari
 
 ### Scenario 1 - Add items to shopping basket
 
-Given I add 2 units of "The Hobbit" to my shopping basket
-And I add 5 units of "Breaking Bad"
-When I check the content of my shopping basket
+Given I add 2 units of "The Hobbit" to my shopping basket \
+And I add 5 units of "Breaking Bad" \
+When I check the content of my shopping basket \
 Then it should contain the following information:
 
 - Creation date (of the shopping basket)
