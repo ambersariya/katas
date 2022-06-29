@@ -1,5 +1,8 @@
+from typing import Optional
+
 from shopping_basket.src.shopping_basket.basketitem import BasketItem
 from shopping_basket.src.shopping_basket.product import ProductID
+from shopping_basket.src.shopping_basket.shopping_basket import ShoppingBasket
 from shopping_basket.src.shopping_basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.src.shopping_basket.user import UserID
 
@@ -12,5 +15,5 @@ class ShoppingBasketService:
         item = BasketItem(user_id=user_id, product_id=product_id, quantity=quantity)
         self.shopping_basket_repository.add_item(item)
 
-    def basket_for(self, user_id: UserID):
-        raise NotImplementedError()
+    def basket_for(self, user_id: UserID) -> Optional[ShoppingBasket]:
+        return self.shopping_basket_repository.basket_for(user_id)
