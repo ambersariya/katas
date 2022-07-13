@@ -129,6 +129,7 @@ Services should not have circular dependencies, that means if service A uses B, 
 Services should not have any state.
 Persistent data should be stored in a (in-memory) repository.
 Create a good package structure, respecting the different users and areas of the application.
+
 Bellow are a few variations of this kata that you can mix and match.
 
 1. Defined Services, undefined public interfaces
