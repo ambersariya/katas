@@ -1,2 +1,0 @@
-class CompanyPolicyViolation(Exception):
-    pass
