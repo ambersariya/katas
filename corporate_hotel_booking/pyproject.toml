@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "Corporate Hotel Booking"
+version = "0.1.0"
+description = "Corporate Hotel Booking from Codurance Katalyst"
+readme = "README.md"
+authors = ["Danish Javed <1080238+ambersariya@users.noreply.github.com>"]
+license = ""
+
+[tool.poetry.dependencies]
+python = "^3.9.7"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+isort = "^5.10.1"
+pytest = "^7.1.2"
+flake8 = "^4.0.1"
+mypy = "^0.961"
+pytest-mockito = "^0.0.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
