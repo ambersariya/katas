@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "enchanting"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+authors = ["Danish Javed <1080238+ambersariya@users.noreply.github.com>"]
+license = ""
+
+[tool.poetry.dependencies]
+python = "^3.9.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.1.0"
+flake8 = "^3.8.4"
+mypy = "^0.960"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
