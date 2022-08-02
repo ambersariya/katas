@@ -7,12 +7,12 @@ class Rule(Protocol):
 
 
 class HasMinPasswordLength(Rule):
-    def __init__(self, length: int):
-        self._length = length
+    def __init__(self, min_length: int):
+        self._min_length = min_length
 
     def check(self, password: str) -> bool:
         return (password is not None) \
-               and (len(password) >= self._length)
+               and (len(password) >= self._min_length)
 
 
 class CheckCapitalLetter(Rule):
