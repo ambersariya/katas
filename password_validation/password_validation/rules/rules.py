@@ -23,3 +23,8 @@ class CheckContainsNumber:
             if character.isnumeric():
                 return True
         return False
+
+
+class CheckContainsUnderscore:
+    def check(self, password: str):
+        return '_' in password
