@@ -1,4 +1,12 @@
-class CheckPasswordLength:
+from typing import Protocol
+
+
+class Rule(Protocol):
+    def check(self, password: str) -> bool:
+        pass
+
+
+class HasMinPasswordLength(Rule):
     def __init__(self, length: int):
         self._length = length
 
@@ -7,24 +15,24 @@ class CheckPasswordLength:
                and (len(password) >= self._length)
 
 
-class CheckCapitalLetter:
+class CheckCapitalLetter(Rule):
     def check(self, password: str) -> bool:
         return password.lower() != password
 
 
-class CheckLowercaseLetter:
-    def check(self, password: str):
+class CheckLowercaseLetter(Rule):
+    def check(self, password: str) -> bool:
         return password.upper() != password
 
 
-class CheckContainsNumber:
-    def check(self, password: str):
+class CheckContainsNumber(Rule):
+    def check(self, password: str) -> bool:
         for character in password:
             if character.isnumeric():
                 return True
         return False
 
 
-class CheckContainsUnderscore:
-    def check(self, password: str):
+class CheckContainsUnderscore(Rule):
+    def check(self, password: str) -> bool:
         return '_' in password
