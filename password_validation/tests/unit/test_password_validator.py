@@ -52,3 +52,29 @@ class PasswordValidatorShould(TestCase):
         password_validator = PasswordValidator(rules=rules)
 
         self.assertEquals(password_validator.validate(password=password), expected_result)
+
+    @parameterized.expand([
+        ('passw', False),  # no number or capital, underscore
+        ('passwo', False),  # no number or capital, underscore
+        ('password', False),  # no capital
+        ('Cdef123_', False),
+        ('Cdef12345678910_', True),
+    ])
+    def test_iteration_2_validation_3(self, password, expected_result):
+        """
+Validation 3:
+
+Have more than 16 characters
+Contains a capital letter
+Contains a lowercase
+Contains an underscore
+        """
+        rules = [
+            HasMinPasswordLength(min_length=16),
+            ContainsCapitalLetter(),
+            ContainsLowercaseLetter(),
+            ContainsUnderscore()
+        ]
+        password_validator = PasswordValidator(rules=rules)
+
+        self.assertEquals(password_validator.validate(password=password), expected_result)
