@@ -15,17 +15,17 @@ class HasMinPasswordLength(Rule):
                and (len(password) >= self._min_length)
 
 
-class CheckCapitalLetter(Rule):
+class ContainsCapitalLetter(Rule):
     def check(self, password: str) -> bool:
         return password.lower() != password
 
 
-class CheckLowercaseLetter(Rule):
+class ContainsLowercaseLetter(Rule):
     def check(self, password: str) -> bool:
         return password.upper() != password
 
 
-class CheckContainsNumber(Rule):
+class ContainsNumber(Rule):
     def check(self, password: str) -> bool:
         for character in password:
             if character.isnumeric():
@@ -33,6 +33,6 @@ class CheckContainsNumber(Rule):
         return False
 
 
-class CheckContainsUnderscore(Rule):
+class ContainsUnderscore(Rule):
     def check(self, password: str) -> bool:
         return '_' in password
