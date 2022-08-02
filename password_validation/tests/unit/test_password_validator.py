@@ -62,12 +62,12 @@ class PasswordValidatorShould(TestCase):
     ])
     def test_iteration_2_validation_3(self, password, expected_result):
         """
-Validation 3:
+        Validation 3:
 
-Have more than 16 characters
-Contains a capital letter
-Contains a lowercase
-Contains an underscore
+        Have more than 16 characters
+        Contains a capital letter
+        Contains a lowercase
+        Contains an underscore
         """
         rules = [
             HasMinPasswordLength(min_length=16),
