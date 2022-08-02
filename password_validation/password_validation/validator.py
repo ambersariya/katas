@@ -4,5 +4,5 @@ PASSWORD_LENGTH = 8
 
 
 class PasswordValidator:
-    def validate(self, password_string) -> bool:
-        return HasMinPasswordLength(min_length=PASSWORD_LENGTH).check(password_string)
+    def validate(self, password: str) -> bool:
+        return HasMinPasswordLength(min_length=PASSWORD_LENGTH).check(password)

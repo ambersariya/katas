@@ -1,21 +1,20 @@
 from unittest import TestCase
 
+from parameterized import parameterized
+
 from password_validation.validator import PasswordValidator
 
 
 class PasswordValidatorShould(TestCase):
-    def test_return_true_when_password_string_is_validated(self):
+    @parameterized.expand([
+        ('', False),  # 0 length
+        (None, False),  # 0 length
+        ('password_to_check', False),  # no number or capital, underscore
+        ('pass word', False),  # no number or capital, underscore
+        ('password1', False),  # no capital
+        ('Ab_cdef123', True),
+    ])
+    def test_iteration_1(self, password, expected_result):
         password_validator = PasswordValidator()
 
-        self.assertTrue(password_validator.validate("some string"))
-
-    def test_return_false_when_password_string_is_empty(self):
-        password_validator = PasswordValidator()
-
-        self.assertFalse(password_validator.validate(''))
-        self.assertFalse(password_validator.validate(None))
-
-    def test_return_true_when_there_is_atleast_one_capital_letter(self):
-        password_validator = PasswordValidator()
-
-        self.assertTrue(password_validator.validate('Easdfghj'))
+        self.assertEquals(password_validator.validate(password=password), expected_result)
