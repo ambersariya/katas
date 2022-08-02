@@ -1,13 +1,17 @@
-from password_validation.rules.rules import HasMinPasswordLength, ContainsUnderscore, ContainsNumber, \
-    ContainsLowercaseLetter, ContainsCapitalLetter
+from typing import List
+
+from password_validation.rules.rules import Rule
 
 PASSWORD_LENGTH = 8
 
 
 class PasswordValidator:
-    def validate(self, password: str) -> bool:
-        return HasMinPasswordLength(min_length=PASSWORD_LENGTH).check(password) \
-               and ContainsCapitalLetter().check(password) \
-               and ContainsLowercaseLetter().check(password) \
-               and ContainsNumber().check(password) \
-               and ContainsUnderscore().check(password)
+    def __init__(self, rules: List[Rule]):
+        """"""
+        self._rules = rules
+
+    def validate(self, password: str):
+        if password is None:
+            return False
+        results = [rule.check(password=password) for rule in self._rules]
+        return False not in results
