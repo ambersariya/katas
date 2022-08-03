@@ -1,10 +1,6 @@
-from dataclasses import dataclass
 from typing import Protocol, Optional
 
-
-@dataclass(init=True, frozen=True)
-class Violation:
-    message: str
+from password_validation.violations import Violation
 
 
 class Rule(Protocol):

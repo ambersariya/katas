@@ -5,18 +5,19 @@ from parameterized import parameterized
 from password_validation.rules.rules import HasMinPasswordLength, ContainsCapitalLetter, ContainsLowercaseLetter, \
     ContainsNumber, ContainsUnderscore
 from password_validation.validator import PasswordValidator
+from password_validation.violations import Violations
 
 
 class PasswordValidatorShould(TestCase):
     @parameterized.expand([
-        ('', False),  # 0 length
-        (None, False),  # 0 length
-        ('password_to_check', False),  # no number or capital, underscore
-        ('pass word', False),  # no number or capital, underscore
-        ('password1', False),  # no capital
-        ('Ab_cdef123', True),
+        ('', 5),  # 0 length
+        (None, 1),  # 0 length
+        ('password_to_check', 2),  # no number or capital, underscore
+        ('pass word', 3),  # no number or capital, underscore
+        ('password1', 2),  # no capital
+        ('Ab_cdef123', 0),
     ])
-    def test_iteration_1(self, password, expected_result):
+    def test_iteration_1(self, password, expected_num_violations):
         rules = [
             HasMinPasswordLength(min_length=8),
             ContainsCapitalLetter(),
@@ -25,16 +26,21 @@ class PasswordValidatorShould(TestCase):
             ContainsUnderscore()
         ]
         password_validator = PasswordValidator(rules=rules)
+        result = password_validator.validate(password=password)
 
-        self.assertEquals(password_validator.validate(password=password), expected_result)
+        self.assertIsInstance(result, Violations)
+        self.assertEquals(
+            len(result),
+            expected_num_violations
+        )
 
     @parameterized.expand([
-        ('passw', False),  # no number or capital, underscore
-        ('passwo', False),  # no number or capital, underscore
-        ('password', False),  # no capital
-        ('Cdef123', True),
+        ('passw', 3),  # no number or capital, underscore
+        ('passwo', 2),  # no number or capital, underscore
+        ('password', 2),  # no capital
+        ('Cdef123', 0),
     ])
-    def test_iteration_2_validation_2(self, password, expected_result):
+    def test_iteration_2_validation_2(self, password, expected_num_violations):
         """
         Validation 2:
 
@@ -50,17 +56,22 @@ class PasswordValidatorShould(TestCase):
             ContainsNumber()
         ]
         password_validator = PasswordValidator(rules=rules)
+        result = password_validator.validate(password=password)
 
-        self.assertEquals(password_validator.validate(password=password), expected_result)
+        self.assertIsInstance(result, Violations)
+        self.assertEquals(
+            len(result),
+            expected_num_violations
+        )
 
     @parameterized.expand([
-        ('passw', False),  # no number or capital, underscore
-        ('passwo', False),  # no number or capital, underscore
-        ('password', False),  # no capital
-        ('Cdef123_', False),
-        ('Cdef12345678910_', True),
+        ('passw', 3),  # no number or capital, underscore
+        ('passwo', 3),  # no number or capital, underscore
+        ('password', 3),  # no capital
+        ('Cdef123_', 1),
+        ('Cdef12345678910_', 0),
     ])
-    def test_iteration_2_validation_3(self, password, expected_result):
+    def test_iteration_2_validation_3(self, password, expected_num_violations):
         """
         Validation 3:
 
@@ -77,4 +88,10 @@ class PasswordValidatorShould(TestCase):
         ]
         password_validator = PasswordValidator(rules=rules)
 
-        self.assertEquals(password_validator.validate(password=password), expected_result)
+        result = password_validator.validate(password=password)
+
+        self.assertIsInstance(result, Violations)
+        self.assertEquals(
+            len(result),
+            expected_num_violations
+        )
