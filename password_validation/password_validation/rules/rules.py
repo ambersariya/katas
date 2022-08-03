@@ -23,8 +23,9 @@ class HasMinPasswordLength(Rule):
 
 
 class ContainsCapitalLetter(Rule):
-    def check(self, password: str) -> bool:
-        return password.lower() != password
+    def check(self, password: str) -> Optional[Violation]:
+        if password.lower() == password:
+            return Violation("Password should contain at least one capital letter")
 
 
 class ContainsLowercaseLetter(Rule):
