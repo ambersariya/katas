@@ -43,5 +43,6 @@ class ContainsNumber(Rule):
 
 
 class ContainsUnderscore(Rule):
-    def check(self, password: str) -> bool:
-        return '_' in password
+    def check(self, password: str) -> Optional[Violation]:
+        if '_' not in password:
+            return Violation("Password should contain at least one underscore")
