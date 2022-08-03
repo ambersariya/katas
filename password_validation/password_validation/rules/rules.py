@@ -35,11 +35,11 @@ class ContainsLowercaseLetter(Rule):
 
 
 class ContainsNumber(Rule):
-    def check(self, password: str) -> bool:
+    def check(self, password: str) -> Optional[Violation]:
         for character in password:
             if character.isnumeric():
-                return True
-        return False
+                return
+        return Violation("Password should contain at least one number")
 
 
 class ContainsUnderscore(Rule):
