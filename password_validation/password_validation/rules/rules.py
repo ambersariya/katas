@@ -29,8 +29,9 @@ class ContainsCapitalLetter(Rule):
 
 
 class ContainsLowercaseLetter(Rule):
-    def check(self, password: str) -> bool:
-        return password.upper() != password
+    def check(self, password: str) -> Optional[Violation]:
+        if password.upper() == password:
+            return Violation("Password should contain at least one lowercase letter")
 
 
 class ContainsNumber(Rule):
