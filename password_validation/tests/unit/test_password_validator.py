@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from parameterized import parameterized
 
+from password_validation.strategies.strategy import AllRulesPassStrategy
 from password_validation.validator_builder import PasswordValidatorBuilder
 from password_validation.violations import Violations
 
@@ -22,11 +23,12 @@ class PasswordValidatorShould(TestCase):
             .contains_lower_case_letter() \
             .contains_underscore() \
             .contains_number() \
+            .with_strategy(AllRulesPassStrategy()) \
             .build()
         result = password_validator.validate(password=password)
 
         self.assertIsInstance(result, Violations)
-        self.assertEquals(
+        self.assertEqual(
             len(result),
             expected_num_violations
         )
@@ -43,11 +45,12 @@ class PasswordValidatorShould(TestCase):
             .contains_capital_letter() \
             .contains_lower_case_letter() \
             .contains_number() \
+            .with_strategy(AllRulesPassStrategy()) \
             .build()
         result = password_validator.validate(password=password)
 
         self.assertIsInstance(result, Violations)
-        self.assertEquals(
+        self.assertEqual(
             len(result),
             expected_num_violations
         )
@@ -65,12 +68,13 @@ class PasswordValidatorShould(TestCase):
             .contains_capital_letter() \
             .contains_lower_case_letter() \
             .contains_underscore() \
+            .with_strategy(AllRulesPassStrategy()) \
             .build()
 
         result = password_validator.validate(password=password)
 
         self.assertIsInstance(result, Violations)
-        self.assertEquals(
+        self.assertEqual(
             len(result),
             expected_num_violations
         )
