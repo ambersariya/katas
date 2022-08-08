@@ -18,3 +18,6 @@ class Violations:
 
     def __len__(self):
         return len(self._violations)
+
+    def __iter__(self):
+        return iter(self._violations)

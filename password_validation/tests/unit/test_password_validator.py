@@ -3,6 +3,7 @@ from unittest import TestCase
 from parameterized import parameterized
 
 from password_validation.strategies.strategy import AllRulesPassStrategy
+from password_validation.validation_result import ValidationResult
 from password_validation.validator_builder import PasswordValidatorBuilder
 from password_validation.violations import Violations
 
@@ -27,9 +28,10 @@ class PasswordValidatorShould(TestCase):
             .build()
         result = password_validator.validate(password=password)
 
-        self.assertIsInstance(result, Violations)
+        self.assertIsInstance(result, ValidationResult)
+        self.assertIsInstance(result.violations, Violations)
         self.assertEqual(
-            len(result),
+            len(result.violations),
             expected_num_violations
         )
 
@@ -49,9 +51,10 @@ class PasswordValidatorShould(TestCase):
             .build()
         result = password_validator.validate(password=password)
 
-        self.assertIsInstance(result, Violations)
+        self.assertIsInstance(result, ValidationResult)
+        self.assertIsInstance(result.violations, Violations)
         self.assertEqual(
-            len(result),
+            len(result.violations),
             expected_num_violations
         )
 
@@ -73,8 +76,9 @@ class PasswordValidatorShould(TestCase):
 
         result = password_validator.validate(password=password)
 
-        self.assertIsInstance(result, Violations)
+        self.assertIsInstance(result, ValidationResult)
+        self.assertIsInstance(result.violations, Violations)
         self.assertEqual(
-            len(result),
+            len(result.violations),
             expected_num_violations
         )

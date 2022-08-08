@@ -23,5 +23,5 @@ class ValidatorBuilderShould(TestCase):
         password_to_pass = "Danish"
         password_to_fail = "foo"
 
-        self.assertEqual(len(validator.validate(password_to_pass)), 0)
-        self.assertEqual(len(validator.validate(password_to_fail)), 2)
+        self.assertEqual(len(validator.validate(password_to_pass).violations), 0)
+        self.assertEqual(len(validator.validate(password_to_fail).violations), 2)
