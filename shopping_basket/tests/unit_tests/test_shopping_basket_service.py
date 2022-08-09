@@ -8,7 +8,7 @@ from shopping_basket.user import UserId
 
 
 class ShoppingBasketServiceShould(TestCase):
-    def test_throw_error_when_user_doesnt_have_a_basket(self):
+    def test_raise_error_when_user_doesnt_have_a_basket(self):
         user_id = UserId('abc-123')
         shopping_basket_repository = MagicMock(ShoppingBasketRepository)
         basket_service = ShoppingBasketService(shopping_basket_repository)
