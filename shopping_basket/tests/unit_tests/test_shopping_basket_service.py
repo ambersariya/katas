@@ -28,4 +28,4 @@ class ShoppingBasketServiceShould(TestCase):
         basket = basket_service.basket_for(user_id=user_id)
 
         self.assertIsInstance(basket, ShoppingBasket)
-        self.assertEquals(user_id, basket.user_id)
+        self.assertEqual(user_id, basket.user_id)

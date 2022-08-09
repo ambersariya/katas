@@ -13,7 +13,6 @@ class ShoppingBasketService:
             raise self.ShoppingBasketNotFoundError()
         return basket
 
-
     def add_item(self, user_id, product_id, quantity):
         raise NotImplementedError()
 
