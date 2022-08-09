@@ -1,6 +1,11 @@
+from dataclasses import dataclass
+
+
+@dataclass(init=True, frozen=True)
 class UserId:
-    pass
+    value: str
 
 
+@dataclass(init=True, frozen=True)
 class User:
-    pass
+    id: UserId
