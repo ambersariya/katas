@@ -57,6 +57,4 @@ class ShoppingBasketServiceShould(TestCase):
         basket_service.add_item(user_id=user_id, product_id=product.id, quantity=quantity)
 
         # then
-        shopping_basket_repository.add_item.assert_called_once_with(
-            shopping_basket_item
-        )
+        shopping_basket_repository.add_item.assert_called_once_with(shopping_basket_item)
