@@ -6,8 +6,8 @@ from shopping_basket.user import UserId
 
 
 class ShoppingBasketService:
-    def __init__(self, shopping_basket_repository: ShoppingBasketRepository, product_repository: ProductRepository):
-        self.product_repository = product_repository
+    def __init__(self, shopping_basket_repository: ShoppingBasketRepository, product_service: ProductRepository):
+        self.product_service = product_service
         self._shopping_basket_repository = shopping_basket_repository
 
     def basket_for(self, user_id: UserId) -> ShoppingBasket:
@@ -17,8 +17,9 @@ class ShoppingBasketService:
         return basket
 
     def add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
-        product = self.product_repository.find_product_by_id(product_id=ProductId(product_id))
-        self._shopping_basket_repository.add_item(ShoppingBasketItem.for_product(product, quantity=quantity))
+        product = self.product_service.find_product_by_id(product_id=product_id)
+        self._shopping_basket_repository.add_item(item=ShoppingBasketItem.for_product(product, quantity=quantity),
+                                                  user_id=user_id)
 
     class ShoppingBasketNotFoundError(Exception):
         pass
