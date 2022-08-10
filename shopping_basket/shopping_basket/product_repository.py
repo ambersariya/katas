@@ -9,6 +9,10 @@ class ProductRepository(Protocol):
     def find_product_by_id(self, product_id: ProductId) -> Product:
         pass
 
+    @abstractmethod
+    def add_product(self, product: Product):
+        pass
+
 
 class InMemoryProductRepository(ProductRepository):
     _products: dict
@@ -20,19 +24,5 @@ class InMemoryProductRepository(ProductRepository):
         if product_id in self._products:
             return self._products[product_id]
 
-
-    # Books
-    # 10001: Lord
-    # of
-    # the
-    # Rings - £10.00
-    # 10002: The
-    # Hobbit - £5.00
-    # DVDs
-    # 20001: Game
-    # of
-    # Thrones - £9.00
-    # 20110: Breaking
-    # Bad - £7.00
     def add_product(self, product: Product):
         self._products[product.id] = product
