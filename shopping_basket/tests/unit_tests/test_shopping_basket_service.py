@@ -1,60 +1,49 @@
+from typing import Final
 from unittest import TestCase
 from unittest.mock import MagicMock
 
 from shopping_basket.product import Product, ProductId
 from shopping_basket.product_repository import ProductRepository
-from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItems, ShoppingBasketItem
+from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
 from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.user import UserId
 
+USER_ID: Final[UserId] = UserId('some-id')
+PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
+BASKET_ITEM_QUANTITY = 5
+BASKET_ITEM: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT, quantity=BASKET_ITEM_QUANTITY)
+BASKET_CREATION_DATE = '15/06/2022'
+SHOPPING_BASKET = ShoppingBasket(user_id=USER_ID, created_at=BASKET_CREATION_DATE, items=[])
+
 
 class ShoppingBasketServiceShould(TestCase):
-    def test_raise_error_when_user_doesnt_have_a_basket(self):
-        user_id = UserId('abc-123')
-        shopping_basket_repository = MagicMock(ShoppingBasketRepository)
-        product_repository = MagicMock(ProductRepository)
+    def setUp(self):
+        self.shopping_basket_repository = MagicMock(ShoppingBasketRepository)
+        self.product_repository = MagicMock(ProductRepository)
 
-        basket_service = ShoppingBasketService(shopping_basket_repository, product_repository)
-        shopping_basket_repository.basket_for.return_value = None
+    def test_raise_error_when_user_doesnt_have_a_basket(self):
+        basket_service = ShoppingBasketService(self.shopping_basket_repository, self.product_repository)
+        self.shopping_basket_repository.basket_for.return_value = None
 
         with self.assertRaises(basket_service.ShoppingBasketNotFoundError):
-            basket_service.basket_for(user_id)
+            basket_service.basket_for(USER_ID)
 
-        shopping_basket_repository.basket_for.assert_called_once()
+        self.shopping_basket_repository.basket_for.assert_called_once()
 
     def test_return_basket_for_given_user(self):
-        user_id = UserId('abc-123')
-        basket_created_at = '15/06/2022'
+        basket_service = ShoppingBasketService(self.shopping_basket_repository, self.product_repository)
+        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET
 
-        shopping_basket_repository = MagicMock(ShoppingBasketRepository)
-        product_repository = MagicMock(ProductRepository)
-
-        basket_service = ShoppingBasketService(shopping_basket_repository, product_repository)
-        shopping_basket = ShoppingBasket(user_id=user_id, created_at=basket_created_at, items=[])
-
-        shopping_basket_repository.basket_for.return_value = shopping_basket
-
-        basket = basket_service.basket_for(user_id=user_id)
+        basket = basket_service.basket_for(user_id=USER_ID)
 
         self.assertIsInstance(basket, ShoppingBasket)
-        self.assertEqual(user_id, basket.user_id)
+        self.assertEqual(USER_ID, basket.user_id)
 
     def test_create_shopping_basket_when_item_is_added_and_basket_shouldnt_exist(self):
-        # given
-        basket_created_at = '15/06/2022'
-        user_id = UserId('abc-123')
-        quantity = 2
-        product = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
-        shopping_basket_item = ShoppingBasketItem.for_product(product=product, quantity=quantity)
+        self.product_repository.find_product_by_id.return_value = PRODUCT
 
-        product_repository = MagicMock(ProductRepository)
-        product_repository.find_product_by_id.return_value = product
-        shopping_basket_repository = MagicMock(ShoppingBasketRepository)
+        basket_service = ShoppingBasketService(self.shopping_basket_repository, self.product_repository)
+        basket_service.add_item(user_id=USER_ID, product_id=PRODUCT.id, quantity=BASKET_ITEM_QUANTITY)
 
-        # when
-        basket_service = ShoppingBasketService(shopping_basket_repository, product_repository)
-        basket_service.add_item(user_id=user_id, product_id=product.id, quantity=quantity)
-
-        # then
-        shopping_basket_repository.add_item.assert_called_once_with(shopping_basket_item)
+        self.shopping_basket_repository.add_item.assert_called_once_with(BASKET_ITEM)
