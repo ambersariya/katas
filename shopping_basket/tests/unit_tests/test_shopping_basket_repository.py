@@ -1,3 +1,4 @@
+from typing import Final
 from unittest import TestCase
 from unittest.mock import MagicMock
 
@@ -7,9 +8,9 @@ from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
 from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
 from shopping_basket.user import UserId
 
-USER_ID = UserId('some-id')
-PRODUCT = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
-BASKET_ITEM = ShoppingBasketItem.for_product(product=PRODUCT, quantity=5)
+USER_ID: Final[UserId] = UserId('some-id')
+PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
+BASKET_ITEM: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT, quantity=5)
 
 
 class InMemoryShoppingBasketRepositoryShould(TestCase):
