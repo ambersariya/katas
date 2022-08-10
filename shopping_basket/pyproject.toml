@@ -10,10 +10,10 @@ license = ""
 python = "^3.9.13"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1.2"
 black = "^22.1.0"
-flake8 = "^3.8.4"
-mypy = "^0.960"
+flake8 = "^5.0.4"
+mypy = "^0.971"
 isort = "^5.10.1"
 behave = "^1.2.6"
 
