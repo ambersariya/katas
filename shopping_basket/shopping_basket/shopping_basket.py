@@ -21,6 +21,14 @@ class ShoppingBasketItem:
             quantity=quantity
         )
 
+    def total(self):
+        return self.price * self.quantity
+
+    def __str__(self):
+        price = "{:.2f}".format(self.price)
+        total = "{:.2f}".format(self.total())
+        return f"{self.quantity} x {self.name} // {self.quantity} x {price} = £{total}"
+
 
 @dataclass()
 class ShoppingBasketItems:
@@ -34,6 +42,9 @@ class ShoppingBasketItems:
 
     def add(self, item: ShoppingBasketItem):
         self._items.append(item)
+
+    def items(self):
+        return self._items
 
 
 @dataclass()
@@ -49,3 +60,12 @@ class ShoppingBasket:
 
     def add(self, item: ShoppingBasketItem):
         self.items.add(item=item)
+
+    def __str__(self):
+        total = 0
+        body = f"Creation date {self.created_at}\n"
+        for item in self.items.items():
+            body += f'{str(item)}\n'
+            total += item.total()
+        body += f"Total: £{'{:.2f}'.format(total)}"
+        return body
