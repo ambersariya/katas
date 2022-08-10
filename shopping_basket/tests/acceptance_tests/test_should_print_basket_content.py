@@ -1,4 +1,4 @@
-from unittest import TestCase, skip
+from unittest import TestCase
 from unittest.mock import MagicMock
 
 from shopping_basket.date_provider import DateProvider
@@ -7,7 +7,6 @@ from shopping_basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.user import UserId
 
 
-@skip(reason="Have to implement unit tests first")
 class PrintBasketContentShould(TestCase):
 
     def setUp(self):
