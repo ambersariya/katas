@@ -29,8 +29,6 @@ class ShoppingBasketServiceShould(TestCase):
         with self.assertRaises(basket_service.ShoppingBasketNotFoundError):
             basket_service.basket_for(USER_ID)
 
-        self.shopping_basket_repository.basket_for.assert_called_once()
-
     def test_return_basket_for_given_user(self):
         basket_service = ShoppingBasketService(self.shopping_basket_repository, self.product_repository)
         self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET

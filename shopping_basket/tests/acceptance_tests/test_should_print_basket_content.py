@@ -12,7 +12,7 @@ class PrintBasketContentShould(TestCase):
     def setUp(self):
         self.shopping_basket_service = ShoppingBasketService()
         self.product_service = ProductService()
-        self.user_id = UserId()
+        self.user_id = UserId('user-01')
 
     def test_return_contents_of_the_basket(self):
         date_provider = MagicMock(DateProvider)
@@ -33,7 +33,7 @@ class PrintBasketContentShould(TestCase):
         assert str(basket) == basket_printout
 
     def _add_item(self, user_id, item_name, quantity):
-        item = self.product_service.find_product_by_name(item_name)
+        item = self.product_service.find_product_by_id(item_name)
 
         self.shopping_basket_service.add_item(user_id=self.user_id,
                                               product_id=item.id,
