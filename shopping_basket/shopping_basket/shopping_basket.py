@@ -1,5 +1,6 @@
+from abc import abstractmethod
 from dataclasses import dataclass
-from typing import List
+from typing import List, Protocol
 
 from shopping_basket.product import Product
 from shopping_basket.user import UserId
@@ -63,7 +64,6 @@ class ShoppingBasketItems:
         return self._items
 
 
-@dataclass()
 class ShoppingBasket:
     user_id: UserId
     created_at: str
@@ -74,7 +74,7 @@ class ShoppingBasket:
         self.created_at = created_at
         self.user_id = user_id
 
-    def add(self, item: ShoppingBasketItem):
+    def add(self, item: ShoppingBasketItem) -> None:
         self.items.add(item=item)
 
     def __str__(self):

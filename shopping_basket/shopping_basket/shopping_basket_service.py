@@ -18,8 +18,13 @@ class ShoppingBasketService:
 
     def add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
         product = self.product_service.find_product_by_id(product_id=product_id)
-        self._shopping_basket_repository.add_item(item=ShoppingBasketItem.for_product(product, quantity=quantity),
-                                                  user_id=user_id)
+        item = ShoppingBasketItem.for_product(product, quantity=quantity)
+        self._shopping_basket_repository.add_item(item=item, user_id=user_id)
+        self._log_item(user_id=item, item=item)
+
+    @staticmethod
+    def _log_item(user_id: UserId, item: ShoppingBasketItem):
+        print(f'[{item.name}]: User[{user_id}], Product[{item.id}], Quantity[{item.quantity}]')
 
     class ShoppingBasketNotFoundError(Exception):
         pass
