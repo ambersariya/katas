@@ -9,8 +9,10 @@ from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRep
 from shopping_basket.user import UserId
 
 USER_ID: Final[UserId] = UserId('some-id')
-PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
-BASKET_ITEM: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT, quantity=5)
+PRODUCT_1: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
+PRODUCT_2: Final[Product] = Product(ProductId('product-2'), name='Topgun DVD', price=5)
+BASKET_ITEM_1: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT_1, quantity=5)
+BASKET_ITEM_2: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT_2, quantity=5)
 
 
 class InMemoryShoppingBasketRepositoryShould(TestCase):
@@ -24,9 +26,35 @@ class InMemoryShoppingBasketRepositoryShould(TestCase):
 
     def test_create_shopping_basket_only_when_we_add_an_item(self):
         self.date_provider.current_date.return_value = '15/06/2022'
-        self.repository.add_item(item=BASKET_ITEM, user_id=USER_ID)
+        self.repository.add_item(item=BASKET_ITEM_1, user_id=USER_ID)
 
         result = self.repository.basket_for(user_id=USER_ID)
 
         self.assertIsInstance(result, ShoppingBasket)
         self.assertEqual(1, len(result.items))
+
+    def test_save_more_than_one_kind_of_item_with_different_id(self):
+        self.date_provider.current_date.return_value = '15/06/2022'
+        self.repository.add_item(item=BASKET_ITEM_1, user_id=USER_ID)
+        self.repository.add_item(item=BASKET_ITEM_2, user_id=USER_ID)
+
+        result = self.repository.basket_for(user_id=USER_ID)
+
+        self.assertIsInstance(result, ShoppingBasket)
+        self.assertEqual(2, len(result.items))
+        self.assertEqual(BASKET_ITEM_1, result.items[0])
+        self.assertEqual(BASKET_ITEM_2, result.items[1])
+
+    def test_update_quantity_and_total_of_item_that_is_added_twice(self):
+        self.date_provider.current_date.return_value = '15/06/2022'
+        self.repository.add_item(item=BASKET_ITEM_1, user_id=USER_ID)
+        self.repository.add_item(item=BASKET_ITEM_1, user_id=USER_ID)
+
+        result = self.repository.basket_for(user_id=USER_ID)
+
+        self.assertIsInstance(result, ShoppingBasket)
+        self.assertEqual(1, len(result.items))
+        item = result.items[0]
+        self.assertIsInstance(item, ShoppingBasketItem)
+        self.assertEqual(10, item.quantity)
+        self.assertEqual(50, item.total())

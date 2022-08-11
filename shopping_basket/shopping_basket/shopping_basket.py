@@ -1,11 +1,11 @@
 from dataclasses import dataclass
-from typing import List, Any
+from typing import List
 
 from shopping_basket.product import Product
 from shopping_basket.user import UserId
 
 
-@dataclass(init=True, frozen=True)
+@dataclass(init=True, frozen=True, repr=True)
 class ShoppingBasketItem:
     id: str
     name: str
@@ -29,6 +29,14 @@ class ShoppingBasketItem:
         total = "{:.2f}".format(self.total())
         return f"{self.quantity} x {self.name} // {self.quantity} x {price} = £{total}"
 
+    def update_quantity(self, quantity) -> 'ShoppingBasketItem':
+        return ShoppingBasketItem(
+            id=self.id,
+            price=self.price,
+            name=self.name,
+            quantity=quantity + self.quantity
+        )
+
 
 @dataclass()
 class ShoppingBasketItems:
@@ -40,7 +48,15 @@ class ShoppingBasketItems:
     def __len__(self):
         return len(self._items)
 
+    def __getitem__(self, index):
+        return self._items[index]
+
     def add(self, item: ShoppingBasketItem):
+        for index, existing_item in enumerate(self._items):
+            if existing_item.id == item.id:
+                updated_item = existing_item.update_quantity(item.quantity)
+                self._items[index] = updated_item
+                return
         self._items.append(item)
 
     def items(self):
