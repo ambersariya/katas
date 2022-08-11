@@ -40,7 +40,7 @@ class PrintBasketContentShould(TestCase):
             "Total: £55.00"
 
         assert str(basket) == basket_printout
-        assert mock_print.call_count == 2
+        assert mock_print.call_count == 3
 
     def _add_item(self, user_id, product_id, quantity):
         self.basket_service_decorator.add_item(user_id=user_id,
