@@ -85,3 +85,4 @@ class ShoppingBasket:
             total += item.total()
         body += f"Total: £{'{:.2f}'.format(total)}"
         return body
+

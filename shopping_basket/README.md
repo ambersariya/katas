@@ -39,7 +39,7 @@ Products available (in-memory repository):
 
 - Log items added to shopping cart on the console:
   [ITEM ADDED TO SHOPPING CART]: User[<ID>], Product[ID], Quantity[<N>]
-    - Not modify original behaviour (Decorator pattern)
+    ~~- Not modify original behaviour (Decorator pattern)~~
 
 ### Scenario 3 - Stock restriction
 

@@ -8,6 +8,7 @@ license = ""
 
 [tool.poetry.dependencies]
 python = "^3.9.13"
+coverage = "^6.4.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"

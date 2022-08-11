@@ -3,10 +3,15 @@ from shopping_basket.product_service import ProductService
 from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
 from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.user import UserId
+from shopping_basket.utilities import ItemLogger
 
 
 class ShoppingBasketService:
-    def __init__(self, shopping_basket_repository: ShoppingBasketRepository, product_service: ProductService):
+    def __init__(self,
+                 shopping_basket_repository: ShoppingBasketRepository,
+                 product_service: ProductService,
+                 item_logger: ItemLogger):
+        self.item_logger = item_logger
         self.product_service = product_service
         self._shopping_basket_repository = shopping_basket_repository
 
@@ -20,11 +25,7 @@ class ShoppingBasketService:
         product = self.product_service.find_product_by_id(product_id=product_id)
         item = ShoppingBasketItem.for_product(product, quantity=quantity)
         self._shopping_basket_repository.add_item(item=item, user_id=user_id)
-        self._log_item(user_id=item, item=item)
-
-    @staticmethod
-    def _log_item(user_id: UserId, item: ShoppingBasketItem):
-        print(f'[{item.name}]: User[{user_id}], Product[{item.id}], Quantity[{item.quantity}]')
+        self.item_logger.log(user_id=item, item=item)
 
     class ShoppingBasketNotFoundError(Exception):
         pass

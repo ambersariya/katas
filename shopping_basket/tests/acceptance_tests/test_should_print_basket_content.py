@@ -8,6 +8,7 @@ from shopping_basket.product_service import ProductService
 from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
 from shopping_basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.user import UserId
+from shopping_basket.utilities import ItemLogger
 
 
 class PrintBasketContentShould(TestCase):
@@ -18,8 +19,10 @@ class PrintBasketContentShould(TestCase):
         self.shopping_basket_repository = InMemoryShoppingBasketRepository(date_provider=date_provider)
         self.product_repository = InMemoryProductRepository()
         self.product_service = ProductService(self.product_repository)
+        self.item_logger = ItemLogger()
         self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
-                                                             shopping_basket_repository=self.shopping_basket_repository)
+                                                             shopping_basket_repository=self.shopping_basket_repository,
+                                                             item_logger=self.item_logger)
         self.user_id = UserId('user-01')
         self._fill_products()
 
