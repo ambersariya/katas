@@ -100,3 +100,7 @@ Products available (in-memory repository):
 
     }
 ```
+
+### Scenario 8 - Convert to Rest API
+
+### Scenario 9 - Convert to Cli package
