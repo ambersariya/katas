@@ -1,6 +1,7 @@
 from unittest import TestCase
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
+from shopping_basket.console_logging_decorator import ConsoleLoggingDecorator
 from shopping_basket.date_provider import DateProvider
 from shopping_basket.product import Product, ProductId
 from shopping_basket.product_repository import InMemoryProductRepository
@@ -20,11 +21,12 @@ class PrintBasketContentShould(TestCase):
         self.product_service = ProductService(self.product_repository)
         self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
                                                              shopping_basket_repository=self.shopping_basket_repository)
+        self.basket_service_decorator = ConsoleLoggingDecorator(self.shopping_basket_service)
         self.user_id = UserId('user-01')
         self._fill_products()
 
-    def test_return_contents_of_the_basket(self):
-
+    @patch('builtins.print')
+    def test_return_contents_of_the_basket(self, mock_print):
         self._add_item(self.user_id, ProductId("10002"), 2)
         self._add_item(self.user_id, ProductId("20110"), 5)
 
@@ -37,12 +39,12 @@ class PrintBasketContentShould(TestCase):
             "Total: £45.00"
 
         assert str(basket) == basket_printout
+        assert mock_print.call_count == 2
 
     def _add_item(self, user_id, product_id, quantity):
-
-        self.shopping_basket_service.add_item(user_id=user_id,
-                                              product_id=product_id,
-                                              quantity=int(quantity))
+        self.basket_service_decorator.add_item(user_id=user_id,
+                                               product_id=product_id,
+                                               quantity=int(quantity))
 
     def _fill_products(self):
         self.product_repository.add_product(Product(id=ProductId('10001'), name="Lord of the Rings", price=10))
