@@ -2,6 +2,12 @@ from dataclasses import dataclass
 
 
 @dataclass(init=True, frozen=True)
+class Stock:
+    available: int
+    reserved: int = 0
+
+
+@dataclass(init=True, frozen=True)
 class ProductId:
     value: str
 
@@ -14,3 +20,4 @@ class Product:
     id: ProductId
     name: str
     price: int
+
