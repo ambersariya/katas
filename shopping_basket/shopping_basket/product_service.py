@@ -19,4 +19,6 @@ class ProductService:
         self._stock_management_service.reserve(product_id=product_id, quantity=quantity)
         return product
 
-
+    def add_product(self, product, stock):
+        self._product_repository.add_product(product=product)
+        self._stock_management_service.save_stock(stock=stock)

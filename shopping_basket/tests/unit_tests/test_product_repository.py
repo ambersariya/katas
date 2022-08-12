@@ -6,21 +6,28 @@ from shopping_basket.product_repository import InMemoryProductRepository
 
 PRODUCT_ID: Final[ProductId] = ProductId("10001")
 PRODUCT: Final[Product] = Product(PRODUCT_ID, name='Lord of the Rings', price=10)
+NEW_PRODUCT: Final[Product] = Product(PRODUCT_ID, name='Lord of the Rings HD', price=10)
 
 
 class ProductRepositoryShould(TestCase):
-    def test_return_product_by_id(self):
-        product_repo = InMemoryProductRepository()
-        product_repo.add_product(PRODUCT)
 
-        expected_product = product_repo.find_product_by_id(PRODUCT_ID)
+    def setUp(self):
+        self.product_repo = InMemoryProductRepository()
+        self.product_repo.add_product(PRODUCT)
+
+    def test_return_product_by_id(self):
+        expected_product = self.product_repo.find_product_by_id(PRODUCT_ID)
 
         self.assertEqual(expected_product, PRODUCT)
 
     def test_return_nothing_when_product_doesnt_exist(self):
-        product_repo = InMemoryProductRepository()
-        product_repo.add_product(PRODUCT)
-
-        expected_product = product_repo.find_product_by_id(ProductId('random_id'))
+        expected_product = self.product_repo.find_product_by_id(ProductId('random_id'))
 
         self.assertIsNone(expected_product)
+
+    def test_return_updated_product_when_adding_new_product_with_existing_id(self):
+        self.product_repo.add_product(NEW_PRODUCT)
+
+        expected_product = self.product_repo.find_product_by_id(PRODUCT_ID)
+        self.assertEqual(expected_product, NEW_PRODUCT)
+
