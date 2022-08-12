@@ -19,7 +19,7 @@ Then it should contain the following information:
 Products available (in-memory repository):
 
 - Books
-    - 10001: Lord of the Rings - £10.00
+    - 10001: Lord of the Rings - £10.00+96*54/
     - 10002: The Hobbit - £5.00
 - DVDs
     - 20001: Game of Thrones - £9.00
