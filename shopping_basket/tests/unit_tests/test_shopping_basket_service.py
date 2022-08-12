@@ -2,8 +2,8 @@ from typing import Final
 from unittest import TestCase
 from unittest.mock import MagicMock
 
+from shopping_basket.errors import ShoppingBasketNotFoundError
 from shopping_basket.product import Product, ProductId
-from shopping_basket.product_repository import ProductRepository
 from shopping_basket.product_service import ProductService
 from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
 from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
@@ -30,7 +30,7 @@ class ShoppingBasketServiceShould(TestCase):
     def test_raise_error_when_user_doesnt_have_a_basket(self):
         self.shopping_basket_repository.basket_for.return_value = None
 
-        with self.assertRaises(self.basket_service.ShoppingBasketNotFoundError):
+        with self.assertRaises(ShoppingBasketNotFoundError):
             self.basket_service.basket_for(USER_ID)
 
     def test_return_basket_for_given_user(self):

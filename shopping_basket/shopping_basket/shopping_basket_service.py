@@ -1,3 +1,4 @@
+from shopping_basket.errors import ShoppingBasketNotFoundError
 from shopping_basket.product import ProductId
 from shopping_basket.product_service import ProductService
 from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
@@ -18,7 +19,7 @@ class ShoppingBasketService:
     def basket_for(self, user_id: UserId) -> ShoppingBasket:
         basket = self._shopping_basket_repository.basket_for(user_id)
         if basket is None:
-            raise self.ShoppingBasketNotFoundError()
+            raise ShoppingBasketNotFoundError()
         return basket
 
     def add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
@@ -27,5 +28,4 @@ class ShoppingBasketService:
         self._shopping_basket_repository.add_item(item=item, user_id=user_id)
         self.item_logger.log(user_id=item, item=item)
 
-    class ShoppingBasketNotFoundError(Exception):
-        pass
+

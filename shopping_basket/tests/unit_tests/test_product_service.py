@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
+from shopping_basket.errors import ProductNotFoundError
 from shopping_basket.product import ProductId, Product
 from shopping_basket.product_repository import ProductRepository
 from shopping_basket.product_service import ProductService
@@ -24,5 +25,5 @@ class ProductServiceShould(TestCase):
         product_id = ProductId('10001')
         self.product_repository.find_product_by_id.return_value = None
 
-        with self.assertRaises(self.product_service.ProductNotFoundError):
+        with self.assertRaises(ProductNotFoundError):
             self.product_service.find_product_by_id(product_id)
