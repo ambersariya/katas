@@ -7,6 +7,9 @@ from shopping_basket.product_repository import InMemoryProductRepository
 from shopping_basket.product_service import ProductService
 from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
 from shopping_basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.stock.stock import Stock
+from shopping_basket.stock.stock_management_service import StockManagementService
+from shopping_basket.stock.stock_repository import InMemoryStockRepository
 from shopping_basket.user import UserId
 from shopping_basket.utilities import ItemLogger
 
@@ -18,7 +21,11 @@ class PrintBasketContentShould(TestCase):
         date_provider.current_date.return_value = "14/6/2022"
         self.shopping_basket_repository = InMemoryShoppingBasketRepository(date_provider=date_provider)
         self.product_repository = InMemoryProductRepository()
-        self.product_service = ProductService(self.product_repository)
+        self.stock_repository = InMemoryStockRepository()
+        self.stock_management_service = StockManagementService(self.stock_repository)
+        self.product_repository = InMemoryProductRepository()
+        self.product_service = ProductService(product_repository=self.product_repository,
+                                              stock_management_service=self.stock_management_service)
         self.item_logger = ItemLogger()
         self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
                                                              shopping_basket_repository=self.shopping_basket_repository,
@@ -49,7 +56,11 @@ class PrintBasketContentShould(TestCase):
                                               quantity=int(quantity))
 
     def _fill_products(self):
-        self.product_repository.add_product(Product(id=ProductId('10001'), name="Lord of the Rings", price=10))
-        self.product_repository.add_product(Product(id=ProductId('10002'), name="The Hobbit", price=5))
-        self.product_repository.add_product(Product(id=ProductId('20001'), name="Game of Thrones", price=9))
-        self.product_repository.add_product(Product(id=ProductId('20110'), name="Breaking Bad", price=7))
+        self.product_service.add_product(product=Product(id=ProductId('10001'), name="Lord of the Rings", price=10),
+                                         stock=Stock(product_id=ProductId('10001'), available=5, reserved=0))
+        self.product_service.add_product(product=Product(id=ProductId('10002'), name="The Hobbit", price=5),
+                                         stock=Stock(product_id=ProductId('10002'), available=5, reserved=0))
+        self.product_service.add_product(product=Product(id=ProductId('20001'), name="Game of Thrones", price=9),
+                                         stock=Stock(product_id=ProductId('20001'), available=5, reserved=0))
+        self.product_service.add_product(product=Product(id=ProductId('20110'), name="Breaking Bad", price=7),
+                                         stock=Stock(product_id=ProductId('20110'), available=5, reserved=0))
