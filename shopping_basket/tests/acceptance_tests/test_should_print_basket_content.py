@@ -27,7 +27,7 @@ class PrintBasketContentShould(TestCase):
         self._fill_products()
 
     @patch('builtins.print')
-    def test_return_contents_of_the_basket(self, mock_print):
+    def test_return_contents_of_the_basket(self, mock_print: MagicMock):
         self._add_item(self.user_id, ProductId("10002"), 2)
         self._add_item(self.user_id, ProductId("10002"), 2)
         self._add_item(self.user_id, ProductId("20110"), 5)
@@ -43,7 +43,7 @@ class PrintBasketContentShould(TestCase):
         assert str(basket) == basket_printout
         assert mock_print.call_count == 3
 
-    def _add_item(self, user_id, product_id, quantity):
+    def _add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
         self.shopping_basket_service.add_item(user_id=user_id,
                                               product_id=product_id,
                                               quantity=int(quantity))
