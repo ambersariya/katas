@@ -1,12 +1,12 @@
 from abc import abstractmethod
-from typing import Protocol, Optional
+from typing import Dict, Protocol, Optional
 
 from shopping_basket.product import ProductId, Product
 
 
 class ProductRepository(Protocol):
     @abstractmethod
-    def find_product_by_id(self, product_id: ProductId) -> Product:
+    def find_product_by_id(self, product_id: ProductId) -> Optional[Product]:
         pass
 
     @abstractmethod
@@ -15,7 +15,7 @@ class ProductRepository(Protocol):
 
 
 class InMemoryProductRepository(ProductRepository):
-    _products: dict
+    _products: Dict[ProductId, Product]
 
     def __init__(self):
         self._products = {}
