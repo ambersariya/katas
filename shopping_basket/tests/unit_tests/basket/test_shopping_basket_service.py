@@ -46,7 +46,7 @@ class ShoppingBasketServiceShould(TestCase):
         self.assertEqual(USER_ID, basket.user_id)
 
     def test_create_shopping_basket_when_item_is_added_and_basket_doesnt_exist(self):
-        self.product_service.find_and_reserve.return_value = PRODUCT
+        self.product_service.reserve.return_value = PRODUCT
 
         self.basket_service.add_item(user_id=USER_ID, product_id=PRODUCT.id, quantity=BASKET_ITEM_QUANTITY)
         self.item_logger.log.assert_called_once()

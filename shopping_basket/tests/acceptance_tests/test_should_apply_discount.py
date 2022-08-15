@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
+from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_id import ProductId

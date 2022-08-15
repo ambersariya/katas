@@ -52,8 +52,8 @@ Products available (in-memory repository):
 ### Scenario 4 - Multi-buy discount
 
 > Disclaimer: we applied this step however we need to emphasize that in real life this is a very bad business strategy
-- Shopping cart should contain multi-buy discount:
-      - 10% discount if more than 3 books are in the cart
+- Shopping cart should contain multi-buy discount:\
+      - 10% discount if more than 3 books are in the cart\
       - 20% discount if at least one book and video are in the cart
 - In case both discounts on shopping basket apply, the biggest discount is selected.
 

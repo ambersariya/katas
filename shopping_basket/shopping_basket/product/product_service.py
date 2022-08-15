@@ -13,7 +13,7 @@ class ProductService:
         self._stock_management_service = stock_management_service
         self._product_repository = product_repository
 
-    def find_and_reserve(self, product_id: ProductId, quantity: int) -> Optional[Product]:
+    def reserve(self, product_id: ProductId, quantity: int) -> Optional[Product]:
         product = self._product_repository.find_product_by_id(product_id)
         if not product:
             raise ProductNotFoundError()

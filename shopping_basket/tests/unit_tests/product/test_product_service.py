@@ -26,7 +26,7 @@ class ProductServiceShould(TestCase):
     def test_return_product_by_id(self):
         self.product_repository.find_product_by_id.return_value = PRODUCT
 
-        product = self.product_service.find_and_reserve(product_id=PRODUCT_ID, quantity=2)
+        product = self.product_service.reserve(product_id=PRODUCT_ID, quantity=2)
 
         self.assertIsInstance(product, Product)
 
@@ -34,14 +34,14 @@ class ProductServiceShould(TestCase):
         self.product_repository.find_product_by_id.return_value = None
 
         with self.assertRaises(ProductNotFoundError):
-            self.product_service.find_and_reserve(product_id=PRODUCT_ID, quantity=2)
+            self.product_service.reserve(product_id=PRODUCT_ID, quantity=2)
 
     def test_raise_error_when_product_has_less_stock_than_required(self):
         self.product_repository.find_product_by_id.return_value = PRODUCT
         self.stock_manager.reserve.side_effect = InsufficientStockError()
 
         with self.assertRaises(InsufficientStockError):
-            self.product_service.find_and_reserve(product_id=PRODUCT_ID, quantity=5)
+            self.product_service.reserve(product_id=PRODUCT_ID, quantity=5)
 
     def test_add_item_to_repository(self):
         stock = Stock(available=5, reserved=0, product_id=PRODUCT_ID)

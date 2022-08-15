@@ -24,7 +24,7 @@ class ShoppingBasketService:
         return basket
 
     def add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
-        product = self.product_service.find_and_reserve(product_id=product_id, quantity=quantity)
+        product = self.product_service.reserve(product_id=product_id, quantity=quantity)
         item = ShoppingBasketItem.for_product(product, quantity=quantity)
         self._shopping_basket_repository.add_item(item=item, user_id=user_id)
         self.item_logger.log(user_id=item, item=item)
