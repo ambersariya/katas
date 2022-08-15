@@ -36,7 +36,7 @@ class ManageStockAvailabilityShould(TestCase):
         with self.assertRaises(InsufficientStockError):
             self._add_item(user_id=self.user_id, product_id=ProductId('10001'), quantity=5)
 
-    def _add_item(self, user_id, product_id, quantity):
+    def _add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
         self.shopping_basket_service.add_item(user_id=user_id,
                                               product_id=product_id,
                                               quantity=int(quantity))

@@ -1,4 +1,5 @@
 from shopping_basket.product import ProductId
+from .stock import Stock
 from shopping_basket.stock.stock_repository import StockRepository
 
 
@@ -11,5 +12,5 @@ class StockManagementService:
         updated_stock = stock.reserve(quantity)
         self.stock_repository.save_stock(updated_stock)
 
-    def save_stock(self, stock):
+    def save_stock(self, stock: Stock) -> None:
         self.stock_repository.save_stock(stock)

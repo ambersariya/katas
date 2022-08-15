@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 from shopping_basket.errors import ShoppingBasketNotFoundError
 from shopping_basket.product import Product, ProductId
 from shopping_basket.product_service import ProductService
-from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
+from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem, ShoppingBasketItems
 from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.user import UserId
@@ -16,7 +16,7 @@ PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd',
 BASKET_ITEM_QUANTITY = 5
 BASKET_ITEM: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT, quantity=BASKET_ITEM_QUANTITY)
 BASKET_CREATION_DATE = '15/06/2022'
-SHOPPING_BASKET = ShoppingBasket(user_id=USER_ID, created_at=BASKET_CREATION_DATE, items=[])
+SHOPPING_BASKET = ShoppingBasket(user_id=USER_ID, created_at=BASKET_CREATION_DATE, items=ShoppingBasketItems(items=[]))
 
 
 class ShoppingBasketServiceShould(TestCase):
