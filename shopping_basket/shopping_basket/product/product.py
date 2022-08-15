@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from shopping_basket.product_category import ProductCategory
+from shopping_basket.product.product_category import ProductCategory
 
 
 @dataclass(init=True, frozen=True)

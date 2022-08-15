@@ -1,9 +1,8 @@
-from abc import abstractmethod
 from dataclasses import dataclass
-from typing import List, Protocol
+from typing import List
 
-from shopping_basket.product import Product
-from shopping_basket.user import UserId
+from shopping_basket.basket.user import UserId
+from shopping_basket.product.product import Product
 
 
 @dataclass(init=True, frozen=True, repr=True)

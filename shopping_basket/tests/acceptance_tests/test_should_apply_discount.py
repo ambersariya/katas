@@ -1,18 +1,18 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from shopping_basket.date_provider import DateProvider
-from shopping_basket.product import Product, ProductId
-from shopping_basket.product_category import ProductCategory
-from shopping_basket.product_repository import InMemoryProductRepository
-from shopping_basket.product_service import ProductService
-from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
-from shopping_basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.product.product import ProductId, Product
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_repository import InMemoryProductRepository
+from shopping_basket.product.product_service import ProductService
+from shopping_basket.basket.shopping_basket_repository import InMemoryShoppingBasketRepository
+from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import InMemoryStockRepository
-from shopping_basket.user import UserId
-from shopping_basket.utilities import ItemLogger
+from shopping_basket.basket.user import UserId
+from shopping_basket.core.utilities import ItemLogger
 
 
 class ApplyDiscountShould(TestCase):

@@ -1,10 +1,10 @@
-from shopping_basket.errors import ShoppingBasketNotFoundError
-from shopping_basket.product import ProductId
-from shopping_basket.product_service import ProductService
-from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
-from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
-from shopping_basket.user import UserId
-from shopping_basket.utilities import ItemLogger
+from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
+from shopping_basket.product.product import ProductId
+from shopping_basket.product.product_service import ProductService
+from shopping_basket.basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
+from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
+from shopping_basket.basket.user import UserId
+from shopping_basket.core.utilities import ItemLogger
 
 
 class ShoppingBasketService:
@@ -27,5 +27,3 @@ class ShoppingBasketService:
         item = ShoppingBasketItem.for_product(product, quantity=quantity)
         self._shopping_basket_repository.add_item(item=item, user_id=user_id)
         self.item_logger.log(user_id=item, item=item)
-
-

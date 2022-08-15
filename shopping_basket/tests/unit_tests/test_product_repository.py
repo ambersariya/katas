@@ -1,12 +1,13 @@
 from typing import Final
 from unittest import TestCase
 
-from shopping_basket.product import ProductId, Product
-from shopping_basket.product_repository import InMemoryProductRepository
+from shopping_basket.product.product import ProductId, Product
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_repository import InMemoryProductRepository
 
 PRODUCT_ID: Final[ProductId] = ProductId("10001")
-PRODUCT: Final[Product] = Product(PRODUCT_ID, name='Lord of the Rings', price=10)
-NEW_PRODUCT: Final[Product] = Product(PRODUCT_ID, name='Lord of the Rings HD', price=10)
+PRODUCT: Final[Product] = Product(PRODUCT_ID, name='Lord of the Rings', price=10, category=ProductCategory.BOOK)
+NEW_PRODUCT: Final[Product] = Product(PRODUCT_ID, name='Lord of the Rings HD', price=10, category=ProductCategory.VIDEO)
 
 
 class ProductRepositoryShould(TestCase):

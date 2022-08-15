@@ -1,13 +1,13 @@
 from abc import abstractmethod
 from typing import Dict, Protocol, Optional
 
-from shopping_basket.date_provider import DateProvider
-from shopping_basket.shopping_basket import (
+from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.basket.shopping_basket import (
     ShoppingBasket,
     ShoppingBasketItem,
     ShoppingBasketItems,
 )
-from shopping_basket.user import UserId
+from shopping_basket.basket.user import UserId
 
 
 class ShoppingBasketRepository(Protocol):

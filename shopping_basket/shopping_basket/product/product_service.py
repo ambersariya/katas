@@ -1,9 +1,9 @@
 from typing import Optional
 
-from shopping_basket.errors import ProductNotFoundError
-from shopping_basket.product import Product, ProductId
-from shopping_basket.product_repository import ProductRepository
-from .stock.stock import Stock
+from shopping_basket.product.product import ProductId, Product
+from shopping_basket.product.product_error import ProductNotFoundError
+from shopping_basket.product.product_repository import ProductRepository
+from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
 

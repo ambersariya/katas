@@ -2,17 +2,18 @@ from typing import Final
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from shopping_basket.errors import ShoppingBasketNotFoundError
-from shopping_basket.product import Product, ProductId
-from shopping_basket.product_service import ProductService
-from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem, ShoppingBasketItems
-from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
-from shopping_basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.user import UserId
-from shopping_basket.utilities import ItemLogger
+from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
+from shopping_basket.product.product import Product, ProductId
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_service import ProductService
+from shopping_basket.basket.shopping_basket import ShoppingBasket, ShoppingBasketItem, ShoppingBasketItems
+from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
+from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.basket.user import UserId
+from shopping_basket.core.utilities import ItemLogger
 
 USER_ID: Final[UserId] = UserId('some-id')
-PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
+PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5, category=ProductCategory.VIDEO)
 BASKET_ITEM_QUANTITY = 5
 BASKET_ITEM: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT, quantity=BASKET_ITEM_QUANTITY)
 BASKET_CREATION_DATE = '15/06/2022'

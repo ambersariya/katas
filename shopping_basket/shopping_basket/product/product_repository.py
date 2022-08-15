@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Dict, Protocol, Optional
 
-from shopping_basket.product import ProductId, Product
+from shopping_basket.product.product import ProductId, Product
 
 
 class ProductRepository(Protocol):

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from shopping_basket.product import ProductId
+from shopping_basket.product.product import ProductId
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_repository import InMemoryStockRepository
 

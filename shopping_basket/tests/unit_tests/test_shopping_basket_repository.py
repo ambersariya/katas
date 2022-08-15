@@ -2,15 +2,17 @@ from typing import Final
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from shopping_basket.date_provider import DateProvider
-from shopping_basket.product import Product, ProductId
-from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
-from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
-from shopping_basket.user import UserId
+from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
+from shopping_basket.basket.shopping_basket_repository import InMemoryShoppingBasketRepository
+from shopping_basket.basket.user import UserId
+from shopping_basket.product.product import Product, ProductId
+from shopping_basket.product.product_category import ProductCategory
 
 USER_ID: Final[UserId] = UserId('some-id')
-PRODUCT_1: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
-PRODUCT_2: Final[Product] = Product(ProductId('product-2'), name='Topgun DVD', price=5)
+PRODUCT_1: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5,
+                                    category=ProductCategory.VIDEO)
+PRODUCT_2: Final[Product] = Product(ProductId('product-2'), name='Topgun DVD', price=5, category=ProductCategory.VIDEO)
 BASKET_ITEM_1: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT_1, quantity=5)
 BASKET_ITEM_2: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT_2, quantity=5)
 

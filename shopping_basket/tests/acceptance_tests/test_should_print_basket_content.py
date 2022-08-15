@@ -1,17 +1,18 @@
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from shopping_basket.date_provider import DateProvider
-from shopping_basket.product import Product, ProductId
-from shopping_basket.product_repository import InMemoryProductRepository
-from shopping_basket.product_service import ProductService
-from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
-from shopping_basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.product.product import ProductId, Product
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_repository import InMemoryProductRepository
+from shopping_basket.product.product_service import ProductService
+from shopping_basket.basket.shopping_basket_repository import InMemoryShoppingBasketRepository
+from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import InMemoryStockRepository
-from shopping_basket.user import UserId
-from shopping_basket.utilities import ItemLogger
+from shopping_basket.basket.user import UserId
+from shopping_basket.core.utilities import ItemLogger
 
 
 class PrintBasketContentShould(TestCase):
@@ -43,8 +44,8 @@ class PrintBasketContentShould(TestCase):
 
         basket_printout = \
             "Creation date 14/6/2022\n" \
-            "4 x The Hobbit // 4 x 5.00 = £20.00\n" \
-            "5 x Breaking Bad // 5 x 7.00 = £35.00\n" \
+            "4 x The Hobbit // Book // 4 x 5.00 = £20.00\n" \
+            "5 x Breaking Bad // Video // 5 x 7.00 = £35.00\n" \
             "Total: £55.00"
 
         assert str(basket) == basket_printout
@@ -56,11 +57,15 @@ class PrintBasketContentShould(TestCase):
                                               quantity=int(quantity))
 
     def _fill_products(self):
-        self.product_service.add_product(product=Product(id=ProductId('10001'), name="Lord of the Rings", price=10),
-                                         stock=Stock(product_id=ProductId('10001'), available=5, reserved=0))
-        self.product_service.add_product(product=Product(id=ProductId('10002'), name="The Hobbit", price=5),
-                                         stock=Stock(product_id=ProductId('10002'), available=5, reserved=0))
-        self.product_service.add_product(product=Product(id=ProductId('20001'), name="Game of Thrones", price=9),
-                                         stock=Stock(product_id=ProductId('20001'), available=5, reserved=0))
-        self.product_service.add_product(product=Product(id=ProductId('20110'), name="Breaking Bad", price=7),
-                                         stock=Stock(product_id=ProductId('20110'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('10001'), name="Lord of the Rings", price=10, category=ProductCategory.BOOK),
+            stock=Stock(product_id=ProductId('10001'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('10002'), name="The Hobbit", price=5, category=ProductCategory.BOOK),
+            stock=Stock(product_id=ProductId('10002'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('20001'), name="Game of Thrones", price=9, category=ProductCategory.VIDEO),
+            stock=Stock(product_id=ProductId('20001'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('20110'), name="Breaking Bad", price=7, category=ProductCategory.VIDEO),
+            stock=Stock(product_id=ProductId('20110'), available=5, reserved=0))

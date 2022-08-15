@@ -1,6 +1,6 @@
 from typing import Dict, Protocol
 
-from shopping_basket.product import ProductId
+from shopping_basket.product.product import ProductId
 from shopping_basket.stock.stock import Stock
 
 
