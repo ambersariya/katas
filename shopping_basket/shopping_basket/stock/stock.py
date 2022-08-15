@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from shopping_basket.product.product import ProductId
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.stock.stock_error import InsufficientStockError
 
 

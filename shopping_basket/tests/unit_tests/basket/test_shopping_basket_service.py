@@ -3,10 +3,13 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
-from shopping_basket.product.product import Product, ProductId
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_service import ProductService
-from shopping_basket.basket.shopping_basket import ShoppingBasket, ShoppingBasketItem, ShoppingBasketItems
+from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId

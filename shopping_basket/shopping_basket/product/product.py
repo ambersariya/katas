@@ -1,14 +1,7 @@
 from dataclasses import dataclass
 
 from shopping_basket.product.product_category import ProductCategory
-
-
-@dataclass(init=True, frozen=True)
-class ProductId:
-    value: str
-
-    def __str__(self):
-        return self.value
+from shopping_basket.product.product_id import ProductId
 
 
 @dataclass(init=True, frozen=True)

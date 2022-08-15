@@ -1,6 +1,6 @@
 from .stock import Stock
 from shopping_basket.stock.stock_repository import StockRepository
-from shopping_basket.product.product import ProductId
+from ..product.product_id import ProductId
 
 
 class StockManagementService:

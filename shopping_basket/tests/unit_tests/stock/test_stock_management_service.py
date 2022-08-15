@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from shopping_basket.product.product import ProductId
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.stock.stock_error import InsufficientStockError
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService

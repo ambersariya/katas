@@ -1,4 +1,4 @@
-from shopping_basket.basket.shopping_basket import ShoppingBasketItem
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.user import UserId
 
 

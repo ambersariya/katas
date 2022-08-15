@@ -1,7 +1,8 @@
 from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
-from shopping_basket.product.product import ProductId
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_service import ProductService
-from shopping_basket.basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
+from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.utilities import ItemLogger

@@ -3,10 +3,12 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from shopping_basket.core.date_provider import DateProvider
-from shopping_basket.basket.shopping_basket import ShoppingBasket, ShoppingBasketItem
-from shopping_basket.basket.shopping_basket_repository import InMemoryShoppingBasketRepository
+from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
+from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import InMemoryShoppingBasketRepository
 from shopping_basket.basket.user import UserId
-from shopping_basket.product.product import Product, ProductId
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_category import ProductCategory
 
 USER_ID: Final[UserId] = UserId('some-id')
