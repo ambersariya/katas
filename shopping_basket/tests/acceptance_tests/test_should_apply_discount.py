@@ -3,6 +3,7 @@ from unittest.mock import MagicMock
 
 from shopping_basket.date_provider import DateProvider
 from shopping_basket.product import Product, ProductId
+from shopping_basket.product_category import ProductCategory
 from shopping_basket.product_repository import InMemoryProductRepository
 from shopping_basket.product_service import ProductService
 from shopping_basket.shopping_basket_repository import InMemoryShoppingBasketRepository
@@ -40,7 +41,7 @@ class ApplyDiscountShould(TestCase):
 
         basket_printout = \
             "Creation date 14/6/2022\n" \
-            "4 x The Hobbit // Books // 4 x 5.00 = £20.00\n" \
+            "4 x The Hobbit // Book // 4 x 5.00 = £20.00\n" \
             "5 x Breaking Bad // Video // 5 x 7.00 = £35.00\n" \
             "Discount applied: 20% \n" \
             "Total: £44.00"
@@ -53,11 +54,15 @@ class ApplyDiscountShould(TestCase):
                                               quantity=int(quantity))
 
     def _fill_products(self):
-        self.product_service.add_product(product=Product(id=ProductId('10001'), name="Lord of the Rings", price=10),
-                                         stock=Stock(product_id=ProductId('10001'), available=5, reserved=0))
-        self.product_service.add_product(product=Product(id=ProductId('10002'), name="The Hobbit", price=5),
-                                         stock=Stock(product_id=ProductId('10002'), available=5, reserved=0))
-        self.product_service.add_product(product=Product(id=ProductId('20001'), name="Game of Thrones", price=9),
-                                         stock=Stock(product_id=ProductId('20001'), available=5, reserved=0))
-        self.product_service.add_product(product=Product(id=ProductId('20110'), name="Breaking Bad", price=7),
-                                         stock=Stock(product_id=ProductId('20110'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('10001'), name="Lord of the Rings", price=10, category=ProductCategory.BOOK),
+            stock=Stock(product_id=ProductId('10001'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('10002'), name="The Hobbit", price=5, category=ProductCategory.BOOK),
+            stock=Stock(product_id=ProductId('10002'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('20001'), name="Game of Thrones", price=9, category=ProductCategory.VIDEO),
+            stock=Stock(product_id=ProductId('20001'), available=5, reserved=0))
+        self.product_service.add_product(
+            product=Product(id=ProductId('20110'), name="Breaking Bad", price=7, category=ProductCategory.VIDEO),
+            stock=Stock(product_id=ProductId('20110'), available=5, reserved=0))

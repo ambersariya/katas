@@ -12,6 +12,7 @@ class ShoppingBasketItem:
     name: str
     price: int
     quantity: int
+    category: str
 
     @staticmethod
     def for_product(product: Product, quantity: int):
@@ -19,7 +20,8 @@ class ShoppingBasketItem:
             id=str(product.id),
             name=product.name,
             price=product.price,
-            quantity=quantity
+            quantity=quantity,
+            category=str(product.category)
         )
 
     def total(self):
@@ -28,14 +30,15 @@ class ShoppingBasketItem:
     def __str__(self):
         price = "{:.2f}".format(self.price)
         total = "{:.2f}".format(self.total())
-        return f"{self.quantity} x {self.name} // {self.quantity} x {price} = £{total}"
+        return f"{self.quantity} x {self.name} // {self.category} // {self.quantity} x {price} = £{total}"
 
     def update_quantity(self, quantity) -> 'ShoppingBasketItem':
         return ShoppingBasketItem(
             id=self.id,
             price=self.price,
             name=self.name,
-            quantity=quantity + self.quantity
+            quantity=quantity + self.quantity,
+            category=self.category
         )
 
 
