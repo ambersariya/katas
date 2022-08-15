@@ -1,7 +1,10 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "python.testing.unittestEnabled": true,
-    "pythonTestExplorer.testFramework": "pytest",
-    "python.testing.pytestEnabled": true,
-    "python.testing.autoTestDiscoverOnSaveEnabled": true
+    "pythonTestExplorer.testFramework": "unittest",
+    "python.testing.pytestEnabled": false,
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.formatting.autopep8Path": "autopep8",
+    "python.formatting.provider": "black"
 }
