@@ -20,8 +20,7 @@ class ShoppingBasket:
         total = 0
         body = f"Creation date {self.created_at}\n"
         for item in self.items.items():
-            body += f'{str(item)}\n'
+            body += f"{str(item)}\n"
             total += item.total()
         body += f"Total: £{'{:.2f}'.format(total)}"
         return body
-

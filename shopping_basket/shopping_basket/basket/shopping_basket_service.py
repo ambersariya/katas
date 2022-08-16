@@ -1,18 +1,20 @@
-from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
-from shopping_basket.product.product_id import ProductId
-from shopping_basket.product.product_service import ProductService
 from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.utilities import ItemLogger
+from shopping_basket.product.product_id import ProductId
+from shopping_basket.product.product_service import ProductService
 
 
 class ShoppingBasketService:
-    def __init__(self,
-                 shopping_basket_repository: ShoppingBasketRepository,
-                 product_service: ProductService,
-                 item_logger: ItemLogger):
+    def __init__(
+        self,
+        shopping_basket_repository: ShoppingBasketRepository,
+        product_service: ProductService,
+        item_logger: ItemLogger,
+    ):
         self.item_logger = item_logger
         self.product_service = product_service
         self._shopping_basket_repository = shopping_basket_repository

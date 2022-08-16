@@ -7,27 +7,27 @@ def before_all(context):
     context.user_id = UserId()
 
 
-@given(u'I add "{quantity}" units of "{item_name}" to my shopping basket')
+@given('I add "{quantity}" units of "{item_name}" to my shopping basket')
 def step_impl(context, quantity: str, item_name: str):
     item = context.product_service.get_item_by_name(name=item_name)
-    context.shopping_basket_service.add_item(user_id=context.user_id,
-                                             product_id=item.product_id,
-                                             quantity=int(quantity))
+    context.shopping_basket_service.add_item(
+        user_id=context.user_id, product_id=item.product_id, quantity=int(quantity)
+    )
 
 
-@given(u'I add "{quantity}" units of "{item_name}"')
+@given('I add "{quantity}" units of "{item_name}"')
 def step_impl(context, quantity: str, item_name: str):
     item = context.product_service.get_item_by_name(name=item_name)
-    context.shopping_basket_service.add_item(user_id=context.user_id,
-                                             product_id=item.product_id,
-                                             quantity=int(quantity))
+    context.shopping_basket_service.add_item(
+        user_id=context.user_id, product_id=item.product_id, quantity=int(quantity)
+    )
 
 
-@when(u'I check the content of my shopping basket')
+@when("I check the content of my shopping basket")
 def step_impl(context):
     context.basket = context.shopping_basket_service.basket_for(context.user_id)
 
 
-@then(u'it should contain the following information')
+@then("it should contain the following information")
 def step_impl(context, basket_printout: str):
     assert str(context.basket) == basket_printout

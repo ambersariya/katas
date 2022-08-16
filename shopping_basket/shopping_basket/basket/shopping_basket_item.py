@@ -12,13 +12,13 @@ class ShoppingBasketItem:
     category: str
 
     @staticmethod
-    def for_product(product: Product, quantity: int) -> 'ShoppingBasketItem':
+    def for_product(product: Product, quantity: int) -> "ShoppingBasketItem":
         return ShoppingBasketItem(
             id=str(product.id),
             name=product.name,
             price=product.price,
             quantity=quantity,
-            category=str(product.category)
+            category=str(product.category),
         )
 
     def total(self) -> int:
@@ -29,11 +29,11 @@ class ShoppingBasketItem:
         total = "{:.2f}".format(self.total())
         return f"{self.quantity} x {self.name} // {self.category} // {self.quantity} x {price} = £{total}"
 
-    def update_quantity(self, quantity) -> 'ShoppingBasketItem':  # type: ignore
+    def update_quantity(self, quantity) -> "ShoppingBasketItem":  # type: ignore
         return ShoppingBasketItem(
             id=self.id,
             price=self.price,
             name=self.name,
             quantity=quantity + self.quantity,
-            category=self.category
+            category=self.category,
         )

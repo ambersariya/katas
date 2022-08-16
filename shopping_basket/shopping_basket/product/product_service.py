@@ -1,15 +1,19 @@
 from typing import Optional
 
 from shopping_basket.product.product import Product
-from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_error import ProductNotFoundError
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_repository import ProductRepository
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
 
 class ProductService:
-    def __init__(self, product_repository: ProductRepository, stock_management_service: StockManagementService):
+    def __init__(
+        self,
+        product_repository: ProductRepository,
+        stock_management_service: StockManagementService,
+    ):
         self._stock_management_service = stock_management_service
         self._product_repository = product_repository
 

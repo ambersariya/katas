@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Protocol, Optional
+from typing import Optional, Protocol
 
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_id import ProductId
@@ -13,5 +13,3 @@ class ProductRepository(Protocol):
     @abstractmethod
     def add_product(self, product: Product) -> None:
         pass
-
-

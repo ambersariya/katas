@@ -7,16 +7,17 @@ from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import StockRepository
 
-PRODUCT_ID = ProductId('10001')
+PRODUCT_ID = ProductId("10001")
 STOCK = Stock(available=5, reserved=0, product_id=PRODUCT_ID)
 UPDATED_STOCK = Stock(available=0, reserved=5, product_id=PRODUCT_ID)
 
 
 class StockManagementServiceShould(TestCase):
-
     def setUp(self):
         self.stock_repository = MagicMock(StockRepository)
-        self.stock_management = StockManagementService(stock_repository=self.stock_repository)
+        self.stock_management = StockManagementService(
+            stock_repository=self.stock_repository
+        )
 
     def test_add_stock_to_repository(self):
         self.stock_management.save_stock(STOCK)
