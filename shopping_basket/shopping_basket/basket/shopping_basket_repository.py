@@ -14,7 +14,7 @@ class ShoppingBasketRepository(Protocol):
         pass
 
     @abstractmethod
-    def add_item(self, item: ShoppingBasketItem, user_id: UserId):
+    def add_item(self, item: ShoppingBasketItem, user_id: UserId) -> None:
         pass
 
 

@@ -9,7 +9,7 @@ format: black isort
 format-check: black-check isort-check
 
 poetry-install:
-	poetry install
+	poetry install --no-interaction --no-ansi
 
 mypy-install-types:
 	$(CMD) mypy --install-types --non-interactive --follow-imports=skip $(PYMODULE)

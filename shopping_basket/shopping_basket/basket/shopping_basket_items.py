@@ -8,16 +8,16 @@ from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 class ShoppingBasketItems:
     _items: List[ShoppingBasketItem]
 
-    def __init__(self, items: List[ShoppingBasketItem]):
+    def __init__(self, items: List[ShoppingBasketItem]) -> None:
         self._items = items
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._items)
 
-    def __getitem__(self, index):
-        return self._items[index]
+    def __getitem__(self, index) -> ShoppingBasketItem:  # type: ignore
+        return self._items[index]  # type: ignore
 
-    def add(self, item: ShoppingBasketItem):
+    def add(self, item: ShoppingBasketItem) -> None:
         for index, existing_item in enumerate(self._items):
             if existing_item.id == item.id:
                 updated_item = existing_item.update_quantity(item.quantity)
@@ -25,5 +25,5 @@ class ShoppingBasketItems:
                 return
         self._items.append(item)
 
-    def items(self):
+    def items(self) -> List[ShoppingBasketItem]:
         return self._items

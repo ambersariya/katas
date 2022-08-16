@@ -11,7 +11,7 @@ class ProductRepository(Protocol):
         pass
 
     @abstractmethod
-    def add_product(self, product: Product):
+    def add_product(self, product: Product) -> None:
         pass
 
 

@@ -16,7 +16,7 @@ class ShoppingBasket:
     def add(self, item: ShoppingBasketItem) -> None:
         self.items.add(item=item)
 
-    def __str__(self):
+    def __str__(self) -> str:
         total = 0
         body = f"Creation date {self.created_at}\n"
         for item in self.items.items():
