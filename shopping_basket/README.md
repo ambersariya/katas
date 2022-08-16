@@ -19,7 +19,7 @@ Then it should contain the following information:
 Products available (in-memory repository):
 
 - Books
-    - 10001: Lord of the Rings - £10.00+96*54/
+    - 10001: Lord of the Rings - £10.00
     - 10002: The Hobbit - £5.00
 - DVDs
     - 20001: Game of Thrones - £9.00
@@ -51,9 +51,10 @@ Products available (in-memory repository):
 
 ### Scenario 4 - Multi-buy discount
 
-- Shopping cart should contain multi-buy discount:
-    - 10% discount if more than 3 books are in the cart
-    - 20% discount if at least one book and video are in the cart
+> Disclaimer: we applied this step however we need to emphasize that in real life this is a very bad business strategy
+- Shopping cart should contain multi-buy discount:\
+      - 10% discount if more than 3 books are in the cart\
+      - 20% discount if at least one book and video are in the cart
 - In case both discounts on shopping basket apply, the biggest discount is selected.
 
 ### Scenario 5 - Payment

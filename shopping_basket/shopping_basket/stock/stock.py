@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from shopping_basket.errors import InsufficientStockError
-from shopping_basket.product import ProductId
+from shopping_basket.product.product_id import ProductId
+from shopping_basket.stock.stock_error import InsufficientStockError
 
 
 @dataclass(init=True, frozen=True)

@@ -1,5 +1,5 @@
-from shopping_basket.shopping_basket import ShoppingBasketItem
-from shopping_basket.user import UserId
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
+from shopping_basket.basket.user import UserId
 
 
 class ItemLogger:

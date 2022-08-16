@@ -1,17 +1,8 @@
-from abc import abstractmethod
-from typing import Dict, Protocol, Optional
+from typing import Dict, Optional
 
-from shopping_basket.product import ProductId, Product
-
-
-class ProductRepository(Protocol):
-    @abstractmethod
-    def find_product_by_id(self, product_id: ProductId) -> Optional[Product]:
-        pass
-
-    @abstractmethod
-    def add_product(self, product: Product):
-        pass
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_id import ProductId
+from shopping_basket.product.product_repository import ProductRepository
 
 
 class InMemoryProductRepository(ProductRepository):

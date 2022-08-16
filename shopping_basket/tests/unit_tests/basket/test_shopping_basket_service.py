@@ -2,17 +2,21 @@ from typing import Final
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from shopping_basket.errors import ShoppingBasketNotFoundError
-from shopping_basket.product import Product, ProductId
-from shopping_basket.product_service import ProductService
-from shopping_basket.shopping_basket import ShoppingBasket, ShoppingBasketItem, ShoppingBasketItems
-from shopping_basket.shopping_basket_repository import ShoppingBasketRepository
-from shopping_basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.user import UserId
-from shopping_basket.utilities import ItemLogger
+from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_id import ProductId
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_service import ProductService
+from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
+from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
+from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.basket.user import UserId
+from shopping_basket.core.utilities import ItemLogger
 
 USER_ID: Final[UserId] = UserId('some-id')
-PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5)
+PRODUCT: Final[Product] = Product(ProductId('product-1'), name='the hobbit dvd', price=5, category=ProductCategory.VIDEO)
 BASKET_ITEM_QUANTITY = 5
 BASKET_ITEM: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(product=PRODUCT, quantity=BASKET_ITEM_QUANTITY)
 BASKET_CREATION_DATE = '15/06/2022'
@@ -42,7 +46,7 @@ class ShoppingBasketServiceShould(TestCase):
         self.assertEqual(USER_ID, basket.user_id)
 
     def test_create_shopping_basket_when_item_is_added_and_basket_doesnt_exist(self):
-        self.product_service.find_and_reserve.return_value = PRODUCT
+        self.product_service.reserve.return_value = PRODUCT
 
         self.basket_service.add_item(user_id=USER_ID, product_id=PRODUCT.id, quantity=BASKET_ITEM_QUANTITY)
         self.item_logger.log.assert_called_once()

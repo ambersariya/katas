@@ -1,9 +1,10 @@
 from typing import Optional
 
-from shopping_basket.errors import ProductNotFoundError
-from shopping_basket.product import Product, ProductId
-from shopping_basket.product_repository import ProductRepository
-from .stock.stock import Stock
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_id import ProductId
+from shopping_basket.product.product_error import ProductNotFoundError
+from shopping_basket.product.product_repository import ProductRepository
+from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
 
@@ -12,7 +13,7 @@ class ProductService:
         self._stock_management_service = stock_management_service
         self._product_repository = product_repository
 
-    def find_and_reserve(self, product_id: ProductId, quantity: int) -> Optional[Product]:
+    def reserve(self, product_id: ProductId, quantity: int) -> Optional[Product]:
         product = self._product_repository.find_product_by_id(product_id)
         if not product:
             raise ProductNotFoundError()
