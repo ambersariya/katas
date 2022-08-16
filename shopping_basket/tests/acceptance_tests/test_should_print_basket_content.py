@@ -29,9 +29,10 @@ class PrintBasketContentShould(TestCase):
         self.product_service = ProductService(product_repository=self.product_repository,
                                               stock_management_service=self.stock_management_service)
         self.item_logger = ItemLogger()
-        self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
-                                                             shopping_basket_repository=self.shopping_basket_repository,
-                                                             item_logger=self.item_logger)
+        self.shopping_basket_service = ShoppingBasketService(shopping_basket_repository=self.shopping_basket_repository,
+                                                             product_service=self.product_service,
+                                                             item_logger=self.item_logger,
+                                                             discount_service=self.discount_service)
         self.user_id = UserId('user-01')
         self._fill_products()
 

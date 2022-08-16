@@ -9,10 +9,8 @@ from shopping_basket.core.utilities import ItemLogger
 
 
 class ShoppingBasketService:
-    def __init__(self,
-                 shopping_basket_repository: ShoppingBasketRepository,
-                 product_service: ProductService,
-                 item_logger: ItemLogger):
+    def __init__(self, shopping_basket_repository: ShoppingBasketRepository, product_service: ProductService,
+                 item_logger: ItemLogger, discount_service):
         self.item_logger = item_logger
         self.product_service = product_service
         self._shopping_basket_repository = shopping_basket_repository

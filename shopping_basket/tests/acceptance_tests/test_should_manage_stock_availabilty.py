@@ -30,9 +30,10 @@ class ManageStockAvailabilityShould(TestCase):
         self.stock_management_service = StockManagementService(self.stock_repository)
         self.product_service = ProductService(self.product_repository, self.stock_management_service)
         self.item_logger = ItemLogger()
-        self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
-                                                             shopping_basket_repository=self.shopping_basket_repository,
-                                                             item_logger=self.item_logger)
+        self.shopping_basket_service = ShoppingBasketService(shopping_basket_repository=self.shopping_basket_repository,
+                                                             product_service=self.product_service,
+                                                             item_logger=self.item_logger,
+                                                             discount_service=self.discount_service)
         self.user_id = UserId('user-01')
         self._fill_products()
         self.stock_management_service.save_stock(stock=Stock(product_id=PRODUCT_ID, available=3, reserved=0))
