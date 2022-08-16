@@ -11,8 +11,12 @@ COPY poetry.lock /app/poetry.lock
 COPY pyproject.toml /app/pyproject.toml
 COPY README.md /app/README.md
 COPY mypy.ini /app
+COPY .flake8 /app
+COPY .isort.cfg /app
+COPY .editorconfig /app
 
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN make
 
+CMD python -m unittest discover .
