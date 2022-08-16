@@ -1,6 +1,5 @@
-from abc import abstractmethod
 from dataclasses import dataclass
-from typing import List, Protocol
+from typing import List
 
 from shopping_basket.product import Product
 from shopping_basket.user import UserId
@@ -30,7 +29,7 @@ class ShoppingBasketItem:
         total = "{:.2f}".format(self.total())
         return f"{self.quantity} x {self.name} // {self.quantity} x {price} = £{total}"
 
-    def update_quantity(self, quantity) -> 'ShoppingBasketItem':
+    def update_quantity(self, quantity: int) -> 'ShoppingBasketItem':
         return ShoppingBasketItem(
             id=self.id,
             price=self.price,
@@ -49,7 +48,7 @@ class ShoppingBasketItems:
     def __len__(self):
         return len(self._items)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int):
         return self._items[index]
 
     def add(self, item: ShoppingBasketItem):
