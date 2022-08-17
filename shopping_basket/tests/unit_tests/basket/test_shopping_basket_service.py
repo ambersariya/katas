@@ -3,7 +3,7 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
-from shopping_basket.discount.discount import Discount
+from shopping_basket.discount.discount import Discount, ThreeBooksDiscount
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
 from shopping_basket.product.product import Product
@@ -31,9 +31,11 @@ BASKET_CREATION_DATE = '15/06/2022'
 SHOPPING_BASKET = ShoppingBasket(user_id=USER_ID, created_at=BASKET_CREATION_DATE,
                                  items=ShoppingBasketItems(items=[BASKET_ITEM_QUANTITY_TWO]))
 DISCOUNTABLE_SHOPPING_BASKET = ShoppingBasket(user_id=USER_ID, created_at=BASKET_CREATION_DATE,
-                                              items=ShoppingBasketItems(items=[BASKET_ITEM_QUANTITY_FIVE]))
+                                              items=ShoppingBasketItems(items=[BASKET_ITEM_QUANTITY_FIVE])
+                                              )
 
-DISCOUNTED_SHOPPING_BASKET = DiscountedShoppingBasket.from_basket(basket=DISCOUNTABLE_SHOPPING_BASKET, discount=Discount())
+DISCOUNTED_SHOPPING_BASKET = DiscountedShoppingBasket.from_basket(basket=DISCOUNTABLE_SHOPPING_BASKET,
+                                                                  discount=ThreeBooksDiscount())
 
 
 class ShoppingBasketServiceShould(TestCase):
