@@ -104,4 +104,8 @@ Products available (in-memory repository):
 
 ### Scenario 8 - Convert to Rest API
 
+Using a framework e.g. FastAPI/Flask
+
 ### Scenario 9 - Convert to Cli package
+
+Using a cli packaging framework such as Typer/Click
