@@ -14,8 +14,8 @@ class ShoppingBasketItems:
     def __len__(self) -> int:
         return len(self._items)
 
-    def __getitem__(self, index) -> ShoppingBasketItem:  # type: ignore
-        return self._items[index]  # type: ignore
+    def __getitem__(self, index: int) -> "ShoppingBasketItem":
+        return self._items[index]
 
     def add(self, item: ShoppingBasketItem) -> None:
         for index, existing_item in enumerate(self._items):
