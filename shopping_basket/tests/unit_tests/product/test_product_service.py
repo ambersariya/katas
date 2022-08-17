@@ -11,17 +11,18 @@ from shopping_basket.product.product_service import ProductService
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
-PRODUCT_ID = ProductId('10001')
+PRODUCT_ID = ProductId("10001")
 
-PRODUCT = Product(id=PRODUCT_ID, name='product', price=5, category=ProductCategory.BOOK)
+PRODUCT = Product(id=PRODUCT_ID, name="product", price=5, category=ProductCategory.BOOK)
 
 
 class ProductServiceShould(TestCase):
-
     def setUp(self):
         self.product_repository = MagicMock(ProductRepository)
         self.stock_manager = MagicMock(StockManagementService)
-        self.product_service = ProductService(self.product_repository, self.stock_manager)
+        self.product_service = ProductService(
+            self.product_repository, self.stock_manager
+        )
 
     def test_return_product_by_id(self):
         self.product_repository.find_product_by_id.return_value = PRODUCT

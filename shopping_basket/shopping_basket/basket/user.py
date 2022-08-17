@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class UserId:
     value: str
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
 

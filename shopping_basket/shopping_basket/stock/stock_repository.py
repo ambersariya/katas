@@ -5,10 +5,8 @@ from shopping_basket.stock.stock import Stock
 
 
 class StockRepository(Protocol):
-    def save_stock(self, stock: Stock):
+    def save_stock(self, stock: Stock) -> None:
         pass
 
     def find_by_id(self, product_id: ProductId) -> Stock:
         pass
-
-

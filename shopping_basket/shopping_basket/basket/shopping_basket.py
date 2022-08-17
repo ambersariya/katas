@@ -16,10 +16,9 @@ class ShoppingBasket:
     def add(self, item: ShoppingBasketItem) -> None:
         self.items.add(item=item)
 
-    def __str__(self):
+    def __str__(self) -> str:
         body = f"Creation date {self.created_at}\n"
         for item in self.items.items():
-            body += f'{str(item)}\n'
+            body += f"{str(item)}\n"
         body += f"Total: £{'{:.2f}'.format(self.items.total_amount())}"
         return body
-

@@ -1,9 +1,7 @@
 from abc import abstractmethod
-from typing import Protocol, Optional
+from typing import Optional, Protocol
 
-from shopping_basket.basket.shopping_basket import (
-    ShoppingBasket,
-)
+from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.user import UserId
 
@@ -14,7 +12,5 @@ class ShoppingBasketRepository(Protocol):
         pass
 
     @abstractmethod
-    def add_item(self, item: ShoppingBasketItem, user_id: UserId):
+    def add_item(self, item: ShoppingBasketItem, user_id: UserId) -> None:
         pass
-
-

@@ -6,10 +6,10 @@ from shopping_basket.stock.stock_repository import StockRepository
 
 
 class InMemoryStockRepository(StockRepository):
-    def __init__(self):
+    def __init__(self) -> None:
         self._stock: Dict[ProductId, Stock] = {}
 
-    def save_stock(self, stock: Stock):
+    def save_stock(self, stock: Stock) -> None:
         self._stock[stock.product_id] = stock
 
     def find_by_id(self, product_id: ProductId) -> Stock:

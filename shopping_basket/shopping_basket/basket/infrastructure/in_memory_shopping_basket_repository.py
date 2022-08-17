@@ -18,15 +18,16 @@ class InMemoryShoppingBasketRepository(ShoppingBasketRepository):
     def basket_for(self, user_id: UserId) -> Optional[ShoppingBasket]:
         if self._basket_exists(user_id=user_id):
             return self._baskets[user_id]
+        return None
 
-    def add_item(self, item: ShoppingBasketItem, user_id: UserId):
+    def add_item(self, item: ShoppingBasketItem, user_id: UserId) -> None:
         if not self._basket_exists(user_id=user_id):
             basket = ShoppingBasket(user_id=user_id, created_at=self._date_provider.current_date(),
                                     items=ShoppingBasketItems(items=[item]))
             self._baskets[user_id] = basket
             return
-        basket = self.basket_for(user_id)
+        basket = self.basket_for(user_id)  # type: ignore
         basket.add(item)
 
-    def _basket_exists(self, user_id: UserId):
+    def _basket_exists(self, user_id: UserId) -> bool:
         return user_id in self._baskets

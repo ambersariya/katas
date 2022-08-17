@@ -43,10 +43,11 @@ class ShoppingBasketServiceShould(TestCase):
         self.shopping_basket_repository = MagicMock(ShoppingBasketRepository)
         self.product_service = MagicMock(ProductService)
         self.item_logger = MagicMock(ItemLogger)
-        self.discount_service = MagicMock(DiscountCalculator)
-        self.basket_service = ShoppingBasketService(self.shopping_basket_repository, self.product_service,
+        self.discount_calculator = MagicMock(DiscountCalculator)
+        self.basket_service = ShoppingBasketService(shopping_basket_repository=self.shopping_basket_repository,
+                                                    product_service=self.product_service,
                                                     item_logger=self.item_logger,
-                                                    discount_service=self.discount_service)
+                                                    discount_calculator=self.discount_calculator)
 
     def test_raise_error_when_user_doesnt_have_a_basket(self):
         self.shopping_basket_repository.basket_for.return_value = None
@@ -65,15 +66,19 @@ class ShoppingBasketServiceShould(TestCase):
     def test_create_shopping_basket_when_item_is_added_and_basket_doesnt_exist(self):
         self.product_service.reserve.return_value = PRODUCT
 
-        self.basket_service.add_item(user_id=USER_ID, product_id=PRODUCT.id, quantity=QUANTITY_TWO)
+        self.basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT.id, quantity=QUANTITY_TWO
+        )
         self.item_logger.log.assert_called_once()
-        self.shopping_basket_repository.add_item.assert_called_once_with(item=BASKET_ITEM_QUANTITY_TWO, user_id=USER_ID)
+        self.shopping_basket_repository.add_item.assert_called_once_with(
+            item=BASKET_ITEM_QUANTITY_TWO, user_id=USER_ID)
 
     def test_return_basket_with_discount_for_given_user(self):
         self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET
         self.discount_service.apply_discount.return_value = DISCOUNTED_SHOPPING_BASKET
 
-        basket = self.basket_service.basket_for(user_id=USER_ID)
+        basket = self.basket_service.basket_for(user_id=USER_ID
+        )
 
         self.assertIsInstance(basket, ShoppingBasket)
         self.assertEqual(USER_ID, basket.user_id)

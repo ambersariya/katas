@@ -1,14 +1,19 @@
 [flake8]
+max-line-length = 160
+max-complexity = 10
+
 exclude =
     .git,
     .pybuild,
     .eggs,
     __pycache__,
     .venv
-
-max_line_length = 96
+    tests/*
 
 ignore =
+    E226,
+    E302,
+    E41
     #Don't require docstrings on magic methods.
     D105,
 
