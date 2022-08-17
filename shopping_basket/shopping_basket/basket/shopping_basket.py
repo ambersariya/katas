@@ -1,8 +1,11 @@
+from dataclasses import dataclass
+
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.user import UserId
 
 
+@dataclass
 class ShoppingBasket:
     user_id: UserId
     created_at: str
@@ -15,6 +18,9 @@ class ShoppingBasket:
 
     def add(self, item: ShoppingBasketItem) -> None:
         self.items.add(item=item)
+
+    def total_amount(self) -> float:
+        return self.items.total_amount()
 
     def __str__(self) -> str:
         body = f"Creation date {self.created_at}\n"

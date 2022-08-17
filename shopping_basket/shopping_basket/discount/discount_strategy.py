@@ -1,7 +1,8 @@
 from typing import Protocol, List
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
-from shopping_basket.discount.discount import ThreeBooksDiscount, MultiCategoryDiscount, Discount
+from shopping_basket.discount.discount import Discount
+
 from shopping_basket.product.product_category import ProductCategory
 
 
@@ -13,10 +14,11 @@ class DiscountStrategy(Protocol):
 
 class ThreeBooksDiscountStrategy(DiscountStrategy):
     MIN_BOOKS = 3
+    PERCENTAGE = 10.00
 
     def apply(self, basket: ShoppingBasket) -> Discount:
         if self._number_of_books(basket) >= self.MIN_BOOKS:
-            return ThreeBooksDiscount()
+            return Discount(percentage=self.PERCENTAGE, amount=self._calculate(basket))
 
     @staticmethod
     def _number_of_books(basket) -> int:
@@ -26,9 +28,14 @@ class ThreeBooksDiscountStrategy(DiscountStrategy):
                 books += item.quantity
         return books
 
+    def _calculate(self, basket: ShoppingBasket) -> float:
+        return basket.total_amount() * (self.PERCENTAGE / 100)
+
 
 class MultiCategoryDiscountStrategy(DiscountStrategy):
-    MIN_QUANTITY = 1
+    MIN_QUANTITY_VIDEO = 1
+    MIN_QUANTITY_BOOK = 1
+    PERCENTAGE = 20.00
 
     def __init__(self, categories: List[ProductCategory]):
         self._categories = categories
@@ -38,5 +45,8 @@ class MultiCategoryDiscountStrategy(DiscountStrategy):
         for item in basket.items:
             if item.category in category_list:
                 category_list.remove(item.category)
-        if len(category_list) is 0:
-            return MultiCategoryDiscount()
+        if len(category_list) == 0:
+            return Discount(percentage=self.PERCENTAGE, amount=self._calculate(basket))
+
+    def _calculate(self, basket: ShoppingBasket) -> float:
+        return basket.total_amount() * (self.PERCENTAGE / 100)

@@ -1,20 +1,37 @@
 from dataclasses import dataclass
-from typing import Protocol
-
-from shopping_basket.basket.shopping_basket import ShoppingBasket
 
 
-@dataclass
-class Discount(Protocol):
-    pass
+@dataclass(init=True, frozen=True)
+class Discount:
+    percentage: float
+    amount: float
 
+    def __eq__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.amount, self.percentage) == (other.amount, other.percentage)
+        return NotImplemented
 
-class ThreeBooksDiscount(Discount):
-    _percentage: float = 10.00
+    def __ne__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.amount, self.percentage) != (other.amount, other.percentage)
+        return NotImplemented
 
-    def calculate(self, basket: ShoppingBasket) -> float:
-        return self.basket.total_amount() * (self._percentage / 100)
+    def __lt__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.amount, self.percentage) < (other.amount, other.percentage)
+        return NotImplemented
 
+    def __le__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.amount, self.percentage) <= (other.amount, other.percentage)
+        return NotImplemented
 
-class MultiCategoryDiscount:
-    pass
+    def __gt__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.amount, self.percentage) > (other.amount, other.percentage)
+        return NotImplemented
+
+    def __ge__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.amount, self.percentage) >= (other.amount, other.percentage)
+        return NotImplemented
