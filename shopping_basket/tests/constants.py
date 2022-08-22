@@ -42,8 +42,9 @@ NEW_VIDEO_PRODUCT: Final[Product] = Product(
     category=ProductCategory.VIDEO
 )
 
+STOCK_BOOK: Final[Stock] = Stock(available=5, reserved=0, product_id=PRODUCT_ID_BOOK)
 STOCK_VIDEO: Final[Stock] = Stock(available=5, reserved=0, product_id=PRODUCT_ID_VIDEO)
-UPDATED_STOCK: Final[Stock] = Stock(available=0, reserved=5, product_id=PRODUCT_ID_VIDEO)
+UPDATED_STOCK_VIDEO: Final[Stock] = Stock(available=0, reserved=5, product_id=PRODUCT_ID_VIDEO)
 
 QUANTITY_FIVE: Final[int] = 5
 QUANTITY_TWO: Final[int] = 2

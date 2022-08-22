@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import STOCK_VIDEO, PRODUCT_ID_VIDEO, UPDATED_STOCK
+from constants import STOCK_VIDEO, PRODUCT_ID_VIDEO, UPDATED_STOCK_VIDEO
 from shopping_basket.stock.stock_error import InsufficientStockError
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import StockRepository
@@ -24,7 +24,7 @@ class StockManagementServiceShould(TestCase):
         self.stock_repository.find_by_id.return_value = STOCK_VIDEO
         self.stock_management.reserve(product_id=PRODUCT_ID_VIDEO, quantity=quantity)
 
-        self.stock_repository.save_stock.assert_called_once_with(UPDATED_STOCK)
+        self.stock_repository.save_stock.assert_called_once_with(UPDATED_STOCK_VIDEO)
 
     def test_raiser_error_when_reserving_more_stock_than_available(self):
         quantity = 7

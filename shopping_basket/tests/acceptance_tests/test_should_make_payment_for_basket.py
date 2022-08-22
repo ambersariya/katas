@@ -1,11 +1,11 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, STRATEGIES
+from constants import USER_ID, STRATEGIES, UNPAID_ORDER
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
-from shopping_basket.basket.shopping_basket_id import ShoppingBasketId
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.basket.user import UserId
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.utilities import ItemLogger
 from shopping_basket.discount.discount_calculator import DiscountCalculator
@@ -15,8 +15,12 @@ from shopping_basket.payment.payment_details import PaymentDetails
 from shopping_basket.payment.payment_service import PaymentService
 from shopping_basket.product.infrastructure.in_memory_product_repository import \
     InMemoryProductRepository
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_service import ProductService
 from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
+from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
 
@@ -50,14 +54,58 @@ class MakePaymentForBasketShould(TestCase):
             shopping_basket_service=self.shopping_basket_service,
             payment_gateway=self.payment_gateway,
         )
+        self._fill_products()
+
+    def _add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
+        self.shopping_basket_service.add_item(
+            user_id=user_id, product_id=product_id, quantity=int(quantity)
+        )
+
+    def _fill_products(self):
+        self.product_service.add_product(
+            product=Product(
+                id=ProductId("10001"),
+                name="Lord of the Rings",
+                price=10,
+                category=ProductCategory.BOOK,
+            ),
+            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0),
+        )
+        self.product_service.add_product(
+            product=Product(
+                id=ProductId("10002"),
+                name="The Hobbit",
+                price=5,
+                category=ProductCategory.BOOK,
+            ),
+            stock=Stock(product_id=ProductId("10002"), available=5, reserved=0),
+        )
+        self.product_service.add_product(
+            product=Product(
+                id=ProductId("20001"),
+                name="Game of Thrones",
+                price=9,
+                category=ProductCategory.VIDEO,
+            ),
+            stock=Stock(product_id=ProductId("20001"), available=5, reserved=0),
+        )
+        self.product_service.add_product(
+            product=Product(
+                id=ProductId("20110"),
+                name="Breaking Bad",
+                price=7,
+                category=ProductCategory.VIDEO,
+            ),
+            stock=Stock(product_id=ProductId("20110"), available=5, reserved=0),
+        )
 
     def test_be_successful(self):
-        shopping_basket_id = ShoppingBasketId('sdsdsds')
+        self._add_item(USER_ID, ProductId("10002"), 4)
+        self._add_item(USER_ID, ProductId("20110"), 5)
         payment_details = PaymentDetails()
 
         self.payment_service.make_payment(
             user_id=USER_ID,
-            shopping_basket_id=shopping_basket_id,
             payment_details=payment_details
         )
 
