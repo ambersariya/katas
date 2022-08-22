@@ -1,4 +1,3 @@
-from copy import copy
 from typing import List, Protocol
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
