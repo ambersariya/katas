@@ -1,14 +1,19 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, STRATEGIES, UNPAID_ORDER
+from constants import USER_ID, STRATEGIES, UNPAID_ORDER, PAYMENT_REFERENCE, PAYMENT_DETAILS
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
+from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
+from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.date_provider import DateProvider
-from shopping_basket.core.utilities import ItemLogger
+from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
+from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
+from shopping_basket.order.order import UnpaidOrder
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_details import PaymentDetails
@@ -27,14 +32,14 @@ from shopping_basket.stock.stock_management_service import StockManagementServic
 class MakePaymentForBasketShould(TestCase):
     def setUp(self) -> None:
         date_provider = MagicMock(DateProvider)
-        date_provider.current_date.return_value = "14/6/2022"
+        date_provider.current_date.return_value = "15/06/2022"
         self.shopping_basket_repository = InMemoryShoppingBasketRepository(
             date_provider=date_provider
         )
         self.stock_repository = InMemoryStockRepository()
         self.stock_management_service = StockManagementService(self.stock_repository)
         self.product_repository = InMemoryProductRepository()
-        self.discount_calculator = DiscountCalculator(STRATEGIES)
+        self.discount_calculator = DiscountCalculator([])
         self.product_service = ProductService(
             product_repository=self.product_repository,
             stock_management_service=self.stock_management_service,
@@ -47,8 +52,13 @@ class MakePaymentForBasketShould(TestCase):
             discount_calculator=self.discount_calculator
         )
         self.payment_provider = MagicMock(PaymentProvider)
+        self.id_generator = IdGenerator()
+        self.order_repository = InMemoryOrderRepository(
+            id_generator=self.id_generator
+        )
         self.payment_gateway = PaymentGateway(
-            payment_provider=self.payment_provider
+            payment_provider=self.payment_provider,
+            order_repository=self.order_repository
         )
         self.payment_service = PaymentService(
             shopping_basket_service=self.shopping_basket_service,
@@ -102,11 +112,32 @@ class MakePaymentForBasketShould(TestCase):
     def test_be_successful(self):
         self._add_item(USER_ID, ProductId("10002"), 4)
         self._add_item(USER_ID, ProductId("20110"), 5)
-        payment_details = PaymentDetails()
+        self.payment_provider.pay.return_value = PAYMENT_REFERENCE
 
         self.payment_service.make_payment(
             user_id=USER_ID,
-            payment_details=payment_details
+            payment_details=PAYMENT_DETAILS
         )
 
-        self.payment_provider.pay.assert_called_once_with(UNPAID_ORDER)
+        self.payment_provider.pay.assert_called_once_with(
+            order=self._unpaid_order(),
+            user_id=USER_ID,
+            payment_details=PAYMENT_DETAILS
+        )
+        self.assertEqual(1, len(self.order_repository))
+
+    def _unpaid_order(self):
+        items = ShoppingBasketItems([
+            ShoppingBasketItem(id=ProductId("10002"),
+                               name='The Hobbit',
+                               quantity=4,
+                               price=5,
+                               category=ProductCategory.BOOK),
+            ShoppingBasketItem(id=ProductId("20110"),
+                               name='Breaking Bad',
+                               quantity=5,
+                               price=7,
+                               category=ProductCategory.VIDEO)
+        ])
+        basket = ShoppingBasket(user_id=USER_ID, created_at='15/06/2022', items=items)
+        return UnpaidOrder(user_id=USER_ID, shopping_basket=basket)
