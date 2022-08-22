@@ -1,3 +1,4 @@
+from copy import copy
 from typing import Protocol, List
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
@@ -23,7 +24,7 @@ class ThreeBooksDiscountStrategy(DiscountStrategy):
     @staticmethod
     def _number_of_books(basket) -> int:
         books = 0
-        for item in basket.items:
+        for item in basket.items.items():
             if item.category == ProductCategory.BOOK:
                 books += item.quantity
         return books
@@ -33,16 +34,14 @@ class ThreeBooksDiscountStrategy(DiscountStrategy):
 
 
 class MultiCategoryDiscountStrategy(DiscountStrategy):
-    MIN_QUANTITY_VIDEO = 1
-    MIN_QUANTITY_BOOK = 1
     PERCENTAGE = 20.00
 
     def __init__(self, categories: List[ProductCategory]):
         self._categories = categories
 
     def apply(self, basket: ShoppingBasket) -> Discount:
-        category_list = self._categories
-        for item in basket.items:
+        category_list = self._categories.copy()
+        for item in basket.items.items():
             if item.category in category_list:
                 category_list.remove(item.category)
         if len(category_list) == 0:

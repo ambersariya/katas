@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from constants import SHOPPING_BASKET, DISCOUNTABLE_SHOPPING_BASKET, DISCOUNTED_SHOPPING_BASKET, \
-    STRATEGIES
+    CATEGORIES, STRATEGIES
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 
 
@@ -19,3 +19,6 @@ class DiscountCalculatorShould(TestCase):
         discounted_basket = self.discount_calculator.apply_discount(DISCOUNTABLE_SHOPPING_BASKET)
 
         self.assertEqual(DISCOUNTED_SHOPPING_BASKET, discounted_basket)
+
+    def tearDown(self) -> None:
+        self.discount_calculator = None
