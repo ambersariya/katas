@@ -8,10 +8,13 @@ from shopping_basket.discount.discount import Discount
 from shopping_basket.discount.discount_strategy import ThreeBooksDiscountStrategy, \
     MultiCategoryDiscountStrategy
 from shopping_basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
+from shopping_basket.order.order import UnpaidOrder, PaidOrder
+from shopping_basket.order.order_id import OrderId
+from shopping_basket.payment.payment_details import PaymentDetails
+from shopping_basket.payment.payment_reference import PaymentReference
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
-
 from shopping_basket.stock.stock import Stock
 
 USER_ID: Final[UserId] = UserId('some-id')
@@ -59,7 +62,7 @@ SHOPPING_BASKET: Final[ShoppingBasket] = ShoppingBasket(
     created_at=BASKET_CREATION_DATE,
     items=ShoppingBasketItems(items=[BASKET_ITEM_QUANTITY_TWO])
 )
-DISCOUNTABLE_SHOPPING_BASKET: Final[ShoppingBasket]  = ShoppingBasket(
+DISCOUNTABLE_SHOPPING_BASKET: Final[ShoppingBasket] = ShoppingBasket(
     user_id=USER_ID,
     created_at=BASKET_CREATION_DATE,
     items=ShoppingBasketItems(items=[BASKET_ITEM_QUANTITY_FIVE])
@@ -72,3 +75,9 @@ DISCOUNTED_SHOPPING_BASKET: Final[ShoppingBasket] = DiscountedShoppingBasket.fro
 )
 CATEGORIES = [ProductCategory.BOOK, ProductCategory.VIDEO]
 STRATEGIES = [ThreeBooksDiscountStrategy(), MultiCategoryDiscountStrategy(CATEGORIES)]
+
+ORDER_ID = OrderId('order-01')
+UNPAID_ORDER = UnpaidOrder(user_id=USER_ID, shopping_basket=SHOPPING_BASKET)
+PAID_ORDER = PaidOrder.from_unpaid_order(order_id=ORDER_ID, order=UNPAID_ORDER)
+PAYMENT_DETAILS = PaymentDetails()
+PAYMENT_REFERENCE = PaymentReference('payment-reference-01')

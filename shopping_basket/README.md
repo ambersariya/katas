@@ -67,7 +67,7 @@ Products available (in-memory repository):
 ```
     public class PaymentService {
 
-        public void makePayment(UserId userId, ShoppingCartId shoppingCartId, PaymentDetails paymentDetails) { }
+        public void makePayment(UserId userId, PaymentDetails paymentDetails) { }
 
     }
 

@@ -2,5 +2,5 @@ from dataclasses import dataclass
 
 
 @dataclass(init=True, frozen=True)
-class ShoppingBasketId:
+class PaymentReference:
     value: str
