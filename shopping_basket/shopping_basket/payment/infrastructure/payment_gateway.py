@@ -1,12 +1,20 @@
 from shopping_basket.basket.user import UserId
 from shopping_basket.order.order import Order
+from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_details import PaymentDetails
 
 
 class PaymentGateway:
-    def __init__(self, payment_provider: PaymentProvider):
+    def __init__(self, payment_provider: PaymentProvider, order_repository: OrderRepository):
+        self.order_repository = order_repository
         self.payment_provider = payment_provider
 
     def pay(self, order: Order, user_id: UserId, payment_details: PaymentDetails) -> None:
-        raise NotImplementedError()
+        reference = self.payment_provider.pay(
+            order=order,
+            user_id=user_id,
+            payment_details=payment_details
+        )
+
+        self.order_repository.add(order=order, payment_reference=reference)
