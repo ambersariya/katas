@@ -1,24 +1,26 @@
 from dataclasses import dataclass
 
 from shopping_basket.product.product import Product
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_id import ProductId
 
 
 @dataclass(init=True, frozen=True, repr=True)
 class ShoppingBasketItem:
-    id: str
+    id: ProductId
     name: str
     price: int
     quantity: int
-    category: str
+    category: ProductCategory
 
     @staticmethod
     def for_product(product: Product, quantity: int) -> "ShoppingBasketItem":
         return ShoppingBasketItem(
-            id=str(product.id),
+            id=product.id,
             name=product.name,
             price=product.price,
             quantity=quantity,
-            category=str(product.category),
+            category=product.category,
         )
 
     def total(self) -> int:

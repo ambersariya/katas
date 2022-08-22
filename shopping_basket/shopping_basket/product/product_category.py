@@ -6,4 +6,4 @@ class ProductCategory(Enum):
     VIDEO = "Video"
 
     def __str__(self) -> str:
-        return self.value
+        return str(self.value)

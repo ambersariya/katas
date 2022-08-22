@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_category import ProductCategory
@@ -33,17 +33,17 @@ class ApplyDiscountShould(TestCase):
         self.stock_repository = InMemoryStockRepository()
         self.stock_management_service = StockManagementService(self.stock_repository)
         self.product_repository = InMemoryProductRepository()
+        self.discount_calculator = DiscountCalculator()
         self.product_service = ProductService(
             product_repository=self.product_repository,
             stock_management_service=self.stock_management_service,
         )
         self.item_logger = ItemLogger()
-        self.shopping_basket_service = ShoppingBasketService(
-            product_service=self.product_service,
-            shopping_basket_repository=self.shopping_basket_repository,
-            item_logger=self.item_logger,
-        )
-        self.user_id = UserId("user-01")
+        self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
+                                                             shopping_basket_repository=self.shopping_basket_repository,
+                                                             item_logger=self.item_logger,
+                                                             discount_calculator=self.discount_calculator)
+        self.user_id = UserId('user-01')
         self._fill_products()
 
     def test_return_contents_of_the_basket(self):

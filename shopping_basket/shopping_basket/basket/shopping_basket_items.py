@@ -27,3 +27,10 @@ class ShoppingBasketItems:
 
     def items(self) -> List[ShoppingBasketItem]:
         return self._items
+
+    def total_amount(self) -> float:
+        total = 0
+        for item in self._items:
+            total += item.total()
+        return total
+

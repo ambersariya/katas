@@ -22,11 +22,8 @@ class InMemoryShoppingBasketRepository(ShoppingBasketRepository):
 
     def add_item(self, item: ShoppingBasketItem, user_id: UserId) -> None:
         if not self._basket_exists(user_id=user_id):
-            basket = ShoppingBasket(
-                items=ShoppingBasketItems(items=[item]),
-                user_id=user_id,
-                created_at=self._date_provider.current_date(),
-            )
+            basket = ShoppingBasket(user_id=user_id, created_at=self._date_provider.current_date(),
+                                    items=ShoppingBasketItems(items=[item]))
             self._baskets[user_id] = basket
             return
         basket = self.basket_for(user_id)  # type: ignore
