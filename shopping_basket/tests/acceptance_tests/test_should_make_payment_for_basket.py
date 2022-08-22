@@ -14,6 +14,7 @@ from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order import UnpaidOrder
+from shopping_basket.payment.infrastructure.errors import PaymentError
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_details import PaymentDetails
@@ -125,6 +126,17 @@ class MakePaymentForBasketShould(TestCase):
             payment_details=PAYMENT_DETAILS
         )
         self.assertEqual(1, len(self.order_repository))
+
+    def test_raise_exception_when_making_payment(self):
+        self.payment_provider.pay.side_effect = PaymentError()
+        self._add_item(USER_ID, ProductId("10002"), 4)
+        self._add_item(USER_ID, ProductId("20110"), 5)
+
+        with self.assertRaises(PaymentError):
+            self.payment_service.make_payment(
+                user_id=USER_ID,
+                payment_details=PAYMENT_DETAILS
+            )
 
     def _unpaid_order(self):
         items = ShoppingBasketItems([
