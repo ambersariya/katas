@@ -6,15 +6,17 @@ from shopping_basket.payment.payment_details import PaymentDetails
 
 
 class PaymentGateway:
-    def __init__(self, payment_provider: PaymentProvider, order_repository: OrderRepository):
+    def __init__(
+        self, payment_provider: PaymentProvider, order_repository: OrderRepository
+    ):
         self.order_repository = order_repository
         self.payment_provider = payment_provider
 
-    def pay(self, order: Order, user_id: UserId, payment_details: PaymentDetails) -> None:
+    def pay(
+        self, order: Order, user_id: UserId, payment_details: PaymentDetails
+    ) -> None:
         reference = self.payment_provider.pay(
-            order=order,
-            user_id=user_id,
-            payment_details=payment_details
+            order=order, user_id=user_id, payment_details=payment_details
         )
 
         self.order_repository.add(order=order, payment_reference=reference)

@@ -7,7 +7,6 @@ from shopping_basket.discount.discounted_shopping_basket import DiscountedShoppi
 
 
 class DiscountCalculator:
-
     def __init__(self, strategies: List[DiscountStrategy]):
         self.strategies = strategies
 
@@ -19,7 +18,9 @@ class DiscountCalculator:
                 applicable_discounts.append(discount)
         if len(applicable_discounts) == 0:
             return basket
-        return DiscountedShoppingBasket(user_id=basket.user_id, created_at=basket.created_at,
-                                        items=basket.items, discount=max(applicable_discounts))
-
-
+        return DiscountedShoppingBasket(
+            user_id=basket.user_id,
+            created_at=basket.created_at,
+            items=basket.items,
+            discount=max(applicable_discounts),
+        )

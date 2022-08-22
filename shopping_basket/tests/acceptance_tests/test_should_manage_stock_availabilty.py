@@ -46,9 +46,9 @@ class ManageStockAvailabilityShould(TestCase):
             shopping_basket_repository=self.shopping_basket_repository,
             product_service=self.product_service,
             item_logger=self.item_logger,
-            discount_calculator=self.discount_calculator
+            discount_calculator=self.discount_calculator,
         )
-        self.user_id = UserId('user-01')
+        self.user_id = UserId("user-01")
         self._fill_products()
         self.stock_management_service.save_stock(
             stock=Stock(product_id=PRODUCT_ID, available=3, reserved=0)

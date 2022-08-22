@@ -1,14 +1,12 @@
 from copy import copy
-from typing import Protocol, List
+from typing import List, Protocol
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.discount.discount import Discount
-
 from shopping_basket.product.product_category import ProductCategory
 
 
 class DiscountStrategy(Protocol):
-
     def apply(self, basket: ShoppingBasket) -> Discount:
         pass
 

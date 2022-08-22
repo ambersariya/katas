@@ -1,7 +1,7 @@
-from typing import Optional, Dict
+from typing import Dict, Optional
 
 from shopping_basket.core.utilities import IdGenerator
-from shopping_basket.order.order import UnpaidOrder, Order, PaidOrder
+from shopping_basket.order.order import Order, PaidOrder, UnpaidOrder
 from shopping_basket.order.order_id import OrderId
 from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.payment_reference import PaymentReference
@@ -17,7 +17,7 @@ class InMemoryOrderRepository(OrderRepository):
         self._orders[order_id] = PaidOrder(
             order_id=order_id,
             user_id=order.user_id,
-            shopping_basket=order.shopping_basket
+            shopping_basket=order.shopping_basket,
         )
 
     def find_order_by_id(self, order_id: OrderId) -> Optional[Order]:

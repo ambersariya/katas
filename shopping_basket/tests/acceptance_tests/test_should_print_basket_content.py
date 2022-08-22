@@ -45,7 +45,7 @@ class PrintBasketContentShould(TestCase):
             product_service=self.product_service,
             shopping_basket_repository=self.shopping_basket_repository,
             item_logger=self.item_logger,
-            discount_calculator=self.discount_calculator
+            discount_calculator=self.discount_calculator,
         )
         self.user_id = UserId("user-01")
         self._fill_products()

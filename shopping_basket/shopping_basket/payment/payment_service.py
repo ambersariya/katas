@@ -9,7 +9,7 @@ class PaymentService:
     def __init__(
         self,
         shopping_basket_service: ShoppingBasketService,
-        payment_gateway: PaymentGateway
+        payment_gateway: PaymentGateway,
     ):
         self.payment_gateway = payment_gateway
         self.shopping_basket_service = shopping_basket_service
@@ -19,5 +19,5 @@ class PaymentService:
         self.payment_gateway.pay(
             order=UnpaidOrder.from_shopping_basket(basket=basket),
             user_id=user_id,
-            payment_details=payment_details
+            payment_details=payment_details,
         )

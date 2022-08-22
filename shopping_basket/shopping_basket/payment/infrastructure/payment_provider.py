@@ -7,8 +7,7 @@ from shopping_basket.payment.payment_reference import PaymentReference
 
 
 class PaymentProvider(Protocol):
-    def pay(self,
-            order: Order,
-            user_id: UserId,
-            payment_details: PaymentDetails) -> PaymentReference:
+    def pay(
+        self, order: Order, user_id: UserId, payment_details: PaymentDetails
+    ) -> PaymentReference:
         pass

@@ -14,7 +14,7 @@ class PaymentGatewayShould(TestCase):
         self.order_repository = MagicMock(OrderRepository)
         self.payment_gateway = PaymentGateway(
             payment_provider=self.payment_provider,
-            order_repository=self.order_repository
+            order_repository=self.order_repository,
         )
 
     def test_raise_exception_for_unpaid_order(self):
@@ -22,24 +22,17 @@ class PaymentGatewayShould(TestCase):
 
         with self.assertRaises(PaymentError):
             self.payment_gateway.pay(
-                order=UNPAID_ORDER,
-                user_id=USER_ID,
-                payment_details=PAYMENT_DETAILS
+                order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
             )
 
     def test_make_payment_successfully_for_unpaid_order(self):
         self.payment_provider.pay.return_value = PAYMENT_REFERENCE
         self.payment_gateway.pay(
-            order=UNPAID_ORDER,
-            user_id=USER_ID,
-            payment_details=PAYMENT_DETAILS
+            order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
         )
         self.payment_provider.pay.assert_called_once_with(
-            order=UNPAID_ORDER,
-            user_id=USER_ID,
-            payment_details=PAYMENT_DETAILS
+            order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
         )
         self.order_repository.add.assert_called_once_with(
-            order=UNPAID_ORDER,
-            payment_reference=PAYMENT_REFERENCE
+            order=UNPAID_ORDER, payment_reference=PAYMENT_REFERENCE
         )

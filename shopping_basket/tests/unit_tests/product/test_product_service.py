@@ -43,5 +43,7 @@ class ProductServiceShould(TestCase):
         stock = Stock(available=5, reserved=0, product_id=PRODUCT_ID_VIDEO)
         self.product_service.add_product(product=PRODUCT_VIDEO, stock=stock)
 
-        self.product_repository.add_product.assert_called_once_with(product=PRODUCT_VIDEO)
+        self.product_repository.add_product.assert_called_once_with(
+            product=PRODUCT_VIDEO
+        )
         self.stock_manager.save_stock.assert_called_once_with(stock=stock)

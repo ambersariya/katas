@@ -33,4 +33,3 @@ class ShoppingBasketItems:
         for item in self._items:
             total += item.total()
         return total
-

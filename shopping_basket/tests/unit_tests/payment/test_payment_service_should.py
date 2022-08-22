@@ -13,7 +13,7 @@ class PaymentServiceShould(TestCase):
         self.shopping_basket_service = MagicMock(ShoppingBasketService)
         self.payment_service = PaymentService(
             shopping_basket_service=self.shopping_basket_service,
-            payment_gateway=self.payment_gateway
+            payment_gateway=self.payment_gateway,
         )
 
     def test_make_payment_for_given_shopping_basket(self):
@@ -26,7 +26,5 @@ class PaymentServiceShould(TestCase):
 
         self.assertIsNone(result)
         self.payment_gateway.pay.assert_called_once_with(
-            order=UNPAID_ORDER,
-            user_id=USER_ID,
-            payment_details=PAYMENT_DETAILS
+            order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
         )

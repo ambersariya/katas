@@ -31,5 +31,7 @@ class StockManagementServiceShould(TestCase):
         self.stock_repository.find_by_id.return_value = STOCK_VIDEO
 
         with self.assertRaises(InsufficientStockError):
-            self.stock_management.reserve(product_id=PRODUCT_ID_VIDEO, quantity=quantity)
+            self.stock_management.reserve(
+                product_id=PRODUCT_ID_VIDEO, quantity=quantity
+            )
         self.stock_repository.save_stock.assert_not_called()

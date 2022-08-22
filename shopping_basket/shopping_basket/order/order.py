@@ -35,5 +35,5 @@ class PaidOrder(UnpaidOrder):
         return PaidOrder(
             order_id=order_id,
             shopping_basket=order.shopping_basket,
-            user_id=order.user_id
+            user_id=order.user_id,
         )

@@ -1,6 +1,6 @@
-from typing import Protocol, Optional
+from typing import Optional, Protocol
 
-from shopping_basket.order.order import UnpaidOrder, Order
+from shopping_basket.order.order import Order, UnpaidOrder
 from shopping_basket.order.order_id import OrderId
 from shopping_basket.payment.payment_reference import PaymentReference
 
