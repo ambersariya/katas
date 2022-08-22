@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, STRATEGIES, UNPAID_ORDER, PAYMENT_REFERENCE, PAYMENT_DETAILS
+from constants import USER_ID, UNPAID_ORDER, PAYMENT_REFERENCE, PAYMENT_DETAILS
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket import ShoppingBasket
@@ -138,7 +138,8 @@ class MakePaymentForBasketShould(TestCase):
                 payment_details=PAYMENT_DETAILS
             )
 
-    def _unpaid_order(self):
+    @staticmethod
+    def _unpaid_order():
         items = ShoppingBasketItems([
             ShoppingBasketItem(id=ProductId("10002"),
                                name='The Hobbit',
