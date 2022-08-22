@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
+from constants import STRATEGIES
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product import Product
@@ -33,16 +34,18 @@ class ApplyDiscountShould(TestCase):
         self.stock_repository = InMemoryStockRepository()
         self.stock_management_service = StockManagementService(self.stock_repository)
         self.product_repository = InMemoryProductRepository()
-        self.discount_calculator = DiscountCalculator()
+        self.discount_calculator = DiscountCalculator(STRATEGIES)
         self.product_service = ProductService(
             product_repository=self.product_repository,
             stock_management_service=self.stock_management_service,
         )
         self.item_logger = ItemLogger()
-        self.shopping_basket_service = ShoppingBasketService(product_service=self.product_service,
-                                                             shopping_basket_repository=self.shopping_basket_repository,
-                                                             item_logger=self.item_logger,
-                                                             discount_calculator=self.discount_calculator)
+        self.shopping_basket_service = ShoppingBasketService(
+            product_service=self.product_service,
+            shopping_basket_repository=self.shopping_basket_repository,
+            item_logger=self.item_logger,
+            discount_calculator=self.discount_calculator
+        )
         self.user_id = UserId('user-01')
         self._fill_products()
 
@@ -56,7 +59,7 @@ class ApplyDiscountShould(TestCase):
             "Creation date 14/6/2022\n"
             "4 x The Hobbit // Book // 4 x 5.00 = £20.00\n"
             "5 x Breaking Bad // Video // 5 x 7.00 = £35.00\n"
-            "Discount applied: 20% \n"
+            "Discount applied: 20%\n"
             "Total: £44.00"
         )
 

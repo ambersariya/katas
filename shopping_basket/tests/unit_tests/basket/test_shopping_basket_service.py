@@ -31,6 +31,7 @@ class ShoppingBasketServiceShould(TestCase):
 
     def test_return_basket_with_no_discount_for_given_user(self):
         self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET
+        self.discount_calculator.apply_discount.return_value = SHOPPING_BASKET
 
         basket = self.basket_service.basket_for(user_id=USER_ID)
 

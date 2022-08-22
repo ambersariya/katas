@@ -26,7 +26,8 @@ class ShoppingBasketService:
         basket = self._shopping_basket_repository.basket_for(user_id)
         if basket is None:
             raise ShoppingBasketNotFoundError()
-        return basket
+
+        return self._discount_calculator.apply_discount(basket=basket)
 
     def add_item(self, user_id: UserId, product_id: ProductId, quantity: int) -> None:
         product = self._product_service.reserve(product_id=product_id, quantity=quantity)

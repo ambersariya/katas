@@ -1,7 +1,9 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
+from constants import STRATEGIES
 from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_category import ProductCategory
@@ -39,6 +41,7 @@ class ManageStockAvailabilityShould(TestCase):
             self.product_repository, self.stock_management_service
         )
         self.item_logger = ItemLogger()
+        self.discount_calculator = DiscountCalculator(STRATEGIES)
         self.shopping_basket_service = ShoppingBasketService(
             shopping_basket_repository=self.shopping_basket_repository,
             product_service=self.product_service,

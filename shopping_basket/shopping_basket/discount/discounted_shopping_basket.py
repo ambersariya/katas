@@ -11,6 +11,15 @@ class DiscountedShoppingBasket(ShoppingBasket):
         super().__init__(user_id, created_at, items)
         self.discount = discount
 
+    def __str__(self) -> str:
+        total = self.items.total_amount() - self.discount.amount
+        body = f"Creation date {self.created_at}\n"
+        for item in self.items.items():
+            body += f"{str(item)}\n"
+        body += f"Discount applied: {'{:.0f}'.format(self.discount.percentage)}%\n"
+        body += f"Total: £{'{:.2f}'.format(total)}"
+        return body
+
     @classmethod
     def from_basket(cls, basket: ShoppingBasket, discount: Discount):
         return DiscountedShoppingBasket(user_id=basket.user_id,

@@ -1,7 +1,9 @@
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
+from constants import STRATEGIES
 from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_category import ProductCategory
@@ -38,10 +40,12 @@ class PrintBasketContentShould(TestCase):
             stock_management_service=self.stock_management_service,
         )
         self.item_logger = ItemLogger()
+        self.discount_calculator = DiscountCalculator([])
         self.shopping_basket_service = ShoppingBasketService(
             product_service=self.product_service,
             shopping_basket_repository=self.shopping_basket_repository,
             item_logger=self.item_logger,
+            discount_calculator=self.discount_calculator
         )
         self.user_id = UserId("user-01")
         self._fill_products()
