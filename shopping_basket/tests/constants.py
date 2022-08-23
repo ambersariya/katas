@@ -1,3 +1,4 @@
+from copy import copy
 from typing import Final
 from unittest.mock import MagicMock
 
@@ -55,7 +56,7 @@ RESERVED_STOCK_VIDEO: Final[Stock] = Stock(
 SOLD_STOCK_VIDEO: Final[Stock] = Stock(
     available=0, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5
 )
-
+PURCHASED_STOCK_VIDEO = copy(STOCK_VIDEO)
 QUANTITY_FIVE: Final[int] = 5
 QUANTITY_TWO: Final[int] = 2
 

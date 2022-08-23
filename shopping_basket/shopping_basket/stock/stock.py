@@ -38,3 +38,11 @@ class Stock:
 
     def is_enough_available(self) -> bool:
         return self.total_stock() >= self.min_available
+
+    def increase_quantity(self, quantity: int) -> "Stock":
+        return Stock(
+            product_id=self.product_id,
+            available=self.available + quantity,
+            min_available=self.min_available,
+            reserved=self.reserved,
+        )

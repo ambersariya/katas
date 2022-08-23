@@ -15,11 +15,16 @@ class StockManagementService:
 
     def reserve(self, product_id: ProductId, quantity: int) -> None:
         stock = self.stock_repository.find_by_id(product_id=product_id)
-        updated_stock = stock.reserve(quantity)
-        self.stock_repository.save_stock(updated_stock)
+        updated_stock = stock.reserve(quantity=quantity)
+        self.stock_repository.save_stock(stock=updated_stock)
 
     def save_stock(self, stock: Stock) -> None:
         self.stock_repository.save_stock(stock)
+
+    def increase_stock(self, product_id: ProductId, quantity: int) -> None:
+        stock = self.stock_repository.find_by_id(product_id=product_id)
+        updated_stock = stock.increase_quantity(quantity=quantity)
+        self.stock_repository.save_stock(stock=updated_stock)
 
     def update_stock(self, items: ShoppingBasketItems) -> None:
         for item in items.items():
