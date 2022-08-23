@@ -1,9 +1,11 @@
 from typing import Final
+from unittest.mock import MagicMock
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.user import UserId
+from shopping_basket.core.event import EventListener
 from shopping_basket.discount.discount import Discount
 from shopping_basket.discount.discount_strategy import (
     ThreeBooksDiscountStrategy,
@@ -41,10 +43,17 @@ NEW_VIDEO_PRODUCT: Final[Product] = Product(
     category=ProductCategory.VIDEO,
 )
 
-STOCK_BOOK: Final[Stock] = Stock(available=5, reserved=0, product_id=PRODUCT_ID_BOOK)
-STOCK_VIDEO: Final[Stock] = Stock(available=5, reserved=0, product_id=PRODUCT_ID_VIDEO)
-UPDATED_STOCK_VIDEO: Final[Stock] = Stock(
-    available=0, reserved=5, product_id=PRODUCT_ID_VIDEO
+STOCK_BOOK: Final[Stock] = Stock(
+    available=5, reserved=0, product_id=PRODUCT_ID_BOOK, min_available=5
+)
+STOCK_VIDEO: Final[Stock] = Stock(
+    available=5, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5
+)
+RESERVED_STOCK_VIDEO: Final[Stock] = Stock(
+    available=0, reserved=5, product_id=PRODUCT_ID_VIDEO, min_available=5
+)
+SOLD_STOCK_VIDEO: Final[Stock] = Stock(
+    available=0, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5
 )
 
 QUANTITY_FIVE: Final[int] = 5
@@ -82,3 +91,5 @@ UNPAID_ORDER = UnpaidOrder(user_id=USER_ID, shopping_basket=SHOPPING_BASKET)
 PAID_ORDER = PaidOrder.from_unpaid_order(order_id=ORDER_ID, order=UNPAID_ORDER)
 PAYMENT_DETAILS = PaymentDetails()
 PAYMENT_REFERENCE = PaymentReference("payment-reference-01")
+FAKE_PAYMENT_COMPLETED_EVENT_LISTENER = MagicMock(EventListener)
+FAKE_LOW_STOCK_EVENT_LISTENER = MagicMock(EventListener)
