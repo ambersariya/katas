@@ -1,11 +1,9 @@
 from shopping_basket.stock.stock_repository import StockRepository
 from .event import StockIsLow
+from .stock import Stock
 from ..basket.shopping_basket_items import ShoppingBasketItems
 from ..core.messagebus import MessageBus
-from ..product.event import ProductLowOnStock
-
 from ..product.product_id import ProductId
-from .stock import Stock
 
 
 class StockManagementService:

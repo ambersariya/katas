@@ -3,6 +3,7 @@ from unittest.mock import MagicMock
 
 from constants import STRATEGIES
 from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.core.messagebus import MessageBus
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_id import ProductId
@@ -26,13 +27,17 @@ from shopping_basket.core.utilities import ItemLogger
 
 class ApplyDiscountShould(TestCase):
     def setUp(self):
+        self.message_bus = MessageBus()
         date_provider = MagicMock(DateProvider)
         date_provider.current_date.return_value = "14/6/2022"
         self.shopping_basket_repository = InMemoryShoppingBasketRepository(
             date_provider=date_provider
         )
         self.stock_repository = InMemoryStockRepository()
-        self.stock_management_service = StockManagementService(self.stock_repository)
+        self.stock_management_service = StockManagementService(
+            self.stock_repository,
+            self.message_bus
+        )
         self.product_repository = InMemoryProductRepository()
         self.discount_calculator = DiscountCalculator(STRATEGIES)
         self.product_service = ProductService(
@@ -78,7 +83,7 @@ class ApplyDiscountShould(TestCase):
                 price=10,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0),
+            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -87,7 +92,7 @@ class ApplyDiscountShould(TestCase):
                 price=5,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(product_id=ProductId("10002"), available=5, reserved=0),
+            stock=Stock(product_id=ProductId("10002"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -96,7 +101,7 @@ class ApplyDiscountShould(TestCase):
                 price=9,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(product_id=ProductId("20001"), available=5, reserved=0),
+            stock=Stock(product_id=ProductId("20001"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -105,5 +110,5 @@ class ApplyDiscountShould(TestCase):
                 price=7,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(product_id=ProductId("20110"), available=5, reserved=0),
+            stock=Stock(product_id=ProductId("20110"), available=5, reserved=0, min_available=5),
         )

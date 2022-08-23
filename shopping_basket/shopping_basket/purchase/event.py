@@ -8,3 +8,7 @@ from shopping_basket.product.product_id import ProductId
 class StockPurchased(Event):
     product_id: ProductId
     quantity_purchased: int
+
+    @staticmethod
+    def name() -> str:
+        return 'StockPurchased'

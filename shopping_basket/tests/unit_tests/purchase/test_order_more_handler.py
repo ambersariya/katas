@@ -2,7 +2,7 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import PRODUCT_ID_VIDEO
-from shopping_basket.core.event import EventListener
+from shopping_basket.core.event import EventHandler
 from shopping_basket.purchase.handler import OrderMoreHandler
 from shopping_basket.purchase.purchase_system import PurchaseSystem
 from shopping_basket.stock.event import StockIsLow

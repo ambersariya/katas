@@ -7,6 +7,6 @@ class Event(Protocol):
         pass
 
 
-class EventListener(Protocol):
+class EventHandler(Protocol):
     def handle(self, event: Event) -> None:
         pass

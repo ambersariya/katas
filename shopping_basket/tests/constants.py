@@ -6,7 +6,7 @@ from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.user import UserId
-from shopping_basket.core.event import EventListener
+from shopping_basket.core.event import EventHandler
 from shopping_basket.discount.discount import Discount
 from shopping_basket.discount.discount_strategy import (
     ThreeBooksDiscountStrategy,
@@ -92,5 +92,5 @@ UNPAID_ORDER = UnpaidOrder(user_id=USER_ID, shopping_basket=SHOPPING_BASKET)
 PAID_ORDER = PaidOrder.from_unpaid_order(order_id=ORDER_ID, order=UNPAID_ORDER)
 PAYMENT_DETAILS = PaymentDetails()
 PAYMENT_REFERENCE = PaymentReference("payment-reference-01")
-FAKE_PAYMENT_COMPLETED_EVENT_LISTENER = MagicMock(EventListener)
-FAKE_LOW_STOCK_EVENT_LISTENER = MagicMock(EventListener)
+FAKE_PAYMENT_COMPLETED_EVENT_LISTENER = MagicMock(EventHandler)
+FAKE_LOW_STOCK_EVENT_LISTENER = MagicMock(EventHandler)
