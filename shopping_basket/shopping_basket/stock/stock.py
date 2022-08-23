@@ -37,4 +37,4 @@ class Stock:
         return self.available + self.reserved
 
     def is_enough_available(self) -> bool:
-        return self.order_quantity() <= self.min_available
+        return self.total_stock() >= self.min_available

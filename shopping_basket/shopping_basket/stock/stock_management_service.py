@@ -1,5 +1,5 @@
 from shopping_basket.stock.stock_repository import StockRepository
-from .event import StockAvailabilityUpdated
+from .event import StockIsLow
 from ..basket.shopping_basket_items import ShoppingBasketItems
 from ..core.messagebus import MessageBus
 from ..product.event import ProductLowOnStock
@@ -26,9 +26,10 @@ class StockManagementService:
             stock = self.stock_repository.find_by_id(product_id=item.id)
             stock = stock.reduce_reserved(quantity=item.quantity)
             self.stock_repository.save_stock(stock=stock)
-            self.message_bus.handle(
-                event=StockAvailabilityUpdated(
-                    product_id=stock.product_id,
-                    order_quantity=stock.order_quantity()
+            if not stock.is_enough_available():
+                self.message_bus.handle(
+                    event=StockIsLow(
+                        product_id=stock.product_id,
+                        order_quantity=stock.order_quantity()
+                    )
                 )
-            )

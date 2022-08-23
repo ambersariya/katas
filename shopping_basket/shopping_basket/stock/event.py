@@ -5,6 +5,6 @@ from shopping_basket.product.product_id import ProductId
 
 
 @dataclass(init=True, frozen=True)
-class StockAvailabilityUpdated(Event):
+class StockIsLow(Event):
     product_id: ProductId
     order_quantity: int

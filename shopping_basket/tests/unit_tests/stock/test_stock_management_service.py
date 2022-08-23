@@ -5,7 +5,7 @@ from constants import STOCK_VIDEO, PRODUCT_ID_VIDEO, RESERVED_STOCK_VIDEO, SHOPP
     BASKET_ITEM_QUANTITY_FIVE, SOLD_STOCK_VIDEO
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.core.messagebus import MessageBus
-from shopping_basket.stock.event import StockAvailabilityUpdated
+from shopping_basket.stock.event import StockIsLow
 from shopping_basket.stock.stock_error import InsufficientStockError
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import StockRepository
@@ -48,7 +48,7 @@ class StockManagementServiceShould(TestCase):
         )
         self.stock_repository.save_stock.assert_has_calls([call(stock=SOLD_STOCK_VIDEO)])
         self.message_bus.handle.assert_called_once_with(
-            event=StockAvailabilityUpdated(
+            event=StockIsLow(
                 product_id=SOLD_STOCK_VIDEO.product_id,
                 order_quantity=5
             )
