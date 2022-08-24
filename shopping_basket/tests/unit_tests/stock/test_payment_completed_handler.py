@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import SHOPPING_BASKET
+from constants import SHOPPING_BASKET_WITH_ONE_ITEM
 
 from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.stock.handler import StockUpdateHandler
@@ -14,9 +14,9 @@ class PaymentCompletedHandlerShould(TestCase):
         self.handler = StockUpdateHandler(stock_management_service=self.stock_management_service)
 
     def test_update_stock_levels_for_purchased_items(self):
-        event = PaymentCompleted(items=SHOPPING_BASKET.items)
+        event = PaymentCompleted(items=SHOPPING_BASKET_WITH_ONE_ITEM.items)
         self.handler.handle(event=event)
 
         self.stock_management_service.update_stock.assert_called_once_with(
-            items=SHOPPING_BASKET.items
+            items=SHOPPING_BASKET_WITH_ONE_ITEM.items
         )

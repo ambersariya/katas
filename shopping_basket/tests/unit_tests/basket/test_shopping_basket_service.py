@@ -2,12 +2,12 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import (
-    BASKET_ITEM_QUANTITY_TWO,
+    BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO,
     DISCOUNTED_SHOPPING_BASKET,
-    PRODUCT_ID_VIDEO,
-    PRODUCT_VIDEO,
+    PRODUCT_ID_BREAKING_BAD,
+    PRODUCT_VIDEO_BREAKING_BAD,
     QUANTITY_TWO,
-    SHOPPING_BASKET,
+    SHOPPING_BASKET_WITH_ONE_ITEM,
     USER_ID,
 )
 
@@ -40,8 +40,8 @@ class ShoppingBasketServiceShould(TestCase):
             self.basket_service.basket_for(USER_ID)
 
     def test_return_basket_with_no_discount_for_given_user(self):
-        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET
-        self.discount_calculator.apply_discount.return_value = SHOPPING_BASKET
+        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
+        self.discount_calculator.apply_discount.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
 
         basket = self.basket_service.basket_for(user_id=USER_ID)
 
@@ -49,18 +49,18 @@ class ShoppingBasketServiceShould(TestCase):
         self.assertEqual(USER_ID, basket.user_id)
 
     def test_create_shopping_basket_when_item_is_added_and_basket_doesnt_exist(self):
-        self.product_service.reserve.return_value = PRODUCT_VIDEO
+        self.product_service.reserve.return_value = PRODUCT_VIDEO_BREAKING_BAD
 
         self.basket_service.add_item(
-            user_id=USER_ID, product_id=PRODUCT_ID_VIDEO, quantity=QUANTITY_TWO
+            user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=QUANTITY_TWO
         )
         self.item_logger.log.assert_called_once()
         self.shopping_basket_repository.add_item.assert_called_once_with(
-            item=BASKET_ITEM_QUANTITY_TWO, user_id=USER_ID
+            item=BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO, user_id=USER_ID
         )
 
     def test_return_basket_with_discount_for_given_user(self):
-        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET
+        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
         self.discount_calculator.apply_discount.return_value = DISCOUNTED_SHOPPING_BASKET
 
         basket = self.basket_service.basket_for(user_id=USER_ID)

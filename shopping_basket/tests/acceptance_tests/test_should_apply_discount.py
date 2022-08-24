@@ -1,5 +1,5 @@
 from acceptance_tests.base_test_case import BaseTestCase
-from constants import USER_ID, STRATEGIES
+from constants import USER_ID, DISCOUNT_STRATEGIES
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product_id import ProductId
@@ -9,7 +9,7 @@ class ApplyDiscountShould(BaseTestCase):
 
     def setUp(self) -> None:
         BaseTestCase.setUp(self)
-        self.discount_calculator = DiscountCalculator(STRATEGIES)
+        self.discount_calculator = DiscountCalculator(DISCOUNT_STRATEGIES)
         self.shopping_basket_service = ShoppingBasketService(
             product_service=self.product_service,
             shopping_basket_repository=self.shopping_basket_repository,

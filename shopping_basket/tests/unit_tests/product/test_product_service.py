@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import PRODUCT_ID_VIDEO, PRODUCT_VIDEO
+from constants import PRODUCT_ID_BREAKING_BAD, PRODUCT_VIDEO_BREAKING_BAD
 
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_error import ProductNotFoundError
@@ -19,9 +19,9 @@ class ProductServiceShould(TestCase):
         self.product_service = ProductService(self.product_repository, self.stock_manager)
 
     def test_return_product_by_id(self):
-        self.product_repository.find_product_by_id.return_value = PRODUCT_VIDEO
+        self.product_repository.find_product_by_id.return_value = PRODUCT_VIDEO_BREAKING_BAD
 
-        product = self.product_service.reserve(product_id=PRODUCT_ID_VIDEO, quantity=2)
+        product = self.product_service.reserve(product_id=PRODUCT_ID_BREAKING_BAD, quantity=2)
 
         self.assertIsInstance(product, Product)
 
@@ -29,18 +29,18 @@ class ProductServiceShould(TestCase):
         self.product_repository.find_product_by_id.return_value = None
 
         with self.assertRaises(ProductNotFoundError):
-            self.product_service.reserve(product_id=PRODUCT_ID_VIDEO, quantity=2)
+            self.product_service.reserve(product_id=PRODUCT_ID_BREAKING_BAD, quantity=2)
 
     def test_raise_error_when_product_has_less_stock_than_required(self):
-        self.product_repository.find_product_by_id.return_value = PRODUCT_VIDEO
+        self.product_repository.find_product_by_id.return_value = PRODUCT_VIDEO_BREAKING_BAD
         self.stock_manager.reserve.side_effect = InsufficientStockError()
 
         with self.assertRaises(InsufficientStockError):
-            self.product_service.reserve(product_id=PRODUCT_ID_VIDEO, quantity=5)
+            self.product_service.reserve(product_id=PRODUCT_ID_BREAKING_BAD, quantity=5)
 
     def test_add_item_to_repository(self):
-        stock = Stock(available=5, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5)
-        self.product_service.add_product(product=PRODUCT_VIDEO, stock=stock)
+        stock = Stock(available=5, reserved=0, product_id=PRODUCT_ID_BREAKING_BAD, min_available=5)
+        self.product_service.add_product(product=PRODUCT_VIDEO_BREAKING_BAD, stock=stock)
 
-        self.product_repository.add_product.assert_called_once_with(product=PRODUCT_VIDEO)
+        self.product_repository.add_product.assert_called_once_with(product=PRODUCT_VIDEO_BREAKING_BAD)
         self.stock_manager.save_stock.assert_called_once_with(stock=stock)

@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import PAYMENT_DETAILS, SHOPPING_BASKET, UNPAID_ORDER, USER_ID
+from constants import PAYMENT_DETAILS, SHOPPING_BASKET_WITH_ONE_ITEM, UNPAID_ORDER, USER_ID
 
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.core.messagebus import MessageBus
@@ -21,7 +21,7 @@ class PaymentServiceShould(TestCase):
         )
 
     def test_make_payment_for_given_shopping_basket(self):
-        self.shopping_basket_service.basket_for.return_value = SHOPPING_BASKET
+        self.shopping_basket_service.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
 
         result = self.payment_service.make_payment(
             user_id=USER_ID,

@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID
+from constants import USER_ID, PRODUCT_BOOK_LORD_OF_THE_RINGS, STOCK_BOOK_LORD_OF_THE_RINGS
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket import ShoppingBasket
@@ -92,13 +92,8 @@ class BaseTestCase(TestCase):
 
     def _fill_products(self):
         self.product_service.add_product(
-            product=Product(
-                id=ProductId("10001"),
-                name="Lord of the Rings",
-                price=10,
-                category=ProductCategory.BOOK,
-            ),
-            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0, min_available=5),
+            product=PRODUCT_BOOK_LORD_OF_THE_RINGS,
+            stock=STOCK_BOOK_LORD_OF_THE_RINGS,
         )
         self.product_service.add_product(
             product=Product(
