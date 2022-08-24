@@ -24,8 +24,8 @@ from shopping_basket.stock.stock import Stock
 
 USER_ID: Final[UserId] = UserId("some-id")
 
-PRODUCT_ID_BOOK: Final[ProductId] = ProductId("product-1")
-PRODUCT_ID_VIDEO: Final[ProductId] = ProductId("product-2")
+PRODUCT_ID_BOOK: Final[ProductId] = ProductId("10001")
+PRODUCT_ID_VIDEO: Final[ProductId] = ProductId("20110")
 
 PRODUCT_BOOK: Final[Product] = Product(
     id=PRODUCT_ID_BOOK,
