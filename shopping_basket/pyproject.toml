@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "shopping_basket"
 version = "0.1.0"
-description = ""
+description = "Shopping basket kata"
 readme = "README.md"
-authors = ["Istvan Agardi <username@example.org>"]
+authors = ["Istvan Agardi <username@example.org>", "Danish Javed <1080238+ambersariya@users.noreply.github.com>"]
 license = ""
 
 [tool.poetry.dependencies]
