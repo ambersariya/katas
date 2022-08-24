@@ -1,7 +1,8 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import SHOPPING_BASKET, USER_ID, UNPAID_ORDER, PAYMENT_DETAILS
+from constants import PAYMENT_DETAILS, SHOPPING_BASKET, UNPAID_ORDER, USER_ID
+
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.core.messagebus import MessageBus
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway

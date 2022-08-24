@@ -2,13 +2,14 @@ from unittest import TestCase
 from unittest.mock import MagicMock, call
 
 from constants import (
-    STOCK_VIDEO,
-    PRODUCT_ID_VIDEO,
-    RESERVED_STOCK_VIDEO,
     BASKET_ITEM_QUANTITY_FIVE,
-    SOLD_STOCK_VIDEO,
+    PRODUCT_ID_VIDEO,
     PURCHASED_STOCK_VIDEO,
+    RESERVED_STOCK_VIDEO,
+    SOLD_STOCK_VIDEO,
+    STOCK_VIDEO,
 )
+
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.core.messagebus import MessageBus
 from shopping_basket.stock.event import StockIsLow

@@ -17,9 +17,7 @@ from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_service import ProductService
-from shopping_basket.stock.infrastructure.in_memory_stock_repository import (
-    InMemoryStockRepository,
-)
+from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 

@@ -9,11 +9,11 @@ from shopping_basket.basket.user import UserId
 from shopping_basket.core.event import EventHandler
 from shopping_basket.discount.discount import Discount
 from shopping_basket.discount.discount_strategy import (
-    ThreeBooksDiscountStrategy,
     MultiCategoryDiscountStrategy,
+    ThreeBooksDiscountStrategy,
 )
 from shopping_basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
-from shopping_basket.order.order import UnpaidOrder, PaidOrder
+from shopping_basket.order.order import PaidOrder, UnpaidOrder
 from shopping_basket.order.order_id import OrderId
 from shopping_basket.payment.payment_details import PaymentDetails
 from shopping_basket.payment.payment_reference import PaymentReference

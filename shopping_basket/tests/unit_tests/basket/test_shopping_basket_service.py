@@ -2,14 +2,15 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import (
-    USER_ID,
-    SHOPPING_BASKET,
-    PRODUCT_VIDEO,
-    QUANTITY_TWO,
-    PRODUCT_ID_VIDEO,
     BASKET_ITEM_QUANTITY_TWO,
     DISCOUNTED_SHOPPING_BASKET,
+    PRODUCT_ID_VIDEO,
+    PRODUCT_VIDEO,
+    QUANTITY_TWO,
+    SHOPPING_BASKET,
+    USER_ID,
 )
+
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository

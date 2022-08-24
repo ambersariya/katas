@@ -1,11 +1,8 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import (
-    USER_ID,
-    PAYMENT_REFERENCE,
-    PAYMENT_DETAILS,
-)
+from constants import PAYMENT_DETAILS, PAYMENT_REFERENCE, USER_ID
+
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
     InMemoryShoppingBasketRepository,
 )
@@ -16,11 +13,9 @@ from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.messagebus import MessageBus
-from shopping_basket.core.utilities import ItemLogger, IdGenerator
+from shopping_basket.core.utilities import IdGenerator, ItemLogger
 from shopping_basket.discount.discount_calculator import DiscountCalculator
-from shopping_basket.order.infrastructure.in_memory_order_repository import (
-    InMemoryOrderRepository,
-)
+from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order import UnpaidOrder
 from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
@@ -37,10 +32,8 @@ from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.purchase.handler import OrderMoreHandler
 from shopping_basket.purchase.purchase_system import PurchaseSystem
 from shopping_basket.stock.event import StockIsLow
-from shopping_basket.stock.handler import StockUpdateHandler, StockPurchasedHandler
-from shopping_basket.stock.infrastructure.in_memory_stock_repository import (
-    InMemoryStockRepository,
-)
+from shopping_basket.stock.handler import StockPurchasedHandler, StockUpdateHandler
+from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 

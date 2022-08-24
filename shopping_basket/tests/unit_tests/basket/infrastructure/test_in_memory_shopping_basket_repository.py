@@ -1,7 +1,8 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, BASKET_ITEM_QUANTITY_FIVE, BASKET_ITEM_QUANTITY_TWO
+from constants import BASKET_ITEM_QUANTITY_FIVE, BASKET_ITEM_QUANTITY_TWO, USER_ID
+
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
     InMemoryShoppingBasketRepository,
 )

@@ -27,4 +27,4 @@ py_version = 39
 profile = "black"
 src_paths = ["shopping_basket", "test"]
 line_length = 100
-
+remove_redundant_aliases = true

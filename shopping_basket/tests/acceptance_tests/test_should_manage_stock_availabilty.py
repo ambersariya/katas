@@ -2,6 +2,7 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import STRATEGIES
+
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
     InMemoryShoppingBasketRepository,
 )
@@ -23,10 +24,8 @@ from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.purchase.handler import OrderMoreHandler
 from shopping_basket.purchase.purchase_system import PurchaseSystem
 from shopping_basket.stock.event import StockIsLow
-from shopping_basket.stock.handler import StockUpdateHandler, StockPurchasedHandler
-from shopping_basket.stock.infrastructure.in_memory_stock_repository import (
-    InMemoryStockRepository,
-)
+from shopping_basket.stock.handler import StockPurchasedHandler, StockUpdateHandler
+from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_error import InsufficientStockError
 from shopping_basket.stock.stock_management_service import StockManagementService

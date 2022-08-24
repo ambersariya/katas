@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from constants import PRODUCT_VIDEO, PRODUCT_ID_VIDEO, NEW_VIDEO_PRODUCT
+from constants import NEW_VIDEO_PRODUCT, PRODUCT_ID_VIDEO, PRODUCT_VIDEO
+
 from shopping_basket.product.infrastructure.in_memory_product_repository import (
     InMemoryProductRepository,
 )

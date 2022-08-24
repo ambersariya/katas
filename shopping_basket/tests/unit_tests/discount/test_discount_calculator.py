@@ -1,11 +1,12 @@
 from unittest import TestCase
 
 from constants import (
-    SHOPPING_BASKET,
     DISCOUNTABLE_SHOPPING_BASKET,
     DISCOUNTED_SHOPPING_BASKET,
+    SHOPPING_BASKET,
     STRATEGIES,
 )
+
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 
 

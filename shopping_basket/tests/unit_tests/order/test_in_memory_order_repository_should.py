@@ -1,11 +1,10 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import ORDER_ID, PAID_ORDER, UNPAID_ORDER, PAYMENT_REFERENCE
+from constants import ORDER_ID, PAID_ORDER, PAYMENT_REFERENCE, UNPAID_ORDER
+
 from shopping_basket.core.utilities import IdGenerator
-from shopping_basket.order.infrastructure.in_memory_order_repository import (
-    InMemoryOrderRepository,
-)
+from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 
 
 class InMemoryOrderRepositoryShould(TestCase):

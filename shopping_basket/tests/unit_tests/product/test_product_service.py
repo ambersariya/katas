@@ -1,7 +1,8 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import PRODUCT_VIDEO, PRODUCT_ID_VIDEO
+from constants import PRODUCT_ID_VIDEO, PRODUCT_VIDEO
+
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_error import ProductNotFoundError
 from shopping_basket.product.product_repository import ProductRepository

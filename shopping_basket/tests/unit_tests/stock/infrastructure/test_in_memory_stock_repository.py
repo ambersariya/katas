@@ -1,9 +1,8 @@
 from unittest import TestCase
 
-from constants import STOCK_VIDEO, PRODUCT_ID_VIDEO
-from shopping_basket.stock.infrastructure.in_memory_stock_repository import (
-    InMemoryStockRepository,
-)
+from constants import PRODUCT_ID_VIDEO, STOCK_VIDEO
+
+from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
 
 
 class InMemoryStockRepositoryShould(TestCase):
