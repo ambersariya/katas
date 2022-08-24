@@ -10,4 +10,4 @@ class OrderConfirmation:
         self.email_gateway = email_gateway
 
     def send(self, user_id: UserId, order_id: OrderId, payment_reference: PaymentReference):
-        raise NotImplementedError()
+        self.email_gateway.send()
