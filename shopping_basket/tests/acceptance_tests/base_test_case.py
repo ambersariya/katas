@@ -15,7 +15,7 @@ from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order import UnpaidOrder
-from shopping_basket.payment.event import PaymentCompleted
+from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_service import PaymentService
@@ -68,17 +68,17 @@ class BaseTestCase(TestCase):
         self.payment_gateway = PaymentGateway(
             payment_provider=self.payment_provider,
             order_repository=self.order_repository,
+            message_bus=self.message_bus
         )
         self.payment_service = PaymentService(
             shopping_basket_service=self.shopping_basket_service,
-            payment_gateway=self.payment_gateway,
-            message_bus=self.message_bus,
+            payment_gateway=self.payment_gateway
         )
         self._fill_products()
         self.purchase_system = PurchaseSystem(message_bus=self.message_bus)
         stock_handler = StockUpdateHandler(stock_management_service=self.stock_management_service)
         order_more_handler = OrderMoreHandler(purchase_system=self.purchase_system)
-        self.message_bus.add_handler(event_class=PaymentCompleted.name(), handler=stock_handler)
+        self.message_bus.add_handler(event_class=OrderConfirmed.name(), handler=stock_handler)
         self.message_bus.add_handler(event_class=StockIsLow.name(), handler=order_more_handler)
         self.message_bus.add_handler(
             event_class=StockPurchased.name(),

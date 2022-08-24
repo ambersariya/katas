@@ -1,4 +1,4 @@
-from shopping_basket.payment.event import PaymentCompleted
+from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.stock.stock_management_service import StockManagementService
 
@@ -7,8 +7,8 @@ class StockUpdateHandler:
     def __init__(self, stock_management_service: StockManagementService):
         self.stock_management_service = stock_management_service
 
-    def handle(self, event: PaymentCompleted) -> None:
-        self.stock_management_service.update_stock(items=event.items)
+    def handle(self, event: OrderConfirmed) -> None:
+        self.stock_management_service.update_stock(items=event.shopping_basket.items)
 
 
 class StockPurchasedHandler:

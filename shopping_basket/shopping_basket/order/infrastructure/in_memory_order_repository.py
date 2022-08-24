@@ -12,13 +12,10 @@ class InMemoryOrderRepository(OrderRepository):
         self._orders: Dict[OrderId, PaidOrder] = {}
         self.id_generator = id_generator
 
-    def add(self, order: UnpaidOrder, payment_reference: PaymentReference) -> None:
+    def add(self, order: UnpaidOrder, payment_reference: PaymentReference) -> OrderId:
         order_id = OrderId(self.id_generator.next())
-        self._orders[order_id] = PaidOrder(
-            order_id=order_id,
-            user_id=order.user_id,
-            shopping_basket=order.shopping_basket,
-        )
+        self._orders[order_id] = PaidOrder.from_unpaid_order(order=order, order_id=order_id)
+        return order_id
 
     def find_order_by_id(self, order_id: OrderId) -> Optional[Order]:
         return self._orders[order_id]

@@ -2,7 +2,7 @@ from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.messagebus import MessageBus
 from shopping_basket.order.order import UnpaidOrder
-from shopping_basket.payment.event import PaymentCompleted
+from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.payment_details import PaymentDetails
 
@@ -12,9 +12,7 @@ class PaymentService:
         self,
         shopping_basket_service: ShoppingBasketService,
         payment_gateway: PaymentGateway,
-        message_bus: MessageBus,
     ):
-        self.message_bus = message_bus
         self.payment_gateway = payment_gateway
         self.shopping_basket_service = shopping_basket_service
 
@@ -25,4 +23,4 @@ class PaymentService:
             user_id=user_id,
             payment_details=payment_details,
         )
-        self.message_bus.handle(PaymentCompleted(items=basket.items))
+
