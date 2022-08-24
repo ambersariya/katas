@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Dict, List
 
 from shopping_basket.core.event import Event, EventHandler
 
