@@ -95,7 +95,7 @@ Products available (in-memory repository):
 - User should receive an email confirmation containing the order id, items bought, and price. (external)
 
 ```
-    public class OrderConfirmation {
+    public class OrderConfirmation  {
 
         public void send(UserId userId, OrderId orderId, PaymentReference paymentReference) { }
 
