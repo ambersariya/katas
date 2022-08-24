@@ -8,6 +8,7 @@ from shopping_basket.product.product_id import ProductId
 class StockIsLow(Event):
     product_id: ProductId
     order_quantity: int
+
     @staticmethod
     def name() -> str:
-        return 'StockIsLow'
+        return "StockIsLow"

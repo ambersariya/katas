@@ -10,4 +10,4 @@ class PaymentCompleted(Event):
 
     @staticmethod
     def name() -> str:
-        return 'PaymentCompleted'
+        return "PaymentCompleted"

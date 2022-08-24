@@ -12,7 +12,7 @@ class PaymentService:
         self,
         shopping_basket_service: ShoppingBasketService,
         payment_gateway: PaymentGateway,
-        message_bus: MessageBus
+        message_bus: MessageBus,
     ):
         self.message_bus = message_bus
         self.payment_gateway = payment_gateway

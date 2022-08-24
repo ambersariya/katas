@@ -21,3 +21,7 @@ coverage = "^6.4.3"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+src_paths = ["shopping_basket", "test"]

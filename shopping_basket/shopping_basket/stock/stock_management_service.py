@@ -7,7 +7,9 @@ from ..product.product_id import ProductId
 
 
 class StockManagementService:
-    def __init__(self, stock_repository: StockRepository, message_bus: MessageBus) -> None:
+    def __init__(
+        self, stock_repository: StockRepository, message_bus: MessageBus
+    ) -> None:
         self.message_bus = message_bus
         self.stock_repository = stock_repository
 
@@ -33,6 +35,6 @@ class StockManagementService:
                 self.message_bus.handle(
                     event=StockIsLow(
                         product_id=stock.product_id,
-                        order_quantity=stock.order_quantity()
+                        order_quantity=stock.order_quantity(),
                     )
                 )

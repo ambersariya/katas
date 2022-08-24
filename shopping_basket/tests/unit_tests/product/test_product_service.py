@@ -40,7 +40,9 @@ class ProductServiceShould(TestCase):
             self.product_service.reserve(product_id=PRODUCT_ID_VIDEO, quantity=5)
 
     def test_add_item_to_repository(self):
-        stock = Stock(available=5, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5)
+        stock = Stock(
+            available=5, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5
+        )
         self.product_service.add_product(product=PRODUCT_VIDEO, stock=stock)
 
         self.product_repository.add_product.assert_called_once_with(

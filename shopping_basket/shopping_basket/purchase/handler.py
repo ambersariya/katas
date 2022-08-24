@@ -8,6 +8,5 @@ class OrderMoreHandler:
 
     def handle(self, event: StockIsLow) -> None:
         self.purchase_system.order_more(
-            product_id=event.product_id,
-            actual_quantity=event.order_quantity
+            product_id=event.product_id, actual_quantity=event.order_quantity
         )

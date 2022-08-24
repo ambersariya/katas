@@ -16,6 +16,5 @@ class OrderMoreHandlerShould(TestCase):
         handler.handle(event=event)
 
         purchase_system.order_more.assert_called_once_with(
-            product_id=PRODUCT_ID_VIDEO,
-            actual_quantity=5
+            product_id=PRODUCT_ID_VIDEO, actual_quantity=5
         )

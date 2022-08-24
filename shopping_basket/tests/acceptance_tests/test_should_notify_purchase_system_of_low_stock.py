@@ -1,10 +1,16 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, PAYMENT_REFERENCE, PAYMENT_DETAILS, \
-    FAKE_PAYMENT_COMPLETED_EVENT_LISTENER, FAKE_LOW_STOCK_EVENT_LISTENER
-from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
-    InMemoryShoppingBasketRepository
+from constants import (
+    USER_ID,
+    PAYMENT_REFERENCE,
+    PAYMENT_DETAILS,
+    FAKE_PAYMENT_COMPLETED_EVENT_LISTENER,
+    FAKE_LOW_STOCK_EVENT_LISTENER,
+)
+from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
+    InMemoryShoppingBasketRepository,
+)
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
@@ -14,15 +20,18 @@ from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.messagebus import MessageBus
 from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
-from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
+from shopping_basket.order.infrastructure.in_memory_order_repository import (
+    InMemoryOrderRepository,
+)
 from shopping_basket.order.order import UnpaidOrder
 from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.payment.infrastructure.errors import PaymentError
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_service import PaymentService
-from shopping_basket.product.infrastructure.in_memory_product_repository import \
-    InMemoryProductRepository
+from shopping_basket.product.infrastructure.in_memory_product_repository import (
+    InMemoryProductRepository,
+)
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
@@ -32,7 +41,9 @@ from shopping_basket.purchase.handler import OrderMoreHandler
 from shopping_basket.purchase.purchase_system import PurchaseSystem
 from shopping_basket.stock.event import StockIsLow
 from shopping_basket.stock.handler import StockUpdateHandler, StockPurchasedHandler
-from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
+from shopping_basket.stock.infrastructure.in_memory_stock_repository import (
+    InMemoryStockRepository,
+)
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
@@ -55,8 +66,7 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
         )
         self.stock_repository = InMemoryStockRepository()
         self.stock_management_service = StockManagementService(
-            stock_repository=self.stock_repository,
-            message_bus=self.message_bus
+            stock_repository=self.stock_repository, message_bus=self.message_bus
         )
         self.product_repository = InMemoryProductRepository()
         self.discount_calculator = DiscountCalculator([])
@@ -99,7 +109,9 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=10,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0, min_available=5),
+            stock=Stock(
+                product_id=ProductId("10001"), available=5, reserved=0, min_available=5
+            ),
         )
         self.product_service.add_product(
             product=Product(
@@ -108,7 +120,9 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=5,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(product_id=ProductId("10002"), available=5, reserved=0, min_available=5),
+            stock=Stock(
+                product_id=ProductId("10002"), available=5, reserved=0, min_available=5
+            ),
         )
         self.product_service.add_product(
             product=Product(
@@ -117,7 +131,9 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=9,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(product_id=ProductId("20001"), available=5, reserved=0, min_available=5),
+            stock=Stock(
+                product_id=ProductId("20001"), available=5, reserved=0, min_available=5
+            ),
         )
         self.product_service.add_product(
             product=Product(
@@ -126,7 +142,9 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=7,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(product_id=ProductId("20110"), available=5, reserved=0, min_available=5),
+            stock=Stock(
+                product_id=ProductId("20110"), available=5, reserved=0, min_available=5
+            ),
         )
 
     @staticmethod
@@ -157,12 +175,18 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
         self._add_item(USER_ID, ProductId("20110"), 5)
         self.payment_provider.pay.return_value = PAYMENT_REFERENCE
 
-        self.message_bus.add_handler(event_class=PaymentCompleted.name(),
-                                     handler=StockUpdateHandler(self.stock_management_service))
-        self.message_bus.add_handler(event_class=StockIsLow.name(),
-                                     handler=OrderMoreHandler(self.purchase_system))
-        self.message_bus.add_handler(event_class=StockPurchased.name(),
-                                     handler=StockPurchasedHandler(self.stock_management_service))
+        self.message_bus.add_handler(
+            event_class=PaymentCompleted.name(),
+            handler=StockUpdateHandler(self.stock_management_service),
+        )
+        self.message_bus.add_handler(
+            event_class=StockIsLow.name(),
+            handler=OrderMoreHandler(self.purchase_system),
+        )
+        self.message_bus.add_handler(
+            event_class=StockPurchased.name(),
+            handler=StockPurchasedHandler(self.stock_management_service),
+        )
         self.payment_service.make_payment(
             user_id=USER_ID, payment_details=PAYMENT_DETAILS
         )

@@ -18,6 +18,5 @@ class StockPurchasedHandler:
 
     def handle(self, event: StockPurchased) -> None:
         self.stock_management_service.increase_stock(
-            product_id=event.product_id,
-            quantity=event.quantity_purchased
+            product_id=event.product_id, quantity=event.quantity_purchased
         )

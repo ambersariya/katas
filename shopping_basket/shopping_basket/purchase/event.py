@@ -11,4 +11,4 @@ class StockPurchased(Event):
 
     @staticmethod
     def name() -> str:
-        return 'StockPurchased'
+        return "StockPurchased"
