@@ -1,0 +1,35 @@
+-------- day 0 --------
+name, sellIn, quality
++5 Dexterity Vest,  sellIn: 10, quality: 20
+Aged Brie,  sellIn: 2, quality: 0
+Elixir of the Mongoose,  sellIn: 5, quality: 7
+Sulfuras, Hand of Ragnaros,  sellIn: 0, quality: 80
+Sulfuras, Hand of Ragnaros,  sellIn: -1, quality: 80
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 15, quality: 20
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 10, quality: 49
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 5, quality: 49
+Conjured Mana Cake,  sellIn: 3, quality: 6
+
+-------- day 1 --------
+name, sellIn, quality
++5 Dexterity Vest,  sellIn: 9, quality: 19
+Aged Brie,  sellIn: 1, quality: 1
+Elixir of the Mongoose,  sellIn: 4, quality: 6
+Sulfuras, Hand of Ragnaros,  sellIn: 0, quality: 80
+Sulfuras, Hand of Ragnaros,  sellIn: -1, quality: 80
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 14, quality: 21
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 9, quality: 50
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 4, quality: 50
+Conjured Mana Cake,  sellIn: 2, quality: 5
+
+-------- day 2 --------
+name, sellIn, quality
++5 Dexterity Vest,  sellIn: 8, quality: 18
+Aged Brie,  sellIn: 0, quality: 2
+Elixir of the Mongoose,  sellIn: 3, quality: 5
+Sulfuras, Hand of Ragnaros,  sellIn: 0, quality: 80
+Sulfuras, Hand of Ragnaros,  sellIn: -1, quality: 80
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 13, quality: 22
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 8, quality: 50
+Backstage passes to a TAFKAL80ETC concert,  sellIn: 3, quality: 50
+Conjured Mana Cake,  sellIn: 1, quality: 4
