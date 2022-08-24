@@ -14,9 +14,7 @@ from shopping_basket.core.date_provider import DateProvider
 class InMemoryShoppingBasketRepositoryShould(TestCase):
     def setUp(self) -> None:
         self.date_provider = MagicMock(DateProvider)
-        self.repository = InMemoryShoppingBasketRepository(
-            date_provider=self.date_provider
-        )
+        self.repository = InMemoryShoppingBasketRepository(date_provider=self.date_provider)
 
     def test_return_no_shopping_basket_for_user(self):
         result = self.repository.basket_for(user_id=USER_ID)

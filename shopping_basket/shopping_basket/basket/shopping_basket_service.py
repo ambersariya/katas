@@ -30,9 +30,7 @@ class ShoppingBasketService:
         return self._discount_calculator.apply_discount(basket=basket)
 
     def add_item(self, user_id: UserId, product_id: ProductId, quantity: int) -> None:
-        product = self._product_service.reserve(
-            product_id=product_id, quantity=quantity
-        )
+        product = self._product_service.reserve(product_id=product_id, quantity=quantity)
         if product:
             item = ShoppingBasketItem.for_product(product, quantity=quantity)
             self._shopping_basket_repository.add_item(item=item, user_id=user_id)

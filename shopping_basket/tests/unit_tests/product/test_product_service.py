@@ -16,9 +16,7 @@ class ProductServiceShould(TestCase):
     def setUp(self):
         self.product_repository = MagicMock(ProductRepository)
         self.stock_manager = MagicMock(StockManagementService)
-        self.product_service = ProductService(
-            self.product_repository, self.stock_manager
-        )
+        self.product_service = ProductService(self.product_repository, self.stock_manager)
 
     def test_return_product_by_id(self):
         self.product_repository.find_product_by_id.return_value = PRODUCT_VIDEO
@@ -41,12 +39,8 @@ class ProductServiceShould(TestCase):
             self.product_service.reserve(product_id=PRODUCT_ID_VIDEO, quantity=5)
 
     def test_add_item_to_repository(self):
-        stock = Stock(
-            available=5, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5
-        )
+        stock = Stock(available=5, reserved=0, product_id=PRODUCT_ID_VIDEO, min_available=5)
         self.product_service.add_product(product=PRODUCT_VIDEO, stock=stock)
 
-        self.product_repository.add_product.assert_called_once_with(
-            product=PRODUCT_VIDEO
-        )
+        self.product_repository.add_product.assert_called_once_with(product=PRODUCT_VIDEO)
         self.stock_manager.save_stock.assert_called_once_with(stock=stock)

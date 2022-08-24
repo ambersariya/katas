@@ -21,9 +21,7 @@ class DiscountCalculatorShould(TestCase):
     def test_return_discounted_shopping_basket_with_ten_percent_discount_when_it_contains_at_least_three_books(
         self,
     ) -> None:
-        discounted_basket = self.discount_calculator.apply_discount(
-            DISCOUNTABLE_SHOPPING_BASKET
-        )
+        discounted_basket = self.discount_calculator.apply_discount(DISCOUNTABLE_SHOPPING_BASKET)
 
         self.assertEqual(DISCOUNTED_SHOPPING_BASKET, discounted_basket)
 

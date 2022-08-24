@@ -9,7 +9,5 @@ class PurchaseSystem:
 
     def order_more(self, product_id: ProductId, actual_quantity: int):
         self.message_bus.handle(
-            event=StockPurchased(
-                quantity_purchased=actual_quantity, product_id=product_id
-            )
+            event=StockPurchased(quantity_purchased=actual_quantity, product_id=product_id)
         )

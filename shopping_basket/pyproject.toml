@@ -22,6 +22,11 @@ coverage = "^6.4.3"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.black]
+line-length = 100
+target-version = ['py39']
+include = '\.py?$'
+
 [tool.isort]
 py_version = 39
 profile = "black"

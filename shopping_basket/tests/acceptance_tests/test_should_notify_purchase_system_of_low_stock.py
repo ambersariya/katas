@@ -99,9 +99,7 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=10,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(
-                product_id=ProductId("10001"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -110,9 +108,7 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=5,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(
-                product_id=ProductId("10002"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("10002"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -121,9 +117,7 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=9,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(
-                product_id=ProductId("20001"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("20001"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -132,9 +126,7 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
                 price=7,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(
-                product_id=ProductId("20110"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("20110"), available=5, reserved=0, min_available=5),
         )
 
     @staticmethod
@@ -177,9 +169,7 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
             event_class=StockPurchased.name(),
             handler=StockPurchasedHandler(self.stock_management_service),
         )
-        self.payment_service.make_payment(
-            user_id=USER_ID, payment_details=PAYMENT_DETAILS
-        )
+        self.payment_service.make_payment(user_id=USER_ID, payment_details=PAYMENT_DETAILS)
 
         basket = self.shopping_basket_service.basket_for(user_id=USER_ID)
         event_payment_1 = PaymentCompleted(items=basket.items)

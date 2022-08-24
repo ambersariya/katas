@@ -81,9 +81,7 @@ class ApplyDiscountShould(TestCase):
                 price=10,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(
-                product_id=ProductId("10001"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("10001"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -92,9 +90,7 @@ class ApplyDiscountShould(TestCase):
                 price=5,
                 category=ProductCategory.BOOK,
             ),
-            stock=Stock(
-                product_id=ProductId("10002"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("10002"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -103,9 +99,7 @@ class ApplyDiscountShould(TestCase):
                 price=9,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(
-                product_id=ProductId("20001"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("20001"), available=5, reserved=0, min_available=5),
         )
         self.product_service.add_product(
             product=Product(
@@ -114,7 +108,5 @@ class ApplyDiscountShould(TestCase):
                 price=7,
                 category=ProductCategory.VIDEO,
             ),
-            stock=Stock(
-                product_id=ProductId("20110"), available=5, reserved=0, min_available=5
-            ),
+            stock=Stock(product_id=ProductId("20110"), available=5, reserved=0, min_available=5),
         )

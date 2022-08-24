@@ -79,9 +79,7 @@ DISCOUNTABLE_SHOPPING_BASKET: Final[ShoppingBasket] = ShoppingBasket(
 )
 
 DISCOUNT: Final[Discount] = Discount(percentage=10, amount=15.5)
-DISCOUNTED_SHOPPING_BASKET: Final[
-    ShoppingBasket
-] = DiscountedShoppingBasket.from_basket(
+DISCOUNTED_SHOPPING_BASKET: Final[ShoppingBasket] = DiscountedShoppingBasket.from_basket(
     basket=DISCOUNTABLE_SHOPPING_BASKET, discount=DISCOUNT
 )
 CATEGORIES = [ProductCategory.BOOK, ProductCategory.VIDEO]

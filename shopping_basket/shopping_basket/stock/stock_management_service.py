@@ -7,9 +7,7 @@ from shopping_basket.stock.stock_repository import StockRepository
 
 
 class StockManagementService:
-    def __init__(
-        self, stock_repository: StockRepository, message_bus: MessageBus
-    ) -> None:
+    def __init__(self, stock_repository: StockRepository, message_bus: MessageBus) -> None:
         self.message_bus = message_bus
         self.stock_repository = stock_repository
 
