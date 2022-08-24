@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, UNPAID_ORDER, PAYMENT_REFERENCE, PAYMENT_DETAILS
+from constants import USER_ID, PAYMENT_REFERENCE, PAYMENT_DETAILS
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
     InMemoryShoppingBasketRepository,
 )
@@ -22,7 +22,6 @@ from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.payment.infrastructure.errors import PaymentError
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
-from shopping_basket.payment.payment_details import PaymentDetails
 from shopping_basket.payment.payment_service import PaymentService
 from shopping_basket.product.infrastructure.in_memory_product_repository import (
     InMemoryProductRepository,

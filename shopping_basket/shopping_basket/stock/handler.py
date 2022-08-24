@@ -1,4 +1,3 @@
-from shopping_basket.core.event import EventHandler, Event
 from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.stock.stock_management_service import StockManagementService

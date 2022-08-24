@@ -2,7 +2,6 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import SHOPPING_BASKET
-from shopping_basket.core.event import EventHandler
 from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.stock.handler import StockUpdateHandler
 from shopping_basket.stock.stock_management_service import StockManagementService
