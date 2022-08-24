@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import USER_ID, PAYMENT_REFERENCE, PAYMENT_DETAILS
+from constants import USER_ID
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket import ShoppingBasket
@@ -11,39 +11,26 @@ from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.messagebus import MessageBus
-from shopping_basket.core.utilities import IdGenerator, ItemLogger
+from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order import UnpaidOrder
-from shopping_basket.payment.event import PaymentCompleted
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_service import PaymentService
-from shopping_basket.product.infrastructure.in_memory_product_repository import (
-    InMemoryProductRepository,
-)
+from shopping_basket.product.infrastructure.in_memory_product_repository import \
+    InMemoryProductRepository
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_service import ProductService
-from shopping_basket.purchase.event import StockPurchased
-from shopping_basket.purchase.handler import OrderMoreHandler
 from shopping_basket.purchase.purchase_system import PurchaseSystem
-from shopping_basket.stock.event import StockIsLow
-from shopping_basket.stock.handler import StockPurchasedHandler, StockUpdateHandler
 from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
 
-class NotifyPurchaseSystemAboutLowStock(TestCase):
-    """
-    - Purchase means the items that were reserved are now no longer there.
-        - The stock is now reduced permanently
-    - Need to tell stock management service to deduct the reserved numbers as described above
-        - React to purchased event
-    - Also need to raise another event to order more stock if threshold is less than equal to something
-    """
+class BaseTestCase(TestCase):
 
     def setUp(self) -> None:
         self.message_bus = MessageBus()
@@ -54,7 +41,8 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
         )
         self.stock_repository = InMemoryStockRepository()
         self.stock_management_service = StockManagementService(
-            stock_repository=self.stock_repository, message_bus=self.message_bus
+            stock_repository=self.stock_repository,
+            message_bus=self.message_bus
         )
         self.product_repository = InMemoryProductRepository()
         self.discount_calculator = DiscountCalculator([])
@@ -84,9 +72,9 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
         self._fill_products()
         self.purchase_system = PurchaseSystem(message_bus=self.message_bus)
 
-    def _add_item(self, user_id: UserId, product_id: ProductId, quantity: int):
+    def _add_item(self, product_id: ProductId, quantity: int):
         self.shopping_basket_service.add_item(
-            user_id=user_id, product_id=product_id, quantity=int(quantity)
+            user_id=USER_ID, product_id=product_id, quantity=int(quantity)
         )
 
     def _fill_products(self):
@@ -149,35 +137,3 @@ class NotifyPurchaseSystemAboutLowStock(TestCase):
         )
         basket = ShoppingBasket(user_id=USER_ID, created_at="15/06/2022", items=items)
         return UnpaidOrder(user_id=USER_ID, shopping_basket=basket)
-
-    def test_be_successful(self):
-        self._add_item(USER_ID, ProductId("10002"), 4)
-        self._add_item(USER_ID, ProductId("20110"), 5)
-        self.payment_provider.pay.return_value = PAYMENT_REFERENCE
-
-        self.message_bus.add_handler(
-            event_class=PaymentCompleted.name(),
-            handler=StockUpdateHandler(self.stock_management_service),
-        )
-        self.message_bus.add_handler(
-            event_class=StockIsLow.name(),
-            handler=OrderMoreHandler(self.purchase_system),
-        )
-        self.message_bus.add_handler(
-            event_class=StockPurchased.name(),
-            handler=StockPurchasedHandler(self.stock_management_service),
-        )
-        self.payment_service.make_payment(user_id=USER_ID, payment_details=PAYMENT_DETAILS)
-
-        basket = self.shopping_basket_service.basket_for(user_id=USER_ID)
-        event_payment_1 = PaymentCompleted(items=basket.items)
-        event_prod_1 = StockIsLow(product_id=ProductId("10002"), order_quantity=4)
-        event_prod_2 = StockIsLow(product_id=ProductId("20110"), order_quantity=5)
-
-        self.payment_provider.pay.assert_called_once_with(
-            order=self._unpaid_order(), user_id=USER_ID, payment_details=PAYMENT_DETAILS
-        )
-        stock = self.stock_repository.find_by_id(product_id=ProductId("10002"))
-        self.assertEqual(1, len(self.order_repository))
-        self.assertEqual(5, stock.available)
-        self.assertEqual(0, stock.reserved)

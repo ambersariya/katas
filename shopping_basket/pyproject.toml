@@ -15,7 +15,6 @@ black = "^22.1.0"
 flake8 = "^5.0.4"
 mypy = "^0.971"
 isort = "^5.10.1"
-behave = "^1.2.6"
 coverage = "^6.4.3"
 
 [build-system]
