@@ -106,6 +106,6 @@ Products available (in-memory repository):
 
 Using a framework e.g. FastAPI/Flask
 
-### Scenario 9 - Convert to Cli package
+### Scenario 9 - Dockerise solution
 
-Using a cli packaging framework such as Typer/Click
+Put the FastAPI solution into docker container.

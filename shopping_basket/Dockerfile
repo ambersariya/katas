@@ -17,5 +17,5 @@ COPY .editorconfig /app
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN make
-
-CMD uvicorn app:app
+EXPOSE 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

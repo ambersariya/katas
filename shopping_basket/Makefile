@@ -35,3 +35,6 @@ black-check:
 update-libs: # Updates python dependencies and commits
 	poetry update
 	git add poetry.lock && git commit poetry.lock -m "chore: update project dependencies"
+
+build-image:
+	docker build -t shopping-basket-api .
