@@ -18,4 +18,4 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN make
 
-CMD python -m unittest discover .
+CMD uvicorn app:app
