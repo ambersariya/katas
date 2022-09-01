@@ -4,7 +4,6 @@ from shopping_basket.product.product_id import ProductId
 
 
 class NotifyPurchaseSystemAboutLowStock(BaseTestCase):
-
     def test_be_successful(self):
         self._add_item(ProductId("10002"), 4)
         self._add_item(ProductId("20110"), 5)

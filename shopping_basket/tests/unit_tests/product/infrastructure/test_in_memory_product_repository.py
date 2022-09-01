@@ -1,6 +1,10 @@
 from unittest import TestCase
 
-from constants import UPDATED_PRODUCT_WITH_OLD_ID, PRODUCT_ID_BREAKING_BAD, PRODUCT_VIDEO_BREAKING_BAD
+from constants import (
+    UPDATED_PRODUCT_WITH_OLD_ID,
+    PRODUCT_ID_BREAKING_BAD,
+    PRODUCT_VIDEO_BREAKING_BAD,
+)
 
 from shopping_basket.product.infrastructure.in_memory_product_repository import (
     InMemoryProductRepository,

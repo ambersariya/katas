@@ -35,7 +35,9 @@ class StockManagementServiceShould(TestCase):
         self.stock_repository.find_by_id.return_value = STOCK_VIDEO_BREAKING_BAD
         self.stock_management.reserve(product_id=PRODUCT_ID_BREAKING_BAD, quantity=quantity)
 
-        self.stock_repository.save_stock.assert_called_once_with(stock=RESERVED_STOCK_VIDEO_BREAKING_BAD)
+        self.stock_repository.save_stock.assert_called_once_with(
+            stock=RESERVED_STOCK_VIDEO_BREAKING_BAD
+        )
 
     def test_raise_error_when_reserving_more_stock_than_available(self):
         quantity = 7
@@ -50,7 +52,9 @@ class StockManagementServiceShould(TestCase):
         self.stock_management.update_stock(
             items=ShoppingBasketItems(items=[BASKET_ITEM_LORD_OF_THE_RINGS_QUANTITY_FIVE])
         )
-        self.stock_repository.save_stock.assert_has_calls([call(stock=SOLD_STOCK_VIDEO_BREAKING_BAD)])
+        self.stock_repository.save_stock.assert_has_calls(
+            [call(stock=SOLD_STOCK_VIDEO_BREAKING_BAD)]
+        )
         self.message_bus.handle.assert_called_once_with(
             event=StockIsLow(product_id=SOLD_STOCK_VIDEO_BREAKING_BAD.product_id, order_quantity=5)
         )
@@ -58,4 +62,6 @@ class StockManagementServiceShould(TestCase):
     def test_increase_stock_levels_for_product(self):
         self.stock_repository.find_by_id.return_value = SOLD_STOCK_VIDEO_BREAKING_BAD
         self.stock_management.increase_stock(product_id=PRODUCT_ID_BREAKING_BAD, quantity=5)
-        self.stock_repository.save_stock.assert_called_once_with(stock=PURCHASED_STOCK_VIDEO_BREAKING_BAD)
+        self.stock_repository.save_stock.assert_called_once_with(
+            stock=PURCHASED_STOCK_VIDEO_BREAKING_BAD
+        )

@@ -8,10 +8,12 @@ from shopping_basket.payment.payment_details import PaymentDetails
 
 
 class PaymentGateway:
-    def __init__(self,
-                 payment_provider: PaymentProvider,
-                 order_repository: OrderRepository,
-                 message_bus: MessageBus):
+    def __init__(
+        self,
+        payment_provider: PaymentProvider,
+        order_repository: OrderRepository,
+        message_bus: MessageBus,
+    ):
         self.message_bus = message_bus
         self.order_repository = order_repository
         self.payment_provider = payment_provider
@@ -23,5 +25,9 @@ class PaymentGateway:
 
         order_id = self.order_repository.add(order=order, payment_reference=reference)
         self.message_bus.handle(
-            OrderConfirmed(order_id=order_id, shopping_basket=order.shopping_basket,
-                           payment_reference=reference))
+            OrderConfirmed(
+                order_id=order_id,
+                shopping_basket=order.shopping_basket,
+                payment_reference=reference,
+            )
+        )

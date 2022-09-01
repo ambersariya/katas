@@ -15,7 +15,7 @@ class PaymentServiceShould(TestCase):
         self.shopping_basket_service = MagicMock(ShoppingBasketService)
         self.payment_service = PaymentService(
             shopping_basket_service=self.shopping_basket_service,
-            payment_gateway=self.payment_gateway
+            payment_gateway=self.payment_gateway,
         )
 
     def test_make_payment_for_given_shopping_basket(self):

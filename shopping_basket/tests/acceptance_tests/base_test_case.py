@@ -2,8 +2,9 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import USER_ID, PRODUCT_BOOK_LORD_OF_THE_RINGS, STOCK_BOOK_LORD_OF_THE_RINGS
-from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
-    InMemoryShoppingBasketRepository
+from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
+    InMemoryShoppingBasketRepository,
+)
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
@@ -19,8 +20,9 @@ from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_service import PaymentService
-from shopping_basket.product.infrastructure.in_memory_product_repository import \
-    InMemoryProductRepository
+from shopping_basket.product.infrastructure.in_memory_product_repository import (
+    InMemoryProductRepository,
+)
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
@@ -36,7 +38,6 @@ from shopping_basket.stock.stock_management_service import StockManagementServic
 
 
 class BaseTestCase(TestCase):
-
     def setUp(self) -> None:
         self.message_bus = MessageBus()
         date_provider = MagicMock(DateProvider)
@@ -46,8 +47,7 @@ class BaseTestCase(TestCase):
         )
         self.stock_repository = InMemoryStockRepository()
         self.stock_management_service = StockManagementService(
-            stock_repository=self.stock_repository,
-            message_bus=self.message_bus
+            stock_repository=self.stock_repository, message_bus=self.message_bus
         )
         self.product_repository = InMemoryProductRepository()
         self.discount_calculator = DiscountCalculator([])
@@ -68,11 +68,11 @@ class BaseTestCase(TestCase):
         self.payment_gateway = PaymentGateway(
             payment_provider=self.payment_provider,
             order_repository=self.order_repository,
-            message_bus=self.message_bus
+            message_bus=self.message_bus,
         )
         self.payment_service = PaymentService(
             shopping_basket_service=self.shopping_basket_service,
-            payment_gateway=self.payment_gateway
+            payment_gateway=self.payment_gateway,
         )
         self._fill_products()
         self.purchase_system = PurchaseSystem(message_bus=self.message_bus)

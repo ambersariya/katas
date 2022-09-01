@@ -11,15 +11,14 @@ from shopping_basket.product.product_id import ProductId
 
 
 class MakePaymentForBasketShould(BaseTestCase):
-
     def setUp(self) -> None:
         BaseTestCase.setUp(self)
         self.email_gateway = MagicMock(EmailGateway)
         self.order_confirmation = OrderConfirmation(email_gateway=self.email_gateway)
-        self.message_bus.add_handler(event_class=OrderConfirmed.name(),
-                                     handler=OrderConfirmedHandler(
-                                         order_confirmation=self.order_confirmation)
-                                     )
+        self.message_bus.add_handler(
+            event_class=OrderConfirmed.name(),
+            handler=OrderConfirmedHandler(order_confirmation=self.order_confirmation),
+        )
 
     def test_raise_exception_when_making_payment(self):
         self.payment_provider.pay.side_effect = PaymentError()

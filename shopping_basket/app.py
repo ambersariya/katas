@@ -6,19 +6,23 @@ from starlette import status
 from starlette.status import HTTP_204_NO_CONTENT
 
 from shopping_basket.api.requests import AddItem
-from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
-    InMemoryShoppingBasketRepository
+from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
+    InMemoryShoppingBasketRepository,
+)
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.messagebus import MessageBus
 from shopping_basket.core.utilities import ItemLogger
 from shopping_basket.discount.discount_calculator import DiscountCalculator
-from shopping_basket.discount.discount_strategy import MultiCategoryDiscountStrategy, \
-    ThreeBooksDiscountStrategy
+from shopping_basket.discount.discount_strategy import (
+    MultiCategoryDiscountStrategy,
+    ThreeBooksDiscountStrategy,
+)
 from shopping_basket.payment.event import OrderConfirmed
-from shopping_basket.product.infrastructure.in_memory_product_repository import \
-    InMemoryProductRepository
+from shopping_basket.product.infrastructure.in_memory_product_repository import (
+    InMemoryProductRepository,
+)
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
@@ -34,18 +38,17 @@ from shopping_basket.stock.stock_management_service import StockManagementServic
 
 app = FastAPI()
 PRODUCT_CATEGORIES = [ProductCategory.BOOK, ProductCategory.VIDEO]
-DISCOUNT_STRATEGIES = [ThreeBooksDiscountStrategy(),
-                       MultiCategoryDiscountStrategy(PRODUCT_CATEGORIES)]
+DISCOUNT_STRATEGIES = [
+    ThreeBooksDiscountStrategy(),
+    MultiCategoryDiscountStrategy(PRODUCT_CATEGORIES),
+]
 
 date_provider = DateProvider()
 message_bus = MessageBus()
-shopping_basket_repository = InMemoryShoppingBasketRepository(
-    date_provider=date_provider
-)
+shopping_basket_repository = InMemoryShoppingBasketRepository(date_provider=date_provider)
 stock_repository = InMemoryStockRepository()
 stock_management_service = StockManagementService(
-    stock_repository=stock_repository,
-    message_bus=message_bus
+    stock_repository=stock_repository, message_bus=message_bus
 )
 product_repository = InMemoryProductRepository()
 discount_calculator = DiscountCalculator([])
@@ -107,12 +110,10 @@ async def root() -> Any:
 @app.post("/items/{user_id}/add-item", status_code=status.HTTP_204_NO_CONTENT)
 async def add_item(user_id: str, item: AddItem) -> Any:
     shopping_basket_service.add_item(
-        user_id=UserId(user_id),
-        product_id=ProductId(item.product_id),
-        quantity=item.quantity
+        user_id=UserId(user_id), product_id=ProductId(item.product_id), quantity=item.quantity
     )
 
 
 @app.get("/baskets/{user_id}", status_code=status.HTTP_200_OK)
 async def basket_for(user_id: str) -> Any:
-    return {'basket': shopping_basket_service.basket_for(user_id=UserId(user_id))}
+    return {"basket": shopping_basket_service.basket_for(user_id=UserId(user_id))}

@@ -18,7 +18,7 @@ class PaymentGatewayShould(TestCase):
         self.payment_gateway = PaymentGateway(
             payment_provider=self.payment_provider,
             order_repository=self.order_repository,
-            message_bus=self.message_bus
+            message_bus=self.message_bus,
         )
 
     def test_raise_exception_for_unpaid_order(self):

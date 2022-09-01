@@ -12,9 +12,11 @@ class OrderConfirmedHandlerShould(TestCase):
         self.order_confirmation = MagicMock(OrderConfirmation)
         self.order_confirmed_handler = OrderConfirmedHandler(self.order_confirmation)
         self.order_confirmed_handler.handle(
-            event=OrderConfirmed(order_id=ORDER_ID,
-                                 shopping_basket=SHOPPING_BASKET_WITH_ONE_ITEM,
-                                 payment_reference=PAYMENT_REFERENCE)
+            event=OrderConfirmed(
+                order_id=ORDER_ID,
+                shopping_basket=SHOPPING_BASKET_WITH_ONE_ITEM,
+                payment_reference=PAYMENT_REFERENCE,
+            )
         )
 
         self.order_confirmation.send.assert_called_once()

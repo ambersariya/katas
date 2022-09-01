@@ -5,7 +5,6 @@ from shopping_basket.payment.payment_reference import PaymentReference
 
 
 class OrderConfirmation:
-
     def __init__(self, email_gateway: EmailGateway):
         self.email_gateway = email_gateway
 

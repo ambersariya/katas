@@ -63,9 +63,9 @@ PURCHASED_STOCK_VIDEO_BREAKING_BAD = copy(STOCK_VIDEO_BREAKING_BAD)
 QUANTITY_FIVE: Final[int] = 5
 QUANTITY_TWO: Final[int] = 2
 
-BASKET_ITEM_LORD_OF_THE_RINGS_QUANTITY_FIVE: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(
-    product=PRODUCT_BOOK_LORD_OF_THE_RINGS, quantity=QUANTITY_FIVE
-)
+BASKET_ITEM_LORD_OF_THE_RINGS_QUANTITY_FIVE: Final[
+    ShoppingBasketItem
+] = ShoppingBasketItem.for_product(product=PRODUCT_BOOK_LORD_OF_THE_RINGS, quantity=QUANTITY_FIVE)
 BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO: Final[ShoppingBasketItem] = ShoppingBasketItem.for_product(
     product=PRODUCT_VIDEO_BREAKING_BAD, quantity=QUANTITY_TWO
 )
@@ -86,7 +86,10 @@ DISCOUNTED_SHOPPING_BASKET: Final[ShoppingBasket] = DiscountedShoppingBasket.fro
     basket=DISCOUNTABLE_SHOPPING_BASKET_WITH_ONE_ITEM, discount=DISCOUNT
 )
 PRODUCT_CATEGORIES = [ProductCategory.BOOK, ProductCategory.VIDEO]
-DISCOUNT_STRATEGIES = [ThreeBooksDiscountStrategy(), MultiCategoryDiscountStrategy(PRODUCT_CATEGORIES)]
+DISCOUNT_STRATEGIES = [
+    ThreeBooksDiscountStrategy(),
+    MultiCategoryDiscountStrategy(PRODUCT_CATEGORIES),
+]
 
 ORDER_ID = OrderId("order-01")
 UNPAID_ORDER = UnpaidOrder(user_id=USER_ID, shopping_basket=SHOPPING_BASKET_WITH_ONE_ITEM)

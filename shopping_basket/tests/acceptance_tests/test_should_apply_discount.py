@@ -6,7 +6,6 @@ from shopping_basket.product.product_id import ProductId
 
 
 class ApplyDiscountShould(BaseTestCase):
-
     def setUp(self) -> None:
         BaseTestCase.setUp(self)
         self.discount_calculator = DiscountCalculator(DISCOUNT_STRATEGIES)
@@ -32,4 +31,3 @@ class ApplyDiscountShould(BaseTestCase):
         )
 
         assert str(basket) == basket_printout
-

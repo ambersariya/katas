@@ -11,7 +11,8 @@ class OrderConfirmationShould(TestCase):
         self.email_gateway = MagicMock(EmailGateway)
         self.order_confirmation = OrderConfirmation(self.email_gateway)
 
-        self.order_confirmation.send(user_id=USER_ID, order_id=ORDER_ID,
-                                     payment_reference=PAYMENT_REFERENCE)
+        self.order_confirmation.send(
+            user_id=USER_ID, order_id=ORDER_ID, payment_reference=PAYMENT_REFERENCE
+        )
 
         self.email_gateway.send.assert_called_once()

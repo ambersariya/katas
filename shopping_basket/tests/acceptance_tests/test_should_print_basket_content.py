@@ -5,7 +5,6 @@ from constants import USER_ID, PRODUCT_ID_HOBBIT, PRODUCT_ID_BREAKING_BAD
 
 
 class PrintBasketContentShould(BaseTestCase):
-
     @patch("builtins.print")
     def test_return_contents_of_the_basket(self, mock_print: MagicMock):
         self._add_item(PRODUCT_ID_HOBBIT, 2)
@@ -23,4 +22,3 @@ class PrintBasketContentShould(BaseTestCase):
 
         assert str(basket) == basket_printout
         assert mock_print.call_count == 3
-
