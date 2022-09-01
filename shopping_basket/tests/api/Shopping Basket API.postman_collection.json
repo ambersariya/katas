@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "11d0acd1-f5ed-473f-bb11-244fc8487822",
+		"name": "Shopping Basket API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add item to basket",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get basket for user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/items/istvan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"items",
+						"istvan"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
