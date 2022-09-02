@@ -9,3 +9,8 @@ class Transaction(Protocol):
 @dataclass(init=True, frozen=True)
 class Deposit(Transaction):
     amount: int
+
+
+@dataclass(init=True, frozen=True)
+class Withdraw(Transaction):
+    amount: int
