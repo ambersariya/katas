@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bank-pytest"
+version = "0.1.0"
+description = ""
+authors = ["ambersariya <1080238+ambersariya@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+black = "^22.8.0"
+mypy = "^0.971"
+prospector = "^1.7.7"
+flake8 = "^5.0.4"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
