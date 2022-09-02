@@ -7,8 +7,11 @@ from src.transaction import Transaction
 class TransactionRepository(Protocol):
     @abstractmethod
     def add_transaction(self, transaction: Transaction) -> None:
-        raise NotImplementedError()
+        pass
 
+    @abstractmethod
+    def all_transactions(self) -> list[Transaction]:
+        pass
 
 class InMemoryTransactionRepository(TransactionRepository):
 
@@ -17,3 +20,6 @@ class InMemoryTransactionRepository(TransactionRepository):
 
     def add_transaction(self, transaction: Transaction) -> None:
         self._transactions.append(transaction)
+
+    def all_transactions(self) -> list[Transaction]:
+        raise NotImplementedError()

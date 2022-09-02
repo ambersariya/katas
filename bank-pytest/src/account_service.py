@@ -18,4 +18,5 @@ class AccountService:
         self.transaction_repository.add_transaction(transaction=Withdraw(amount=amount))
 
     def print_statement(self) -> None:
-        raise NotImplementedError()
+        transactions = self.transaction_repository.all_transactions()
+        self.statement_printer.print(transactions)
