@@ -13,6 +13,7 @@ class TransactionRepository(Protocol):
     def all_transactions(self) -> list[Transaction]:
         pass
 
+
 class InMemoryTransactionRepository(TransactionRepository):
 
     def __init__(self):
@@ -22,4 +23,4 @@ class InMemoryTransactionRepository(TransactionRepository):
         self._transactions.append(transaction)
 
     def all_transactions(self) -> list[Transaction]:
-        raise NotImplementedError()
+        return self._transactions
