@@ -3,7 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from src.account_service import AccountService
-from src.statement_printer import StatementPrinter, ConsoleStatementPrinter
+from src.statement_printer import ConsoleStatementPrinter
 from src.transaction_repository import InMemoryTransactionRepository
 
 EXPECTED_STATEMENT = \
