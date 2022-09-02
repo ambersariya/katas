@@ -1,2 +1,22 @@
-def test_print_all_transactions():
-    assert False is True
+from unittest.mock import patch
+
+from src.account_service import AccountService
+
+EXPECTED_STATEMENT = \
+    """Date | Amount | Balance
+    14/01/2012 | -500 | 2500
+    13/01/2012 | 2000 | 3000
+    10/01/2012 | 1000 | 1000"""
+
+
+@patch("builtins.print")
+def test_print_all_transactions(mocked_print):
+    service = AccountService()
+
+    service.deposit(1000)
+    service.deposit(2000)
+    service.withdraw(500)
+
+    service.print_statement()
+
+    mocked_print.assert_called_with(EXPECTED_STATEMENT)
