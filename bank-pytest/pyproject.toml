@@ -12,7 +12,6 @@ pytest = "^7.1.2"
 black = "^22.8.0"
 mypy = "^0.971"
 prospector = "^1.7.7"
-flake8 = "^5.0.4"
 isort = "^5.10.1"
 
 [build-system]
