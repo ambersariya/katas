@@ -1,7 +1,7 @@
 from abc import ABC
 from datetime import datetime
 
-TRANSACTION_DATE_FORMAT = '%d/%m/%Y'
+from src.constants import TRANSACTION_DATE_FORMAT
 
 
 class Transaction(ABC):

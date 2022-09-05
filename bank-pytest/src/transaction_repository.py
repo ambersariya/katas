@@ -16,8 +16,8 @@ class TransactionRepository(Protocol):
 
 class InMemoryTransactionRepository(TransactionRepository):
 
-    def __init__(self):
-        self._transactions = []
+    def __init__(self) -> None:
+        self._transactions: list[Transaction] = []
 
     def add_transaction(self, transaction: Transaction) -> None:
         self._transactions.append(transaction)

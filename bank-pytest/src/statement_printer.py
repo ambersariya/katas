@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from string import Template
 from typing import Protocol
 
@@ -6,6 +7,7 @@ from src.transaction import Transaction, Deposit, Withdraw
 
 
 class StatementPrinter(Protocol):
+    @abstractmethod
     def print(self, transactions: list[Transaction]) -> None:
         pass
 
@@ -41,5 +43,5 @@ class ConsoleStatementPrinter(StatementPrinter):
 
     @staticmethod
     def __ensure_has_transactions(transactions: list[Transaction]) -> None:
-        if len(transactions) is 0:
-            raise NoTransactionsToPrint("No transactions to print ")
+        if len(transactions) == 0:
+            raise NoTransactionsToPrint("No transactions to print")
