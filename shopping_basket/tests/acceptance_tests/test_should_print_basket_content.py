@@ -1,15 +1,20 @@
 from unittest.mock import MagicMock, patch
 
-from acceptance_tests.base_test_case import BaseTestCase
 from constants import USER_ID, PRODUCT_ID_HOBBIT, PRODUCT_ID_BREAKING_BAD
 
 
-class PrintBasketContentShould(BaseTestCase):
-    @patch("builtins.print")
-    def test_return_contents_of_the_basket(self, mock_print: MagicMock):
-        self._add_item(PRODUCT_ID_HOBBIT, 2)
-        self._add_item(PRODUCT_ID_HOBBIT, 2)
-        self._add_item(PRODUCT_ID_BREAKING_BAD, 5)
+class TestPrintBasketContentShould:
+
+    def test_return_contents_of_the_basket(self, shopping_basket_service):
+        shopping_basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT_ID_HOBBIT, quantity=2
+        )
+        shopping_basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT_ID_HOBBIT, quantity=2
+        )
+        shopping_basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=5
+        )
 
         basket = self.shopping_basket_service.basket_for(USER_ID)
 
@@ -21,4 +26,5 @@ class PrintBasketContentShould(BaseTestCase):
         )
 
         assert str(basket) == basket_printout
-        assert mock_print.call_count == 3
+
+
