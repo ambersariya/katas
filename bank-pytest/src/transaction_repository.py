@@ -7,11 +7,11 @@ from src.transaction import Transaction
 class TransactionRepository(Protocol):
     @abstractmethod
     def add_transaction(self, transaction: Transaction) -> None:
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def all_transactions(self) -> list[Transaction]:
-        pass
+        pass  # pragma: no cover
 
 
 class InMemoryTransactionRepository(TransactionRepository):

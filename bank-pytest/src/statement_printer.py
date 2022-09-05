@@ -9,7 +9,7 @@ from src.transaction import Transaction, Deposit, Withdraw
 class StatementPrinter(Protocol):
     @abstractmethod
     def print(self, transactions: list[Transaction]) -> None:
-        pass
+        pass  # pragma: no cover
 
 
 class ConsoleStatementPrinter(StatementPrinter):
