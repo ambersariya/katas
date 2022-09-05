@@ -10,7 +10,7 @@ from src.transaction_repository import TransactionRepository
 
 
 @pytest.fixture()
-def empty_transactions():
+def empty_transactions() -> list[Transaction]:
     return []
 
 
@@ -24,24 +24,28 @@ def transactions() -> list[Transaction]:
 
 
 @pytest.fixture()
-def mocked_date_provider():
+def mocked_date_provider() -> MagicMock | DateProvider:
     date_provider = MagicMock(DateProvider)
     date_provider.today.return_value = '01/08/2022'
     return date_provider
 
 
 @pytest.fixture()
-def mocked_transaction_repository():
+def mocked_transaction_repository() -> MagicMock | TransactionRepository:
     return MagicMock(TransactionRepository)
 
 
 @pytest.fixture()
-def mocked_statement_printer():
+def mocked_statement_printer() -> MagicMock | StatementPrinter:
     return MagicMock(StatementPrinter)
 
 
 @pytest.fixture()
-def account_service(mocked_transaction_repository, mocked_statement_printer, mocked_date_provider):
+def account_service(
+    mocked_transaction_repository: TransactionRepository,
+    mocked_statement_printer: StatementPrinter,
+    mocked_date_provider: DateProvider
+) -> AccountService:
     return AccountService(
         transaction_repository=mocked_transaction_repository,
         statement_printer=mocked_statement_printer,
