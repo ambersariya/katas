@@ -15,6 +15,15 @@ prospector = "^1.7.7"
 isort = "^5.10.1"
 coverage = { extras = ["toml"], version = "^6.4.4" }
 
+# PyTest Config
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+console_output_style = "count"
+log_cli = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
