@@ -1,6 +1,10 @@
+from typing import Any
 from unittest.mock import patch
 
 from src.account_service import AccountService
+from src.date_provider import DateProvider
+from src.statement_printer import StatementPrinter
+from src.transaction_repository import TransactionRepository
 
 EXPECTED_STATEMENT = \
     """Date | Amount | Balance
@@ -11,7 +15,10 @@ EXPECTED_STATEMENT = \
 
 @patch("builtins.print")
 def test_print_all_transactions(
-    mocked_print, transaction_repository, statement_printer, mocked_date_provider
+    mocked_print: Any,
+    transaction_repository: TransactionRepository,
+    statement_printer: StatementPrinter,
+    mocked_date_provider: DateProvider
 ) -> None:
     service = AccountService(
         transaction_repository=transaction_repository,
