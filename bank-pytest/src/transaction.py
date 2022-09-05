@@ -1,16 +1,29 @@
-from dataclasses import dataclass
-from typing import Protocol
+from abc import ABC
+from datetime import datetime
+
+TRANSACTION_DATE_FORMAT = '%d/%m/%Y'
 
 
-class Transaction(Protocol):
-    pass
+class Transaction(ABC):
+    def __init__(self, date: str, amount: int):
+        self._amount: int = amount
+        self._date: datetime = datetime.strptime(date, TRANSACTION_DATE_FORMAT)
+
+    @property
+    def date(self) -> str:
+        return self._date.strftime(TRANSACTION_DATE_FORMAT)
+
+    @property
+    def amount(self) -> int:
+        return self._amount
 
 
-@dataclass(init=True, frozen=True)
 class Deposit(Transaction):
-    amount: int
+    def __init__(self, amount: int, date: str):
+        super().__init__(amount=amount, date=date)
 
 
-@dataclass(init=True, frozen=True)
 class Withdraw(Transaction):
-    amount: int
+
+    def __init__(self, amount: int, date: str):
+        super().__init__(amount=amount, date=date)
