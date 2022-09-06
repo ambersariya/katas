@@ -2,7 +2,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from constants import PRODUCT_BOOK_LORD_OF_THE_RINGS, STOCK_BOOK_LORD_OF_THE_RINGS, USER_ID
+from constants import PRODUCT_BOOK_LORD_OF_THE_RINGS, STOCK_BOOK_LORD_OF_THE_RINGS, USER_ID, \
+    DISCOUNT_STRATEGIES
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket import ShoppingBasket
@@ -59,7 +60,13 @@ def product_repository():
 
 @pytest.fixture()
 def discount_calculator():
-    return DiscountCalculator(strategies=[])
+    def initialize_strategies(strategies=[]):
+        return DiscountCalculator(strategies=strategies)
+    return initialize_strategies
+
+@pytest.fixture()
+def discount_strategies():
+    return DISCOUNT_STRATEGIES
 
 
 @pytest.fixture()

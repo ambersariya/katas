@@ -1,26 +1,22 @@
-from acceptance_tests.base_test_case import BaseTestCase
-from constants import USER_ID, DISCOUNT_STRATEGIES
-from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.discount.discount_calculator import DiscountCalculator
-from shopping_basket.product.product_id import ProductId
+import pytest
 
 
-class ApplyDiscountShould(BaseTestCase):
-    def setUp(self) -> None:
-        BaseTestCase.setUp(self)
-        self.discount_calculator = DiscountCalculator(DISCOUNT_STRATEGIES)
-        self.shopping_basket_service = ShoppingBasketService(
-            product_service=self.product_service,
-            shopping_basket_repository=self.shopping_basket_repository,
-            item_logger=self.item_logger,
-            discount_calculator=self.discount_calculator,
+from constants import USER_ID, DISCOUNT_STRATEGIES, PRODUCT_ID_HOBBIT, PRODUCT_ID_BREAKING_BAD
+
+
+class TestApplyDiscountShould:
+
+    @pytest.mark.usefixtures('initialize_handlers')
+    def test_return_contents_of_the_basket(self, discount_calculator, shopping_basket_service):
+        discount_calculator(strategies=DISCOUNT_STRATEGIES)
+        shopping_basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT_ID_HOBBIT, quantity=4
+        )
+        shopping_basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=5
         )
 
-    def test_return_contents_of_the_basket(self):
-        self._add_item(ProductId("10002"), 4)
-        self._add_item(ProductId("20110"), 5)
-
-        basket = self.shopping_basket_service.basket_for(USER_ID)
+        basket = shopping_basket_service.basket_for(USER_ID)
 
         basket_printout = (
             "Creation date 15/06/2022\n"
