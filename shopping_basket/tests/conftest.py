@@ -1,21 +1,37 @@
+from unittest.mock import MagicMock
+
 import pytest
-from pydantic import PaymentCardNumber
+
+from constants import PRODUCT_BOOK_LORD_OF_THE_RINGS, STOCK_BOOK_LORD_OF_THE_RINGS, USER_ID
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
+from shopping_basket.basket.shopping_basket import ShoppingBasket
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
+from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.core.messagebus import MessageBus
+from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.core.messagebus import HANDLERS
 from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
+from shopping_basket.order.order import UnpaidOrder
+from shopping_basket.payment.event import OrderConfirmed
+from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_service import PaymentService
 from shopping_basket.product.infrastructure.in_memory_product_repository import \
     InMemoryProductRepository
+from shopping_basket.product.product import Product
+from shopping_basket.product.product_category import ProductCategory
+from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_service import ProductService
+from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.purchase.handler import OrderMoreHandler
 from shopping_basket.purchase.purchase_system import PurchaseSystem
+from shopping_basket.stock.event import StockIsLow
 from shopping_basket.stock.handler import StockUpdateHandler, StockPurchasedHandler
 from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
+from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
 
 
@@ -82,12 +98,10 @@ def stock_purchased_handler(stock_management_service):
 
 
 @pytest.fixture()
-def message_bus(stock_handler, order_more_handler, stock_purchased_handler):
-    _message_bus = MessageBus()
-    _message_bus.add_handler(event_class=OrderConfirmed.name(), handler=stock_handler)
-    _message_bus.add_handler(event_class=StockIsLow.name(), handler=order_more_handler)
-    _message_bus.add_handler(event_class=StockPurchased.name(), handler=stock_purchased_handler)
-    return _message_bus
+def initialize_handlers(stock_handler, order_more_handler, stock_purchased_handler):
+    # HANDLERS[OrderConfirmed] = stock_handler
+    HANDLERS[StockIsLow] = order_more_handler
+    HANDLERS[StockPurchased] = stock_purchased_handler
 
 
 @pytest.fixture()
@@ -120,18 +134,19 @@ def shopping_basket_service(product_service, shopping_basket_repository, item_lo
 
 
 @pytest.fixture()
-def stock_management_service(stock_repository, message_bus):
-    return StockManagementService(stock_repository=stock_repository, message_bus=message_bus)
+def stock_management_service(stock_repository):
+    return StockManagementService(stock_repository=stock_repository)
 
 
 @pytest.fixture()
 def product_service(product_repository, stock_management_service):
-    _product_service =  ProductService(product_repository=product_repository,
-                          stock_management_service=stock_management_service)
-    _fill_products()
+    _product_service = ProductService(product_repository=product_repository,
+                                      stock_management_service=stock_management_service)
+    _fill_products(_product_service)
     return _product_service
 
-def _fill_products(self):
+
+def _fill_products(product_service):
     product_service.add_product(
         product=PRODUCT_BOOK_LORD_OF_THE_RINGS,
         stock=STOCK_BOOK_LORD_OF_THE_RINGS,

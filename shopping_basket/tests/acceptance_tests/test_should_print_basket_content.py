@@ -1,11 +1,9 @@
-from unittest.mock import MagicMock, patch
-
 from constants import USER_ID, PRODUCT_ID_HOBBIT, PRODUCT_ID_BREAKING_BAD
 
 
 class TestPrintBasketContentShould:
 
-    def test_return_contents_of_the_basket(self, shopping_basket_service):
+    def test_return_contents_of_the_basket(self, shopping_basket_service, initialize_handlers):
         shopping_basket_service.add_item(
             user_id=USER_ID, product_id=PRODUCT_ID_HOBBIT, quantity=2
         )
@@ -16,7 +14,7 @@ class TestPrintBasketContentShould:
             user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=5
         )
 
-        basket = self.shopping_basket_service.basket_for(USER_ID)
+        basket = shopping_basket_service.basket_for(USER_ID)
 
         basket_printout = (
             "Creation date 15/06/2022\n"
