@@ -99,14 +99,14 @@ def stock_purchased_handler(stock_management_service):
 
 @pytest.fixture()
 def initialize_handlers(stock_handler, order_more_handler, stock_purchased_handler):
-    # HANDLERS[OrderConfirmed] = stock_handler
+    HANDLERS[OrderConfirmed] = stock_handler
     HANDLERS[StockIsLow] = order_more_handler
     HANDLERS[StockPurchased] = stock_purchased_handler
 
 
 @pytest.fixture()
-def purchase_system(message_bus):
-    return PurchaseSystem(message_bus=message_bus)
+def purchase_system():
+    return PurchaseSystem()
 
 
 @pytest.fixture()
@@ -114,7 +114,6 @@ def payment_gateway(payment_provider, order_repository, message_bus):
     return PaymentGateway(
         payment_provider=payment_provider,
         order_repository=order_repository,
-        message_bus=message_bus,
     )
 
 

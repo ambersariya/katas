@@ -1,5 +1,5 @@
 from shopping_basket.basket.user import UserId
-from shopping_basket.core.messagebus import MessageBus
+from shopping_basket.core.messagebus import handle
 from shopping_basket.order.order import Order
 from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.event import OrderConfirmed
@@ -11,10 +11,8 @@ class PaymentGateway:
     def __init__(
         self,
         payment_provider: PaymentProvider,
-        order_repository: OrderRepository,
-        message_bus: MessageBus,
+        order_repository: OrderRepository
     ):
-        self.message_bus = message_bus
         self.order_repository = order_repository
         self.payment_provider = payment_provider
 
@@ -24,7 +22,7 @@ class PaymentGateway:
         )
 
         order_id = self.order_repository.add(order=order, payment_reference=reference)
-        self.message_bus.handle(
+        handle(
             OrderConfirmed(
                 order_id=order_id,
                 shopping_basket=order.shopping_basket,
