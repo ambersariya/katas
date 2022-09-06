@@ -11,10 +11,13 @@ from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.core.date_provider import DateProvider
+from shopping_basket.core.email_gateway import EmailGateway
 from shopping_basket.core.messagebus import HANDLERS
 from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
+from shopping_basket.order.handler import OrderConfirmedHandler
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
+from shopping_basket.order.notification.order_confirmation import OrderConfirmation
 from shopping_basket.order.order import UnpaidOrder
 from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
@@ -34,6 +37,16 @@ from shopping_basket.stock.handler import StockUpdateHandler, StockPurchasedHand
 from shopping_basket.stock.infrastructure.in_memory_stock_repository import InMemoryStockRepository
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_management_service import StockManagementService
+
+
+@pytest.fixture()
+def email_gateway():
+    return MagicMock(EmailGateway)
+
+
+@pytest.fixture()
+def order_confirmation(email_gateway):
+    return OrderConfirmation(email_gateway=email_gateway)
 
 
 @pytest.fixture()
@@ -104,13 +117,23 @@ def order_more_handler(purchase_system):
 
 
 @pytest.fixture()
+def order_confirmed_handler(order_confirmation):
+    return OrderConfirmedHandler(order_confirmation=order_confirmation)
+
+
+@pytest.fixture()
 def stock_purchased_handler(stock_management_service):
     return StockPurchasedHandler(stock_management_service=stock_management_service)
 
 
 @pytest.fixture()
-def initialize_handlers(stock_handler, order_more_handler, stock_purchased_handler):
-    HANDLERS[OrderConfirmed] = [stock_handler]
+def initialize_handlers(
+    stock_handler,
+    order_more_handler,
+    stock_purchased_handler,
+    order_confirmed_handler
+):
+    HANDLERS[OrderConfirmed] = [order_confirmed_handler, stock_handler]
     HANDLERS[StockIsLow] = [order_more_handler]
     HANDLERS[StockPurchased] = [stock_purchased_handler]
 

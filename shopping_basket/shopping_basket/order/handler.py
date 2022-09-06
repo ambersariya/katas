@@ -6,7 +6,7 @@ class OrderConfirmedHandler:
     def __init__(self, order_confirmation: OrderConfirmation):
         self.order_confirmation = order_confirmation
 
-    def handle(self, event: OrderConfirmed):
+    def __call__(self, event: OrderConfirmed):
         self.order_confirmation.send(
             user_id=event.shopping_basket.user_id,
             order_id=event.order_id,
