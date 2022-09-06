@@ -60,9 +60,13 @@ def product_repository():
 
 @pytest.fixture()
 def discount_calculator():
-    def initialize_strategies(strategies=[]):
+    def initialize_strategies(strategies=None):
+        if strategies is None:
+            strategies = []
         return DiscountCalculator(strategies=strategies)
+
     return initialize_strategies
+
 
 @pytest.fixture()
 def discount_strategies():
@@ -137,6 +141,17 @@ def shopping_basket_service(product_service, shopping_basket_repository, item_lo
                                  shopping_basket_repository=shopping_basket_repository,
                                  item_logger=item_logger,
                                  discount_calculator=discount_calculator)
+
+
+@pytest.fixture()
+def shopping_basket_service_with_discounts(product_service, shopping_basket_repository, item_logger,
+                                           discount_calculator):
+    return ShoppingBasketService(product_service=product_service,
+                                 shopping_basket_repository=shopping_basket_repository,
+                                 item_logger=item_logger,
+                                 discount_calculator=discount_calculator(
+                                     strategies=DISCOUNT_STRATEGIES)
+                                 )
 
 
 @pytest.fixture()
