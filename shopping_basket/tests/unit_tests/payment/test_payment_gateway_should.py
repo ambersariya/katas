@@ -15,16 +15,13 @@ class TestPaymentGatewayShould:
                 order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
             )
 
-    @mock.patch('shopping_basket.payment.infrastructure.payment_gateway.handle')
-    def test_make_payment_successfully_for_unpaid_order(self, event_handler,
-                                                        mocked_payment_provider,
-                                                        payment_gateway,
-                                                        mocked_order_repository):
+    @mock.patch("shopping_basket.payment.infrastructure.payment_gateway.handle")
+    def test_make_payment_successfully_for_unpaid_order(
+        self, event_handler, mocked_payment_provider, payment_gateway, mocked_order_repository
+    ):
         mocked_payment_provider.pay.return_value = PAYMENT_REFERENCE
 
-        payment_gateway.pay(
-            order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
-        )
+        payment_gateway.pay(order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS)
         mocked_payment_provider.pay.assert_called_once_with(
             order=UNPAID_ORDER, user_id=USER_ID, payment_details=PAYMENT_DETAILS
         )

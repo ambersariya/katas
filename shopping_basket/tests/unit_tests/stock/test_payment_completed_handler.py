@@ -4,7 +4,6 @@ from shopping_basket.stock.handler import StockUpdateHandler
 
 
 class TestPaymentCompletedHandlerShould:
-
     def test_update_stock_levels_for_purchased_items(self, mocked_stock_management_service):
         handler = StockUpdateHandler(stock_management_service=mocked_stock_management_service)
         event = OrderConfirmed(

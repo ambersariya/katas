@@ -2,10 +2,15 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from constants import PRODUCT_BOOK_LORD_OF_THE_RINGS, STOCK_BOOK_LORD_OF_THE_RINGS, USER_ID, \
-    DISCOUNT_STRATEGIES
-from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
-    InMemoryShoppingBasketRepository
+from constants import (
+    PRODUCT_BOOK_LORD_OF_THE_RINGS,
+    STOCK_BOOK_LORD_OF_THE_RINGS,
+    USER_ID,
+    DISCOUNT_STRATEGIES,
+)
+from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
+    InMemoryShoppingBasketRepository,
+)
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
@@ -23,8 +28,9 @@ from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
 from shopping_basket.payment.payment_service import PaymentService
-from shopping_basket.product.infrastructure.in_memory_product_repository import \
-    InMemoryProductRepository
+from shopping_basket.product.infrastructure.in_memory_product_repository import (
+    InMemoryProductRepository,
+)
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_category import ProductCategory
 from shopping_basket.product.product_id import ProductId
@@ -133,10 +139,7 @@ def stock_purchased_handler(stock_management_service):
 
 @pytest.fixture()
 def initialize_handlers(
-    stock_handler,
-    order_more_handler,
-    stock_purchased_handler,
-    order_confirmed_handler
+    stock_handler, order_more_handler, stock_purchased_handler, order_confirmed_handler
 ):
     HANDLERS[OrderConfirmed] = [order_confirmed_handler, stock_handler]
     HANDLERS[StockIsLow] = [order_more_handler]
@@ -163,17 +166,21 @@ def mocked_payment_gateway():
 
 @pytest.fixture()
 def payment_service(shopping_basket_service, payment_gateway):
-    return PaymentService(shopping_basket_service=shopping_basket_service,
-                          payment_gateway=payment_gateway)
+    return PaymentService(
+        shopping_basket_service=shopping_basket_service, payment_gateway=payment_gateway
+    )
 
 
 @pytest.fixture()
-def shopping_basket_service(product_service, shopping_basket_repository, item_logger,
-                            discount_calculator):
-    return ShoppingBasketService(product_service=product_service,
-                                 shopping_basket_repository=shopping_basket_repository,
-                                 item_logger=item_logger,
-                                 discount_calculator=discount_calculator())
+def shopping_basket_service(
+    product_service, shopping_basket_repository, item_logger, discount_calculator
+):
+    return ShoppingBasketService(
+        product_service=product_service,
+        shopping_basket_repository=shopping_basket_repository,
+        item_logger=item_logger,
+        discount_calculator=discount_calculator(),
+    )
 
 
 @pytest.fixture()
@@ -182,14 +189,15 @@ def mocked_shopping_basket_service():
 
 
 @pytest.fixture()
-def shopping_basket_service_with_discounts(product_service, shopping_basket_repository, item_logger,
-                                           discount_calculator):
-    return ShoppingBasketService(product_service=product_service,
-                                 shopping_basket_repository=shopping_basket_repository,
-                                 item_logger=item_logger,
-                                 discount_calculator=discount_calculator(
-                                     strategies=DISCOUNT_STRATEGIES)
-                                 )
+def shopping_basket_service_with_discounts(
+    product_service, shopping_basket_repository, item_logger, discount_calculator
+):
+    return ShoppingBasketService(
+        product_service=product_service,
+        shopping_basket_repository=shopping_basket_repository,
+        item_logger=item_logger,
+        discount_calculator=discount_calculator(strategies=DISCOUNT_STRATEGIES),
+    )
 
 
 @pytest.fixture()
@@ -199,8 +207,9 @@ def stock_management_service(stock_repository):
 
 @pytest.fixture()
 def product_service(product_repository, stock_management_service):
-    _product_service = ProductService(product_repository=product_repository,
-                                      stock_management_service=stock_management_service)
+    _product_service = ProductService(
+        product_repository=product_repository, stock_management_service=stock_management_service
+    )
     _fill_products(_product_service)
     return _product_service
 

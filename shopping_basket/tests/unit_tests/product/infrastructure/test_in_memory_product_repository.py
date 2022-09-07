@@ -17,8 +17,7 @@ class TestProductRepositoryShould:
         assert expected_product is None
 
     def test_return_updated_product_when_adding_new_product_with_existing_id(
-        self,
-        product_repository
+        self, product_repository
     ) -> None:
         product_repository.add_product(UPDATED_PRODUCT_WITH_OLD_ID)
 

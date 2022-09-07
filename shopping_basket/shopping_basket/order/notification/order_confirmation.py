@@ -7,12 +7,7 @@ from shopping_basket.payment.payment_reference import PaymentReference
 class OrderConfirmation:
     def __init__(self, email_gateway: EmailGateway):
         self._email_gateway = email_gateway
-        print('order confirmation happened')
+        print("order confirmation happened")
 
-    def send(
-        self,
-        user_id: UserId,
-        order_id: OrderId,
-        payment_reference: PaymentReference
-    ) -> None:
+    def send(self, user_id: UserId, order_id: OrderId, payment_reference: PaymentReference) -> None:
         self._email_gateway.send()

@@ -6,9 +6,9 @@ from constants import (
 
 
 class TestDiscountCalculatorShould:
-
-    def test_return_shopping_basket_when_no_discount_is_applicable(self,
-                                                                   discount_calculator_with_strategies) -> None:
+    def test_return_shopping_basket_when_no_discount_is_applicable(
+        self, discount_calculator_with_strategies
+    ) -> None:
         non_discounted_basket = discount_calculator_with_strategies.apply_discount(
             SHOPPING_BASKET_WITH_ONE_ITEM
         )
@@ -23,4 +23,3 @@ class TestDiscountCalculatorShould:
         )
 
         assert DISCOUNTED_SHOPPING_BASKET == discounted_basket
-

@@ -6,6 +6,4 @@ from shopping_basket.purchase.event import StockPurchased
 class PurchaseSystem:
     @staticmethod
     def order_more(product_id: ProductId, actual_quantity: int):
-        handle(
-            event=StockPurchased(quantity_purchased=actual_quantity, product_id=product_id)
-        )
+        handle(event=StockPurchased(quantity_purchased=actual_quantity, product_id=product_id))

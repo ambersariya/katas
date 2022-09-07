@@ -15,9 +15,7 @@ from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundE
 
 class TestShoppingBasketServiceShould:
     def test_raise_error_when_user_doesnt_have_a_basket(
-        self,
-        mocked_shopping_basket_repository,
-        shopping_basket_service
+        self, mocked_shopping_basket_repository, shopping_basket_service
     ) -> None:
         mocked_shopping_basket_repository.basket_for.return_value = None
 
@@ -25,10 +23,7 @@ class TestShoppingBasketServiceShould:
             shopping_basket_service.basket_for(USER_ID)
 
     def test_return_basket_with_no_discount_for_given_user(
-        self,
-        mocked_shopping_basket_repository,
-        mocked_discount_calculator,
-        shopping_basket_service
+        self, mocked_shopping_basket_repository, mocked_discount_calculator, shopping_basket_service
     ) -> None:
         mocked_shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
         mocked_discount_calculator.apply_discount.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
@@ -43,7 +38,7 @@ class TestShoppingBasketServiceShould:
         mocked_shopping_basket_repository,
         mocked_product_service,
         shopping_basket_service,
-        mocked_item_logger
+        mocked_item_logger,
     ) -> None:
         mocked_product_service.reserve.return_value = PRODUCT_VIDEO_BREAKING_BAD
 
@@ -56,10 +51,7 @@ class TestShoppingBasketServiceShould:
         )
 
     def test_return_basket_with_discount_for_given_user(
-        self,
-        mocked_shopping_basket_repository,
-        mocked_discount_calculator,
-        shopping_basket_service
+        self, mocked_shopping_basket_repository, mocked_discount_calculator, shopping_basket_service
     ) -> None:
         mocked_shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
         mocked_discount_calculator.apply_discount.return_value = DISCOUNTED_SHOPPING_BASKET

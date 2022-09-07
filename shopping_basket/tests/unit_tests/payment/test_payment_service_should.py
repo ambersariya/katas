@@ -2,10 +2,9 @@ from constants import PAYMENT_DETAILS, SHOPPING_BASKET_WITH_ONE_ITEM, UNPAID_ORD
 
 
 class TestPaymentServiceShould:
-    def test_make_payment_for_given_shopping_basket(self,
-                                                    mocked_shopping_basket_service,
-                                                    mocked_payment_gateway,
-                                                    payment_service):
+    def test_make_payment_for_given_shopping_basket(
+        self, mocked_shopping_basket_service, mocked_payment_gateway, payment_service
+    ):
         mocked_shopping_basket_service.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
 
         payment_service.make_payment(

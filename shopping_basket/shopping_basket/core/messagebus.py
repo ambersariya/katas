@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Callable, Dict, List, Type
 
 from shopping_basket.core.event import Event
 
@@ -14,8 +14,4 @@ def handle(event: Event):
         handler(event)
 
 
-HANDLERS = {
-
-}
-
-# type: Dict[Type[events.Event], List[Callable]]
+HANDLERS: Dict[Type[Event], List[Callable]] = {}

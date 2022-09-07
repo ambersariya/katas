@@ -3,8 +3,9 @@ from unittest.mock import MagicMock
 from _pytest.fixtures import fixture
 
 from constants import DISCOUNT_STRATEGIES
-from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
-    InMemoryShoppingBasketRepository
+from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
+    InMemoryShoppingBasketRepository,
+)
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.core.utilities import ItemLogger, IdGenerator
@@ -28,9 +29,7 @@ def mocked_stock_repository():
 
 @fixture()
 def stock_management_service(mocked_stock_repository):
-    return StockManagementService(
-        stock_repository=mocked_stock_repository
-    )
+    return StockManagementService(stock_repository=mocked_stock_repository)
 
 
 @fixture()
@@ -82,15 +81,17 @@ def mocked_discount_calculator():
 
 
 @fixture()
-def shopping_basket_service(mocked_discount_calculator,
-                            mocked_shopping_basket_repository,
-                            mocked_product_service,
-                            mocked_item_logger):
+def shopping_basket_service(
+    mocked_discount_calculator,
+    mocked_shopping_basket_repository,
+    mocked_product_service,
+    mocked_item_logger,
+):
     return ShoppingBasketService(
         shopping_basket_repository=mocked_shopping_basket_repository,
         product_service=mocked_product_service,
         item_logger=mocked_item_logger,
-        discount_calculator=mocked_discount_calculator
+        discount_calculator=mocked_discount_calculator,
     )
 
 
@@ -121,15 +122,21 @@ def mocked_stock_management_service():
 
 @fixture()
 def product_service(mocked_product_repository, mocked_stock_management_service):
-    _product_service = ProductService(product_repository=mocked_product_repository,
-                                      stock_management_service=mocked_stock_management_service)
+    _product_service = ProductService(
+        product_repository=mocked_product_repository,
+        stock_management_service=mocked_stock_management_service,
+    )
     return _product_service
+
 
 @fixture()
 def mocked_purchase_system():
     return MagicMock(PurchaseSystem)
 
+
 @fixture()
 def payment_service(mocked_shopping_basket_service, mocked_payment_gateway):
-    return PaymentService(shopping_basket_service=mocked_shopping_basket_service,
-                          payment_gateway=mocked_payment_gateway)
+    return PaymentService(
+        shopping_basket_service=mocked_shopping_basket_service,
+        payment_gateway=mocked_payment_gateway,
+    )

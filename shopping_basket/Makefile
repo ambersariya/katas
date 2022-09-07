@@ -21,7 +21,7 @@ isort:
 	$(CMD) isort $(PYMODULE) $(EXTRACODE)
 
 isort-check:
-	$(CMD) isort --check --verbose $(PYMODULE) $(EXTRACODE)
+	$(CMD) isort --check $(PYMODULE) $(EXTRACODE)
 
 clean:
 	git clean -Xdf # Delete all files in .gitignore

@@ -8,11 +8,7 @@ from shopping_basket.payment.payment_details import PaymentDetails
 
 
 class PaymentGateway:
-    def __init__(
-        self,
-        payment_provider: PaymentProvider,
-        order_repository: OrderRepository
-    ):
+    def __init__(self, payment_provider: PaymentProvider, order_repository: OrderRepository):
         self.order_repository = order_repository
         self.payment_provider = payment_provider
 
