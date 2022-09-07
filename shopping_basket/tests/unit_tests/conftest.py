@@ -5,9 +5,13 @@ from _pytest.fixtures import fixture
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
+from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
+from shopping_basket.core.utilities import ItemLogger
+from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
+from shopping_basket.product.product_service import ProductService
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import StockRepository
 
@@ -53,5 +57,33 @@ def in_memory_shopping_basket_repo(date_provider):
 
 
 @fixture()
-def mock_shopping_basket_repo():
-    MagicMock(ShoppingBasketRepository)
+def mocked_shopping_basket_repository():
+    return MagicMock(ShoppingBasketRepository)
+
+
+@fixture()
+def mocked_product_service():
+    return MagicMock(ProductService)
+
+
+@fixture()
+def mocked_item_logger():
+    return MagicMock(ItemLogger)
+
+
+@fixture()
+def mocked_discount_calculator():
+    return MagicMock(DiscountCalculator)
+
+
+@fixture()
+def shopping_basket_service(mocked_discount_calculator,
+                            mocked_shopping_basket_repository,
+                            mocked_product_service,
+                            mocked_item_logger):
+    return ShoppingBasketService(
+        shopping_basket_repository=mocked_shopping_basket_repository,
+        product_service=mocked_product_service,
+        item_logger=mocked_item_logger,
+        discount_calculator=mocked_discount_calculator
+    )

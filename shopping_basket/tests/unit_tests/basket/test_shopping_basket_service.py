@@ -1,5 +1,4 @@
-from unittest import TestCase
-from unittest.mock import MagicMock
+import pytest
 
 from constants import (
     BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO,
@@ -12,57 +11,60 @@ from constants import (
 )
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
-from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
-from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.core.utilities import ItemLogger
-from shopping_basket.discount.discount_calculator import DiscountCalculator
-from shopping_basket.product.product_service import ProductService
 
 
-class ShoppingBasketServiceShould(TestCase):
-    def setUp(self):
-        self.shopping_basket_repository = MagicMock(ShoppingBasketRepository)
-        self.product_service = MagicMock(ProductService)
-        self.item_logger = MagicMock(ItemLogger)
-        self.discount_calculator = MagicMock(DiscountCalculator)
-        self.basket_service = ShoppingBasketService(
-            shopping_basket_repository=self.shopping_basket_repository,
-            product_service=self.product_service,
-            item_logger=self.item_logger,
-            discount_calculator=self.discount_calculator,
-        )
+class TestShoppingBasketServiceShould:
+    def test_raise_error_when_user_doesnt_have_a_basket(
+        self,
+        mocked_shopping_basket_repository,
+        shopping_basket_service
+    ) -> None:
+        mocked_shopping_basket_repository.basket_for.return_value = None
 
-    def test_raise_error_when_user_doesnt_have_a_basket(self):
-        self.shopping_basket_repository.basket_for.return_value = None
+        with pytest.raises(ShoppingBasketNotFoundError):
+            shopping_basket_service.basket_for(USER_ID)
 
-        with self.assertRaises(ShoppingBasketNotFoundError):
-            self.basket_service.basket_for(USER_ID)
+    def test_return_basket_with_no_discount_for_given_user(
+        self,
+        mocked_shopping_basket_repository,
+        mocked_discount_calculator,
+        shopping_basket_service
+    ) -> None:
+        mocked_shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
+        mocked_discount_calculator.apply_discount.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
 
-    def test_return_basket_with_no_discount_for_given_user(self):
-        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
-        self.discount_calculator.apply_discount.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
+        basket = shopping_basket_service.basket_for(user_id=USER_ID)
 
-        basket = self.basket_service.basket_for(user_id=USER_ID)
+        assert isinstance(basket, ShoppingBasket)
+        assert USER_ID == basket.user_id
 
-        self.assertIsInstance(basket, ShoppingBasket)
-        self.assertEqual(USER_ID, basket.user_id)
+    def test_create_shopping_basket_when_item_is_added_and_basket_doesnt_exist(
+        self,
+        mocked_shopping_basket_repository,
+        mocked_product_service,
+        shopping_basket_service,
+        mocked_item_logger
+    ) -> None:
+        mocked_product_service.reserve.return_value = PRODUCT_VIDEO_BREAKING_BAD
 
-    def test_create_shopping_basket_when_item_is_added_and_basket_doesnt_exist(self):
-        self.product_service.reserve.return_value = PRODUCT_VIDEO_BREAKING_BAD
-
-        self.basket_service.add_item(
+        shopping_basket_service.add_item(
             user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=QUANTITY_TWO
         )
-        self.item_logger.log.assert_called_once()
-        self.shopping_basket_repository.add_item.assert_called_once_with(
+        mocked_item_logger.log.assert_called_once()
+        mocked_shopping_basket_repository.add_item.assert_called_once_with(
             item=BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO, user_id=USER_ID
         )
 
-    def test_return_basket_with_discount_for_given_user(self):
-        self.shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
-        self.discount_calculator.apply_discount.return_value = DISCOUNTED_SHOPPING_BASKET
+    def test_return_basket_with_discount_for_given_user(
+        self,
+        mocked_shopping_basket_repository,
+        mocked_discount_calculator,
+        shopping_basket_service
+    ) -> None:
+        mocked_shopping_basket_repository.basket_for.return_value = SHOPPING_BASKET_WITH_ONE_ITEM
+        mocked_discount_calculator.apply_discount.return_value = DISCOUNTED_SHOPPING_BASKET
 
-        basket = self.basket_service.basket_for(user_id=USER_ID)
+        basket = shopping_basket_service.basket_for(user_id=USER_ID)
 
-        self.assertIsInstance(basket, ShoppingBasket)
-        self.assertEqual(USER_ID, basket.user_id)
+        assert isinstance(basket, ShoppingBasket)
+        assert USER_ID == basket.user_id
