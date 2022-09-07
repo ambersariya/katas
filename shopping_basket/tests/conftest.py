@@ -157,9 +157,14 @@ def payment_gateway(payment_provider, order_repository):
 
 
 @pytest.fixture()
-def payment_service(shopping_basket_service, payment_gateway):
-    return PaymentService(shopping_basket_service=shopping_basket_service,
-                          payment_gateway=payment_gateway)
+def mocked_payment_gateway():
+    return MagicMock(PaymentGateway)
+
+
+@pytest.fixture()
+def payment_service(mocked_shopping_basket_service, mocked_payment_gateway):
+    return PaymentService(shopping_basket_service=mocked_shopping_basket_service,
+                          payment_gateway=mocked_payment_gateway)
 
 
 @pytest.fixture()
@@ -169,6 +174,11 @@ def shopping_basket_service(product_service, shopping_basket_repository, item_lo
                                  shopping_basket_repository=shopping_basket_repository,
                                  item_logger=item_logger,
                                  discount_calculator=discount_calculator())
+
+
+@pytest.fixture()
+def mocked_shopping_basket_service():
+    return MagicMock(ShoppingBasketService)
 
 
 @pytest.fixture()
