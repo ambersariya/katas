@@ -13,6 +13,7 @@ from shopping_basket.order.infrastructure.in_memory_order_repository import InMe
 from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
+from shopping_basket.product.product_repository import ProductRepository
 from shopping_basket.product.product_service import ProductService
 from shopping_basket.stock.stock_management_service import StockManagementService
 from shopping_basket.stock.stock_repository import StockRepository
@@ -95,10 +96,29 @@ def shopping_basket_service(mocked_discount_calculator,
 def discount_calculator_with_strategies(discount_calculator):
     return discount_calculator(DISCOUNT_STRATEGIES)
 
+
 @fixture()
 def mocked_id_generator():
     return MagicMock(IdGenerator)
 
+
 @fixture()
 def order_repository(mocked_id_generator):
     return InMemoryOrderRepository(id_generator=mocked_id_generator)
+
+
+@fixture()
+def mocked_product_repository():
+    return MagicMock(ProductRepository)
+
+
+@fixture()
+def mocked_stock_management_service():
+    return MagicMock(StockManagementService)
+
+
+@fixture()
+def product_service(mocked_product_repository, mocked_stock_management_service):
+    _product_service = ProductService(product_repository=mocked_product_repository,
+                                      stock_management_service=mocked_stock_management_service)
+    return _product_service
