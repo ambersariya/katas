@@ -2,6 +2,7 @@ from unittest.mock import MagicMock
 
 from _pytest.fixtures import fixture
 
+from constants import DISCOUNT_STRATEGIES
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import \
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
@@ -87,3 +88,8 @@ def shopping_basket_service(mocked_discount_calculator,
         item_logger=mocked_item_logger,
         discount_calculator=mocked_discount_calculator
     )
+
+
+@fixture()
+def discount_calculator_with_strategies(discount_calculator):
+    return discount_calculator(DISCOUNT_STRATEGIES)
