@@ -7,10 +7,9 @@ from shopping_basket.order.notification.order_confirmation import OrderConfirmat
 from shopping_basket.payment.event import OrderConfirmed
 
 
-class OrderConfirmedHandlerShould(TestCase):
-    def test_send_email_when_order_is_confirmed(self):
-        self.order_confirmation = MagicMock(OrderConfirmation)
-        self.order_confirmed_handler = OrderConfirmedHandler(self.order_confirmation)
+class TestOrderConfirmedHandlerShould:
+    def test_send_email_when_order_is_confirmed(self, mocked_order_confirmation) -> None:
+        self.order_confirmed_handler = OrderConfirmedHandler(mocked_order_confirmation)
         self.order_confirmed_handler(
             event=OrderConfirmed(
                 order_id=ORDER_ID,
@@ -19,4 +18,4 @@ class OrderConfirmedHandlerShould(TestCase):
             )
         )
 
-        self.order_confirmation.send.assert_called_once()
+        mocked_order_confirmation.send.assert_called_once()

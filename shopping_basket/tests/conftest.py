@@ -50,10 +50,15 @@ def order_confirmation(email_gateway):
 
 
 @pytest.fixture()
+def mocked_order_confirmation():
+    return MagicMock(OrderConfirmation)
+
+
+@pytest.fixture()
 def date_provider():
-    date_provider = MagicMock(DateProvider)
-    date_provider.current_date.return_value = "15/06/2022"
-    return date_provider
+    _date_provider = MagicMock(DateProvider)
+    _date_provider.current_date.return_value = "15/06/2022"
+    return _date_provider
 
 
 @pytest.fixture()
