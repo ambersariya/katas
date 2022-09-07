@@ -7,8 +7,9 @@ from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository 
     InMemoryShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.core.utilities import ItemLogger
+from shopping_basket.core.utilities import ItemLogger, IdGenerator
 from shopping_basket.discount.discount_calculator import DiscountCalculator
+from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.infrastructure.payment_provider import PaymentProvider
@@ -93,3 +94,11 @@ def shopping_basket_service(mocked_discount_calculator,
 @fixture()
 def discount_calculator_with_strategies(discount_calculator):
     return discount_calculator(DISCOUNT_STRATEGIES)
+
+@fixture()
+def mocked_id_generator():
+    return MagicMock(IdGenerator)
+
+@fixture()
+def order_repository(mocked_id_generator):
+    return InMemoryOrderRepository(id_generator=mocked_id_generator)
