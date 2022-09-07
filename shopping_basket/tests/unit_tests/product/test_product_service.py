@@ -2,7 +2,6 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from constants import PRODUCT_ID_BREAKING_BAD, PRODUCT_VIDEO_BREAKING_BAD
-
 from shopping_basket.product.product import Product
 from shopping_basket.product.product_error import ProductNotFoundError
 from shopping_basket.product.product_repository import ProductRepository

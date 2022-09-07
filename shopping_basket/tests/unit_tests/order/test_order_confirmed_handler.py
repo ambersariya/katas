@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, mock
 from unittest.mock import MagicMock
 
 from constants import ORDER_ID, SHOPPING_BASKET_WITH_ONE_ITEM, PAYMENT_REFERENCE
@@ -11,7 +11,7 @@ class OrderConfirmedHandlerShould(TestCase):
     def test_send_email_when_order_is_confirmed(self):
         self.order_confirmation = MagicMock(OrderConfirmation)
         self.order_confirmed_handler = OrderConfirmedHandler(self.order_confirmation)
-        self.order_confirmed_handler.handle(
+        self.order_confirmed_handler(
             event=OrderConfirmed(
                 order_id=ORDER_ID,
                 shopping_basket=SHOPPING_BASKET_WITH_ONE_ITEM,

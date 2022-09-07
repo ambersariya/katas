@@ -6,7 +6,6 @@ from constants import (
     BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO,
     USER_ID,
 )
-
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
     InMemoryShoppingBasketRepository,
 )

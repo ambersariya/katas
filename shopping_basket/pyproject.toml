@@ -19,6 +19,7 @@ mypy = "^0.971"
 isort = "^5.10.1"
 coverage = "^6.4.3"
 pytest-mypy = "^0.9.1"
+pytest-mock = "^3.8.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

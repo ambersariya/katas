@@ -5,7 +5,6 @@ from constants import (
     PRODUCT_ID_BREAKING_BAD,
     PRODUCT_VIDEO_BREAKING_BAD,
 )
-
 from shopping_basket.product.infrastructure.in_memory_product_repository import (
     InMemoryProductRepository,
 )

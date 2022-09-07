@@ -6,7 +6,6 @@ from constants import (
     SHOPPING_BASKET_WITH_ONE_ITEM,
     DISCOUNT_STRATEGIES,
 )
-
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 
 

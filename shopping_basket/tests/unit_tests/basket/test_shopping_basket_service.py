@@ -10,7 +10,6 @@ from constants import (
     SHOPPING_BASKET_WITH_ONE_ITEM,
     USER_ID,
 )
-
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_error import ShoppingBasketNotFoundError
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
