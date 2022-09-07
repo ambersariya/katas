@@ -162,9 +162,9 @@ def mocked_payment_gateway():
 
 
 @pytest.fixture()
-def payment_service(mocked_shopping_basket_service, mocked_payment_gateway):
-    return PaymentService(shopping_basket_service=mocked_shopping_basket_service,
-                          payment_gateway=mocked_payment_gateway)
+def payment_service(shopping_basket_service, payment_gateway):
+    return PaymentService(shopping_basket_service=shopping_basket_service,
+                          payment_gateway=payment_gateway)
 
 
 @pytest.fixture()
