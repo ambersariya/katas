@@ -1,6 +1,6 @@
 # Katas
 
-Here are some of the kata's I've solved:
+Here are some of the kata's solved in this repo:
 
 1. Bank kata (Typescript) [here](./bank)
 2. Shopping Basket (Python) [here](./shopping_basket)
