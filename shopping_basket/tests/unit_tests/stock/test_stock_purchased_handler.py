@@ -1,20 +1,14 @@
-from unittest import TestCase
-from unittest.mock import MagicMock
-
 from constants import PRODUCT_ID_LORD_OF_THE_RINGS
-
 from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.stock.handler import StockPurchasedHandler
-from shopping_basket.stock.stock_management_service import StockManagementService
 
 
-class StockPurchaseHandlerShould(TestCase):
-    def test_handle_stock_purchase_event(self):
+class TestStockPurchaseHandlerShould:
+    def test_handle_stock_purchase_event(self, mocked_stock_management_service):
         event = StockPurchased(quantity_purchased=5, product_id=PRODUCT_ID_LORD_OF_THE_RINGS)
-        stock_management_service = MagicMock(StockManagementService)
-        handler = StockPurchasedHandler(stock_management_service=stock_management_service)
-        handler.handle(event=event)
+        handler = StockPurchasedHandler(stock_management_service=mocked_stock_management_service)
+        handler(event=event)
 
-        stock_management_service.increase_stock.assert_called_once_with(
+        mocked_stock_management_service.increase_stock.assert_called_once_with(
             product_id=PRODUCT_ID_LORD_OF_THE_RINGS, quantity=5
         )

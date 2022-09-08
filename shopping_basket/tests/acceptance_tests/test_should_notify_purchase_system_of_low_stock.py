@@ -1,20 +1,38 @@
-from acceptance_tests.base_test_case import BaseTestCase
-from constants import USER_ID, PAYMENT_REFERENCE, PAYMENT_DETAILS
-from shopping_basket.product.product_id import ProductId
+import pytest
+
+from constants import (
+    USER_ID,
+    PAYMENT_REFERENCE,
+    PAYMENT_DETAILS,
+    PRODUCT_ID_HOBBIT,
+    PRODUCT_ID_BREAKING_BAD,
+)
 
 
-class NotifyPurchaseSystemAboutLowStock(BaseTestCase):
-    def test_be_successful(self):
-        self._add_item(ProductId("10002"), 4)
-        self._add_item(ProductId("20110"), 5)
-        self.payment_provider.pay.return_value = PAYMENT_REFERENCE
-
-        self.payment_service.make_payment(user_id=USER_ID, payment_details=PAYMENT_DETAILS)
-
-        self.payment_provider.pay.assert_called_once_with(
-            order=self._unpaid_order(), user_id=USER_ID, payment_details=PAYMENT_DETAILS
+class TestNotifyPurchaseSystemAboutLowStock:
+    @pytest.mark.usefixtures("initialize_handlers")
+    def test_be_successful(
+        self,
+        shopping_basket_service,
+        payment_provider,
+        payment_service,
+        unpaid_order,
+        stock_repository,
+        order_repository,
+    ):
+        shopping_basket_service.add_item(user_id=USER_ID, product_id=PRODUCT_ID_HOBBIT, quantity=4)
+        shopping_basket_service.add_item(
+            user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=5
         )
-        stock = self.stock_repository.find_by_id(product_id=ProductId("10002"))
-        self.assertEqual(1, len(self.order_repository))
-        self.assertEqual(5, stock.available)
-        self.assertEqual(0, stock.reserved)
+
+        payment_provider.pay.return_value = PAYMENT_REFERENCE
+
+        payment_service.make_payment(user_id=USER_ID, payment_details=PAYMENT_DETAILS)
+
+        payment_provider.pay.assert_called_once_with(
+            order=unpaid_order, user_id=USER_ID, payment_details=PAYMENT_DETAILS
+        )
+        stock = stock_repository.find_by_id(product_id=PRODUCT_ID_HOBBIT)
+        assert len(order_repository) == 1
+        assert stock.available == 5
+        assert stock.reserved == 0

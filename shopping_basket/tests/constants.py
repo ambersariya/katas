@@ -1,12 +1,10 @@
 from copy import copy
 from typing import Final
-from unittest.mock import MagicMock
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from shopping_basket.basket.user import UserId
-from shopping_basket.core.event import EventHandler
 from shopping_basket.discount.discount import Discount
 from shopping_basket.discount.discount_strategy import (
     MultiCategoryDiscountStrategy,

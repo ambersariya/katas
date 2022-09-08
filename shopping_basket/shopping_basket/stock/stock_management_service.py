@@ -1,5 +1,5 @@
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
-from shopping_basket.core.messagebus import MessageBus
+from shopping_basket.core.messagebus import handle
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.stock.event import StockIsLow
 from shopping_basket.stock.stock import Stock
@@ -7,8 +7,7 @@ from shopping_basket.stock.stock_repository import StockRepository
 
 
 class StockManagementService:
-    def __init__(self, stock_repository: StockRepository, message_bus: MessageBus) -> None:
-        self.message_bus = message_bus
+    def __init__(self, stock_repository: StockRepository) -> None:
         self.stock_repository = stock_repository
 
     def reserve(self, product_id: ProductId, quantity: int) -> None:
@@ -30,7 +29,7 @@ class StockManagementService:
             stock = stock.reduce_reserved(quantity=item.quantity)
             self.stock_repository.save_stock(stock=stock)
             if not stock.is_enough_available():
-                self.message_bus.handle(
+                handle(
                     event=StockIsLow(
                         product_id=stock.product_id,
                         order_quantity=stock.order_quantity(),
