@@ -1,9 +1,7 @@
 from typing import Any
 
 from fastapi import FastAPI
-from fastapi.openapi.models import Response
 from starlette import status
-from starlette.status import HTTP_204_NO_CONTENT
 
 from shopping_basket.api.requests import AddItem
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
@@ -12,13 +10,16 @@ from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository 
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.basket.user import UserId
 from shopping_basket.core.date_provider import DateProvider
-from shopping_basket.core.messagebus import MessageBus
+from shopping_basket.core.email_gateway import FakeEmailGateway
+from shopping_basket.core.messagebus import HANDLERS
 from shopping_basket.core.utilities import ItemLogger
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.discount.discount_strategy import (
     MultiCategoryDiscountStrategy,
     ThreeBooksDiscountStrategy,
 )
+from shopping_basket.order.handler import OrderConfirmedHandler
+from shopping_basket.order.notification.order_confirmation import OrderConfirmation
 from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.product.infrastructure.in_memory_product_repository import (
     InMemoryProductRepository,
@@ -44,12 +45,9 @@ DISCOUNT_STRATEGIES = [
 ]
 
 date_provider = DateProvider()
-message_bus = MessageBus()
 shopping_basket_repository = InMemoryShoppingBasketRepository(date_provider=date_provider)
 stock_repository = InMemoryStockRepository()
-stock_management_service = StockManagementService(
-    stock_repository=stock_repository, message_bus=message_bus
-)
+stock_management_service = StockManagementService(stock_repository=stock_repository)
 product_repository = InMemoryProductRepository()
 discount_calculator = DiscountCalculator([])
 product_service = ProductService(
@@ -63,15 +61,17 @@ shopping_basket_service = ShoppingBasketService(
     item_logger=item_logger,
     discount_calculator=discount_calculator,
 )
-purchase_system = PurchaseSystem(message_bus=message_bus)
+purchase_system = PurchaseSystem()
 stock_handler = StockUpdateHandler(stock_management_service=stock_management_service)
 order_more_handler = OrderMoreHandler(purchase_system=purchase_system)
-message_bus.add_handler(event_class=OrderConfirmed.name(), handler=stock_handler)
-message_bus.add_handler(event_class=StockIsLow.name(), handler=order_more_handler)
-message_bus.add_handler(
-    event_class=StockPurchased.name(),
-    handler=StockPurchasedHandler(stock_management_service=stock_management_service),
-)
+stock_purchase_handler = StockPurchasedHandler(stock_management_service=stock_management_service)
+email_gateway = FakeEmailGateway()
+order_confirmation = OrderConfirmation(email_gateway=email_gateway)
+order_confirmed_handler = OrderConfirmedHandler(order_confirmation=order_confirmation)
+HANDLERS[OrderConfirmed] = [stock_handler]
+HANDLERS[StockIsLow] = [order_more_handler]
+HANDLERS[StockPurchased] = [stock_purchase_handler]
+
 # Add some products to repo
 product_service.add_product(
     product=Product(
