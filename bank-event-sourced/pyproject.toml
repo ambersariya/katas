@@ -6,9 +6,10 @@ authors = ["ambersariya <1080238+ambersariya@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+eventsourcing = "^9.2.16"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1.3"
 black = "^22.1.0"
 flake8 = "^5.0.4"
 mypy = "^0.971"
