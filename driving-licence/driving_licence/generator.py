@@ -1,5 +1,7 @@
 from datetime import datetime
 
+DOB_FORMAT = '%d-%b-%Y'
+
 
 class DrivingLicenceGenerator:
     def format_surname(self, surname: str) -> str:
@@ -7,11 +9,11 @@ class DrivingLicenceGenerator:
 
     def format_year(self, dob: str) -> str:
         return datetime \
-            .strptime(dob, '%m-%b-%Y') \
+            .strptime(dob, DOB_FORMAT) \
             .strftime('%y')[0]
 
     def format_month_of_birth(self, dob: str, gender: str) -> str:
-        month_of_birth = datetime.strptime(dob, '%m-%b-%Y')
+        month_of_birth = datetime.strptime(dob, DOB_FORMAT)
         formatted_month = month_of_birth.strftime('%m')
         match gender:
             case 'F':
@@ -19,3 +21,6 @@ class DrivingLicenceGenerator:
                 return f"{month_prefix}{formatted_month[1]}"
             case _:
                 return formatted_month
+
+    def format_date_within_month(self, dob: str) -> str:
+        return datetime.strptime(dob, DOB_FORMAT).strftime('%d')
