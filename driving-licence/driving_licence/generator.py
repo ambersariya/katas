@@ -7,10 +7,8 @@ class DrivingLicenceGenerator:
     def format_surname(self, surname: str) -> str:
         return surname.upper()[:5].ljust(5, '9')
 
-    def format_year(self, dob: str) -> str:
-        return datetime \
-            .strptime(dob, DOB_FORMAT) \
-            .strftime('%y')[0]
+    def format_decade(self, dob: str) -> str:
+        return dob[-2:-1]
 
     def format_month_of_birth(self, dob: str, gender: str) -> str:
         month_of_birth = datetime.strptime(dob, DOB_FORMAT)
@@ -23,4 +21,7 @@ class DrivingLicenceGenerator:
                 return formatted_month
 
     def format_date_within_month(self, dob: str) -> str:
-        return datetime.strptime(dob, DOB_FORMAT).strftime('%d')
+        return dob[0:2]
+
+    def format_year(self, dob: str) -> str:
+        return dob[-1:]

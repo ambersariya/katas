@@ -53,3 +53,14 @@ def test_should_format_month_of_birth_based_on_gender(driving_licence_generator:
 def test_should_format_date_in_month(driving_licence_generator: DrivingLicenceGenerator, dob, expected_output):
     result = driving_licence_generator.format_date_within_month(dob=dob)
     assert result == expected_output
+
+
+@pytest.mark.parametrize('dob, expected_output', [
+    pytest.param("01-Jan-1981", '1'),
+    pytest.param("11-Nov-1982", '2'),
+    pytest.param("12-Nov-1987", '7'),
+    pytest.param("30-Mar-2022", '2'),
+])
+def test_should_format_year_in_date_of_birth(driving_licence_generator: DrivingLicenceGenerator, dob, expected_output):
+    result = driving_licence_generator.format_year(dob=dob)
+    assert result == expected_output
