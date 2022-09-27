@@ -7,5 +7,5 @@ class DrivingLicenceGenerator:
 
     def format_year(self, dob: str) -> str:
         return datetime.datetime \
-            .strptime(dob, '%m-%d-%Y') \
+            .strptime(dob, '%m-%b-%Y') \
             .strftime('%y')[0]

@@ -15,9 +15,9 @@ def test_should_retrieve_surname(data, expected_output):
 
 
 @pytest.mark.parametrize('data, expected_output', [
-    ("01-01-1980", '8'),
-    ("01-01-1995", '9'),
-    ("01-01-2000", '0')
+    ("01-Jan-1980", '8'),
+    ("01-Feb-1995", '9'),
+    ("01-Jun-2000", '0')
 ])
 def test_should_retrieve_decade(data, expected_output):
     driving_licence_generator = DrivingLicenceGenerator()
