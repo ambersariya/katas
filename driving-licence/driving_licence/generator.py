@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 class DrivingLicenceGenerator:
@@ -6,9 +6,16 @@ class DrivingLicenceGenerator:
         return surname.upper()[:5].ljust(5, '9')
 
     def format_year(self, dob: str) -> str:
-        return datetime.datetime \
+        return datetime \
             .strptime(dob, '%m-%b-%Y') \
             .strftime('%y')[0]
 
     def format_month_of_birth(self, dob: str, gender: str) -> str:
-        pass
+        month_of_birth = datetime.strptime(dob, '%m-%b-%Y')
+        formatted_month = month_of_birth.strftime('%m')
+        match gender:
+            case 'F':
+                month_prefix = '5' if month_of_birth.month < 10 else 6
+                return f"{month_prefix}{formatted_month[1]}"
+            case _:
+                return formatted_month

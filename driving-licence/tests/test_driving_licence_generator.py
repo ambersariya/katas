@@ -30,8 +30,13 @@ def test_should_format_decade_of_birth(driving_licence_generator, data, expected
 
 @pytest.mark.parametrize('dob, gender, expected_output', [
     pytest.param("01-Jan-1980", "M", '01', id="get 01 when person is Male"),
-    pytest.param("01-Feb-1995", "F", '51', id="get 51 when person is Female"),
-    pytest.param("01-Dec-2000", "F", '62', id="get 62 when person is Female")
+    pytest.param("01-Nov-1980", "M", '11', id="get 11 when person is Male"),
+    pytest.param("01-Dec-1980", "M", '12', id="get 11 when person is Male"),
+    pytest.param("01-Feb-1995", "F", '52', id="get 51 when person is Female"),
+    pytest.param("01-Sep-2000", "F", '59', id="get 59 when person is Female"),
+    pytest.param("01-Oct-2000", "F", '60', id="get 60 when person is Female"),
+    pytest.param("01-Nov-2000", "F", '61', id="get 61 when person is Female"),
+    pytest.param("01-Dec-2000", "F", '62', id="get 62 when person is Female"),
 ])
 def test_should_format_month_of_birth_based_on_gender(driving_licence_generator, dob, gender, expected_output):
     result = driving_licence_generator.format_month_of_birth(dob=dob, gender=gender)
