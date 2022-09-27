@@ -8,7 +8,7 @@ from driving_licence.generator import DrivingLicenceGenerator
     ("SmithRowe", 'SMITH'),
     ("Gea", 'GEA99')
 ])
-def test_should_retrieve_surname(data, expected_output):
+def test_should_format_surname_to_fixed_length(data, expected_output):
     driving_licence_generator = DrivingLicenceGenerator()
     result = driving_licence_generator.format_surname(surname=data)
     assert result == expected_output
@@ -19,7 +19,7 @@ def test_should_retrieve_surname(data, expected_output):
     ("01-Feb-1995", '9'),
     ("01-Jun-2000", '0')
 ])
-def test_should_retrieve_decade(data, expected_output):
+def test_should_format_decade_of_birth(data, expected_output):
     driving_licence_generator = DrivingLicenceGenerator()
     result = driving_licence_generator.format_year(dob=data)
     assert result == expected_output
