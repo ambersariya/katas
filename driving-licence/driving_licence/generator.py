@@ -26,9 +26,16 @@ class DrivingLicenceGenerator:
     def format_year(self, dob: str) -> str:
         return dob[-1:]
 
-    def format_initials(self, firstname, middlename: str):
-        middlename = middlename[0:2].ljust(2, '9')
-        return f"{firstname[0:2]}{middlename}".upper()
+    def format_initials(self, firstname: str, middlename: str):
+        middlename = middlename[0] if len(middlename) > 0 else '9'
+        return f"{firstname[0]}{middlename}".upper()
 
     def generate(self, data: list) -> str:
-        pass
+        return f"{self.format_surname(surname=data[2])}" \
+               f"{self.format_decade(dob=data[3])}" \
+               f"{self.format_month_of_birth(dob=data[3], gender=data[4])}" \
+               f"{self.format_date_within_month(dob=data[3])}" \
+               f"{self.format_year(dob=data[3])}" \
+               f"{self.format_initials(firstname=data[0], middlename=data[1])}" \
+               f"9AA"
+

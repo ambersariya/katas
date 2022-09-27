@@ -69,10 +69,10 @@ def test_should_format_year_in_date_of_birth(driving_licence_generator: DrivingL
 
 
 @pytest.mark.parametrize('firstname, middlename, expected_output', [
-    ("Kevin", "De", 'KEDE'),
-    ("Osama", "Bin", 'OSBI'),
-    ("Osama", "", 'OS99'),
-    ("Marc", "K", 'MAK9'),
+    ("Kevin", "De", 'KD'),
+    ("Osama", "Bin", 'OB'),
+    ("Osama", "", 'O9'),
+    ("Marc", "K", 'MK'),
 ])
 def test_should_format_initials(
         driving_licence_generator: DrivingLicenceGenerator,
@@ -85,20 +85,28 @@ def test_should_format_initials(
 
 
 @pytest.mark.parametrize('data, expected_output', [
-    (["Kevin", "De", "Bruyne"   , "01-12-1999", "M"], ''),
-    (["Kevin", "De", "Bruyne"   , "01-11-2022", "M"], ''),
-    (["Kevin", "De", "Bruyne"   , "07-10-1985", "M"], ''),
-    (["Kevin", "De", "Bruyne"   , "14-09-2000", "M"], ''),
-    (["Osama", "Bin", "Laden"   , "01-09-1975", "F"], ''),
-    (["Osama", "Bin", "Laden"   , "01-12-1985", "F"], ''),
-    (["Osama", "Bin", "Laden"   , "30-11-2100", "F"], ''),
-    (["Osama", "Bin", "Laden"   , "20-10-2022", "F"], ''),
-    (["Osama", "Bin", "Laden"   , "31-04-2006", "F"], ''),
-    (["James", ""   , "Bond"    , "31-04-2016", "M"], ''),
-    (["James", ""   , "Bond"    , "07-07-1957", "F"], ''),
-    (["Marc", "K"   , "Special" , "07-07-1926", "F"], ''),
-    (["Marc", "K"   , "Special" , "07-07-1826", "F"], ''),
+    (["John", "James", "Smith" , "01-Jan-2000", "M"], 'SMITH001010JJ9AA'),
+    (["Kevin", "De", "Bruyne"  , "01-Dec-1999", "M"], 'BRUYN912019KD9AA'),
+    (["Kevin", "De", "Bruyne"  , "01-Nov-2022", "M"], 'BRUYN211012KD9AA'),
+    (["Kevin", "De", "Bruyne"  , "07-Oct-1985", "M"], 'BRUYN810075KD9AA'),
+    (["Kevin", "De", "Bruyne"  , "14-Sep-2000", "M"], 'BRUYN009140KD9AA'),
+    (["Osama", "Bin", "Laden"  , "01-Sep-1975", "F"], 'LADEN759015OB9AA'),
+    (["Osama", "Bin", "Laden"  , "01-Dec-1985", "F"], 'LADEN862015OB9AA'),
+    (["Osama", "Bin", "Laden"  , "30-Nov-2100", "F"], 'LADEN061300OB9AA'),
+    (["Osama", "Bin", "Laden"  , "20-Oct-2022", "F"], 'LADEN260202OB9AA'),
+    (["Osama", "Bin", "Laden"  , "30-Apr-2006", "F"], 'LADEN054306OB9AA'),
+    (["James", ""   , "Bond"   , "28-Apr-2016", "M"], 'BOND9104286J99AA'),
+    (["James", ""   , "Bond"   , "07-Jul-1957", "F"], 'BOND9557077J99AA'),
+    (["Marc", "K"   , "Special", "07-Jul-1926", "F"], 'SPECI257076MK9AA'),
+    (["Marc", "K"   , "Special", "07-Jul-1826", "F"], 'SPECI257076MK9AA'),
+    (["Johanna", "", "Gibbs", "13-Dec-1981", "F"], 'GIBBS862131J99AA'),
+    (["Andrew", "Robert", "Lee", "02-Sep-1981", "M"], 'LEE99809021AR9AA'),
 ])
-def test_should_generate_driving_licence_number(driving_licence_generator: DrivingLicenceGenerator, data, expected_output):
+def test_should_generate_driving_licence_number(
+        driving_licence_generator: DrivingLicenceGenerator,
+        data,
+        expected_output
+):
     result = driving_licence_generator.generate(data=data)
+    assert len(result) == 16
     assert result == expected_output
