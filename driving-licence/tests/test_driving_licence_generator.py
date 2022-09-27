@@ -66,3 +66,19 @@ def test_should_format_date_in_month(driving_licence_generator: DrivingLicenceGe
 def test_should_format_year_in_date_of_birth(driving_licence_generator: DrivingLicenceGenerator, dob, expected_output):
     result = driving_licence_generator.format_year(dob=dob)
     assert result == expected_output
+
+
+@pytest.mark.parametrize('firstname, middlename, expected_output', [
+    ("Kevin", "De", 'KEDE'),
+    ("Osama", "Bin", 'OSBI'),
+    ("Osama", "", 'OS99'),
+    ("Marc", "K", 'MAK9'),
+])
+def test_should_format_initials(
+        driving_licence_generator: DrivingLicenceGenerator,
+        firstname,
+        middlename,
+        expected_output
+):
+    result = driving_licence_generator.format_initials(firstname=firstname, middlename=middlename)
+    assert result == expected_output

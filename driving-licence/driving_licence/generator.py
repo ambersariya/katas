@@ -25,3 +25,7 @@ class DrivingLicenceGenerator:
 
     def format_year(self, dob: str) -> str:
         return dob[-1:]
+
+    def format_initials(self, firstname, middlename: str):
+        middlename = middlename[0:2].ljust(2, '9')
+        return f"{firstname[0:2]}{middlename}".upper()
