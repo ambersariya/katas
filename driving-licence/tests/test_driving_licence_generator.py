@@ -82,3 +82,23 @@ def test_should_format_initials(
 ):
     result = driving_licence_generator.format_initials(firstname=firstname, middlename=middlename)
     assert result == expected_output
+
+
+@pytest.mark.parametrize('data, expected_output', [
+    (["Kevin", "De", "Bruyne"   , "01-12-1999", "M"], ''),
+    (["Kevin", "De", "Bruyne"   , "01-11-2022", "M"], ''),
+    (["Kevin", "De", "Bruyne"   , "07-10-1985", "M"], ''),
+    (["Kevin", "De", "Bruyne"   , "14-09-2000", "M"], ''),
+    (["Osama", "Bin", "Laden"   , "01-09-1975", "F"], ''),
+    (["Osama", "Bin", "Laden"   , "01-12-1985", "F"], ''),
+    (["Osama", "Bin", "Laden"   , "30-11-2100", "F"], ''),
+    (["Osama", "Bin", "Laden"   , "20-10-2022", "F"], ''),
+    (["Osama", "Bin", "Laden"   , "31-04-2006", "F"], ''),
+    (["James", ""   , "Bond"    , "31-04-2016", "M"], ''),
+    (["James", ""   , "Bond"    , "07-07-1957", "F"], ''),
+    (["Marc", "K"   , "Special" , "07-07-1926", "F"], ''),
+    (["Marc", "K"   , "Special" , "07-07-1826", "F"], ''),
+])
+def test_should_generate_driving_licence_number(driving_licence_generator: DrivingLicenceGenerator, data, expected_output):
+    result = driving_licence_generator.generate(data=data)
+    assert result == expected_output
