@@ -38,4 +38,3 @@ class DrivingLicenceGenerator:
                f"{self.format_year(dob=data[3])}" \
                f"{self.format_initials(firstname=data[0], middlename=data[1])}" \
                f"9AA"
-

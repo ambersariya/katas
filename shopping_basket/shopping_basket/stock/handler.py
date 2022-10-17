@@ -7,7 +7,7 @@ class StockUpdateHandler:
     def __init__(self, stock_management_service: StockManagementService):
         self.stock_management_service = stock_management_service
 
-    def __call__(self, event: OrderConfirmed) -> None:
+    def __call__(self, event: OrderConfirmed):
         self.stock_management_service.update_stock(items=event.shopping_basket.items)
 
 
