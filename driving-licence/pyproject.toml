@@ -8,6 +8,8 @@ packages = [{include = "driving_licence"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+fastapi = "^0.85.1"
+uvicorn = {extras = ["standard"], version = "^0.18.3"}
 
 
 [tool.poetry.group.dev.dependencies]
