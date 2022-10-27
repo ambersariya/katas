@@ -7,8 +7,7 @@ Luckily, with the scant sum of money that is left in your account, you are able 
 Buying and selling over the galaxy requires you to convert numbers and units, and you decided to write a program to
 help you.
 
-The numbers used for intergalactic transactions follows similar convention to the roman numerals and you have
-painstakingly collected the appropriate translation between them.
+The numbers used for intergalactic transactions follows similar convention to the roman numerals, and you have painstakingly collected the appropriate translation between them.
 
 Roman numerals are based on seven symbols:
 
