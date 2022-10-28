@@ -22,3 +22,4 @@ class Currency:
 class CurrencyRepo(Protocol):
     def add(self, currency: Currency):
         pass
+
