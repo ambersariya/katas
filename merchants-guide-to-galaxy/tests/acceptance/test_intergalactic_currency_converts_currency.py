@@ -1,8 +1,9 @@
 import pytest as pytest
 
+from unittest.mock import patch
 
 @pytest.fixture()
-def app_input():
+def test_input():
     return """
 glob is I
 prok is V
@@ -28,6 +29,7 @@ I have no idea what you are talking about
 """
 
 
-def test_should_convert_intergalactic_currency_to_arabic_numbers(self, app_input):
-    result = ''
-    assert result == OUTPUT
+@patch('builtins.print')
+def test_should_convert_intergalactic_currency_to_credits(mock_print, test_input, intergalactic_currency_converter):
+    intergalactic_currency_converter.execute_conversion(test_input)
+    mock_print.assert_called_with(OUTPUT)
