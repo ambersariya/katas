@@ -2,6 +2,7 @@ import pytest as pytest
 
 from unittest.mock import patch
 
+
 @pytest.fixture()
 def test_input():
     return """

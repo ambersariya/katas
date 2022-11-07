@@ -17,6 +17,5 @@ def test_currency_repo_stores_currency(in_memory_currency_repo):
 
 
 def test_raises_error_when_currency_doesnt_exist(in_memory_currency_repo):
-
     with pytest.raises(NonExistingCurrency):
         in_memory_currency_repo.get_currency(currency_name="prok")

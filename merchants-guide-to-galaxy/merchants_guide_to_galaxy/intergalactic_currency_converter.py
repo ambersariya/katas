@@ -2,7 +2,6 @@ from merchants_guide_to_galaxy.currency_repo import CurrencyRepo, Currency, Curr
 
 
 class IntergalacticCurrencyConverter:
-
     def __init__(self, currency_repo: CurrencyRepo):
         self.currency_repo = currency_repo
 
