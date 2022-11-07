@@ -1,11 +1,11 @@
-from merchants_guide_to_galaxy.currency_repo import CurrencyRepo, Currency, CurrencyValue
+from merchants_guide_to_galaxy.currency_repo import SymbolRepo, Currency, CurrencyValue
 from merchants_guide_to_galaxy.error import NonExistingCurrency
 from merchants_guide_to_galaxy.metal_converter import MetalConverter
 
 
 class IntergalacticCurrencyConverter:
 
-    def __init__(self, currency_repo: CurrencyRepo, metal_converter: MetalConverter):
+    def __init__(self, currency_repo: SymbolRepo, metal_converter: MetalConverter):
         self.metal_converter = metal_converter
         self.currency_repo = currency_repo
 
@@ -27,7 +27,7 @@ class IntergalacticCurrencyConverter:
         result = []
         for element in data:
             try:
-                currency = self.currency_repo.get_currency(element)
+                currency = self.currency_repo.symbol_value(element)
                 result.append(currency)
             except NonExistingCurrency:
                 result.append(element)

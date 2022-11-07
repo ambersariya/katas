@@ -3,6 +3,7 @@ from enum import Enum
 from typing import Protocol
 
 from merchants_guide_to_galaxy.error import NonExistingCurrency
+from merchants_guide_to_galaxy.intergalactic_symbols import IntergalacticSymbol
 
 
 class CurrencyValue(Enum):
@@ -15,28 +16,30 @@ class CurrencyValue(Enum):
     M = 1000
 
 
-@dataclass
-class Currency:
-    name: str
-    value: CurrencyValue
+@dataclass(init=True, frozen=True)
+class Currency(IntergalacticSymbol):
+    pass
 
 
-class CurrencyRepo(Protocol):
-    def add(self, currency: Currency):
+class SymbolRepo(Protocol):
+    def add(self, symbol: IntergalacticSymbol):
+        pass
+
+    def symbol_value(self, symbol: str) -> IntergalacticSymbol | NonExistingCurrency:
         pass
 
 
-class InMemoryCurrencyRepo:
+class InMemorySymbolRepo:
     def __init__(self):
         self.repo: dict = {}
 
     def __len__(self):
         return len(self.repo)
 
-    def add(self, currency: Currency):
-        self.repo[currency.name] = currency
+    def add(self, symbol: IntergalacticSymbol):
+        self.repo[symbol.name] = symbol
 
-    def get_currency(self, currency_name: str) -> Currency | NonExistingCurrency:
-        if currency_name not in self.repo:
+    def symbol_value(self, symbol: str) -> IntergalacticSymbol | NonExistingCurrency:
+        if symbol not in self.repo:
             raise NonExistingCurrency()
-        return self.repo[currency_name]
+        return self.repo[symbol]
