@@ -29,7 +29,7 @@ tegj is L
     mocked_currency_repo.add.assert_has_calls(calls=calls)
 
 
-def test_should_calculate_value_of_when_data_end_with_credits(
+def test_should_calculate_value_of_metal_when_data_end_with_credits(
         intergalactic_currency_converter: IntergalacticCurrencyConverter,
         mocked_metal_converter: MetalConverter,
         mocked_currency_repo: CurrencyRepo):
