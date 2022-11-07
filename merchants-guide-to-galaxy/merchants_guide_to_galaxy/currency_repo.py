@@ -18,7 +18,7 @@ class CurrencyValue(Enum):
 
 @dataclass(init=True, frozen=True)
 class Currency(IntergalacticSymbol):
-    pass
+    value: CurrencyValue
 
 
 class SymbolRepo(Protocol):
