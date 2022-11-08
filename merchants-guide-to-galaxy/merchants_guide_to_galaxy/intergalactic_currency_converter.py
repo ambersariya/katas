@@ -31,4 +31,3 @@ class IntergalacticCurrencyConverter:
                 result.append(currency)
             except NonExistingCurrency:
                 result.append(element)
-                
