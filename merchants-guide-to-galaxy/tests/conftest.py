@@ -7,7 +7,7 @@ from merchants_guide_to_galaxy.intergalactic_currency_converter import Intergala
 
 
 @pytest.fixture
-def mocked_currency_repo():
+def mocked_symbol_repo():
     return MagicMock(SymbolRepo)
 
 

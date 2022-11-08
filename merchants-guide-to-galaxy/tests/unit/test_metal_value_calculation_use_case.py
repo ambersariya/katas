@@ -12,9 +12,9 @@ from merchants_guide_to_galaxy.metal_value_calculation_use_case import metal_val
     ("pish prok glob glob glob spacejunk is 306 Credits", 17, "spacejunk", ["X", "V", "I", "I", "I"])
 ])
 def test_metal_value_calculation_use_case(input_data, metal_value, metal_name, currency_values,
-                                          mocked_currency_repo):
+                                          mocked_symbol_repo):
     metal = Metal(value=metal_value, name=metal_name)
-    mocked_currency_repo.symbol_value.side_effect = currency_values
+    mocked_symbol_repo.symbol_value.side_effect = currency_values
 
-    metal_value_calculation_use_case(symbol_repo=mocked_currency_repo, raw_data=input_data)
-    mocked_currency_repo.add.assert_called_once_with(symbol=metal)
+    metal_value_calculation_use_case(symbol_repo=mocked_symbol_repo, raw_data=input_data)
+    mocked_symbol_repo.add.assert_called_once_with(symbol=metal)

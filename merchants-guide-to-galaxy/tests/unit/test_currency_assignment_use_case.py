@@ -10,7 +10,7 @@ from merchants_guide_to_galaxy.currency_repo import Currency, CurrencyValue
     ("pish is X", "pish", "X"),
     ("tegj is L", "tegj", "L")
 ])
-def test_currency_assignment_use_case(input_data, currency_name, currency_value, mocked_currency_repo):
-    currency_assignment_use_case(symbol_repo=mocked_currency_repo, raw_data=input_data)
-    mocked_currency_repo.add.assert_called_with(
+def test_currency_assignment_use_case(input_data, currency_name, currency_value, mocked_symbol_repo):
+    currency_assignment_use_case(symbol_repo=mocked_symbol_repo, raw_data=input_data)
+    mocked_symbol_repo.add.assert_called_with(
         symbol=Currency(name=currency_name, value=CurrencyValue[currency_value]))

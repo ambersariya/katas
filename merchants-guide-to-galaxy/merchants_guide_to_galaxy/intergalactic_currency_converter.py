@@ -12,6 +12,7 @@ class IntergalacticCurrencyConverter:
     def execute_conversion(self, raw_data: str) -> None:
         currency_assignment_use_case(symbol_repo=self.symbol_repo, raw_data=raw_data)
         metal_value_calculation_use_case(symbol_repo=self.symbol_repo, raw_data=raw_data)
+
         # dataset = [line for line in raw_data.split("\n") if len(line) > 0]
         # for data in dataset:
         #     # We have logic that decides on whether the data in dataset has a ?
