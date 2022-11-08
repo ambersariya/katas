@@ -1,24 +1,27 @@
 from dataclasses import dataclass
-from enum import Enum
+from enum import auto, Enum
 from typing import Protocol
 
 from merchants_guide_to_galaxy.error import NonExistingCurrency
 from merchants_guide_to_galaxy.intergalactic_symbols import IntergalacticSymbol
 
 
-class CurrencyValue(Enum):
-    I = 1
-    V = 5
-    X = 10
-    L = 250
-    C = 100
-    D = 500
-    M = 1000
+class CurrencyValue(str, Enum):
+    I = "I"
+    V = "V"
+    X = "X"
+    L = "L"
+    C = "C"
+    D = "D"
+    M = "M"
 
 
 @dataclass(init=True, frozen=True)
 class Currency(IntergalacticSymbol):
     value: CurrencyValue
+
+    def __str__(self):
+        return str(self.value)
 
 
 class SymbolRepo(Protocol):

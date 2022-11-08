@@ -6,12 +6,12 @@ from merchants_guide_to_galaxy.error import NonExistingCurrency
 
 class IntergalacticCurrencyConverter:
 
-    def __init__(self, currency_repo: SymbolRepo):
-        self.currency_repo = currency_repo
+    def __init__(self, symbol_repo: SymbolRepo):
+        self.symbol_repo = symbol_repo
 
     def execute_conversion(self, raw_data: str) -> None:
-        currency_assignment_use_case(symbol_repo=self.currency_repo, raw_data=raw_data)
-        metal_value_calculation_use_case(symbol_repo=self.currency_repo, raw_data=raw_data)
+        currency_assignment_use_case(symbol_repo=self.symbol_repo, raw_data=raw_data)
+        metal_value_calculation_use_case(symbol_repo=self.symbol_repo, raw_data=raw_data)
         # dataset = [line for line in raw_data.split("\n") if len(line) > 0]
         # for data in dataset:
         #     # We have logic that decides on whether the data in dataset has a ?

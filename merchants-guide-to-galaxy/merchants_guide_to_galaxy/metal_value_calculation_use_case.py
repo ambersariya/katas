@@ -14,7 +14,7 @@ def metal_value_calculation_use_case(symbol_repo: SymbolRepo, raw_data: str) -> 
         credit_value = int(data.pop())
         metal = data.pop()
         roman_symbol = list(map(
-            lambda curr: symbol_repo.symbol_value(symbol=curr),
+            lambda curr: symbol_repo.symbol_value(symbol=curr).value,
             data
         ))
         roman_symbol = ''.join(roman_symbol)

@@ -12,8 +12,8 @@ def mocked_currency_repo():
 
 
 @pytest.fixture
-def intergalactic_currency_converter(mocked_currency_repo):
-    return IntergalacticCurrencyConverter(currency_repo=mocked_currency_repo)
+def intergalactic_currency_converter(in_memory_currency_repo):
+    return IntergalacticCurrencyConverter(symbol_repo=in_memory_currency_repo)
 
 
 @pytest.fixture
