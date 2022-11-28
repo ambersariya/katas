@@ -1,7 +1,7 @@
 import pytest
 
-from merchants_guide_to_galaxy.symbol_repo import InMemorySymbolRepo, Currency, CurrencyValue
-from merchants_guide_to_galaxy.error import NonExistingCurrency
+from merchants_guide_to_galaxy.domain.currency import CurrencyValue, Currency
+from merchants_guide_to_galaxy.domain.error import NonExistingCurrency
 
 CURRENCY_GLOB = Currency(name="glob", value=CurrencyValue.I)
 CURRENCY_PROK = Currency(name="prok", value=CurrencyValue.V)

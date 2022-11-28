@@ -1,4 +1,5 @@
-from merchants_guide_to_galaxy.symbol_repo import SymbolRepo, Currency, CurrencyValue
+from merchants_guide_to_galaxy.domain.currency import CurrencyValue, Currency
+from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
 
 
 def currency_assignment(line: str):

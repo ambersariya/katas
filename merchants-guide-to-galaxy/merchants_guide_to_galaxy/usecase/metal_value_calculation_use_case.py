@@ -1,6 +1,6 @@
-from merchants_guide_to_galaxy.symbol_repo import SymbolRepo
-from merchants_guide_to_galaxy.metal import Metal
-from merchants_guide_to_galaxy.roman_numerals_converter import roman_to_arabic
+from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
+from merchants_guide_to_galaxy.domain.metal import Metal
+from merchants_guide_to_galaxy.domain.roman_numerals_converter import roman_to_arabic
 
 
 def credit_assignment(line: str):

@@ -1,7 +1,7 @@
 import pytest
 
-from merchants_guide_to_galaxy.metal import Metal
-from merchants_guide_to_galaxy.metal_value_calculation_use_case import metal_value_calculation_use_case
+from merchants_guide_to_galaxy.domain.metal import Metal
+from merchants_guide_to_galaxy.usecase.metal_value_calculation_use_case import metal_value_calculation_use_case
 
 
 @pytest.mark.parametrize('input_data, metal_value, metal_name, currency_values', [

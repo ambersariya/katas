@@ -2,8 +2,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from merchants_guide_to_galaxy.symbol_repo import SymbolRepo, InMemorySymbolRepo, Currency, CurrencyValue
-from merchants_guide_to_galaxy.intergalactic_currency_converter import IntergalacticCurrencyConverter
+from merchants_guide_to_galaxy.repository.in_memory_symbol_repo import InMemorySymbolRepo
+from merchants_guide_to_galaxy.domain.currency import CurrencyValue, Currency
+from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
+from merchants_guide_to_galaxy.app import IntergalacticCurrencyConverter
 
 
 @pytest.fixture
