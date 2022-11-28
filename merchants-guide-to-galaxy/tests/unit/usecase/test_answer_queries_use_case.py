@@ -16,7 +16,3 @@ def test_answer_queries_use_case(input_data, answer, symbol_values, mocked_symbo
     answers = answer_queries_use_case(raw_data=input_data, symbol_repo=mocked_symbol_repo)
 
     assert len(answers) == 1
-
-
-x = lambda a : a + 10
-print(x(5))
