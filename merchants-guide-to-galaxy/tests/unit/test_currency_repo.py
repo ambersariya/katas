@@ -1,6 +1,6 @@
 import pytest
 
-from merchants_guide_to_galaxy.currency_repo import InMemorySymbolRepo, Currency, CurrencyValue
+from merchants_guide_to_galaxy.symbol_repo import InMemorySymbolRepo, Currency, CurrencyValue
 from merchants_guide_to_galaxy.error import NonExistingCurrency
 
 CURRENCY_GLOB = Currency(name="glob", value=CurrencyValue.I)

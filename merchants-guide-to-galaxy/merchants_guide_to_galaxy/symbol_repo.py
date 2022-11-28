@@ -28,7 +28,7 @@ class SymbolRepo(Protocol):
     def add(self, symbol: IntergalacticSymbol):
         pass
 
-    def symbol_value(self, symbol: str) -> IntergalacticSymbol | NonExistingCurrency:
+    def symbol_value(self, symbol: str) -> str:
         pass
 
 
@@ -45,4 +45,4 @@ class InMemorySymbolRepo:
     def symbol_value(self, symbol: str) -> IntergalacticSymbol | NonExistingCurrency:
         if symbol not in self.repo:
             raise NonExistingCurrency()
-        return self.repo[symbol]
+        return self.repo[symbol].value

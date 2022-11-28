@@ -1,7 +1,7 @@
 import pytest
 
 from merchants_guide_to_galaxy.answer_queries_use_case import answer_queries_use_case
-from merchants_guide_to_galaxy.currency_repo import CurrencyValue, Currency
+from merchants_guide_to_galaxy.symbol_repo import CurrencyValue, Currency
 
 
 @pytest.mark.parametrize('input_data, answer, symbol_values', [

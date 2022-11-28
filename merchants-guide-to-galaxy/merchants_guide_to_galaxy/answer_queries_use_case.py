@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from merchants_guide_to_galaxy.currency_repo import SymbolRepo
+from merchants_guide_to_galaxy.symbol_repo import SymbolRepo
 from merchants_guide_to_galaxy.roman_numerals_converter import roman_to_arabic
 
 

@@ -1,6 +1,6 @@
 from merchants_guide_to_galaxy.metal_value_calculation_use_case import metal_value_calculation_use_case
 from merchants_guide_to_galaxy.currency_assignment_use_case import currency_assignment_use_case
-from merchants_guide_to_galaxy.currency_repo import SymbolRepo
+from merchants_guide_to_galaxy.symbol_repo import SymbolRepo
 from merchants_guide_to_galaxy.error import NonExistingCurrency
 
 

@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from merchants_guide_to_galaxy.currency_repo import SymbolRepo, InMemorySymbolRepo, Currency, CurrencyValue
+from merchants_guide_to_galaxy.symbol_repo import SymbolRepo, InMemorySymbolRepo, Currency, CurrencyValue
 from merchants_guide_to_galaxy.intergalactic_currency_converter import IntergalacticCurrencyConverter
 
 

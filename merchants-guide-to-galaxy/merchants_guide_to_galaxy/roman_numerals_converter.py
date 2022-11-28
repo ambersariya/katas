@@ -1,4 +1,4 @@
-from merchants_guide_to_galaxy.currency_repo import SymbolRepo
+from merchants_guide_to_galaxy.symbol_repo import SymbolRepo
 from merchants_guide_to_galaxy.metal import Metal
 
 
