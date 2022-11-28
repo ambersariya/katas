@@ -42,7 +42,7 @@ class InMemorySymbolRepo:
     def add(self, symbol: IntergalacticSymbol):
         self.repo[symbol.name] = symbol
 
-    def symbol_value(self, symbol: str) -> IntergalacticSymbol | NonExistingCurrency:
+    def symbol_value(self, symbol: str) -> str:
         if symbol not in self.repo:
             raise NonExistingCurrency()
         return self.repo[symbol].value
