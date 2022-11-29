@@ -6,6 +6,7 @@ from merchants_guide_to_galaxy.repository.in_memory_symbol_repo import InMemoryS
 from merchants_guide_to_galaxy.domain.currency import CurrencyValue, Currency
 from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
 from merchants_guide_to_galaxy.app import IntergalacticCurrencyConverter
+from merchants_guide_to_galaxy.usecase.answer_printer import AnswerPrinter
 
 
 @pytest.fixture
@@ -14,8 +15,13 @@ def mocked_symbol_repo():
 
 
 @pytest.fixture
-def intergalactic_currency_converter(in_memory_currency_repo):
-    return IntergalacticCurrencyConverter(symbol_repo=in_memory_currency_repo)
+def answer_printer():
+    return AnswerPrinter()
+
+
+@pytest.fixture
+def intergalactic_currency_converter(in_memory_currency_repo, answer_printer):
+    return IntergalacticCurrencyConverter(symbol_repo=in_memory_currency_repo, answer_printer=answer_printer)
 
 
 @pytest.fixture

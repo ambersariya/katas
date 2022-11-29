@@ -1,6 +1,7 @@
-from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
+from merchants_guide_to_galaxy.domain.currency import Currency
 from merchants_guide_to_galaxy.domain.error import NonExistingCurrency
 from merchants_guide_to_galaxy.domain.intergalactic_symbols import IntergalacticSymbol
+from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
 
 
 class InMemorySymbolRepo(SymbolRepo):
@@ -13,7 +14,7 @@ class InMemorySymbolRepo(SymbolRepo):
     def add(self, symbol: IntergalacticSymbol):
         self.repo[symbol.name] = symbol
 
-    def symbol_value(self, symbol: str) -> str:
+    def find_symbol_value(self, symbol: str) -> IntergalacticSymbol:
         if symbol not in self.repo:
             raise NonExistingCurrency()
-        return self.repo[symbol].value
+        return self.repo[symbol]

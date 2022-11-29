@@ -5,8 +5,7 @@ from unittest.mock import patch
 
 @pytest.fixture()
 def test_input():
-    return """
-glob is I
+    return """glob is I
 prok is V
 pish is X
 tegj is L
@@ -17,17 +16,14 @@ how much is pish tegj glob glob ?
 how many Credits is glob prok Silver ?
 how many Credits is glob prok Gold ?
 how many Credits is glob prok Iron ?
-how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
-"""
+how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"""
 
 
-OUTPUT = """
-pish tegj glob glob is 42
-glob prok Silver is 68 Credits
-glob prok Gold is 57800 Credits
-glob prok Iron is 782 Credits
-I have no idea what you are talking about
-"""
+OUTPUT = "pish tegj glob glob is 42.0\n" \
+         "glob prok Silver is 68.0 Credits\n" \
+         "glob prok Gold is 57800.0 Credits\n" \
+         "glob prok Iron is 782.0 Credits\n" \
+         "I have no idea what you are talking about"
 
 
 @patch('builtins.print')
