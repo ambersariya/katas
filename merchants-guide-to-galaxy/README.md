@@ -71,9 +71,9 @@ how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
 ## Test Output:
 
 ```
-pish tegj glob glob is 42
-glob prok Silver is 68 Credits
-glob prok Gold is 57800 Credits
-glob prok Iron is 782 Credits
+pish tegj glob glob is 42.0
+glob prok Silver is 68.0 Credits
+glob prok Gold is 57800.0 Credits
+glob prok Iron is 782.0 Credits
 I have no idea what you are talking about
 ```
