@@ -25,10 +25,11 @@ They want to use the CQRS pattern, To do that we will have:
 
 ```mermaid
 sequenceDiagram
-    Alice->>+CqrsResort: available_rooms(arrival: Date, departure: Date)
-    CqrsResort->>+ReadModel: fetch_available_rooms(date_range)
+    Alice->>+CqrsResort: available_rooms(AvailabilityRange)
+    CqrsResort->>+RoomRepository: fetch_available_rooms(AvailabilityRange)
     CqrsResort-->>-Alice: {rooms: [room1(name), room2(name)]}
     Alice->>+CqrsResort: book_room(Booking(room1, client_id, arrival_date, departure_date))
+    CqrsResort->>-BookRoomHandler: make_booking
 ```
 
 The Booking struct contains:
