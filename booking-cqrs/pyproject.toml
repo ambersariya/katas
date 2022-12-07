@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "booking-cqrs"
+version = "0.1.0"
+description = "Kata demonstrating CQRS pattern"
+authors = ["ambersariya <1080238+ambersariya@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
