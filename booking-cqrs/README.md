@@ -4,7 +4,7 @@ You should implement a simple booking soluiton in CQRS architecture.
 
 ## About CQRS
 
-CQRS for Command Query Responsibility Segregation Pattern.
+[CQRS](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs) for Command Query Responsibility Segregation Pattern.
 
 A query returns data and does not alter the state of the object. A command changes the state of an object but does not return any data.
 
