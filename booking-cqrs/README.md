@@ -38,4 +38,4 @@ And the Room struct contain only:
 <https://codingdojo.org/kata/CQRS_Booking/>
 
 inspiration source of this kata : <https://github.com/tpierrain/CQRS/>
-explanation of CQRS by Microsoft <https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj591573(v=pandp.10)
+explanation of CQRS by Microsoft <https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj591573(v=pandp.10>
