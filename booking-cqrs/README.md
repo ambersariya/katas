@@ -16,11 +16,20 @@ We want to make a booking solution for one hotel.
 
 The first 2 users stories are :
 
-- As a user I want to see all free rooms.
+- As a user I want to see all available rooms.
 - As a user I want to book a room.
-- They want to use the CQRS pattern, To do that we will have :
 
-one command service with a function bookARoom(Booking) they call the WriteRegistry they notify the ReadRegistry called by query service with function Room[] freeRooms(arrival: Date, departure: Date)
+They want to use the CQRS pattern, To do that we will have:
+
+- one command service with a function `book_room(Booking)` they call the `WriteRegistry` they notify the `ReadRegistry` called by query service with function `Room[] available_rooms(arrival: Date, departure: Date)`
+
+```mermaid
+sequenceDiagram
+    Alice->>+CqrsResort: available_rooms(arrival: Date, departure: Date)
+    CqrsResort->>+ReadModel: fetch_available_rooms(date_range)
+    CqrsResort-->>-Alice: {rooms: [room1(name), room2(name)]}
+    Alice->>+CqrsResort: book_room(Booking(room1, client_id, arrival_date, departure_date))
+```
 
 The Booking struct contains:
 
