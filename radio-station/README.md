@@ -11,3 +11,8 @@ Unsure; whatever the local "music" community is
 - Near-real-time synced with the music on the air
 - User voting mechanism
 - Mobile-device accessibility
+
+## Links
+
+- <https://www.architecturalkatas.com/kata.html?TakingRequests.json>
+- <https://github.com/tedneward/ArchKatas/blob/main/TakingRequests.json>
