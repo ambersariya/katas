@@ -1,2 +1,0 @@
-class NonExistingCurrency(Exception):
-    pass

@@ -2,20 +2,26 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from merchants_guide_to_galaxy.currency_repo import SymbolRepo, InMemorySymbolRepo, Currency, CurrencyValue
-from merchants_guide_to_galaxy.intergalactic_currency_converter import IntergalacticCurrencyConverter
-from merchants_guide_to_galaxy.metal_converter import MetalConverter
+from merchants_guide_to_galaxy.repository.in_memory_symbol_repo import InMemorySymbolRepo
+from merchants_guide_to_galaxy.domain.currency import CurrencyValue, Currency
+from merchants_guide_to_galaxy.domain.symbol_repo import SymbolRepo
+from merchants_guide_to_galaxy.app import IntergalacticCurrencyConverter
+from merchants_guide_to_galaxy.usecase.answer_printer import AnswerPrinter
 
 
 @pytest.fixture
-def mocked_currency_repo():
+def mocked_symbol_repo():
     return MagicMock(SymbolRepo)
 
 
 @pytest.fixture
-def intergalactic_currency_converter(mocked_currency_repo, mocked_metal_converter):
-    return IntergalacticCurrencyConverter(currency_repo=mocked_currency_repo,
-                                          metal_converter=mocked_metal_converter)
+def answer_printer():
+    return AnswerPrinter()
+
+
+@pytest.fixture
+def intergalactic_currency_converter(in_memory_currency_repo, answer_printer):
+    return IntergalacticCurrencyConverter(symbol_repo=in_memory_currency_repo, answer_printer=answer_printer)
 
 
 @pytest.fixture
@@ -29,13 +35,3 @@ def intergalactic_currencies():
             Currency(name="prok", value=CurrencyValue.V),
             Currency(name="pish", value=CurrencyValue.X),
             Currency(name="tegj", value=CurrencyValue.L)]
-
-
-@pytest.fixture
-def mocked_metal_converter():
-    return MagicMock(MetalConverter)
-
-
-@pytest.fixture
-def metal_converter(mocked_currency_repo):
-    return MetalConverter(currency_repo=mocked_currency_repo)
