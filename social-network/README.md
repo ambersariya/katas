@@ -26,3 +26,11 @@ you’re going to use BDD to cover all important features.
 - Mentions: Bob can link to Charlie in a message using “@”
 - Links: Alice can link to a clickable web resource in a message
 - Direct Messages: Mallory can send a private message to Alice
+
+### Tasks
+
+- [x] Abstractions
+- [x] Dependency Injection (IoC)
+- [ ] Processes (Event Handlers)
+- [ ] REST
+- [ ] Optimise Read Models (split away from using same repo for read/write)

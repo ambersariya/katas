@@ -1,10 +1,10 @@
 .PHONY: all clean lint type test test-cov
 
 CMD := poetry run
-PYMODULE := shopping_basket
+PYMODULE := src
 EXTRACODE :=
 
-all: poetry-install mypy lint format-check
+all: poetry-install mypy lint format-check tests
 format: black isort
 format-check: black-check isort-check
 
@@ -37,4 +37,7 @@ update-libs: # Updates python dependencies and commits
 	git add poetry.lock && git commit poetry.lock -m "chore: update project dependencies"
 
 build-image:
-	docker build -t shopping-basket-api .
+	docker build -t social-network-api .
+
+test:
+	poetry run pytest
