@@ -61,11 +61,21 @@ container[_PyCommandBus] = _PyCommandBus()
 container[_PyEventBus] = _PyEventBus()
 container[_PyQueryBus] = _PyQueryBus()
 
-container[CommandBus] = Singleton(lambda c: CommandBus(handlers=c[CommandHandlers], message_command_bus=c[_PyCommandBus]))
-container[QueryBus] = Singleton(lambda c: QueryBus(handlers=c[QueryHandlers], message_query_bus=c[_PyQueryBus]))
-container[EventBus] = Singleton(lambda c: EventBus(handlers=c[EventHandlers], message_event_bus=c[_PyEventBus]))
+container[CommandBus] = Singleton(
+    lambda c: CommandBus(
+        handlers=c[CommandHandlers], message_command_bus=c[_PyCommandBus]
+    )
+)
+container[QueryBus] = Singleton(
+    lambda c: QueryBus(handlers=c[QueryHandlers], message_query_bus=c[_PyQueryBus])
+)
+container[EventBus] = Singleton(
+    lambda c: EventBus(handlers=c[EventHandlers], message_event_bus=c[_PyEventBus])
+)
 
-container[TimelineRepository] = lambda c: InMemoryTimelineRepository(event_bus=c[EventBus])
+container[TimelineRepository] = lambda c: InMemoryTimelineRepository(
+    event_bus=c[EventBus]
+)
 container[PublishMessageCommandHandler] = lambda c: PublishMessageCommandHandler(
     timeline_repository=c[TimelineRepository]
 )
