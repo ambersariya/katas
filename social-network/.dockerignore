@@ -1,0 +1,7 @@
+.mypy_cache/
+.pytest_cache/
+.idea/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class

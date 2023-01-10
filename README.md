@@ -11,5 +11,6 @@ Here are some of the kata's solved in this repo:
 1. [Gilded Rose](./gilded_rose)
 1. [UK Driving Licence](./driving-licence/)
 1. [Merchant's Guide To Galaxy](./merchants-guide-to-galaxy/)
+1. [Social Network (Python)](./social-network/)
 
 Hope you find them useful.

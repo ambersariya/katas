@@ -1,0 +1,31 @@
+# http://editorconfig.org
+
+root = true
+
+[*]
+max_line_length = 100
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[Makefile]
+indent_style = tab
+
+# 4 space indentation
+[*.{py,java,r,R}]
+indent_style = space
+indent_size = 4
+
+# 2 space indentation
+[*.{js,json,y{a,}ml,html,cwl}]
+indent_style = space
+indent_size = 2
+
+[*.{md,Rmd,rst}]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
