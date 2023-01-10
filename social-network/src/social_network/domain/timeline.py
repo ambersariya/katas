@@ -1,3 +1,5 @@
+from typing import List
+
 from src.core.events import EventMixin
 from src.core.value_objects import UserId
 from src.social_network.domain.events import MessageWasPublished
@@ -6,12 +8,12 @@ from src.social_network.domain.value_objects import PublishingTime
 
 
 class Timeline(EventMixin):
-    def __init__(self, user: UserId, messages: list[Message] = None):
+    def __init__(self, user: UserId, messages: List[Message] = None):
         super().__init__()
         self.__user = user
         self.__messages = [] if messages is None else messages
 
-    def messages(self) -> list[Message]:
+    def messages(self) -> List[Message]:
         return self.__messages
 
     @property

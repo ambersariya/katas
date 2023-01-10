@@ -1,5 +1,14 @@
+GET /timelines/alice/messages
+Accept: application/json
+Host: 127.0.0.1:8000
+
+###
 POST /timelines/alice/messages HTTP/1.1
 Host: 127.0.0.1:8000
 Content-Type: application/json
 
-{"message": "Functional programming is cool", "publisher": "alice","timeline_user": "alice"}
+{
+    "message": "Functional programming is cool",
+    "publisher": "alice",
+    "timeline_user": "alice"
+}

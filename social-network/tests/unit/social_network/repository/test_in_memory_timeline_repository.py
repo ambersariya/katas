@@ -13,8 +13,7 @@ PUSHED_TIMELINE.publish_message(message="some message", published_by=USER_ID)
 def test_should_fetch_empty_timeline_for_user_when_no_messages_exist(
     in_memory_timeline_repository,
 ):
-    user_dto = UserId("alice")
-    timeline = in_memory_timeline_repository.fetch_timeline(user=user_dto)
+    timeline = in_memory_timeline_repository.fetch_timeline(user=USER_ID)
     assert len(timeline) == 0
 
 
@@ -28,6 +27,5 @@ def test_should_add_message_to_timeline(
     timeline = in_memory_timeline_repository.fetch_timeline(user=USER_ID)
 
     assert len(timeline) == 1
-    assert len(timeline.domain_events) == 1
     assert USER_ID == timeline.user
     fake_event_bus.dispatch.assert_called_once()

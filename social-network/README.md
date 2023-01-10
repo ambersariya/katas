@@ -31,6 +31,6 @@ you’re going to use BDD to cover all important features.
 
 - [x] Abstractions
 - [x] Dependency Injection (IoC)
-- [ ] Processes (Event Handlers)
-- [ ] REST
+- [x] Processes (Event Handlers)
+- [x] REST
 - [ ] Optimise Read Models (split away from using same repo for read/write)

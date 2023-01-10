@@ -73,9 +73,8 @@ container[EventBus] = Singleton(
     lambda c: EventBus(handlers=c[EventHandlers], message_event_bus=c[_PyEventBus])
 )
 
-container[TimelineRepository] = lambda c: InMemoryTimelineRepository(
-    event_bus=c[EventBus]
-)
+container[TimelineRepository] = Singleton(
+    lambda c: InMemoryTimelineRepository(event_bus=c[EventBus]))
 container[PublishMessageCommandHandler] = lambda c: PublishMessageCommandHandler(
     timeline_repository=c[TimelineRepository]
 )

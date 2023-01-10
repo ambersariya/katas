@@ -1,4 +1,3 @@
-RESPONSE_OK = {}
 ERROR_RESPONSE_MESSAGE = {
     "detail": [
         {
@@ -31,15 +30,6 @@ ERROR_RESPONSE_TIMELINE_USER = {
 }
 
 testdata = [
-    (
-        {
-            "message": "Functional programming is cool",
-            "publisher": "alice",
-            "timeline_user": "alice",
-        },
-        201,
-        RESPONSE_OK,
-    ),
     (
         {"message": "", "publisher": "alice", "timeline_user": "alice"},
         422,

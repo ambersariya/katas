@@ -12,7 +12,7 @@ class InMemoryTimelineRepository(TimelineRepository):
     def fetch_timeline(self, user: UserId) -> Timeline:
         if user in self.__timelines:
             return self.__timelines[user]
-        return Timeline(user=user)
+        return Timeline(user=user, messages=[])
 
     def add(self, timeline: Timeline) -> None:
         self.__timelines[timeline.user] = timeline
