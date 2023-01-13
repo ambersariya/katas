@@ -1,6 +1,7 @@
 import datetime
 
-from src.asset import Asset, AssetName, AssetOwner
+from src.asset import Asset
+from src.value_objects import AssetOwner, AssetName
 from src.repository.in_memory_asset_repository import InMemoryAssetRepository
 
 ASSET_OWNER = AssetOwner('alice')

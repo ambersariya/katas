@@ -1,7 +1,7 @@
 from typing import Dict
 
-from src.repository.stock_pricing_repository import StockPricingRepository, StockPrice, StockName, \
-    StockUnknownError
+from src.repository.stock_pricing_repository import StockPricingRepository, StockUnknownError
+from src.value_objects import StockName, StockPrice
 
 
 class InMemoryStockPriceRepository(StockPricingRepository):

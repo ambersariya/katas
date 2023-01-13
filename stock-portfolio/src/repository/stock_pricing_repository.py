@@ -1,8 +1,7 @@
 from abc import abstractmethod
-from typing import Protocol, NewType
+from typing import Protocol
 
-StockName = NewType('StockName', str)
-StockPrice = NewType('StockPrice', float)
+from src.value_objects import StockName, StockPrice
 
 
 class StockUnknownError(Exception):

@@ -1,5 +1,5 @@
-from src.asset import Asset, AssetName, AssetOwner
-from src.repository.stock_pricing_repository import StockPrice, StockName
+from src.asset import Asset
+from src.value_objects import StockName, StockPrice, AssetOwner, AssetName
 
 ASSET_OWNER = AssetOwner('alice')
 TSLA_ASSET = Asset(number_of_shares=10, name=AssetName("TSLA"), owner=ASSET_OWNER)

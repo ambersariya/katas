@@ -1,9 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import NewType
 
-AssetOwner = NewType('AssetOwner', str)
-AssetName = NewType('AssetName', str)
+from src.value_objects import AssetOwner, AssetName
 
 
 @dataclass(init=True, frozen=True)

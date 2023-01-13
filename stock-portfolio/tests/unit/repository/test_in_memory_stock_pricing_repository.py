@@ -1,7 +1,8 @@
 import pytest as pytest
 
 from src.repository.in_memory_stock_price_repository import InMemoryStockPriceRepository
-from src.repository.stock_pricing_repository import StockName, StockPrice, StockUnknownError
+from src.repository.stock_pricing_repository import StockUnknownError
+from src.value_objects import StockName, StockPrice
 
 STOCK_NAME = StockName('TSLA')
 STOCK_PRICE = StockPrice(150.0)
