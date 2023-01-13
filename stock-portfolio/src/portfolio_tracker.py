@@ -1,7 +1,7 @@
 from src.asset import Asset
 from src.presenter.portfolio_presenter import Presenter
 from src.repository.asset_repository import AssetRepository
-from src.repository.stock_pricing_repository import StockPricingRepository
+from src.repository.stock_pricing_repository import StockPricingRepository, StockName
 
 
 class PortfolioTracker:
@@ -25,7 +25,10 @@ class PortfolioTracker:
 
     def print_portfolio(self, owner):
         assets = self.asset_repository.fetch_assets(owner=owner)
-        prices = self.stock_pricing_repository.fetch_prices()
+        prices = {
+            StockName(asset.name): self.stock_pricing_repository.fetch_stock_price(stock=StockName(asset.name))
+            for asset in assets
+        }
         self.portfolio_presenter.present(assets=assets, prices=prices)
 
     @staticmethod

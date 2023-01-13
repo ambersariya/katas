@@ -1,15 +1,24 @@
 from abc import abstractmethod
-from typing import Protocol, Dict
+from typing import Protocol, NewType
 
-StockPrices = Dict[str, float]
+StockName = NewType('StockName', str)
+StockPrice = NewType('StockPrice', float)
+
+
+class StockUnknownError(Exception):
+    pass
 
 
 class StockPricingRepository(Protocol):
-
     @abstractmethod
-    def set_stock_price(self, stock: str, price: float):
+    def set_stock_price(self, stock: StockName, price: StockPrice) -> None:
         pass
 
     @abstractmethod
-    def fetch_prices(self) -> StockPrices:
+    def fetch_stock_price(self, stock: StockName) -> StockPrice:
+        """
+        :param stock:
+        :return:
+        :raise: StockUnknownError
+        """
         pass

@@ -1,4 +1,5 @@
 from src.asset import Asset, AssetName, AssetOwner
+from src.repository.stock_pricing_repository import StockPrice, StockName
 
 ASSET_OWNER = AssetOwner('alice')
 TSLA_ASSET = Asset(number_of_shares=10, name=AssetName("TSLA"), owner=ASSET_OWNER)
@@ -32,10 +33,15 @@ def test_should_print_asset_portfolio(mock_portfolio_presenter,
         Asset(number_of_shares=100, name=AssetName('AAPL'), owner=ASSET_OWNER),
         Asset(number_of_shares=80, name=AssetName('MSFT'), owner=ASSET_OWNER),
     ]
-    stock_prices = {'AAPL': 100.0, 'MSFT': 80.0}
+    stock_prices = {
+        StockName('AAPL'): StockPrice(100.0), StockName('MSFT'): StockPrice(80.0)
+    }
 
-    mock_stock_pricing_repository.fetch_prices.return_value = stock_prices
     mock_asset_repository.fetch_assets.return_value = user_assets
+    mock_stock_pricing_repository.fetch_stock_price.side_effect = [
+        StockPrice(100.0),
+        StockPrice(80.0)
+    ]
 
     portfolio_tracker.print_portfolio(owner=ASSET_OWNER)
 
