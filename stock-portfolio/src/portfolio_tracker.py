@@ -12,29 +12,29 @@ class PortfolioTracker:
         stock_pricing_repository: StockPricingRepository,
         portfolio_presenter: Presenter
     ):
-        self.portfolio_presenter = portfolio_presenter
-        self.stock_pricing_repository = stock_pricing_repository
-        self.asset_repository = asset_repository
+        self.__portfolio_presenter = portfolio_presenter
+        self.__stock_pricing_repository = stock_pricing_repository
+        self.__asset_repository = asset_repository
 
     def add_purchase(self, number_of_shares, asset_name, asset_owner):
         asset = self.__to_asset(number_of_shares, asset_name=asset_name, asset_owner=asset_owner)
-        self.asset_repository.add_asset(asset)
+        self.__asset_repository.add_asset(asset)
 
     def add_sale(self, number_of_shares: int, asset_name, asset_owner):
         asset = self.__to_asset(number_of_shares, asset_name=asset_name, asset_owner=asset_owner)
-        self.asset_repository.update_asset(asset)
+        self.__asset_repository.update_asset(asset)
 
     def update_price(self, stock, price):
-        self.stock_pricing_repository.set_stock_price(price=price, stock=stock)
+        self.__stock_pricing_repository.set_stock_price(price=price, stock=stock)
 
     def print_portfolio(self, owner):
-        assets = self.asset_repository.fetch_assets(owner=owner)
+        assets = self.__asset_repository.fetch_assets(owner=owner)
         prices = {
-            StockName(asset.name): self.stock_pricing_repository.fetch_stock_price(
+            StockName(asset.name): self.__stock_pricing_repository.fetch_stock_price(
                 stock=StockName(asset.name))
             for asset in assets
         }
-        self.portfolio_presenter.present(assets=assets, prices=prices)
+        self.__portfolio_presenter.present(assets=assets, prices=prices)
 
     @staticmethod
     def __to_asset(number_of_shares, asset_name, asset_owner) -> Asset:
