@@ -1,6 +1,6 @@
 # Stock Portfolio
 
-Implement the following user story using Outside-In TDD starting from an a test.
+Implement the following user story using Outside-In TDD starting from an acceptance test.
 
 ## Portfolio user story
 

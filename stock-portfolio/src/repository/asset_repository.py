@@ -14,5 +14,5 @@ class AssetRepository(Protocol):
         pass
 
     @abstractmethod
-    def fetch_assets(self) -> List[Asset]:
+    def fetch_assets(self, owner: str) -> List[Asset]:
         pass
