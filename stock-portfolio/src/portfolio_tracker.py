@@ -1,5 +1,5 @@
 from src.asset import Asset
-from src.presenter.portfolio_presenter import Presenter
+from src.presenter.portfolio_presenter import PortfolioPresenter
 from src.repository.asset_repository import AssetRepository
 from src.repository.stock_pricing_repository import StockPricingRepository
 from src.value_objects import StockName
@@ -10,7 +10,7 @@ class PortfolioTracker:
         self,
         asset_repository: AssetRepository,
         stock_pricing_repository: StockPricingRepository,
-        portfolio_presenter: Presenter
+        portfolio_presenter: PortfolioPresenter
     ):
         self.__portfolio_presenter = portfolio_presenter
         self.__stock_pricing_repository = stock_pricing_repository

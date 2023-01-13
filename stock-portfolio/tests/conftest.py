@@ -1,6 +1,7 @@
 import pytest as pytest
 
 from src.portfolio_tracker import PortfolioTracker
+from src.presenter.cli_portfolio_presenter import CliPortfolioPresenter
 from src.repository.in_memory_asset_repository import InMemoryAssetRepository
 from src.repository.in_memory_stock_price_repository import InMemoryStockPriceRepository
 
@@ -17,7 +18,7 @@ def in_memory_stock_price_repository():
 
 @pytest.fixture
 def portfolio_presenter():
-    raise NotImplementedError()
+    return CliPortfolioPresenter()
 
 
 @pytest.fixture

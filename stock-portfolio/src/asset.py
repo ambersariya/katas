@@ -4,7 +4,7 @@ from datetime import datetime
 from src.value_objects import AssetOwner, AssetName
 
 
-@dataclass(init=True, frozen=True)
+@dataclass(init=True)
 class Asset:
     owner: AssetOwner
     name: AssetName

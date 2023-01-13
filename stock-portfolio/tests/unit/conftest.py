@@ -1,7 +1,7 @@
 import pytest as pytest
 
 from src.portfolio_tracker import PortfolioTracker
-from src.presenter.portfolio_presenter import Presenter
+from src.presenter.portfolio_presenter import PortfolioPresenter
 from src.repository.asset_repository import AssetRepository
 from src.repository.stock_pricing_repository import StockPricingRepository
 
@@ -18,7 +18,7 @@ def mock_stock_pricing_repository(mocker):
 
 @pytest.fixture
 def mock_portfolio_presenter(mocker):
-    return mocker.MagicMock(Presenter)
+    return mocker.MagicMock(PortfolioPresenter)
 
 
 @pytest.fixture
