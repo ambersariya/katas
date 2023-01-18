@@ -2,19 +2,23 @@ from src.asset import Asset
 from src.value_objects import StockName, StockPrice, AssetOwner, AssetName
 
 ASSET_OWNER = AssetOwner('alice')
-TSLA_ASSET = Asset(number_of_shares=10, name=AssetName("TSLA"), owner=ASSET_OWNER)
+TSLA_ASSET = Asset(number_of_shares=10, name=AssetName("TSLA"))
 
 
 def test_asset_is_added_to_the_portfolio_tracker(mock_asset_repository, portfolio_tracker):
-    portfolio_tracker.add_purchase(number_of_shares=10, asset_name="TSLA", asset_owner=ASSET_OWNER)
+    portfolio_tracker.buy(number_of_shares=10, asset_name="TSLA")
 
-    mock_asset_repository.add_asset.assert_called_once_with(TSLA_ASSET)
+    mock_asset_repository.save_asset.assert_called_once_with(TSLA_ASSET)
 
 
 def test_asset_has_been_sold_from_the_portfolio_tracker(mock_asset_repository, portfolio_tracker):
-    portfolio_tracker.add_sale(number_of_shares=10, asset_name="TSLA", asset_owner=ASSET_OWNER)
+    asset_after_sale = Asset(number_of_shares=7, name=AssetName("TSLA"))
 
-    mock_asset_repository.update_asset.assert_called_once_with(TSLA_ASSET)
+    mock_asset_repository.fetch_asset_by_name.return_value = TSLA_ASSET
+
+    portfolio_tracker.sell(number_of_shares=3, asset_name="TSLA")
+
+    mock_asset_repository.save_asset.assert_called_once_with(asset_after_sale)
 
 
 def test_asset_has_updated_value_of_the_stock_in_portfolio_tracker(mock_stock_pricing_repository,

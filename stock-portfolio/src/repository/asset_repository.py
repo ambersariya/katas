@@ -2,17 +2,20 @@ from abc import abstractmethod
 from typing import Protocol, List
 
 from src.asset import Asset
+from src.value_objects import AssetName
 
 
 class AssetRepository(Protocol):
     @abstractmethod
-    def add_asset(self, asset: Asset):
+    def save_asset(self, asset: Asset) -> None:
         pass
 
     @abstractmethod
-    def update_asset(self, asset: Asset):
+    def fetch_assets(self) -> List[Asset]:
         pass
 
     @abstractmethod
-    def fetch_assets(self, owner: str) -> List[Asset]:
+    def fetch_asset_by_name(self, asset_name: AssetName) -> Asset:
         pass
+
+

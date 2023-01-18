@@ -47,3 +47,6 @@ sorted by first operation date ascending
 ASSUMPTION NOTE:
  - This is a tracker where you are able to record your past and present purchases
  - The type of currency, e.g. dollar, pounds, is only there when user prints portfolio
+
+
+TODO: 
