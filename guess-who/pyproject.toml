@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "guess_who"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 
 
 [tool.poetry.group.dev.dependencies]
