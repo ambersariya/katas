@@ -13,7 +13,7 @@ class PasswordValidatorBuilder:
     def __init__(self):
         self._rules = []
 
-    def has_min_password_length(self, required_length):
+    def has_min_password_length(self, required_length: int):
         self._rules.append(HasMinPasswordLength(required_length))
         return self
 

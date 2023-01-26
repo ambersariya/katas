@@ -6,7 +6,6 @@ from password_validation.strategies.strategy import Strategy
 
 class PasswordValidator:
     def __init__(self, rules: List[Rule], strategy: Strategy):
-        """"""
         self._rules = rules
         self._strategy = strategy
 

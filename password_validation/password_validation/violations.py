@@ -8,7 +8,7 @@ class Violation:
 
 
 class Violations:
-    def __init__(self, violations=None):
+    def __init__(self, violations: List[Violation] = None):  # type: ignore
         if violations is None:
             violations = []
         self._violations = violations
