@@ -36,7 +36,7 @@ on future requirements upfront and follow the TDD-Cycle strictly.
   is allowed to work on Sundays.
 - As shop owner I want the list of employees to be sorted by their name, so I can find employees
   easier.
-- As shop owner I want the list of employees to be capitalized, so I can read it better.
 - As shop owner I want the employees to be sorted by their names descending instead of ascending.
+- As shop owner I want the list of employees to be capitalized, so I can read it better.
 
 [https://codingdojo.org/kata/Employee-Report/](https://codingdojo.org/kata/Employee-Report/)
