@@ -9,5 +9,5 @@ def test_should_list_employees_18_years_and_above(employee_service, employees):
     )
 
     assert len(result) == 2
-    assert result[0].age > 18
-    assert result[1].age > 18
+    assert result[0].age >= 18
+    assert result[1].age >= 18
