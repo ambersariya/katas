@@ -10,6 +10,9 @@ packages = [{include = "employee_report_simplified"}]
 python = "^3.10"
 
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
