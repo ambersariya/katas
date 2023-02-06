@@ -478,15 +478,14 @@ Tasklist:
 - Reduce the big flight sectors
 - Maybe have a base for the airline, this will help reduce the complexity?
     - For example, everyone being based in London
--
 
 ```python
 def test_should_show_a_generated_schedule_for_pilots():
     # Given a set of pilots and flights
     pilots = [
-        Pilot("John", "Smith"),
-        Pilot("Jane", "Doe"),
-        Pilot("Bob", "Johnson"),
+        Pilot("John", "Smith", "Captain"),
+        Pilot("Jane", "Doe", "Co-Pilot"),
+        Pilot("Bob", "Johnson", "Co-Pilot"),
     ]
 
     flights = [

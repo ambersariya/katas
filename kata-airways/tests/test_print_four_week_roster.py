@@ -1,12 +1,16 @@
+def schedule_adheres_to_rules(schedule):
+    pass
+
+
 def test_should_show_a_generated_schedule_for_pilots():
     # Given a set of pilots and flights
-    pilots = [
-        Pilot("John", "Smith"),
-        Pilot("Jane", "Doe"),
-        Pilot("Bob", "Johnson"),
+    pilots = [  # unscheduled pilots
+        Pilot("John", "Smith", "Captain"),
+        Pilot("Jane", "Doe", "Co-Pilot"),
+        Pilot("Bob", "Johnson", "Co-Pilot"),
     ]
 
-    flights = [
+    flights = [  # Unscheduled flights
         Flight("LAX", "JFK", "2022-01-01", "Captain"),
         Flight("JFK", "LAX", "2022-01-02", "Co-pilot"),
         Flight("LAX", "JFK", "2022-01-03", "Captain"),
