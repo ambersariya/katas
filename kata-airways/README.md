@@ -220,7 +220,10 @@ Full Kata
 
 ## Pilots Scheduling Roster
 
-Put on your aviator shades and buckle up for a wild ride as we embark on a mission to schedule the rosters of our fearless pilots at **Kata Airways**! With flights soaring high and the need to ensure our pilots have some R&R, we need a top-notch system that can keep up with the demand. Get ready to write some code that'll make scheduling a breeze, follow the rules and keep our pilots flying happy! 
+Put on your aviator shades and buckle up for a wild ride as we embark on a mission to schedule the rosters of our
+fearless pilots at **Kata Airways**! With flights soaring high and the need to ensure our pilots have some R&R, we need
+a top-notch system that can keep up with the demand. Get ready to write some code that'll make scheduling a breeze,
+follow the rules and keep our pilots flying happy!
 
 **TASK:** The idea is to create a 4-week schedule for each pilot that they can look at and plan their life around.
 
@@ -259,10 +262,11 @@ The program should also have the following rules:
     - Sydney (SYD)
     - Dubai (DXB).
     - a. Flights cannot have the same departure and arrival airport.
-    **Short <= 2.5, Medium <= 4, Long >= 4**
+      **Short <= 2.5, Medium <= 4, Long >= 4**
 13. **Rule 13:** All flights are on time and there are no delays or cancelled
 14. **Rule 14:** Only one flight per day is allowed to a destination airport
 15. **Rule 15:** The airline has a sufficient number of pilots for all destinations to ensure adequate staffing
+16. **Rule 16:** Everyone is based in London
 
 An example print out of the schedule looks like this:
 
@@ -469,13 +473,12 @@ Accumulated Hours: 99h20m
 Monthly Hours Remaining: 40m
 ```
 
-Tasklist: 
+Tasklist:
 
 - Reduce the big flight sectors
 - Maybe have a base for the airline, this will help reduce the complexity?
     - For example, everyone being based in London
-- 
-
+-
 
 ```python
 def test_should_show_a_generated_schedule_for_pilots():
