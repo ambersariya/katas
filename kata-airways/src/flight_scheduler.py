@@ -6,6 +6,10 @@ from src.pilot import Pilot
 from src.schedule import Schedule
 
 
+class InsufficientPilotsForPairing(Exception):
+    pass
+
+
 class FlightScheduler:
     def __init__(self, route_map: RouteMap):
         self.__route_map = route_map
@@ -15,9 +19,16 @@ class FlightScheduler:
         return Schedule(flights=scheduled_flights)
 
     def __make_flight(self, unscheduled_flight: Flight, pilots: list[Pilot]) -> Flight:
-        self.__route_map.get_route(origin=unscheduled_flight.origin, destination=unscheduled_flight.destination)
+        route = self.__route_map.get_route(origin=unscheduled_flight.origin, destination=unscheduled_flight.destination)
         return Flight(
-            unscheduled_flight.route,
+            route,
             unscheduled_flight.date,
-            FlightPairing(captain=pilots[0], co_pilot=pilots[1])
+            self.__create_flight_pairing(pilots=pilots)
         )
+
+    def __create_flight_pairing(self, pilots: list[Pilot]):
+        valid_num_for_pairing = len(pilots) % 2
+        if valid_num_for_pairing > 0:
+            raise InsufficientPilotsForPairing()
+
+        return FlightPairing(captain=pilots[0], co_pilot=pilots[1])
