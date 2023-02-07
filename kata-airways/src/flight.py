@@ -10,7 +10,7 @@ class FlightPairing:
     co_pilot: Pilot
 
 
-@dataclasses.dataclass(init=True, frozen=True)
+@dataclasses.dataclass(init=True)
 class Flight:
     route: Route
     date: str
@@ -27,3 +27,6 @@ class Flight:
     @property
     def destination(self):
         return self.route.destination
+
+    def schedule(self, flight_pairing: FlightPairing):
+        self.flight_pairing = flight_pairing
