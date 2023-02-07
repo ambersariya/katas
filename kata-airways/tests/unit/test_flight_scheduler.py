@@ -28,6 +28,7 @@ def test_generate_schedule_should_return_a_schedule(mock_route_map):
 def test_generate_schedule_should_create_flight_schedule_for_lax(mock_route_map):
     pilots = [JOHN_SMITH, JANE_DOE]
     flights = [LHR_LAX]
+    mock_route_map.get_route.return_value = ROUTE
 
     result = FlightScheduler(route_map=mock_route_map).generate_schedule(pilots, flights)
     expected_schedule = Schedule([EXPECTED_PAIRED_FLIGHT])
