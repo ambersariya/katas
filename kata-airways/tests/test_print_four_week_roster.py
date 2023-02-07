@@ -26,18 +26,17 @@ def unscheduled_flights():
     ]
 
 
-def test_should_show_a_generated_schedule_for_pilots(route_map, unscheduled_flights):
-    # Given a set of pilots and flights
-    pilots = [  # unscheduled pilots
+@pytest.fixture
+def available_pilots():
+    return [
         Pilot("John Smith"),
         Pilot("Jane Doe"),
         Pilot("Bob Johnson"),
     ]
 
-    # When I generate a schedule
-    flight_scheduler = FlightScheduler(route_map=route_map)
-    schedule = flight_scheduler.generate_schedule(pilots, unscheduled_flights)
 
-    # Then the schedule should adhere to all of the above rules
+def test_should_show_a_generated_schedule_for_pilots(route_map, unscheduled_flights, available_pilots):
+    flight_scheduler = FlightScheduler(route_map=route_map)
+    schedule = flight_scheduler.generate_schedule(available_pilots, unscheduled_flights)
 
     assert schedule_adheres_to_rules(schedule)
