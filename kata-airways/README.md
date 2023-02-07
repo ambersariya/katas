@@ -241,8 +241,7 @@ The program should also have the following rules:
 1. **Rule 1:** Each pilot must have at least one day off in every 7-day period.
 2. **Rule 2:** Each pilot can fly no more than 100 hours in a calendar month.
 3. **Rule 3:** Each pilot can fly no more than 30 hours in any 7-day period.
-4. **Rule 4:** Each pilot must have at least **9 hours of rest** between flight duties _as a Co-Pilot_.
-5. **Rule 5:** Each pilot must have at least **14 hours of rest** before performing a flight duty as a Captain.
+4. **Rule 4:** Each pilot must have at least **14 hours of rest** between flight duties for both the captain and co-pilot.
 6. **Rule 6:** A pilot cannot be scheduled for more than 3 consecutive flight duties as a captain.
 7. **Rule 7:** A pilot cannot be scheduled for more than 5 consecutive flight duties as a co-pilot.
 8. **Rule 8:** Pilots can only request time off within a certain time frame before the flight (e.g. 4 weeks)
