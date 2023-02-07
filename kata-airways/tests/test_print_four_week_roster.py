@@ -2,7 +2,7 @@ import pytest
 
 from src.core.value_objects import Route, Airport
 from src.flight import Flight
-from src.flight_schduler import FlightScheduler
+from src.flight_scheduler import FlightScheduler
 from src.pilot import Pilot
 
 

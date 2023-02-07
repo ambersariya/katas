@@ -3,7 +3,7 @@ import pytest
 from src.core.errors import UnknownDestination
 from src.core.value_objects import Airport, Route
 from src.flight import Flight, FlightPairing
-from src.flight_schduler import FlightScheduler
+from src.flight_scheduler import FlightScheduler
 from src.pilot import Pilot
 from src.schedule import Schedule
 
