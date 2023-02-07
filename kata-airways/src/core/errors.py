@@ -1,0 +1,2 @@
+class UnknownDestination(Exception):
+    pass

@@ -1,18 +1,19 @@
-def schedule_adheres_to_rules(schedule):
-    pass
+from src.flight import Flight
+from src.flight_schduler import FlightScheduler
+from src.pilot import Pilot
 
-PRINTOUT_SCHEDULE = """
-Origin | Destination | Departure | Arrival | Captain | Co-Pilot
-LHR | LAX | 2022-01-01T12:00Z | 2022-01-01T15:00Z-8 | John Smith | Bob Johnson
-LHR | JFK | 2022-01-01T13:00Z | 2022-01-01T16:00Z-5 | John Smith |Bob Johnson
-LHR | BER | 2022-01-01T14:00Z | 2022-01-01T16:40Z+1 | John Smith | Jane Doe
-LHR | ATH | 2022-01-01T16:00Z | 2022-01-01T21:30Z+2 | John Smith | Jane Doe
-LHR | CDG | 2022-01-01T17:00Z | 2022-01-01T19:00Z+1 | Jane Doe | John Smith
-LHR | DUB | 2022-01-01T18:00Z | 2022-01-01T19:00Z+0 | Jane Doe | Bob Johnson
-LHR | BCN | 2022-01-01T19:00Z | 2022-01-01T21:00Z+1 | Jane Doe | Bob Johnson
-LHR | MXP | 2022-01-01T20:00Z | 2022-01-01T12:00Z+1 | Jane Doe | Bob Johnson
-LHR | DXB | 2022-01-01T21:00Z | 2022-02-01T04:00Z+4 | Bob Johnson | Jane Doe
-"""
+
+def schedule_adheres_to_rules(schedule):
+    assert schedule.for_pilot("John Smith").has_total_flights(24)
+    assert schedule.for_pilot("John Smith").has_consecutive_days_off(1)
+    assert schedule.for_pilot("John Smith").has_worked_less_than_thirty_hours_a_week()
+    assert schedule.for_pilot("John Smith").has_worked_less_than_one_hundred_hours_a_week()
+    assert schedule.for_pilot("John Smith").has_flight_on("TUE")
+    assert schedule.for_pilot("John Smith").has_flight_on("THU")
+    assert schedule.for_pilot("John Smith").has_flight_on("SAT")
+
+
+
 
 def test_should_show_a_generated_schedule_for_pilots():
     # Given a set of pilots and flights
@@ -35,5 +36,6 @@ def test_should_show_a_generated_schedule_for_pilots():
 
     # Then the schedule should adhere to all of the above rules
 
-    assert schedule_adheres_to_rules(schedule) == PRINTOUT_SCHEDULE
+    assert schedule_adheres_to_rules(schedule)
+
 
