@@ -4,7 +4,7 @@ from src.core.value_objects import Route
 from src.pilot import Pilot
 
 
-@dataclasses.dataclass(init=True, frozen=True)
+@dataclasses.dataclass(init=True, frozen=True, eq=True)
 class FlightPairing:
     captain: Pilot
     co_pilot: Pilot
