@@ -1,6 +1,7 @@
 import pytest
 
 from src.core.errors import UnknownDestination
+from src.core.value_objects import Airport, Route
 from src.flight import Flight, FlightPairing
 from src.flight_schduler import FlightScheduler
 from src.pilot import Pilot
@@ -8,7 +9,12 @@ from src.schedule import Schedule
 
 JOHN_SMITH = Pilot("John Smith")
 JANE_DOE = Pilot("Jane Doe")
-LHR_LAX = Flight("LHR", "LAX", "2022-01-01")
+LHR_LAX = Flight(Route(origin=Airport("LAX"), destination=Airport("LHR"), duration=11), "2022-01-04")
+EXPECTED_PAIRED_FLIGHT = Flight(
+    Route(origin=Airport("LAX"), destination=Airport("LHR"), duration=11),
+    "2022-01-04",
+    FlightPairing(JOHN_SMITH, JANE_DOE)
+)
 
 
 def test_generate_schedule_should_return_a_schedule(mock_route_map):
@@ -23,7 +29,7 @@ def test_generate_schedule_should_create_flight_schedule_for_lax(mock_route_map)
     flights = [LHR_LAX]
 
     result = FlightScheduler(route_map=mock_route_map).generate_schedule(pilots, flights)
-    expected_schedule = Schedule([Flight("LHR", "LAX", "2022-01-01", FlightPairing(JOHN_SMITH, JANE_DOE))])
+    expected_schedule = Schedule([EXPECTED_PAIRED_FLIGHT])
     assert result == expected_schedule
 
 

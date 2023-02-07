@@ -1,7 +1,6 @@
 import dataclasses
-from typing import NewType, Tuple
 
-from src.core.value_objects import Airport
+from src.core.value_objects import Route
 from src.pilot import Pilot
 
 
@@ -13,8 +12,7 @@ class FlightPairing:
 
 @dataclasses.dataclass(init=True, frozen=True)
 class Flight:
-    origin: Airport
-    destination: Airport
+    route: Route
     date: str
     flight_pairing: FlightPairing = dataclasses.field(default=None)
 
@@ -22,4 +20,10 @@ class Flight:
     def scheduled(self):
         return self.flight_pairing is not None
 
+    @property
+    def origin(self):
+        return self.route.origin
 
+    @property
+    def destination(self):
+        return self.route.destination
