@@ -1,6 +1,8 @@
 # Katas
 
-Here are some of the kata's solved in this repo. Hope you find them useful.
+Here are some of the kata's I've solved either by myself or with my colleagues. Majority of the katas come from the [Codurance Katalyst page](https://www.codurance.com/katalyst). 
+
+Hope you find them useful.
 
 | Kata | Link |
 | --- | --- |
