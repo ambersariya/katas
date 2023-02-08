@@ -1,5 +1,3 @@
-# Katas
-
 # Kata Solutions
 
 This repository contains my solutions to various coding challenges, also known as katas. Most of the katas come from [Codurance Katalyst](https://codurance.com/katalyst) and cover a wide range of topics and difficulty levels. All of the katas start with a test, either an acceptance or a unit test.
@@ -9,6 +7,8 @@ I would like to extend a special thank you to my colleagues, who have paired wit
 Feel free to use the code in this repository as a reference or starting point for your own kata solutions. If you have any questions or feedback, please feel free to reach out to me.
 
 Thank you for visiting!
+
+Here's a list of katas below:
 
 | Kata | Link |
 | --- | --- |
@@ -27,3 +27,10 @@ Thank you for visiting!
 | Shopping basket | [shopping_basket](shopping_basket) |
 | Social network | [social-network](social-network) |
 | Tennis | [tennis](tennis) |
+
+## Tooling
+
+Majority of the kata solutions are Python and use Poetry. 
+- [Intellij/Pycharm](https://www.jetbrains.com/idea/)
+- [mob](https://mob.sh) helped us to pair program effectively by doing fast code handover to each other.
+- [VSCode](https://code.visualstudio.com/) (_occassional use_)
