@@ -5,6 +5,7 @@ from src.core.route_map import RouteMap
 from src.flight import Flight, FlightPairing
 from src.pilot import Pilot
 from src.schedule import Schedule
+from itertools import _grouper
 
 
 class InsufficientPilotsForPairing(Exception):
@@ -27,9 +28,15 @@ class FlightScheduler:
             self.__create_flight_pairing(pilots=pilots)
         )
 
-    def __create_flight_pairing(self, pilots: list[Pilot]):
+    def  __create_flight_pairing(self, pilots: list[Pilot]):
         valid_num_for_pairing = len(pilots) % 2
+        pilot_pairs = _grouper(pilots, 2)
+        print(pilot_pairs)
         if valid_num_for_pairing > 0:
             raise InsufficientPilotsForPairing()
 
+        # Step 1: Group pilots into pairings of twos randomly
+        # Step 2: Select a pairing randomly to be chosen for flight pairing
+
+        random.shuffle(pilots)
         return FlightPairing(captain=pilots[0], co_pilot=pilots[1])
