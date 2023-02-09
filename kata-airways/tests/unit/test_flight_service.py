@@ -1,5 +1,8 @@
 from unittest.mock import call
 
+import pytest
+
+from src.core.errors import PilotFlyingHoursExceeded
 from src.flight import FlightPairing
 from tests.constants import JOHN_SMITH, JANE_DOE, ROUTE_LHR_LAX, PILOT_JANE_DOE, \
     PILOT_JOHN_SMITH
@@ -16,7 +19,7 @@ def test_should_generate_a_flight_pairing(pilot_service, mock_pilot_repository):
     mock_pilot_repository.find_by_name.assert_has_calls = [call(JOHN_SMITH), call(JANE_DOE)]
 
 
-def test_should_generate_a_flight_pairing_when_they_less_than_30_hours_for_the_week(
+def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_month(
         pilot_service,
         mock_pilot_repository
 ):
@@ -38,3 +41,35 @@ def test_should_generate_a_flight_pairing_when_they_less_than_30_hours_for_the_w
     ])
 
     assert type(result) == FlightPairing
+
+
+def test_should_raise_exception_when_captain_has_worked_100_or_more_hours(mock_pilot_repository, pilot_service):
+    PILOT_JOHN_SMITH.worked_month_hours = 100
+    PILOT_JOHN_SMITH.worked_week_hours = 11
+
+    PILOT_JANE_DOE.worked_month_hours = 50
+    PILOT_JANE_DOE.worked_week_hours = 11
+
+    mock_pilot_repository.find_by_name.side_effect = [PILOT_JOHN_SMITH, PILOT_JANE_DOE]
+
+    with pytest.raises(PilotFlyingHoursExceeded):
+        pilot_service.generate_pairing(
+            pilots=[JOHN_SMITH, JANE_DOE],
+            route=ROUTE_LHR_LAX
+        )
+
+
+def test_should_raise_exception_when_copilot_has_worked_100_or_more_hours(mock_pilot_repository, pilot_service):
+    PILOT_JOHN_SMITH.worked_month_hours = 50
+    PILOT_JOHN_SMITH.worked_week_hours = 11
+
+    PILOT_JANE_DOE.worked_month_hours = 100
+    PILOT_JANE_DOE.worked_week_hours = 11
+
+    mock_pilot_repository.find_by_name.side_effect = [PILOT_JOHN_SMITH, PILOT_JANE_DOE]
+
+    with pytest.raises(PilotFlyingHoursExceeded):
+        pilot_service.generate_pairing(
+            pilots=[JOHN_SMITH, JANE_DOE],
+            route=ROUTE_LHR_LAX
+        )
