@@ -39,6 +39,9 @@ def test_should_show_a_generated_schedule_for_pilots(
         available_pilots,
         flight_scheduler
 ):
-    schedule = flight_scheduler.generate_schedule(unscheduled_flights)
+    schedule = flight_scheduler.generate_schedule(
+        unscheduled_flights=unscheduled_flights,
+        pilots=available_pilots
+    )
 
     assert schedule_adheres_to_rules(schedule)

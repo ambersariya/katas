@@ -11,4 +11,5 @@ class PilotRepository(Protocol):
 
 
 class InMemoryPilotRepository:
-    pass
+    def find_by_name(self, pilot_name: PilotName):
+        raise NotImplementedError()

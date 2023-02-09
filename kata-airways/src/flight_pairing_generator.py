@@ -8,7 +8,7 @@ class PilotService:
         self.__pilot_repository = pilot_repository
 
     def generate_pairing(self, pilots: list[PilotName], route: Route) -> FlightPairing:
-        captain = self.__pilot_repository.find_by_name(pilots[0])
-        copilot = self.__pilot_repository.find_by_name(pilots[1])
+        captain = self.__pilot_repository.find_by_name(pilot_name=pilots[0])
+        copilot = self.__pilot_repository.find_by_name(pilot_name=pilots[1])
 
         return FlightPairing(captain=captain, co_pilot=copilot)
