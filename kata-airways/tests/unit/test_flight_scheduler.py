@@ -1,53 +1,56 @@
 import pytest
 
 from src.core.errors import UnknownDestination
-from src.core.value_objects import Airport, Route
-from src.flight import Flight, FlightPairing
-from src.flight_scheduler import FlightScheduler, InsufficientPilotsForPairing
-from src.pilot import Pilot
+from src.flight_scheduler import InsufficientPilotsForPairing
 from src.schedule import Schedule
-
-JOHN_SMITH = Pilot("John Smith")
-JANE_DOE = Pilot("Jane Doe")
-LHR_LAX = Flight(Route(origin=Airport("LAX"), destination=Airport("LHR"), duration=11), "2022-01-04")
-ROUTE = Route(origin=Airport("LAX"), destination=Airport("LHR"), duration=11)
-EXPECTED_PAIRED_FLIGHT = Flight(
-    ROUTE,
-    "2022-01-04",
-    FlightPairing(JOHN_SMITH, JANE_DOE)
-)
+from tests.constants import JANE_DOE, JOHN_SMITH, FLIGHT_LHR_LAX_UNPAIRED, ROUTE_LHR_LAX, FLIGHT_LHR_LAX_PAIRED, \
+    FLIGHT_PAIR_JOHN_JANE
 
 
-def test_generate_schedule_should_return_a_schedule(mock_route_map):
+def test_generate_schedule_should_return_a_schedule(
+        flight_scheduler,
+        mock_route_map,
+        mock_pilot_service
+):
     pilots = []
     flights = []
-    flight_schedule = FlightScheduler(route_map=mock_route_map).generate_schedule(pilots, flights)
+    flight_schedule = flight_scheduler.generate_schedule(pilots, flights)
     assert type(flight_schedule) == Schedule
 
 
-def test_generate_schedule_should_create_flight_schedule_for_lax(mock_route_map):
+def test_generate_schedule_should_create_flight_schedule_for_lax(flight_scheduler, mock_route_map,
+                                                                 mock_pilot_service):
     pilots = [JOHN_SMITH, JANE_DOE]
-    flights = [LHR_LAX]
-    mock_route_map.get_route.return_value = ROUTE
+    flights = [FLIGHT_LHR_LAX_UNPAIRED]
+    mock_route_map.get_route.return_value = ROUTE_LHR_LAX
+    mock_pilot_service.generate_pairing.return_value = FLIGHT_PAIR_JOHN_JANE
+    expected_schedule = Schedule([FLIGHT_LHR_LAX_PAIRED])
 
-    result = FlightScheduler(route_map=mock_route_map).generate_schedule(pilots, flights)
-    expected_schedule = Schedule([EXPECTED_PAIRED_FLIGHT])
+    result = flight_scheduler.generate_schedule(pilots, flights)
+
     assert result == expected_schedule
+    mock_route_map.get_route.assert_called_once()
+    mock_pilot_service.generate_pairing.assert_called_once()
 
 
-def test_raise_exception_for_unknown_destination(mock_route_map):
+def test_raise_exception_for_unknown_destination(flight_scheduler, mock_route_map):
     pilots = [JOHN_SMITH, JANE_DOE]
-    flights = [LHR_LAX]
+    flights = [FLIGHT_LHR_LAX_UNPAIRED]
     mock_route_map.get_route.side_effect = UnknownDestination()
     with pytest.raises(UnknownDestination):
-        FlightScheduler(route_map=mock_route_map).generate_schedule(pilots, flights)
+        flight_scheduler.generate_schedule(pilots, flights)
         mock_route_map.get_route.assert_called_once_with(origin="LHR", destination="LAX")
 
 
-def test_should_raise_insufficient_pilots_exception_num_of_pilots_is_not_an_even_number(mock_route_map):
+def test_should_raise_insufficient_pilots_exception_when_num_of_pilots_is_not_an_even_number(
+        flight_scheduler,
+        mock_route_map,
+        mock_pilot_service
+):
     pilots = [JOHN_SMITH]
-    flights = [LHR_LAX]
-    mock_route_map.get_route.return_value = ROUTE
+    flights = [FLIGHT_LHR_LAX_UNPAIRED]
+    mock_route_map.get_route.return_value = ROUTE_LHR_LAX
+    mock_pilot_service.generate_pairing.side_effect = InsufficientPilotsForPairing()
     with pytest.raises(InsufficientPilotsForPairing):
-        FlightScheduler(route_map=mock_route_map).generate_schedule(pilots, flights)
+        flight_scheduler.generate_schedule(pilots, flights)
         mock_route_map.get_route.assert_called_once_with(origin="LAX", destination="LHR")

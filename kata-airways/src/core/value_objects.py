@@ -2,7 +2,9 @@ import dataclasses
 from typing import NewType, Union, TypeAlias
 
 Airport = NewType('Airport', str)
+PilotName = NewType('PilotName', str)
 FlightDuration: TypeAlias = Union[int, float]
+
 make_route_key = lambda origin, destination: f"{origin}-{destination}"
 
 
