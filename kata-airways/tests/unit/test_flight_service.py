@@ -49,12 +49,15 @@ def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_
     [
         # Monthly hours
         pytest.param(FlyingHours(month=100, week=11), FlyingHours(month=50, week=11)),
+        pytest.param(FlyingHours(month=89, week=11), FlyingHours(month=50, week=11)),
         pytest.param(FlyingHours(month=50, week=11), FlyingHours(month=100, week=11)),
         pytest.param(FlyingHours(month=100, week=11), FlyingHours(month=100, week=11)),
+        pytest.param(FlyingHours(month=100, week=11), FlyingHours(month=89, week=11)),
         # Week hours
-        pytest.param(FlyingHours(month=30, week=30), FlyingHours(month=50, week=11)),
-        pytest.param(FlyingHours(month=11, week=11), FlyingHours(month=30, week=30)),
-        pytest.param(FlyingHours(month=100, week=30), FlyingHours(month=100, week=30)),
+        pytest.param(FlyingHours(month=50, week=19), FlyingHours(month=50, week=11)),
+        pytest.param(FlyingHours(month=50, week=11), FlyingHours(month=50, week=20)),
+        pytest.param(FlyingHours(month=50, week=11), FlyingHours(month=50, week=30)),
+        pytest.param(FlyingHours(month=50, week=25), FlyingHours(month=50, week=25)),
     ]
 )
 def test_should_raise_exception_when_flying_hours_exceed_threshold(

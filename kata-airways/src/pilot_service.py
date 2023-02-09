@@ -15,12 +15,12 @@ class PilotService:
         captain = self.__pilot_repository.find_by_name(pilot_name=pilots[0])
         copilot = self.__pilot_repository.find_by_name(pilot_name=pilots[1])
 
-        if captain.worked_month_hours >= MAX_FLYING_HOURS_MONTH \
-                or copilot.worked_month_hours >= MAX_FLYING_HOURS_MONTH:
+        if (captain.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH \
+                or (copilot.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH:
             raise PilotFlyingHoursExceeded()
 
-        if captain.worked_week_hours >= MAX_FLYING_HOURS_WEEK \
-                or copilot.worked_week_hours >= MAX_FLYING_HOURS_WEEK:
+        if (captain.worked_week_hours + route.duration) >= MAX_FLYING_HOURS_WEEK \
+                or (copilot.worked_week_hours + route.duration) >= MAX_FLYING_HOURS_WEEK:
             raise PilotFlyingHoursExceeded()
 
         captain.worked_month_hours += route.duration
