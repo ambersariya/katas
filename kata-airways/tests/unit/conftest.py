@@ -1,7 +1,7 @@
 import pytest
 
 from src.core.route_map import RouteMap
-from src.flight_pairing_generator import PilotService
+from src.pilot_service import PilotService
 from src.flight_scheduler import FlightScheduler
 from src.pilot_repository import PilotRepository
 

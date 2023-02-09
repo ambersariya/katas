@@ -3,7 +3,7 @@ from typing import List
 from src.core.route_map import RouteMap
 from src.core.value_objects import PilotName
 from src.flight import Flight
-from src.flight_pairing_generator import PilotService
+from src.pilot_service import PilotService
 from src.schedule import Schedule
 
 
