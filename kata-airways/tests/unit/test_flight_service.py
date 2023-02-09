@@ -14,3 +14,4 @@ def test_should_generate_a_flight_pairing(pilot_service, mock_pilot_repository):
 
     assert type(result) == FlightPairing
     mock_pilot_repository.find_by_name.assert_has_calls = [call(JOHN_SMITH), call(JANE_DOE)]
+

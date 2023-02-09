@@ -1,5 +1,6 @@
 from src.core.value_objects import PilotName, Route, Airport
 from src.flight import Flight, FlightPairing
+from src.pilot import Pilot
 
 AIRPORT_LAX = Airport("LAX")
 AIRPORT_LHR = Airport("LHR")
@@ -15,5 +16,5 @@ FLIGHT_PAIR_JOHN_JANE = FlightPairing(JOHN_SMITH, JANE_DOE)
 FLIGHT_LHR_LAX_UNPAIRED = Flight(ROUTE_LHR_LAX, "2022-01-04")
 FLIGHT_LHR_LAX_PAIRED = Flight(ROUTE_LHR_LAX, "2022-01-04", FLIGHT_PAIR_JOHN_JANE)
 
-PILOT_JOHN_SMITH = None # Pilot()
-PILOT_JANE_DOE = None # Pilot()
+PILOT_JOHN_SMITH = Pilot()
+PILOT_JANE_DOE = Pilot()
