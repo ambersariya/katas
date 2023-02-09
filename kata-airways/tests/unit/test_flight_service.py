@@ -57,7 +57,7 @@ def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_
         pytest.param(FlyingHours(month=100, week=30), FlyingHours(month=100, week=30)),
     ]
 )
-def test_should_raise_exception_when_monthly_hours_exceed_100(
+def test_should_raise_exception_when_flying_hours_exceed_threshold(
         captain_hours, copilot_hours, mock_pilot_repository, pilot_service
 ):
     PILOT_JOHN_SMITH.worked_month_hours = captain_hours.month
