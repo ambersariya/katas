@@ -1,0 +1,12 @@
+title Kata Airways Scheduling
+
+entryspacing 1.4
+
+Admin->FlightScheduler: generate_schedule(flights, pilot_names)
+FlightScheduler->RouteMap: get_route(flight.origin, flight.destination)
+RouteMap-->FlightScheduler: route
+FlightScheduler->PilotService: generate_pair(pilot_names)
+PilotService->PilotRepository: find_by_name()
+PilotService<--PilotRepository: FlightPairing
+PilotService-->FlightScheduler: FlightPairing
+Admin<--FlightScheduler: Schedule
