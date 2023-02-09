@@ -3,6 +3,7 @@ from unittest.mock import call
 import pytest
 
 from src.core.errors import PilotFlyingHoursExceeded
+from src.core.value_objects import FlyingHours
 from src.flight import FlightPairing
 from tests.constants import JOHN_SMITH, JANE_DOE, ROUTE_LHR_LAX, PILOT_JANE_DOE, \
     PILOT_JOHN_SMITH
@@ -44,19 +45,26 @@ def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_
 
 
 @pytest.mark.parametrize(
-    "captain_month_hours, copilot_month_hours",
+    "captain_hours, copilot_hours",
     [
-        (50, 100),
-        (100, 50),
+        # Monthly hours
+        pytest.param(FlyingHours(month=100, week=11), FlyingHours(month=50, week=11)),
+        pytest.param(FlyingHours(month=50, week=11), FlyingHours(month=100, week=11)),
+        pytest.param(FlyingHours(month=100, week=11), FlyingHours(month=100, week=11)),
+        # Week hours
+        pytest.param(FlyingHours(month=30, week=30), FlyingHours(month=50, week=11)),
+        pytest.param(FlyingHours(month=11, week=11), FlyingHours(month=30, week=30)),
+        pytest.param(FlyingHours(month=100, week=30), FlyingHours(month=100, week=30)),
     ]
 )
-def test_should_raise_exception_when_monthly_hours_exceed_100(captain_month_hours, copilot_month_hours,
-                                                              mock_pilot_repository, pilot_service):
-    PILOT_JOHN_SMITH.worked_month_hours = captain_month_hours
-    PILOT_JOHN_SMITH.worked_week_hours = 11
+def test_should_raise_exception_when_monthly_hours_exceed_100(
+        captain_hours, copilot_hours, mock_pilot_repository, pilot_service
+):
+    PILOT_JOHN_SMITH.worked_month_hours = captain_hours.month
+    PILOT_JOHN_SMITH.worked_week_hours = captain_hours.week
 
-    PILOT_JANE_DOE.worked_month_hours = copilot_month_hours
-    PILOT_JANE_DOE.worked_week_hours = 11
+    PILOT_JANE_DOE.worked_month_hours = copilot_hours.month
+    PILOT_JANE_DOE.worked_week_hours = copilot_hours.week
 
     mock_pilot_repository.find_by_name.side_effect = [PILOT_JOHN_SMITH, PILOT_JANE_DOE]
 

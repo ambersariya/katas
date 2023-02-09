@@ -4,6 +4,7 @@ from src.flight import FlightPairing
 from src.pilot_repository import PilotRepository
 
 MAX_FLYING_HOURS_MONTH = 100
+MAX_FLYING_HOURS_WEEK = 30
 
 
 class PilotService:
@@ -16,6 +17,10 @@ class PilotService:
 
         if captain.worked_month_hours >= MAX_FLYING_HOURS_MONTH \
                 or copilot.worked_month_hours >= MAX_FLYING_HOURS_MONTH:
+            raise PilotFlyingHoursExceeded()
+
+        if captain.worked_week_hours >= MAX_FLYING_HOURS_WEEK \
+                or copilot.worked_week_hours >= MAX_FLYING_HOURS_WEEK:
             raise PilotFlyingHoursExceeded()
 
         captain.worked_month_hours += route.duration

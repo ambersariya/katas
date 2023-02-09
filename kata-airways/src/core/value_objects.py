@@ -16,3 +16,9 @@ class Route:
 
     def id(self) -> str:
         return make_route_key(self.origin, self.destination)
+
+
+@dataclasses.dataclass(init=True)
+class FlyingHours:
+    month: float
+    week: float
