@@ -43,27 +43,19 @@ def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_
     assert type(result) == FlightPairing
 
 
-def test_should_raise_exception_when_captain_has_worked_100_or_more_hours(mock_pilot_repository, pilot_service):
-    PILOT_JOHN_SMITH.worked_month_hours = 100
+@pytest.mark.parametrize(
+    "captain_month_hours, copilot_month_hours",
+    [
+        (50, 100),
+        (100, 50),
+    ]
+)
+def test_should_raise_exception_when_monthly_hours_exceed_100(captain_month_hours, copilot_month_hours,
+                                                              mock_pilot_repository, pilot_service):
+    PILOT_JOHN_SMITH.worked_month_hours = captain_month_hours
     PILOT_JOHN_SMITH.worked_week_hours = 11
 
-    PILOT_JANE_DOE.worked_month_hours = 50
-    PILOT_JANE_DOE.worked_week_hours = 11
-
-    mock_pilot_repository.find_by_name.side_effect = [PILOT_JOHN_SMITH, PILOT_JANE_DOE]
-
-    with pytest.raises(PilotFlyingHoursExceeded):
-        pilot_service.generate_pairing(
-            pilots=[JOHN_SMITH, JANE_DOE],
-            route=ROUTE_LHR_LAX
-        )
-
-
-def test_should_raise_exception_when_copilot_has_worked_100_or_more_hours(mock_pilot_repository, pilot_service):
-    PILOT_JOHN_SMITH.worked_month_hours = 50
-    PILOT_JOHN_SMITH.worked_week_hours = 11
-
-    PILOT_JANE_DOE.worked_month_hours = 100
+    PILOT_JANE_DOE.worked_month_hours = copilot_month_hours
     PILOT_JANE_DOE.worked_week_hours = 11
 
     mock_pilot_repository.find_by_name.side_effect = [PILOT_JOHN_SMITH, PILOT_JANE_DOE]
