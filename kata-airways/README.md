@@ -19,8 +19,9 @@ The program should also have the following rules:
 
 1. Each pilot must have at least one day off in every seven-day period.
 2. Each pilot may fly no more than 100 hours in a calendar month.
+2. Each pilot may fly no more than 30 hours in a week (seven-day period).
 3. Each pilot must have at least nine hours of rest between flight duties.
-4. Each pilot is qualified to switch between the roles of Co-Pilot and Captain.
+4. Each pilot is qualified to switch between the roles of Co-Pilot and Captain. e.g. John Smith can be captain on flight to LAX, Jane Doe can be Copilot. On the return leg John can be copilot and jane is now captain.
 5. The airline operates flights between the following airports: London (LHR), Los Angeles (LAX), New York (JFK), Paris (
    CDG), Tokyo (HND), Munich (MUC), Rio de Janeiro (GIG), Athens (ATH), Sydney (SYD), and Dubai (DXB).
    a. Flights cannot have the same departure and arrival airport.

@@ -1,10 +1,9 @@
 from src.core.errors import PilotFlyingHoursExceeded
 from src.core.value_objects import Route, PilotName
 from src.flight import FlightPairing
+from src.pilot import MAX_FLYING_HOURS_MONTH, MAX_FLYING_HOURS_WEEK
 from src.pilot_repository import PilotRepository
 
-MAX_FLYING_HOURS_MONTH = 100
-MAX_FLYING_HOURS_WEEK = 30
 
 
 class PilotService:
