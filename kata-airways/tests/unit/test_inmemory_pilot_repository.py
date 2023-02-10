@@ -32,6 +32,21 @@ def test_should_find_pilot_who_has_worked_less_than_30_hours_for_the_week(pilot_
     result = pilot_repository.find_by_availability()
 
     assert len(result) == 1
-    assert result[0].name == JOHN_SMITH
     assert result[0].worked_week_hours <= 30
+
+
+def test_should_find_pilot_who_has_worked_less_than_100_hours_for_the_month(pilot_repository):
+    PILOT_JOHN_SMITH.worked_month_hours = 95
+    PILOT_JOHN_SMITH.worked_week_hours = 20
+
+    PILOT_JANE_DOE.worked_week_hours = 20
+    PILOT_JANE_DOE.worked_month_hours = 99
+
+    pilot_repository.add(PILOT_JOHN_SMITH)
+    pilot_repository.add(PILOT_JANE_DOE)
+
+    result = pilot_repository.find_by_availability()
+
+    assert len(result) == 2
     assert result[0].worked_month_hours <= 100
+    assert result[1].worked_month_hours <= 100

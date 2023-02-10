@@ -40,7 +40,7 @@ class InMemoryPilotRepository:
         found_pilots = [pilot for pilot in pilots if pilot.worked_month_hours < MAX_FLYING_HOURS_MONTH]
 
         # Less than 30 hours in week
-        found_pilots = [pilot for pilot in pilots if pilot.worked_month_hours < MAX_FLYING_HOURS_WEEK]
+        found_pilots = [pilot for pilot in found_pilots if pilot.worked_week_hours < MAX_FLYING_HOURS_WEEK]
 
         random.shuffle(found_pilots)
 
