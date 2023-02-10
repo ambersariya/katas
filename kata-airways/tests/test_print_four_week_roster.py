@@ -2,6 +2,7 @@ import pytest
 
 from src.core.value_objects import Route, Airport, PilotName
 from src.flight import Flight
+from tests.constants import PILOT_JOHN_SMITH, PILOT_JANE_DOE
 
 
 def schedule_adheres_to_rules(schedule):
@@ -37,8 +38,12 @@ def test_should_show_a_generated_schedule_for_pilots(
         route_map,
         unscheduled_flights,
         available_pilots,
-        flight_scheduler
+        flight_scheduler,
+        pilot_repository
 ):
+    pilot_repository.add(PILOT_JOHN_SMITH)
+    pilot_repository.add(PILOT_JANE_DOE)
+
     schedule = flight_scheduler.generate_schedule(
         unscheduled_flights=unscheduled_flights,
         pilots=available_pilots

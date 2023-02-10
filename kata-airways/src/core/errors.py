@@ -4,3 +4,7 @@ class UnknownDestination(Exception):
 
 class PilotFlyingHoursExceeded(Exception):
     pass
+
+
+class UnknownPilotException(Exception):
+    pass

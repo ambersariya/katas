@@ -36,7 +36,7 @@ def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_
         route=ROUTE_LHR_LAX
     )
 
-    mock_pilot_repository.save.assert_has_calls([
+    mock_pilot_repository.add.assert_has_calls([
         call(pilot=PILOT_JOHN_SMITH),
         call(pilot=PILOT_JANE_DOE)
     ])

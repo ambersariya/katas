@@ -16,5 +16,5 @@ FLIGHT_PAIR_JOHN_JANE = FlightPairing(JOHN_SMITH, JANE_DOE)
 FLIGHT_LHR_LAX_UNPAIRED = Flight(ROUTE_LHR_LAX, "2022-01-04")
 FLIGHT_LHR_LAX_PAIRED = Flight(ROUTE_LHR_LAX, "2022-01-04", FLIGHT_PAIR_JOHN_JANE)
 
-PILOT_JOHN_SMITH = Pilot()
-PILOT_JANE_DOE = Pilot()
+PILOT_JOHN_SMITH = Pilot(pilot_name=JOHN_SMITH, worked_month_hours=0.0, worked_week_hours=0.0)
+PILOT_JANE_DOE = Pilot(pilot_name=JANE_DOE, worked_month_hours=0.0, worked_week_hours=0.0)

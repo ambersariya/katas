@@ -26,7 +26,7 @@ class PilotService:
         captain.worked_month_hours += route.duration
         copilot.worked_month_hours += route.duration
 
-        self.__pilot_repository.save(pilot=captain)
-        self.__pilot_repository.save(pilot=copilot)
+        self.__pilot_repository.add(pilot=captain)
+        self.__pilot_repository.add(pilot=copilot)
 
         return FlightPairing(captain=captain, co_pilot=copilot)
