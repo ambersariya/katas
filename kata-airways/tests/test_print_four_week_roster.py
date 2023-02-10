@@ -1,6 +1,6 @@
 import pytest
 
-from src.core.value_objects import Route, Airport, PilotName
+from src.core.value_objects import Route, Airport
 from src.flight import Flight
 from tests.constants import PILOT_JOHN_SMITH, PILOT_JANE_DOE
 
@@ -25,19 +25,9 @@ def unscheduled_flights():
     ]
 
 
-@pytest.fixture
-def available_pilots():
-    return [
-        PilotName("John Smith"),
-        PilotName("Jane Doe"),
-        PilotName("Bob Johnson"),
-    ]
-
-
 def test_should_show_a_generated_schedule_for_pilots(
         route_map,
         unscheduled_flights,
-        # available_pilots,
         flight_scheduler,
         pilot_repository
 ):
@@ -45,8 +35,7 @@ def test_should_show_a_generated_schedule_for_pilots(
     pilot_repository.add(PILOT_JANE_DOE)
 
     schedule = flight_scheduler.generate_schedule(
-        unscheduled_flights=unscheduled_flights,
-        # pilots=available_pilots
+        unscheduled_flights=unscheduled_flights
     )
 
     assert schedule_adheres_to_rules(schedule)

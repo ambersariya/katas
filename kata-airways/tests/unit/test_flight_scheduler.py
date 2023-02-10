@@ -1,7 +1,6 @@
 import pytest
 
-from src.core.errors import UnknownDestination
-from src.flight_scheduler import InsufficientPilotsForPairing
+from src.core.errors import UnknownDestination, InsufficientPilotsException
 from src.schedule import Schedule
 from tests.constants import JOHN_SMITH, FLIGHT_LHR_LAX_UNPAIRED, ROUTE_LHR_LAX, FLIGHT_LHR_LAX_PAIRED, \
     FLIGHT_PAIR_JOHN_JANE
@@ -47,7 +46,7 @@ def test_should_raise_insufficient_pilots_exception_when_num_of_pilots_is_not_an
 ):
     flights = [FLIGHT_LHR_LAX_UNPAIRED]
     mock_route_map.get_route.return_value = ROUTE_LHR_LAX
-    mock_pilot_service.generate_pairing.side_effect = InsufficientPilotsForPairing()
-    with pytest.raises(InsufficientPilotsForPairing):
+    mock_pilot_service.generate_pairing.side_effect = InsufficientPilotsException()
+    with pytest.raises(InsufficientPilotsException):
         flight_scheduler.generate_schedule(flights)
         mock_route_map.get_route.assert_called_once_with(origin="LAX", destination="LHR")

@@ -1,4 +1,4 @@
-from src.core.errors import PilotAvailabilityException
+from src.core.errors import InsufficientPilotsException
 from src.core.value_objects import Route
 from src.flight import FlightPairing
 from src.pilot_repository import PilotRepository
@@ -11,7 +11,7 @@ class PilotService:
     def generate_pairing(self, route: Route) -> FlightPairing:
         available_pilots = self.__pilot_repository.find_by_availability()
         if len(available_pilots) == 0:
-            raise PilotAvailabilityException()
+            raise InsufficientPilotsException()
         captain, copilot = available_pilots
 
         # if (captain.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH \

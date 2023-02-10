@@ -1,14 +1,9 @@
 from typing import List
 
 from src.core.route_map import RouteMap
-from src.core.value_objects import PilotName
 from src.flight import Flight
 from src.pilot_service import PilotService
 from src.schedule import Schedule
-
-
-class InsufficientPilotsForPairing(Exception):
-    pass
 
 
 class FlightScheduler:

@@ -3,13 +3,12 @@ from abc import abstractmethod
 from typing import Protocol
 
 from src.core.errors import UnknownPilotException
-from src.core.value_objects import PilotName
 from src.pilot import Pilot, MAX_FLYING_HOURS_MONTH, MAX_FLYING_HOURS_WEEK
 
 
 class PilotRepository(Protocol):
     @abstractmethod
-    def find_by_name(self, pilot_name: PilotName) -> Pilot:
+    def find_by_name(self, pilot_name: str) -> Pilot:
         pass
 
     @abstractmethod
@@ -25,7 +24,7 @@ class InMemoryPilotRepository:
     def __init__(self):
         self.__pilots = {}
 
-    def find_by_name(self, pilot_name: PilotName) -> Pilot:
+    def find_by_name(self, pilot_name: str) -> Pilot:
         if pilot_name not in self.__pilots:
             raise UnknownPilotException()
         return self.__pilots[pilot_name]

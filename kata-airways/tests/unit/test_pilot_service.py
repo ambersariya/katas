@@ -2,7 +2,7 @@ from unittest.mock import call
 
 import pytest
 
-from src.core.errors import PilotFlyingHoursExceeded, PilotAvailabilityException
+from src.core.errors import PilotFlyingHoursExceeded, InsufficientPilotsException
 from src.core.value_objects import FlyingHours
 from src.flight import FlightPairing
 from tests.constants import JOHN_SMITH, JANE_DOE, ROUTE_LHR_LAX, PILOT_JANE_DOE, \
@@ -38,7 +38,7 @@ def test_should_generate_a_flight_pairing_when_they_less_than_100_hours_for_the_
 
 def test_should_raise_exception_when_we_find_no_one_to_create_flight_pairing(pilot_service, mock_pilot_repository):
     mock_pilot_repository.find_by_availability.return_value = []
-    with pytest.raises(PilotAvailabilityException):
+    with pytest.raises(InsufficientPilotsException):
         pilot_service.generate_pairing(route=ROUTE_LHR_LAX)
 
 

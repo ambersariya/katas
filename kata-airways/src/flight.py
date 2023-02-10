@@ -1,12 +1,13 @@
 import dataclasses
 
-from src.core.value_objects import Route, PilotName
+from src.core.value_objects import Route
+from src.pilot import Pilot
 
 
 @dataclasses.dataclass(init=True, frozen=True, eq=True)
 class FlightPairing:
-    captain: PilotName
-    co_pilot: PilotName
+    captain: Pilot
+    co_pilot: Pilot
 
 
 @dataclasses.dataclass(init=True)

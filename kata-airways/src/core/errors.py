@@ -10,5 +10,5 @@ class UnknownPilotException(Exception):
     pass
 
 
-class PilotAvailabilityException(Exception):
+class InsufficientPilotsException(Exception):
     pass
