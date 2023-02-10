@@ -28,7 +28,7 @@ def pilot_service(mock_pilot_repository):
 
 @pytest.fixture
 def flight_scheduler(mock_route_map, mock_pilot_service):
-    return FlightScheduler(route_map=mock_route_map, flight_pairing_generator=mock_pilot_service)
+    return FlightScheduler(route_map=mock_route_map, pilot_service=mock_pilot_service)
 
 
 @pytest.fixture

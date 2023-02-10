@@ -1,29 +1,29 @@
-from src.core.errors import PilotFlyingHoursExceeded
-from src.core.value_objects import Route, PilotName
+from src.core.errors import PilotAvailabilityException
+from src.core.value_objects import Route
 from src.flight import FlightPairing
-from src.pilot import MAX_FLYING_HOURS_MONTH, MAX_FLYING_HOURS_WEEK
 from src.pilot_repository import PilotRepository
-
 
 
 class PilotService:
     def __init__(self, pilot_repository: PilotRepository):
         self.__pilot_repository = pilot_repository
 
-    def generate_pairing(self, pilots: list[PilotName], route: Route) -> FlightPairing:
-        captain = self.__pilot_repository.find_by_name(pilot_name=pilots[0])
-        copilot = self.__pilot_repository.find_by_name(pilot_name=pilots[1])
+    def generate_pairing(self, route: Route) -> FlightPairing:
+        available_pilots = self.__pilot_repository.find_by_availability()
+        if len(available_pilots) == 0:
+            raise PilotAvailabilityException()
+        captain, copilot = available_pilots
 
-        if (captain.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH \
-                or (copilot.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH:
-            raise PilotFlyingHoursExceeded()
+        # if (captain.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH \
+        #         or (copilot.worked_month_hours + route.duration) >= MAX_FLYING_HOURS_MONTH:
+        #     raise PilotFlyingHoursExceeded()
+        #
+        # if (captain.worked_week_hours + route.duration) >= MAX_FLYING_HOURS_WEEK \
+        #         or (copilot.worked_week_hours + route.duration) >= MAX_FLYING_HOURS_WEEK:
+        #     raise PilotFlyingHoursExceeded()
 
-        if (captain.worked_week_hours + route.duration) >= MAX_FLYING_HOURS_WEEK \
-                or (copilot.worked_week_hours + route.duration) >= MAX_FLYING_HOURS_WEEK:
-            raise PilotFlyingHoursExceeded()
-
-        captain.worked_month_hours += route.duration
-        copilot.worked_month_hours += route.duration
+        # captain.worked_month_hours += route.duration
+        # copilot.worked_month_hours += route.duration
 
         self.__pilot_repository.add(pilot=captain)
         self.__pilot_repository.add(pilot=copilot)

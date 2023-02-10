@@ -3,7 +3,6 @@ import pytest
 from src.core.errors import UnknownPilotException
 from src.core.value_objects import PilotName
 from src.pilot import Pilot
-from src.pilot_service import MAX_FLYING_HOURS_WEEK
 from tests.constants import JOHN_SMITH, PILOT_JOHN_SMITH, PILOT_JANE_DOE
 
 
@@ -30,7 +29,7 @@ def test_should_find_pilot_who_has_worked_less_than_30_hours_for_the_week(pilot_
     pilot_repository.add(PILOT_JOHN_SMITH)
     pilot_repository.add(PILOT_JANE_DOE)
 
-    result = pilot_repository.find_by()
+    result = pilot_repository.find_by_availability()
 
     assert len(result) == 1
     assert result[0].name == JOHN_SMITH

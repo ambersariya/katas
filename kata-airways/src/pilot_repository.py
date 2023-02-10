@@ -17,7 +17,7 @@ class PilotRepository(Protocol):
         pass
 
     @abstractmethod
-    def find_by(self, weekly_hours: float) -> list[Pilot]:
+    def find_by_availability(self, limit: int = 2) -> list[Pilot]:
         pass
 
 
@@ -33,7 +33,7 @@ class InMemoryPilotRepository:
     def add(self, pilot: Pilot) -> None:
         self.__pilots[pilot.name] = pilot
 
-    def find_by(self) -> list[Pilot]:
+    def find_by_availability(self, limit: int = 2) -> list[Pilot]:
         pilots = self.__pilots.values()
 
         # Less than 100 hours in month

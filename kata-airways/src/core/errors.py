@@ -8,3 +8,7 @@ class PilotFlyingHoursExceeded(Exception):
 
 class UnknownPilotException(Exception):
     pass
+
+
+class PilotAvailabilityException(Exception):
+    pass
