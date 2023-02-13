@@ -17,7 +17,7 @@ Your function should comply with the following additional rules:
 - If the number is a multiple of three, return the string `"Fizz"`
 - If the number is a multiple of five, return the string `"Buzz"`.
 - If the number is a multiple of both three and five, return the string `"FizzBuzz"`.
- 
+
 For example, given the numbers from 1 to 15 in order, the function would return:
 
 ```bash
