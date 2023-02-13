@@ -23,7 +23,7 @@ Here's a list of katas below:
 | Gilded rose | [gilded_rose](gilded_rose) | Python |
 | Guess who | [guess-who](guess-who) | Python |
 | Mars rover | [mars_rover](mars_rover) | Python |
-| Merchants guide to galaxy | [merchants-guide-to-galaxy](merchants-guide-to-galaxy) | Pytho |
+| Merchants guide to galaxy | [merchants-guide-to-galaxy](merchants-guide-to-galaxy) | Python |
 | Password validation | [password_validation](password_validation) | Python |
 | Shopping basket | [shopping_basket](shopping_basket) | Python |
 | Social network | [social-network](social-network) | Python |
