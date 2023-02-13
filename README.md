@@ -10,23 +10,24 @@ Thank you for visiting!
 
 Here's a list of katas below:
 
-| Kata | Link |
-| --- | --- |
-| bank (Python unittest)| [bank](bank) |
-| bank (Python pytest) | [bank-pytest](bank-pytest) |
-| bank (Typescript) | [bank-ts](bank-ts) |
-| UK Driving Licence | [driving-licence](driving-licence) |
-| Employee report | [employee-report](employee-report) |
-| Employee report (simplified) | [employee-report-simplified](employee-report-simplified) |
-| Enchanting | [enchanting](enchanting) |
-| Gilded rose | [gilded_rose](gilded_rose) |
-| Guess who | [guess-who](guess-who) |
-| Mars rover | [mars_rover](mars_rover) |
-| Merchants guide to galaxy | [merchants-guide-to-galaxy](merchants-guide-to-galaxy) |
-| Password validation | [password_validation](password_validation) |
-| Shopping basket | [shopping_basket](shopping_basket) |
-| Social network | [social-network](social-network) |
-| Tennis | [tennis](tennis) |
+| Kata | Link | Language |
+| --- | --- | --- |
+| bank (Python unittest)| [bank](bank) | Python (Unittest) |
+| bank (Python pytest) | [bank-pytest](bank-pytest) | Python |
+| bank (Typescript) | [bank-ts](bank-ts) | Typescript |
+| FizzBuzz (Typescript) | [fizzbuzz](./fizzbuzz) | Typescript |
+| UK Driving Licence | [driving-licence](driving-licence) | Python |
+| Employee report | [employee-report](employee-report) | Python |
+| Employee report (simplified) | [employee-report-simplified](employee-report-simplified) | Python |
+| Enchanting | [enchanting](enchanting) | Python |
+| Gilded rose | [gilded_rose](gilded_rose) | Python |
+| Guess who | [guess-who](guess-who) | Python |
+| Mars rover | [mars_rover](mars_rover) | Python |
+| Merchants guide to galaxy | [merchants-guide-to-galaxy](merchants-guide-to-galaxy) | Python |
+| Password validation | [password_validation](password_validation) | Python |
+| Shopping basket | [shopping_basket](shopping_basket) | Python |
+| Social network | [social-network](social-network) | Python |
+| Tennis | [tennis](tennis) | Python |
 
 ## Tooling
 
