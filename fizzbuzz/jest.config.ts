@@ -32,6 +32,9 @@ export default {
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
+  preset: "ts-jest",
+  testEnvironment: "node",
+  roots: ["<rootDir>/src"],
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -71,9 +74,7 @@ export default {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
+  moduleDirectories: ["node_modules", "src"],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [
