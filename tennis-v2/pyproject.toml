@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tennis-v2"
+version = "0.1.0"
+description = ""
+authors = ["ambersariya <1080238+ambersariya@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "tennis_v2"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
