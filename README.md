@@ -12,10 +12,10 @@ Here's a list of katas below:
 
 | Kata | Link | Language |
 | --- | --- | --- |
-| bank (Python unittest)| [bank](bank) | Python (Unittest) |
-| bank (Python pytest) | [bank-pytest](bank-pytest) | Python |
-| bank (Typescript) | [bank-ts](bank-ts) | Typescript |
-| FizzBuzz (Typescript) | [fizzbuzz](./fizzbuzz) | Typescript |
+| bank| [bank](bank) | Python (Unittest) |
+| bank | [bank-pytest](bank-pytest) | Python |
+| bank | [bank-ts](bank-ts) | Typescript |
+| FizzBuzz | [fizzbuzz](./fizzbuzz) | Typescript |
 | UK Driving Licence | [driving-licence](driving-licence) | Python |
 | Employee report | [employee-report](employee-report) | Python |
 | Employee report (simplified) | [employee-report-simplified](employee-report-simplified) | Python |
