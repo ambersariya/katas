@@ -33,5 +33,5 @@ Here's a list of katas below:
 
 Majority of the kata solutions are Python and use Poetry. 
 - [Intellij/Pycharm](https://www.jetbrains.com/idea/)
-- [mob](https://mob.sh) helped us to pair program effectively by doing fast code handover to each other.
+- [mob](https://mob.sh) helps to pair program, regardless of style.
 - [VSCode](https://code.visualstudio.com/) (_occassional use_)
