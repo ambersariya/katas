@@ -1,6 +1,6 @@
 import pytest
 
-from constants import PRODUCT_ID_LORD_OF_THE_RINGS, USER_ID
+from tests.constants import PRODUCT_ID_LORD_OF_THE_RINGS, USER_ID
 from shopping_basket.stock.stock import Stock
 from shopping_basket.stock.stock_error import InsufficientStockError
 

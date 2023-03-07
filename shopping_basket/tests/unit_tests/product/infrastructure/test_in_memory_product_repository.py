@@ -1,4 +1,4 @@
-from constants import (
+from tests.constants import (
     UPDATED_PRODUCT_WITH_OLD_ID,
     PRODUCT_ID_BREAKING_BAD,
     PRODUCT_VIDEO_BREAKING_BAD,

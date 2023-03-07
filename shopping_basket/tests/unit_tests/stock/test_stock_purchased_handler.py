@@ -1,4 +1,4 @@
-from constants import PRODUCT_ID_LORD_OF_THE_RINGS
+from tests.constants import PRODUCT_ID_LORD_OF_THE_RINGS
 from shopping_basket.purchase.event import StockPurchased
 from shopping_basket.stock.handler import StockPurchasedHandler
 

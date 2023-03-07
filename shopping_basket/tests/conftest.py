@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from constants import (
+from tests.constants import (
     PRODUCT_BOOK_LORD_OF_THE_RINGS,
     STOCK_BOOK_LORD_OF_THE_RINGS,
     USER_ID,

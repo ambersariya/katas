@@ -1,4 +1,4 @@
-from constants import USER_ID, ORDER_ID, PAYMENT_REFERENCE
+from tests.constants import USER_ID, ORDER_ID, PAYMENT_REFERENCE
 
 
 class TestOrderConfirmationShould:

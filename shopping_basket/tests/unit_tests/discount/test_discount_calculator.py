@@ -1,4 +1,4 @@
-from constants import (
+from tests.constants import (
     DISCOUNTABLE_SHOPPING_BASKET_WITH_ONE_ITEM,
     DISCOUNTED_SHOPPING_BASKET,
     SHOPPING_BASKET_WITH_ONE_ITEM,

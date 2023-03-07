@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from constants import (
+from tests.constants import (
     BASKET_ITEM_LORD_OF_THE_RINGS_QUANTITY_FIVE,
     BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO,
     USER_ID,

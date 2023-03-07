@@ -1,6 +1,6 @@
 import pytest
 
-from constants import (
+from tests.constants import (
     USER_ID,
     PAYMENT_REFERENCE,
     PAYMENT_DETAILS,

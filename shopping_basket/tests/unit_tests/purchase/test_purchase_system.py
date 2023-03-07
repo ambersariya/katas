@@ -1,6 +1,6 @@
 from unittest import mock
 
-from constants import PRODUCT_ID_BREAKING_BAD
+from tests.constants import PRODUCT_ID_BREAKING_BAD
 from shopping_basket.purchase.event import StockPurchased
 
 

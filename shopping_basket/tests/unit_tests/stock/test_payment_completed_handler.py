@@ -1,4 +1,4 @@
-from constants import SHOPPING_BASKET_WITH_ONE_ITEM, ORDER_ID, PAYMENT_REFERENCE
+from tests.constants import SHOPPING_BASKET_WITH_ONE_ITEM, ORDER_ID, PAYMENT_REFERENCE
 from shopping_basket.payment.event import OrderConfirmed
 from shopping_basket.stock.handler import StockUpdateHandler
 

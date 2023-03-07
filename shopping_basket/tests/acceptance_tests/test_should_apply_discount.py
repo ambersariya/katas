@@ -1,6 +1,6 @@
 import pytest
 
-from constants import USER_ID, PRODUCT_ID_HOBBIT, PRODUCT_ID_BREAKING_BAD
+from tests.constants import USER_ID, PRODUCT_ID_HOBBIT, PRODUCT_ID_BREAKING_BAD
 
 
 class TestApplyDiscountShould:

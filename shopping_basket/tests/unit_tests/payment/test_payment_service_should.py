@@ -1,4 +1,4 @@
-from constants import PAYMENT_DETAILS, SHOPPING_BASKET_WITH_ONE_ITEM, UNPAID_ORDER, USER_ID
+from tests.constants import PAYMENT_DETAILS, SHOPPING_BASKET_WITH_ONE_ITEM, UNPAID_ORDER, USER_ID
 
 
 class TestPaymentServiceShould:

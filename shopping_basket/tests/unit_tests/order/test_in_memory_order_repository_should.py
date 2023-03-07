@@ -1,4 +1,4 @@
-from constants import ORDER_ID, PAID_ORDER, PAYMENT_REFERENCE, UNPAID_ORDER
+from tests.constants import ORDER_ID, PAID_ORDER, PAYMENT_REFERENCE, UNPAID_ORDER
 
 
 class TestInMemoryOrderRepositoryShould:

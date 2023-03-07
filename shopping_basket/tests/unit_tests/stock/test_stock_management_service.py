@@ -3,7 +3,7 @@ from unittest.mock import call
 
 import pytest
 
-from constants import (
+from tests.constants import (
     BASKET_ITEM_LORD_OF_THE_RINGS_QUANTITY_FIVE,
     PRODUCT_ID_BREAKING_BAD,
     PURCHASED_STOCK_VIDEO_BREAKING_BAD,

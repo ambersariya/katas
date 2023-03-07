@@ -9,9 +9,10 @@ license = ""
 [tool.poetry.dependencies]
 python = "^3.9.13"
 fastapi = "^0.85.0"
-uvicorn = {extras = ["standard"], version = "^0.18.3"}
+uvicorn = { extras = ["standard"], version = "^0.18.3" }
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+pytest-archon = "^0.0.4"
 pytest = "^7.1.2"
 black = "^22.1.0"
 mypy = "^0.971"

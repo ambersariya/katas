@@ -1,6 +1,6 @@
 import pytest
 
-from constants import (
+from tests.constants import (
     BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO,
     DISCOUNTED_SHOPPING_BASKET,
     PRODUCT_ID_BREAKING_BAD,

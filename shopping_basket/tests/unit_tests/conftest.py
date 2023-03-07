@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 from _pytest.fixtures import fixture
 
-from constants import DISCOUNT_STRATEGIES
+from tests.constants import DISCOUNT_STRATEGIES
 from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository import (
     InMemoryShoppingBasketRepository,
 )

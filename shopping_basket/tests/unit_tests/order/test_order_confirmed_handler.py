@@ -1,7 +1,7 @@
 from unittest import TestCase, mock
 from unittest.mock import MagicMock
 
-from constants import ORDER_ID, SHOPPING_BASKET_WITH_ONE_ITEM, PAYMENT_REFERENCE
+from tests.constants import ORDER_ID, SHOPPING_BASKET_WITH_ONE_ITEM, PAYMENT_REFERENCE
 from shopping_basket.order.handler import OrderConfirmedHandler
 from shopping_basket.order.notification.order_confirmation import OrderConfirmation
 from shopping_basket.payment.event import OrderConfirmed

@@ -2,7 +2,7 @@ from unittest import mock
 
 import pytest
 
-from constants import PAYMENT_DETAILS, PAYMENT_REFERENCE, UNPAID_ORDER, USER_ID
+from tests.constants import PAYMENT_DETAILS, PAYMENT_REFERENCE, UNPAID_ORDER, USER_ID
 from shopping_basket.payment.infrastructure.errors import PaymentError
 
 
