@@ -24,15 +24,16 @@ def test_basket_should_not_import_any_other_packages_except_core():
         name="Basket package should not import any other packages except core",
         comment="some comment"
     ).match('shopping_basket.basket*') \
-        .may_import('shopping_basket.core*')\
+        .may_import('shopping_basket.core*') \
         .may_import('shopping_basket.basket.product') \
         .should_not_import("shopping_basket.api*") \
         .should_not_import("shopping_basket.payment*") \
         .should_not_import("shopping_basket.discount*") \
         .should_not_import("shopping_basket.order*") \
         .should_not_import("shopping_basket.purchase*") \
-        .should_not_import("shopping_basket.stock*")\
+        .should_not_import("shopping_basket.stock*") \
         .check('shopping_basket.basket')
+
 
 @skip(reason='need to come back to this')
 def test_payment_should_not_import_any_other_packages_except_core():
@@ -40,13 +41,12 @@ def test_payment_should_not_import_any_other_packages_except_core():
         name="Payment package should not import any other packages except core",
         comment="some comment"
     ).match('shopping_basket.payment*') \
-        .may_import('shopping_basket.core*')\
+        .may_import('shopping_basket.core*') \
         .should_not_import("shopping_basket.api*") \
         .should_not_import("shopping_basket.basket*") \
         .should_not_import("shopping_basket.discount*") \
         .should_not_import("shopping_basket.order*") \
         .should_not_import("shopping_basket.product*") \
         .should_not_import("shopping_basket.purchase*") \
-        .should_not_import("shopping_basket.stock*")\
+        .should_not_import("shopping_basket.stock*") \
         .check('shopping_basket.payment')
-
