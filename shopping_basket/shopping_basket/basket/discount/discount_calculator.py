@@ -1,9 +1,9 @@
 from typing import List
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
-from shopping_basket.discount.discount import Discount
-from shopping_basket.discount.discount_strategy import DiscountStrategy
-from shopping_basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
+from shopping_basket.basket.discount.discount import Discount
+from shopping_basket.basket.discount.discount_strategy import DiscountStrategy
+from shopping_basket.basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
 
 
 class DiscountCalculator:

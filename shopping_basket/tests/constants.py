@@ -5,12 +5,12 @@ from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from core.value_objects import UserId
-from shopping_basket.discount.discount import Discount
-from shopping_basket.discount.discount_strategy import (
+from shopping_basket.basket.discount.discount import Discount
+from shopping_basket.basket.discount.discount_strategy import (
     MultiCategoryDiscountStrategy,
     ThreeBooksDiscountStrategy,
 )
-from shopping_basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
+from shopping_basket.basket.discount.discounted_shopping_basket import DiscountedShoppingBasket
 from shopping_basket.order.order import PaidOrder, UnpaidOrder
 from shopping_basket.order.order_id import OrderId
 from shopping_basket.payment.payment_details import PaymentDetails

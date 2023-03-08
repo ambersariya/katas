@@ -1,7 +1,7 @@
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
 from core.value_objects import UserId
-from shopping_basket.discount.discount import Discount
+from shopping_basket.basket.discount.discount import Discount
 
 
 class DiscountedShoppingBasket(ShoppingBasket):

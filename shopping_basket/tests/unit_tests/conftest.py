@@ -10,7 +10,7 @@ from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepo
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
 from shopping_basket.core.utilities import IdGenerator
 from basket.shopping_basket_item_logger import ItemLogger
-from shopping_basket.discount.discount_calculator import DiscountCalculator
+from shopping_basket.basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order_repository import OrderRepository
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway

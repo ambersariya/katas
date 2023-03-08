@@ -1,7 +1,7 @@
 from typing import List, Protocol
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
-from shopping_basket.discount.discount import Discount
+from shopping_basket.basket.discount.discount import Discount
 from shopping_basket.product.product_category import ProductCategory
 
 

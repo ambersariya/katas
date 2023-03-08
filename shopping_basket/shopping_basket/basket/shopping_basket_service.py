@@ -4,7 +4,7 @@ from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from core.value_objects import UserId
 from basket.shopping_basket_item_logger import ItemLogger
-from shopping_basket.discount.discount_calculator import DiscountCalculator
+from shopping_basket.basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.product.product_id import ProductId
 from shopping_basket.product.product_service import ProductService
 
