@@ -8,7 +8,8 @@ from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository 
 )
 from shopping_basket.basket.shopping_basket_repository import ShoppingBasketRepository
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from shopping_basket.core.utilities import ItemLogger, IdGenerator
+from shopping_basket.core.utilities import IdGenerator
+from basket.shopping_basket_item_logger import ItemLogger
 from shopping_basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository
 from shopping_basket.order.order_repository import OrderRepository

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
-from shopping_basket.basket.user import UserId
+from core.value_objects import UserId
 from shopping_basket.order.order_id import OrderId
 
 

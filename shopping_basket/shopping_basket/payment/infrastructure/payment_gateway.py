@@ -1,4 +1,4 @@
-from shopping_basket.basket.user import UserId
+from core.value_objects import UserId
 from shopping_basket.core.messagebus import handle
 from shopping_basket.order.order import Order
 from shopping_basket.order.order_repository import OrderRepository

@@ -4,7 +4,7 @@ from typing import Final
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
 from shopping_basket.basket.shopping_basket_items import ShoppingBasketItems
-from shopping_basket.basket.user import UserId
+from core.value_objects import UserId
 from shopping_basket.discount.discount import Discount
 from shopping_basket.discount.discount_strategy import (
     MultiCategoryDiscountStrategy,
