@@ -14,11 +14,9 @@ class ShoppingBasketService:
         self,
         shopping_basket_repository: ShoppingBasketRepository,
         product_service: ProductService,
-        item_logger: ItemLogger,
         discount_calculator: DiscountCalculator,
     ):
         self._discount_calculator = discount_calculator
-        self._item_logger = item_logger
         self._product_service = product_service
         self._shopping_basket_repository = shopping_basket_repository
 
@@ -34,4 +32,3 @@ class ShoppingBasketService:
         if product:
             item = ShoppingBasketItem.for_product(product, quantity=quantity)
             self._shopping_basket_repository.add_item(item=item, user_id=user_id)
-            self._item_logger.log(user_id=user_id, item=item)

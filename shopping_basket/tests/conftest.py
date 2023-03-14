@@ -69,8 +69,8 @@ def date_provider():
 
 
 @pytest.fixture()
-def shopping_basket_repository(date_provider):
-    return InMemoryShoppingBasketRepository(date_provider=date_provider)
+def shopping_basket_repository(date_provider, item_logger):
+    return InMemoryShoppingBasketRepository(date_provider=date_provider, item_logger=item_logger)
 
 
 @pytest.fixture()
@@ -174,12 +174,11 @@ def payment_service(shopping_basket_service, payment_gateway):
 
 @pytest.fixture()
 def shopping_basket_service(
-    product_service, shopping_basket_repository, item_logger, discount_calculator
+    product_service, shopping_basket_repository, discount_calculator
 ):
     return ShoppingBasketService(
         product_service=product_service,
         shopping_basket_repository=shopping_basket_repository,
-        item_logger=item_logger,
         discount_calculator=discount_calculator(),
     )
 
@@ -191,12 +190,11 @@ def mocked_shopping_basket_service():
 
 @pytest.fixture()
 def shopping_basket_service_with_discounts(
-    product_service, shopping_basket_repository, item_logger, discount_calculator
+    product_service, shopping_basket_repository, discount_calculator
 ):
     return ShoppingBasketService(
         product_service=product_service,
         shopping_basket_repository=shopping_basket_repository,
-        item_logger=item_logger,
         discount_calculator=discount_calculator(strategies=DISCOUNT_STRATEGIES),
     )
 

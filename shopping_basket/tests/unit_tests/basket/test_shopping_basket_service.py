@@ -38,14 +38,12 @@ class TestShoppingBasketServiceShould:
         mocked_shopping_basket_repository,
         mocked_product_service,
         shopping_basket_service,
-        mocked_item_logger,
     ) -> None:
         mocked_product_service.reserve.return_value = PRODUCT_VIDEO_BREAKING_BAD
 
         shopping_basket_service.add_item(
             user_id=USER_ID, product_id=PRODUCT_ID_BREAKING_BAD, quantity=QUANTITY_TWO
         )
-        mocked_item_logger.log.assert_called_once()
         mocked_shopping_basket_repository.add_item.assert_called_once_with(
             item=BASKET_ITEM_BREAKING_BAD_QUANTITY_TWO, user_id=USER_ID
         )

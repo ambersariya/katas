@@ -57,8 +57,9 @@ def payment_gateway(mocked_payment_provider, mocked_order_repository):
 
 
 @fixture()
-def in_memory_shopping_basket_repo(date_provider):
-    return InMemoryShoppingBasketRepository(date_provider=date_provider)
+def in_memory_shopping_basket_repo(date_provider, mocked_item_logger):
+    return InMemoryShoppingBasketRepository(date_provider=date_provider,
+                                            item_logger=mocked_item_logger)
 
 
 @fixture()
@@ -85,13 +86,11 @@ def mocked_discount_calculator():
 def shopping_basket_service(
     mocked_discount_calculator,
     mocked_shopping_basket_repository,
-    mocked_product_service,
-    mocked_item_logger,
+    mocked_product_service
 ):
     return ShoppingBasketService(
         shopping_basket_repository=mocked_shopping_basket_repository,
         product_service=mocked_product_service,
-        item_logger=mocked_item_logger,
         discount_calculator=mocked_discount_calculator,
     )
 
