@@ -19,7 +19,7 @@ from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.email_gateway import EmailGateway
 from shopping_basket.core.messagebus import HANDLERS
 from shopping_basket.core.utilities import IdGenerator
-from basket.shopping_basket_item_logger import ItemLogger
+from shopping_basket.basket.shopping_basket_item_logger import ItemLogger
 from shopping_basket.basket.discount.discount_calculator import DiscountCalculator
 from shopping_basket.order.handler import OrderConfirmedHandler
 from shopping_basket.order.infrastructure.in_memory_order_repository import InMemoryOrderRepository

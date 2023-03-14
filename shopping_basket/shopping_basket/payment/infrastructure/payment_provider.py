@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from core.value_objects import UserId
+from shopping_basket.core.value_objects import UserId
 from shopping_basket.order.order import Order
 from shopping_basket.payment.payment_details import PaymentDetails
 from shopping_basket.payment.payment_reference import PaymentReference

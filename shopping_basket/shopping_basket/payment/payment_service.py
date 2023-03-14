@@ -1,5 +1,5 @@
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from core.value_objects import UserId
+from shopping_basket.core.value_objects import UserId
 from shopping_basket.order.order import UnpaidOrder
 from shopping_basket.payment.infrastructure.payment_gateway import PaymentGateway
 from shopping_basket.payment.payment_details import PaymentDetails

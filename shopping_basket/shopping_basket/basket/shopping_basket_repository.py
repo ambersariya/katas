@@ -3,7 +3,7 @@ from typing import Optional, Protocol
 
 from shopping_basket.basket.shopping_basket import ShoppingBasket
 from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
-from core.value_objects import UserId
+from shopping_basket.core.value_objects import UserId
 
 
 class ShoppingBasketRepository(Protocol):

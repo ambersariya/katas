@@ -1,5 +1,5 @@
-from basket.shopping_basket_item import ShoppingBasketItem
-from core.value_objects import UserId
+from shopping_basket.basket.shopping_basket_item import ShoppingBasketItem
+from shopping_basket.core.value_objects import UserId
 
 
 class ItemLogger:
