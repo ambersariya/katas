@@ -8,13 +8,13 @@ from shopping_basket.basket.infrastructure.in_memory_shopping_basket_repository 
     InMemoryShoppingBasketRepository,
 )
 from shopping_basket.basket.shopping_basket_service import ShoppingBasketService
-from core.value_objects import UserId
+from shopping_basket.core.value_objects import UserId
 from shopping_basket.core.date_provider import DateProvider
 from shopping_basket.core.email_gateway import FakeEmailGateway
 from shopping_basket.core.messagebus import HANDLERS
 from basket.shopping_basket_item_logger import ItemLogger
-from shopping_basket.discount.discount_calculator import DiscountCalculator
-from shopping_basket.discount.discount_strategy import (
+from shopping_basket.basket.discount.discount_calculator import DiscountCalculator
+from shopping_basket.basket.discount.discount_strategy import (
     MultiCategoryDiscountStrategy,
     ThreeBooksDiscountStrategy,
 )
