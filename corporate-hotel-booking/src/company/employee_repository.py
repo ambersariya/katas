@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Protocol
 
 from src.company.employee import Employee
-from src.company.errors import EmployeeAlreadyExists
+from src.company.errors import EmployeeAlreadyExists, EmployeeNotFound
 
 
 class EmployeeRepository(Protocol):
@@ -13,10 +13,6 @@ class EmployeeRepository(Protocol):
     @abstractmethod
     def delete_employee(self, employee_id: str) -> None:
         pass
-
-
-class EmployeeNotFound(Exception):
-    pass
 
 
 class InMemoryEmployeeRepository(EmployeeRepository):

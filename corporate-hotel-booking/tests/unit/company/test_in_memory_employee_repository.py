@@ -1,8 +1,7 @@
 import pytest
 
 from src.company.employee import Employee
-from src.company.employee_repository import EmployeeNotFound
-from src.company.errors import EmployeeAlreadyExists
+from src.company.errors import EmployeeAlreadyExists, EmployeeNotFound
 
 COMPANY_ID = '3ade019b-c718-4ebc-89ff-ddc9512c96f0'
 EMPLOYEE_ID = 'ae5c0343-70ec-40af-811d-94867bf1ae1b'
