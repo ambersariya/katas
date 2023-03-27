@@ -8,7 +8,7 @@ license = ""
 
 [tool.poetry.dependencies]
 python = "^3.9.13"
-fastapi = "^0.85.0"
+fastapi = "^0.95.0"
 uvicorn = { extras = ["standard"], version = "^0.18.3" }
 
 [tool.poetry.group.dev.dependencies]
