@@ -3,6 +3,7 @@ from enum import StrEnum
 
 
 class RoomType(StrEnum):
+    DOUBLE = 'Double'
     STANDARD = 'standard'
 
 

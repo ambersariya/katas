@@ -4,10 +4,11 @@ version = "0.1.0"
 description = ""
 authors = ["Danish Javed <1080238+ambersariya@users.noreply.github.com>"]
 readme = "README.md"
-packages = [{include = "corporate_hotel_booking"}]
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest = "^7.2.2"
 
 
 [tool.poetry.group.dev.dependencies]
