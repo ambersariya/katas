@@ -1,7 +1,7 @@
 package com.github.ambersariya;
 
 public class FizzBuzz {
-    public String fizzbuzz(int number) {
+    public String convert(int number) {
         return String.valueOf(number);
     }
 }
