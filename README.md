@@ -19,6 +19,7 @@ Here's a list of katas below:
 | Bank                         | [bank-pytest](bank-pytest)                               | Python            |
 | Bank                         | [bank-ts](bank-ts)                                       | Typescript        |
 | FizzBuzz                     | [fizzbuzz](./fizzbuzz)                                   | Typescript        |
+| FizzBuzz Java                | [fizzbuzz](./fizzbuzz-java)                              | Java              |
 | UK Driving Licence           | [driving-licence](driving-licence)                       | Python            |
 | Employee report              | [employee-report](employee-report)                       | Python            |
 | Employee report (simplified) | [employee-report-simplified](employee-report-simplified) | Python            |
