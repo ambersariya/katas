@@ -1,17 +1,25 @@
 package com.github.ambersariya;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FizzBuzzShould {
-    @Test
-    void return_string_1_when_given_1() {
-        assertEquals("1", (new FizzBuzz()).convert(1));
+
+    FizzBuzz fizzBuzz;
+
+    @BeforeEach
+    void setup(){
+        fizzBuzz = new FizzBuzz();
     }
 
-    @Test
-    void return_string_2_when_given_2() {
-        assertEquals("2", (new FizzBuzz()).convert(2));
+    @ParameterizedTest
+    @CsvSource({"1,1", "2,2", "3,Fizz", "6,Fizz", "5,Buzz", "15,FizzBuzz"})
+    void return_string_when_given_input(int input, String expected){
+        assertEquals(expected, fizzBuzz.convert(input));
     }
 }
