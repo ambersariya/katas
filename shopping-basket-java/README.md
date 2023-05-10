@@ -25,13 +25,10 @@ Products available (in-memory repository):
     - 20001: Game of Thrones - £9.00
     - 20110: Breaking Bad - £7.00
 
-```~~~~
+```java
     public class ShoppingBasketService {
-
         public void addItem(UserID userId, ProductID productId, int quantity) { }
-
         public <?> basketFor(UserID userId) { }
-
     }
 ```
 
@@ -65,17 +62,13 @@ Products available (in-memory repository):
 - Payment should be sent to payment gateway (external component)
 - If payment is rejected, exception is thrown
 
-```
+```java
     public class PaymentService {
-
         public void makePayment(UserId userId, PaymentDetails paymentDetails) { }
-
     }
 
     public class PaymentGateway {
-
-        public PaymentReference pay(Order order, UserId userId, PaymentDetails paymentDetails)
-
+        public PaymentReference pay(Order order, UserId userId, PaymentDetails paymentDetails) { }
     }
 ```
 
@@ -83,11 +76,10 @@ Products available (in-memory repository):
 
 - Once items are sold (payment is made) if items in stock is below threshold, notify purchase component.
 
-```
+```java
     public class PurchaseSystem {
-
-        public void orderMore(ProductId productId, int actualQuantity)
-
+        public void orderMore(ProductId productId, int actualQuantity) {
+        }
     }
 ```
 
@@ -95,10 +87,9 @@ Products available (in-memory repository):
 
 - User should receive an email confirmation containing the order id, items bought, and price. (external)
 
-```
-    public class OrderConfirmation  {
-
-        public void send(UserId userId, OrderId orderId, PaymentReference paymentReference) { }
-
+```java
+    public class OrderConfirmation {
+        public void send(UserId userId, OrderId orderId, PaymentReference paymentReference) {
+        }
     }
 ```
