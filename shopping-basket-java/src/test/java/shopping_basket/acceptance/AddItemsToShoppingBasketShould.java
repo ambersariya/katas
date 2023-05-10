@@ -2,10 +2,7 @@ package shopping_basket.acceptance;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import shopping_basket.ProductID;
-import shopping_basket.ShoppingBasket;
-import shopping_basket.ShoppingBasketService;
-import shopping_basket.UserID;
+import shopping_basket.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,9 +14,11 @@ public class AddItemsToShoppingBasketShould {
     private static final int QUANTITY_PRODUCT_BREAKING_BAD = 5;
     private ShoppingBasketService shoppingBasketService;
 
+    private InMemoryShoppingBasketRepository inMemoryShoppingBasketRepository;
+
     @BeforeEach
     public void setUp() {
-        shoppingBasketService = new ShoppingBasketService();
+        shoppingBasketService = new ShoppingBasketService(inMemoryShoppingBasketRepository);
     }
 
     @Test
