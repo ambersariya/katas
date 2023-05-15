@@ -10,4 +10,10 @@ class MarsRoverShould {
         MarsRover marsRover = new MarsRover();
         assertEquals(marsRover.execute(""), "0:0:N");
     }
+
+    @Test
+    void face_east_when_turning_once() {
+        MarsRover marsRover = new MarsRover();
+        assertEquals(marsRover.execute("R"), "0:0:E");
+    }
 }
