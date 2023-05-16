@@ -7,12 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MarsRoverShould {
     @ParameterizedTest
-    @CsvSource({"\"\", 0:0:N", "R,0:0:E", "RR,0:0:S"})
+    @CsvSource({
+            "\"\", 0:0:N",
+            "R,0:0:E",
+            "RR,0:0:S",
+            "RRR,0:0:W",
+            "RRRR,0:0:N",
+    })
     void execute_commands(String input, String expected_output) {
         MarsRover marsRover = new MarsRover();
         assertEquals(marsRover.execute(input), expected_output);
     }
 }
-
-// add slide around pairing styles
-//
