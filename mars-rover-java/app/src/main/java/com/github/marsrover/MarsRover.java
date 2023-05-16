@@ -23,33 +23,37 @@ public class MarsRover {
             }
 
             if (singleCommand.equals("M")) {
-                if (currentDirection.equals(Direction.NORTH)) {
-                    this.Y += 1;
-                }
-
-                if (currentDirection.equals(Direction.WEST)) {
-                    this.X -= 1;
-                }
-
-                if (currentDirection.equals(Direction.SOUTH)) {
-                    this.Y -= 1;
-                }
-
-                if (currentDirection.equals(Direction.EAST)) {
-                    this.X -= 1;
-                }
-
-                if (this.Y > GRID_SIZE_Y) {
-                    this.Y = 0;
-                }
-
-                if (this.X > GRID_SIZE_X) {
-                    this.X = 0;
-                }
+                move();
             }
         }
 
         return facing();
+    }
+
+    private void move() {
+        if (currentDirection.equals(Direction.NORTH)) {
+            this.Y += 1;
+        }
+
+        if (currentDirection.equals(Direction.WEST)) {
+            this.X -= 1;
+        }
+
+        if (currentDirection.equals(Direction.SOUTH)) {
+            this.Y -= 1;
+        }
+
+        if (currentDirection.equals(Direction.EAST)) {
+            this.X -= 1;
+        }
+
+        if (this.Y > GRID_SIZE_Y) {
+            this.Y = 0;
+        }
+
+        if (this.X > GRID_SIZE_X) {
+            this.X = 0;
+        }
     }
 
     private String facing() {
