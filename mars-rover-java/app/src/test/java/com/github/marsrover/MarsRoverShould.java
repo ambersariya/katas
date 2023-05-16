@@ -14,7 +14,7 @@ class MarsRoverShould {
             "RRR,0:0:W",
             "RRRR,0:0:N",
     })
-    void execute_commands(String input, String expected_output) {
+    void execute_commands_to_turn_right(String input, String expected_output) {
         MarsRover marsRover = new MarsRover();
         assertEquals(marsRover.execute(input), expected_output);
     }
