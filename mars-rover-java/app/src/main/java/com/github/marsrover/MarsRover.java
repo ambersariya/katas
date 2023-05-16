@@ -1,14 +1,14 @@
 package com.github.marsrover;
 
 public class MarsRover {
-    private static final int GRID_SIZE_X = 10;
-    private static final int GRID_SIZE_Y = 10;
     private Direction currentDirection;
-    private int Y;
-    private int X;
+    private Coordinate coordinates;
+    private final Grid grid;
 
     public MarsRover() {
         currentDirection = Direction.NORTH;
+        coordinates = new Coordinate(0, 0);
+        grid = new Grid();
     }
 
     public String execute(String command) {
@@ -23,40 +23,19 @@ public class MarsRover {
             }
 
             if (singleCommand.equals("M")) {
-                move();
+                coordinates = grid.next(coordinates, currentDirection);
             }
         }
 
         return facing();
     }
 
-    private void move() {
-        if (currentDirection.equals(Direction.NORTH)) {
-            this.Y += 1;
-        }
-
-        if (currentDirection.equals(Direction.WEST)) {
-            this.X -= 1;
-        }
-
-        if (currentDirection.equals(Direction.SOUTH)) {
-            this.Y -= 1;
-        }
-
-        if (currentDirection.equals(Direction.EAST)) {
-            this.X -= 1;
-        }
-
-        if (this.Y > GRID_SIZE_Y) {
-            this.Y = 0;
-        }
-
-        if (this.X > GRID_SIZE_X) {
-            this.X = 0;
-        }
-    }
-
     private String facing() {
-        return String.format("%d:%d:%s", Math.abs(X), Math.abs(Y), currentDirection.value());
+        return String.format(
+                "%d:%d:%s",
+                coordinates.x(),
+                coordinates.y(),
+                currentDirection.value()
+        );
     }
 }
