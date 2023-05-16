@@ -10,29 +10,27 @@ public class MarsRover {
     public String execute(String command) {
         for (char cmd : command.toCharArray()) {
             String singleCommand = String.valueOf(cmd);
-
             if (singleCommand.equals("R")) {
-                if (direction.equals("N")) {
-                    direction = "E";
-                    continue;
-                }
-
-                if (direction.equals("E")) {
-                    direction = "S";
-                    continue;
-                }
-
-                if (direction.equals("S")) {
-                    direction = "W";
-                    continue;
-                }
-
-                if (direction.equals("W")) {
-                    direction = "N";
-                }
+                direction = turnRight();
             }
         }
 
         return "0:0:" + direction;
+    }
+
+    private String turnRight() {
+        if (direction.equals("N")) {
+            return "E";
+        }
+
+        if (direction.equals("E")) {
+            return "S";
+        }
+
+        if (direction.equals("S")) {
+            return "W";
+        }
+
+        return "N";
     }
 }
