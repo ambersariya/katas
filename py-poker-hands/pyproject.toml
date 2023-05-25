@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "py-poker-hands"
+version = "0.1.0"
+description = ""
+authors = ["ambersariya <1080238+ambersariya@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "py_poker_hands"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
