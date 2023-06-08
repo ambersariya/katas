@@ -26,4 +26,23 @@ public class HotelShould {
 
         assertEquals(rooms, hotel.rooms());
     }
+
+    @Test
+    public void find_room_by_room_number() {
+        var hotel = new Hotel(1, "premier inn");
+        hotel.setRoom(1, RoomType.STANDARD);
+        var room = hotel.findRoomByRoomNumber(1);
+
+        assertEquals(new Room(1, RoomType.STANDARD), room);
+    }
+
+    @Test
+    public void return_number_of_rooms_in_a_hotel() {
+        var hotel = new Hotel(1, "premier inn");
+        hotel.setRoom(1, RoomType.STANDARD);
+        hotel.setRoom(2, RoomType.STANDARD);
+        hotel.setRoom(3, RoomType.STANDARD);
+
+        assertEquals(3, hotel.numberOfRooms());
+    }
 }

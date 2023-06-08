@@ -4,6 +4,8 @@ import com.github.ambersariya.Hotel;
 import com.github.ambersariya.HotelRepository;
 import com.github.ambersariya.HotelService;
 import com.github.ambersariya.RoomType;
+import com.github.ambersariya.hotel.HotelAlreadyExists;
+import com.github.ambersariya.hotel.HotelDoesNotExist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +27,6 @@ public class HotelServiceShould {
     private HotelService hotelService;
     @Mock
     private HotelRepository hotelRepository;
-//    private final Hotel hotel = new Hotel(HOTEL_ID, HOTEL_NAME);
 
     @BeforeEach
     public void setUp() {
@@ -52,5 +54,25 @@ public class HotelServiceShould {
         hotelService.setRoom(HOTEL_ID, 1, RoomType.STANDARD);
 
         verify(hotelRepository).saveHotel(HOTEL);
+    }
+
+    @Test
+    public void throw_exception_when_hotel_id_already_exists() {
+        when(hotelRepository.findHotelBy(HOTEL_ID)).thenReturn(HOTEL);
+        Exception exception = assertThrows(HotelAlreadyExists.class, () -> {
+            hotelService.addHotel(HOTEL_ID, HOTEL_NAME);
+        });
+
+        assertEquals("Hotel already exists", exception.getMessage());
+    }
+
+    @Test
+    public void throw_exception_when_hotel_does_not_exist() {
+        when(hotelRepository.findHotelBy(HOTEL_ID)).thenReturn(null);
+        Exception exception = assertThrows(HotelDoesNotExist.class, () -> {
+            hotelService.setRoom(HOTEL_ID, 1, RoomType.STANDARD);
+        });
+
+        assertEquals("Hotel does not exist", exception.getMessage());
     }
 }

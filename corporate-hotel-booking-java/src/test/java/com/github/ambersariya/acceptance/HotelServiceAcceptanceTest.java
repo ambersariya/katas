@@ -1,6 +1,7 @@
 package com.github.ambersariya.acceptance;
 
 import com.github.ambersariya.*;
+import com.github.ambersariya.hotel.Room;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,5 +23,6 @@ public class HotelServiceAcceptanceTest {
         assertInstanceOf(Hotel.class, hotel);
         assertEquals(HOTEL_NAME, hotel.name);
         assertEquals(HOTEL_ID, hotel.id);
+        assertInstanceOf(Room.class, hotel.findRoomByRoomNumber(ROOM_NUMBER));
     }
 }

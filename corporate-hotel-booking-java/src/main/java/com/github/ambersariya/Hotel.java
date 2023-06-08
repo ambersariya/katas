@@ -2,17 +2,18 @@ package com.github.ambersariya;
 
 import com.github.ambersariya.hotel.Room;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Hotel {
     public final int id;
     public final String name;
-    private final ArrayList<Room> rooms;
+    private final HashMap<Integer, Room> rooms;
 
     public Hotel(int id, String name) {
         this.id = id;
         this.name = name;
-        rooms = new ArrayList<>();
+        rooms = new HashMap<>();
     }
 
     public boolean equals(Object other) {
@@ -27,10 +28,18 @@ public class Hotel {
     }
 
     public void setRoom(int roomNumber, RoomType roomType) {
-        rooms.add(new Room(roomNumber, roomType));
+        rooms.put(roomNumber, new Room(roomNumber, roomType));
     }
 
-    public ArrayList<Room> rooms() {
-        return rooms;
+    public List<Room> rooms() {
+        return rooms.values().stream().toList();
+    }
+
+    public Room findRoomByRoomNumber(int roomNumber) {
+        return rooms.get(roomNumber);
+    }
+
+    public int numberOfRooms() {
+        return rooms.size();
     }
 }
