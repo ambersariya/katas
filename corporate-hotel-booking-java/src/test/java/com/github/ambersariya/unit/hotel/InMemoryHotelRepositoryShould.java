@@ -1,7 +1,7 @@
 package com.github.ambersariya.unit.hotel;
 
-import com.github.ambersariya.Hotel;
-import com.github.ambersariya.InMemoryHotelRepository;
+import com.github.ambersariya.hotel.Hotel;
+import com.github.ambersariya.hotel.InMemoryHotelRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

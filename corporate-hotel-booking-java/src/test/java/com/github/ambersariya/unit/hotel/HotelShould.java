@@ -1,7 +1,7 @@
 package com.github.ambersariya.unit.hotel;
 
-import com.github.ambersariya.Hotel;
-import com.github.ambersariya.RoomType;
+import com.github.ambersariya.hotel.Hotel;
+import com.github.ambersariya.hotel.RoomType;
 import com.github.ambersariya.hotel.Room;
 import org.junit.jupiter.api.Test;
 

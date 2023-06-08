@@ -1,7 +1,6 @@
 package com.github.ambersariya.acceptance;
 
-import com.github.ambersariya.*;
-import com.github.ambersariya.hotel.Room;
+import com.github.ambersariya.hotel.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

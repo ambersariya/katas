@@ -1,4 +1,4 @@
-package com.github.ambersariya;
+package com.github.ambersariya.hotel;
 
 import java.util.HashMap;
 

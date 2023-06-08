@@ -1,6 +1,4 @@
-package com.github.ambersariya;
-
-import com.github.ambersariya.hotel.Room;
+package com.github.ambersariya.hotel;
 
 import java.util.HashMap;
 import java.util.List;

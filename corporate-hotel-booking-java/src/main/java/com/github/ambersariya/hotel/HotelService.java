@@ -1,7 +1,4 @@
-package com.github.ambersariya;
-
-import com.github.ambersariya.hotel.HotelAlreadyExists;
-import com.github.ambersariya.hotel.HotelDoesNotExist;
+package com.github.ambersariya.hotel;
 
 public class HotelService {
 

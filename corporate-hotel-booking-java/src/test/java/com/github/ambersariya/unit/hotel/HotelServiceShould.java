@@ -1,9 +1,9 @@
 package com.github.ambersariya.unit.hotel;
 
-import com.github.ambersariya.Hotel;
-import com.github.ambersariya.HotelRepository;
-import com.github.ambersariya.HotelService;
-import com.github.ambersariya.RoomType;
+import com.github.ambersariya.hotel.Hotel;
+import com.github.ambersariya.hotel.HotelRepository;
+import com.github.ambersariya.hotel.HotelService;
+import com.github.ambersariya.hotel.RoomType;
 import com.github.ambersariya.hotel.HotelAlreadyExists;
 import com.github.ambersariya.hotel.HotelDoesNotExist;
 import org.junit.jupiter.api.BeforeEach;
