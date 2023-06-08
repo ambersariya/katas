@@ -5,7 +5,7 @@ import com.github.ambersariya.hotel.HotelRepository;
 import com.github.ambersariya.hotel.HotelService;
 import com.github.ambersariya.hotel.RoomType;
 import com.github.ambersariya.hotel.HotelAlreadyExists;
-import com.github.ambersariya.hotel.HotelDoesNotExist;
+import com.github.ambersariya.hotel.HotelNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -69,7 +69,7 @@ public class HotelServiceShould {
     @Test
     public void throw_exception_when_hotel_does_not_exist() {
         when(hotelRepository.findHotelBy(HOTEL_ID)).thenReturn(null);
-        Exception exception = assertThrows(HotelDoesNotExist.class, () -> {
+        Exception exception = assertThrows(HotelNotFound.class, () -> {
             hotelService.setRoom(HOTEL_ID, 1, RoomType.STANDARD);
         });
 

@@ -20,7 +20,7 @@ public class HotelService {
     public void setRoom(int hotelId, int roomNumber, RoomType roomType) {
         var hotel = hotelRepository.findHotelBy(hotelId);
         if (hotel == null) {
-            throw new HotelDoesNotExist("Hotel does not exist");
+            throw new HotelNotFound("Hotel does not exist");
         }
         hotel.setRoom(roomNumber, roomType);
         hotelRepository.saveHotel(hotel);

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HotelShould {
     private static final Hotel hotel = new Hotel(1, "premier inn");
     private static final List<Room> rooms = new ArrayList<Room>();
+    private static final Room STANDARD_ROOM = new Room(1, RoomType.STANDARD);
 
     @Test
     public void be_able_to_return_empty_list_when_there_are_no_rooms() {
@@ -21,7 +22,7 @@ public class HotelShould {
 
     @Test
     public void be_able_to_return_all_of_its_rooms() {
-        rooms.add(new Room(1, RoomType.STANDARD));
+        rooms.add(STANDARD_ROOM);
         hotel.setRoom(1, RoomType.STANDARD);
 
         assertEquals(rooms, hotel.rooms());
@@ -29,11 +30,10 @@ public class HotelShould {
 
     @Test
     public void find_room_by_room_number() {
-        var ROOM = new Room(1, RoomType.STANDARD);
         hotel.setRoom(1, RoomType.STANDARD);
         var room = hotel.findRoomByRoomNumber(1);
 
-        assertEquals(ROOM, room);
+        assertEquals(STANDARD_ROOM, room);
     }
 
     @Test
