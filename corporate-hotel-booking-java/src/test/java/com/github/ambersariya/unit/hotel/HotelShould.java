@@ -1,26 +1,26 @@
 package com.github.ambersariya.unit.hotel;
 
 import com.github.ambersariya.hotel.Hotel;
-import com.github.ambersariya.hotel.RoomType;
 import com.github.ambersariya.hotel.Room;
+import com.github.ambersariya.hotel.RoomType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HotelShould {
+    private static final Hotel hotel = new Hotel(1, "premier inn");
+    private static final List<Room> rooms = new ArrayList<Room>();
+
     @Test
     public void be_able_to_return_empty_list_when_there_are_no_rooms() {
-        var hotel = new Hotel(1, "premier inn");
-        var rooms = new ArrayList<>();
         assertEquals(rooms, hotel.rooms());
     }
 
     @Test
     public void be_able_to_return_all_of_its_rooms() {
-        var hotel = new Hotel(1, "premier inn");
-        var rooms = new ArrayList<>();
         rooms.add(new Room(1, RoomType.STANDARD));
         hotel.setRoom(1, RoomType.STANDARD);
 
@@ -29,16 +29,15 @@ public class HotelShould {
 
     @Test
     public void find_room_by_room_number() {
-        var hotel = new Hotel(1, "premier inn");
+        var ROOM = new Room(1, RoomType.STANDARD);
         hotel.setRoom(1, RoomType.STANDARD);
         var room = hotel.findRoomByRoomNumber(1);
 
-        assertEquals(new Room(1, RoomType.STANDARD), room);
+        assertEquals(ROOM, room);
     }
 
     @Test
     public void return_number_of_rooms_in_a_hotel() {
-        var hotel = new Hotel(1, "premier inn");
         hotel.setRoom(1, RoomType.STANDARD);
         hotel.setRoom(2, RoomType.STANDARD);
         hotel.setRoom(3, RoomType.STANDARD);
