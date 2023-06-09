@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-public class HotelServiceAcceptanceTest {
+public class HotelServiceShould {
     private static final int HOTEL_ID = 1;
     private static final String HOTEL_NAME = "premier inn";
     private static final int ROOM_NUMBER = 1;
