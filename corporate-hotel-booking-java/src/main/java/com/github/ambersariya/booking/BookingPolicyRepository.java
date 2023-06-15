@@ -8,6 +8,4 @@ public interface BookingPolicyRepository {
     CompanyPolicy findCompanyPolicyBy(int companyId);
 
     EmployeePolicy findEmployeePolicyBy(int employeeId);
-
-    int findCompanyIdBy(int employeeId);
 }

@@ -31,9 +31,4 @@ public class InMemoryBookingPolicyRepository implements BookingPolicyRepository 
         }
         return employeePolicies.get(employeeId);
     }
-
-    @Override
-    public int findCompanyIdBy(int employeeId) {
-        throw new UnsupportedOperationException();
-    }
 }
