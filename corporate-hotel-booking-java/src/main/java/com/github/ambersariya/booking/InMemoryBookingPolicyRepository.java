@@ -18,17 +18,11 @@ public class InMemoryBookingPolicyRepository implements BookingPolicyRepository 
 
     @Override
     public CompanyPolicy findCompanyPolicyBy(int companyId) {
-        if (!companyPolicies.containsKey(companyId)) {
-            throw new CompanyBookingPolicyNotFound();
-        }
         return companyPolicies.get(companyId);
     }
 
     @Override
     public EmployeePolicy findEmployeePolicyBy(int employeeId) {
-        if (!employeePolicies.containsKey(employeeId)) {
-            throw new EmployeeBookingPolicyNotFound();
-        }
         return employeePolicies.get(employeeId);
     }
 }

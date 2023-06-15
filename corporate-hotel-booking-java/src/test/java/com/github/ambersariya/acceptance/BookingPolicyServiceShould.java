@@ -47,4 +47,11 @@ public class BookingPolicyServiceShould {
 
         assertTrue(bookingPolicyService.isBookingAllowed(EMPLOYEE_ID, RoomType.STANDARD));
     }
+
+    @Test
+    public void allowed_to_book_any_room_when_neither_company_nor_employee_policies_exist() {
+        var bookingPolicyService = new BookingPolicyService(bookingPolicyRepository, employeeRepository);
+
+        assertTrue(bookingPolicyService.isBookingAllowed(EMPLOYEE_ID, RoomType.STANDARD));
+    }
 }

@@ -1,7 +1,6 @@
 package com.github.ambersariya.unit.booking;
 
 import com.github.ambersariya.booking.CompanyPolicy;
-import com.github.ambersariya.booking.EmployeeBookingPolicyNotFound;
 import com.github.ambersariya.booking.EmployeePolicy;
 import com.github.ambersariya.booking.InMemoryBookingPolicyRepository;
 import com.github.ambersariya.hotel.RoomType;
@@ -11,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class InMemoryBookingPolicyRepositoryShould {
     private static final int COMPANY_ID = 1;
@@ -45,7 +44,12 @@ public class InMemoryBookingPolicyRepositoryShould {
 
     @Test
     public void throw_exception_when_company_policy_doesnt_exist() {
-        assertThrows(EmployeeBookingPolicyNotFound.class, () -> bookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID));
+        assertNull(bookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID));
+    }
+
+    @Test
+    public void throw_exception_when_employee_policy_doesnt_exist() {
+        assertNull(bookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID));
     }
 
     @Test

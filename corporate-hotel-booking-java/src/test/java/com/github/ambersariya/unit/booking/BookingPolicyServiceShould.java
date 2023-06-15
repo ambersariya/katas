@@ -1,6 +1,9 @@
 package com.github.ambersariya.unit.booking;
 
-import com.github.ambersariya.booking.*;
+import com.github.ambersariya.booking.BookingPolicyRepository;
+import com.github.ambersariya.booking.BookingPolicyService;
+import com.github.ambersariya.booking.CompanyPolicy;
+import com.github.ambersariya.booking.EmployeePolicy;
 import com.github.ambersariya.employee.Employee;
 import com.github.ambersariya.employee.EmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
@@ -56,11 +59,29 @@ public class BookingPolicyServiceShould {
     public void allow_booking_a_standard_room_on_company_policy() {
         var companyRoomTypes = List.of(RoomType.STANDARD);
         var companyPolicy = new CompanyPolicy(COMPANY_ID, companyRoomTypes);
-
-        when(companyBookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID)).thenThrow(EmployeeBookingPolicyNotFound.class);
         when(employeeRepository.findById(EMPLOYEE_ID)).thenReturn(EMPLOYEE);
+        when(companyBookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID)).thenReturn(null);
         when(companyBookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID)).thenReturn(companyPolicy);
 
         assertTrue(bookingPolicyService.isBookingAllowed(EMPLOYEE_ID, RoomType.STANDARD));
+    }
+
+    @Test
+    public void allow_booking_a_junior_suite_room_on_employee_policy() {
+        var employeePolicy = new EmployeePolicy(EMPLOYEE_ID, List.of(RoomType.JUNIOR_SUITE));
+
+        when(companyBookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID)).thenReturn(employeePolicy);
+
+        assertTrue(bookingPolicyService.isBookingAllowed(EMPLOYEE_ID, RoomType.JUNIOR_SUITE));
+    }
+
+    @Test
+    public void allow_booking_any_room_when_no_policies_exist() {
+
+        when(employeeRepository.findById(EMPLOYEE_ID)).thenReturn(EMPLOYEE);
+        when(companyBookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID)).thenReturn(null);
+        when(companyBookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID)).thenReturn(null);
+
+        assertTrue(bookingPolicyService.isBookingAllowed(EMPLOYEE_ID, RoomType.JUNIOR_SUITE));
     }
 }
