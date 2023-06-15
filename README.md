@@ -18,7 +18,7 @@ Here's a list of katas below:
 | Bank                         | [bank-pytest](bank-pytest)                                 | Python            |
 | Bank                         | [bank-ts](bank-ts)                                         | Typescript        |
 | UK Driving License           | [driving-license](driving-license)                         | Python            |
-| Corporate Hotel Booking      |[corporate-hotel-booking-java](corporate-hotel-booking-java)| Python            |
+| Corporate Hotel Booking      |[corporate-hotel-booking-java](corporate-hotel-booking-java)| Java              |
 | FizzBuzz                     | [fizzbuzz](./fizzbuzz)                                     | Typescript        |
 | FizzBuzz Java                | [fizzbuzz](./fizzbuzz-java)                                | Java              |
 | Employee report              | [employee-report](employee-report)                         | Python            |
