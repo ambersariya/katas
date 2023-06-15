@@ -34,6 +34,7 @@ public class BookingPolicyServiceShould {
     public void setUp() {
         bookingPolicyService = new BookingPolicyService(companyBookingPolicyRepository, employeeRepository);
     }
+
     @Test
     public void allow_saving_company_policy() {
         var companyRoomTypes = List.of(RoomType.STANDARD);
