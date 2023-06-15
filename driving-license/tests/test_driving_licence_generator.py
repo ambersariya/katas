@@ -1,11 +1,11 @@
 import pytest
 
-from driving_licence.generator import DrivingLicenceGenerator
+from driving_license.generator import DrivingLicenseGenerator
 
 
 @pytest.fixture
-def driving_licence_generator():
-    return DrivingLicenceGenerator()
+def driving_license_generator():
+    return DrivingLicenseGenerator()
 
 
 @pytest.mark.parametrize('data, expected_output', [
@@ -14,11 +14,11 @@ def driving_licence_generator():
     pytest.param("Gea", 'GEA99', id='when there are less than 5 chars')
 ])
 def test_should_format_surname_to_fixed_length(
-        driving_licence_generator: DrivingLicenceGenerator,
+        driving_license_generator: DrivingLicenseGenerator,
         data: str,
         expected_output: str
 ):
-    result = driving_licence_generator.format_surname(surname=data)
+    result = driving_license_generator.format_surname(surname=data)
     assert result == expected_output
 
 
@@ -28,11 +28,11 @@ def test_should_format_surname_to_fixed_length(
     pytest.param("01-Jun-2000", '0', id='get 0 when year is 2000')
 ])
 def test_should_format_decade_of_birth(
-        driving_licence_generator: DrivingLicenceGenerator,
+        driving_license_generator: DrivingLicenseGenerator,
         data: str,
         expected_output: str
 ):
-    result = driving_licence_generator.format_decade(dob=data)
+    result = driving_license_generator.format_decade(dob=data)
     assert result == expected_output
 
 
@@ -47,11 +47,11 @@ def test_should_format_decade_of_birth(
     pytest.param("01-Dec-2000", "F", '62', id="get 62 when person is Female"),
 ])
 def test_should_format_month_of_birth_based_on_gender(
-        driving_licence_generator: DrivingLicenceGenerator,
+        driving_license_generator: DrivingLicenseGenerator,
         dob: str,
         gender: str, expected_output
 ):
-    result = driving_licence_generator.format_month_of_birth(dob=dob, gender=gender)
+    result = driving_license_generator.format_month_of_birth(dob=dob, gender=gender)
     assert result == expected_output
 
 
@@ -63,11 +63,11 @@ def test_should_format_month_of_birth_based_on_gender(
     pytest.param("30-Dec-1980", '30'),
 ])
 def test_should_format_date_in_month(
-        driving_licence_generator: DrivingLicenceGenerator,
+        driving_license_generator: DrivingLicenseGenerator,
         dob: str,
         expected_output: str
 ):
-    result = driving_licence_generator.format_date_within_month(dob=dob)
+    result = driving_license_generator.format_date_within_month(dob=dob)
     assert result == expected_output
 
 
@@ -78,11 +78,11 @@ def test_should_format_date_in_month(
     pytest.param("30-Mar-2022", '2'),
 ])
 def test_should_format_year_in_date_of_birth(
-        driving_licence_generator: DrivingLicenceGenerator,
+        driving_license_generator: DrivingLicenseGenerator,
         dob: str,
         expected_output: str
 ):
-    result = driving_licence_generator.format_year(dob=dob)
+    result = driving_license_generator.format_year(dob=dob)
     assert result == expected_output
 
 
@@ -93,12 +93,12 @@ def test_should_format_year_in_date_of_birth(
     ("Marc", "K", 'MK'),
 ])
 def test_should_format_initials(
-        driving_licence_generator: DrivingLicenceGenerator,
+        driving_license_generator: DrivingLicenseGenerator,
         firstname: str,
         middlename: str,
         expected_output: str
 ):
-    result = driving_licence_generator.format_initials(firstname=firstname, middlename=middlename)
+    result = driving_license_generator.format_initials(firstname=firstname, middlename=middlename)
     assert result == expected_output
 
 
@@ -120,11 +120,11 @@ def test_should_format_initials(
     (["Johanna", "", "Gibbs", "13-Dec-1981", "F"], 'GIBBS862131J99AA'),
     (["Andrew", "Robert", "Lee", "02-Sep-1981", "M"], 'LEE99809021AR9AA'),
 ])
-def test_should_generate_driving_licence_number(
-        driving_licence_generator: DrivingLicenceGenerator,
+def test_should_generate_driving_license_number(
+        driving_license_generator: DrivingLicenseGenerator,
         data,
         expected_output
 ):
-    result = driving_licence_generator.generate(data=data)
+    result = driving_license_generator.generate(data=data)
     assert len(result) == 16
     assert result == expected_output

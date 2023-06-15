@@ -1,4 +1,4 @@
-# UK Driving Licence
+# UK Driving License
 
 Details here: https://www.codewars.com/kata/586a1af1c66d18ad81000134/train/python
 

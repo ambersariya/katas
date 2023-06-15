@@ -3,7 +3,7 @@ from datetime import datetime
 DOB_FORMAT = '%d-%b-%Y'
 
 
-class DrivingLicenceGenerator:
+class DrivingLicenseGenerator:
     def format_surname(self, surname: str) -> str:
         return surname.upper()[:5].ljust(5, '9')
 

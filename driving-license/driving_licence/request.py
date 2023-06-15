@@ -1,7 +1,6 @@
 from pydantic.main import BaseModel
 
 
-
 class DrivingLicenseRequestModel(BaseModel):
     first_name: str
     middle_name: str
