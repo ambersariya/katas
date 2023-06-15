@@ -1,24 +1,35 @@
 package com.github.ambersariya.booking;
 
+import java.util.HashMap;
+
 public class InMemoryBookingPolicyRepository implements BookingPolicyRepository {
+    private HashMap<Integer, CompanyPolicy> companyPolicies = new HashMap<>();
+    private HashMap<Integer, EmployeePolicy> employeePolicies = new HashMap<>();
+
     @Override
     public void saveCompanyPolicy(CompanyPolicy companyPolicy) {
-        throw new UnsupportedOperationException();
+        companyPolicies.put(companyPolicy.companyId(), companyPolicy);
     }
 
     @Override
     public void saveEmployeePolicy(EmployeePolicy employeePolicy) {
-        throw new UnsupportedOperationException();
+        employeePolicies.put(employeePolicy.employeeId(), employeePolicy);
     }
 
     @Override
     public CompanyPolicy findCompanyPolicyBy(int companyId) {
-        throw new UnsupportedOperationException();
+        if (!companyPolicies.containsKey(companyId)) {
+            throw new CompanyBookingPolicyNotFound();
+        }
+        return companyPolicies.get(companyId);
     }
 
     @Override
     public EmployeePolicy findEmployeePolicyBy(int employeeId) {
-        throw new UnsupportedOperationException();
+        if (!employeePolicies.containsKey(employeeId)) {
+            throw new EmployeeBookingPolicyNotFound();
+        }
+        return employeePolicies.get(employeeId);
     }
 
     @Override

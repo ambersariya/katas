@@ -1,9 +1,6 @@
 package com.github.ambersariya.unit.booking;
 
-import com.github.ambersariya.booking.BookingPolicyRepository;
-import com.github.ambersariya.booking.BookingPolicyService;
-import com.github.ambersariya.booking.CompanyPolicy;
-import com.github.ambersariya.booking.EmployeePolicy;
+import com.github.ambersariya.booking.*;
 import com.github.ambersariya.employee.Employee;
 import com.github.ambersariya.employee.EmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
@@ -60,7 +57,7 @@ public class BookingPolicyServiceShould {
         var companyRoomTypes = List.of(RoomType.STANDARD);
         var companyPolicy = new CompanyPolicy(COMPANY_ID, companyRoomTypes);
 
-        when(companyBookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID)).thenReturn(null);
+        when(companyBookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID)).thenThrow(EmployeeBookingPolicyNotFound.class);
         when(employeeRepository.findById(EMPLOYEE_ID)).thenReturn(EMPLOYEE);
         when(companyBookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID)).thenReturn(companyPolicy);
 

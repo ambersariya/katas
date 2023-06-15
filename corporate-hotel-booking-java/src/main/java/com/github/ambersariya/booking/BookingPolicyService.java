@@ -25,17 +25,28 @@ public class BookingPolicyService {
     }
 
     public boolean isBookingAllowed(int employeeId, RoomType roomType) {
-        var employeePolicy = bookingPolicyRepository.findEmployeePolicyBy(employeeId);
-        if (employeePolicy != null) {
-            return employeePolicy.roomTypes().contains(roomType);
+        try {
+            return isBookingAllowedByEmployeePolicy(employeeId, roomType);
+        } catch (Exception e) {
+            return isBookingAllowedByCompanyPolicy(employeeId, roomType);
         }
+    }
 
+    private boolean isBookingAllowedByCompanyPolicy(int employeeId, RoomType roomType) {
         var employee = employeeRepository.findById(employeeId);
         var companyPolicy = bookingPolicyRepository.findCompanyPolicyBy(employee.companyId());
         if (companyPolicy != null) {
             return companyPolicy.roomTypes().contains(roomType);
         }
 
+        return false;
+    }
+
+    private boolean isBookingAllowedByEmployeePolicy(int employeeId, RoomType roomType) {
+        var employeePolicy = bookingPolicyRepository.findEmployeePolicyBy(employeeId);
+        if (employeePolicy != null) {
+            return employeePolicy.roomTypes().contains(roomType);
+        }
         return false;
     }
 }

@@ -2,6 +2,7 @@ package com.github.ambersariya.acceptance;
 
 import com.github.ambersariya.booking.BookingPolicyService;
 import com.github.ambersariya.booking.InMemoryBookingPolicyRepository;
+import com.github.ambersariya.employee.Employee;
 import com.github.ambersariya.employee.InMemoryEmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BookingPolicyServiceShould {
     private static final int COMPANY_ID = 1;
     private static final int EMPLOYEE_ID = 1;
+    private static final Employee EMPLOYEE = new Employee(EMPLOYEE_ID, COMPANY_ID);
     private InMemoryBookingPolicyRepository bookingPolicyRepository;
     private InMemoryEmployeeRepository employeeRepository;
 
@@ -21,6 +23,7 @@ public class BookingPolicyServiceShould {
     public void setUp() {
         bookingPolicyRepository = new InMemoryBookingPolicyRepository();
         employeeRepository = new InMemoryEmployeeRepository();
+        employeeRepository.addEmployee(EMPLOYEE);
     }
 
     @Test
@@ -35,7 +38,7 @@ public class BookingPolicyServiceShould {
         assertTrue(bookingPolicyService.isBookingAllowed(EMPLOYEE_ID, RoomType.JUNIOR_SUITE));
     }
 
-    @Test()
+    @Test
     public void allow_booking_a_standard_room_only_as_per_company_policy() {
         var companyRoomTypes = List.of(RoomType.STANDARD);
 
