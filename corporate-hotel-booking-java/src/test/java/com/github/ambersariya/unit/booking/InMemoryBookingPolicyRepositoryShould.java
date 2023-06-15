@@ -47,4 +47,27 @@ public class InMemoryBookingPolicyRepositoryShould {
     public void throw_exception_when_company_policy_doesnt_exist() {
         assertThrows(EmployeeBookingPolicyNotFound.class, () -> bookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID));
     }
+
+    @Test
+    public void update_existing_company_policy_with_junior_suite_room_type() {
+        bookingPolicyRepository.saveCompanyPolicy(COMPANY_POLICY);
+        var updatedPolicy = new CompanyPolicy(COMPANY_ID, List.of(RoomType.STANDARD, RoomType.JUNIOR_SUITE));
+        bookingPolicyRepository.saveCompanyPolicy(updatedPolicy);
+
+        var result = bookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID);
+        assertEquals(updatedPolicy, result);
+    }
+
+    @Test
+    public void update_existing_employee_policy_with_master_suite_room_type() {
+        bookingPolicyRepository.saveEmployeePolicy(EMPLOYEE_POLICY);
+        var updatedPolicy = new EmployeePolicy(
+                COMPANY_ID,
+                List.of(RoomType.STANDARD, RoomType.JUNIOR_SUITE, RoomType.MASTER_SUITE)
+        );
+        bookingPolicyRepository.saveEmployeePolicy(updatedPolicy);
+
+        var result = bookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID);
+        assertEquals(updatedPolicy, result);
+    }
 }
