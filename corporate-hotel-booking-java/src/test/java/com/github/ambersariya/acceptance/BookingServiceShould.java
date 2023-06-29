@@ -15,9 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BookingServiceShould {
     private static final EmployeeId EMPLOYEE_ID = new EmployeeId("d4bd3200-3d27-4e92-936d-e8f1c47f5f21");
@@ -66,7 +64,6 @@ class BookingServiceShould {
         assertEquals(BOOKING1_CHECK_OUT, booking.checkOut());
     }
 
-    // suggest test case to make two bookings by the same employee but they cannot overlap
     @Test
     void make_two_bookings_by_the_same_employee_but_they_cannot_overlap() {
         var bookingService = new BookingService(bookingPolicyService, idGenerator, bookingRepository, hotelService);
