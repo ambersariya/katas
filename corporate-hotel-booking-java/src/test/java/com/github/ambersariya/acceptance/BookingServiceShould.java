@@ -1,6 +1,7 @@
 package com.github.ambersariya.acceptance;
 
 import com.github.ambersariya.booking.*;
+import com.github.ambersariya.core.CompanyId;
 import com.github.ambersariya.core.IdGenerator;
 import com.github.ambersariya.core.UuidGenerator;
 import com.github.ambersariya.employee.InMemoryEmployeeRepository;
@@ -23,7 +24,7 @@ class BookingServiceShould {
     private static final RoomType ROOM_TYPE = RoomType.STANDARD;
     private static final Date CHECK_IN = new Date(2020, 8, 5);
     private static final Date CHECK_OUT = new Date(2020, 8, 6);
-    private static final int COMPANY_ID = 1;
+    private static final CompanyId COMPANY_ID = new CompanyId("d4bd3200-3d27-4e92-936d-e8f1c47f5f21");
     private BookingPolicyService bookingPolicyService;
     private IdGenerator idGenerator;
     private InMemoryBookingRepository bookingRepository;

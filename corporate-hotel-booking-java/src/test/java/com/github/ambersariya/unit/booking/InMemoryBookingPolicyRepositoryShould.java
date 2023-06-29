@@ -3,6 +3,7 @@ package com.github.ambersariya.unit.booking;
 import com.github.ambersariya.booking.CompanyPolicy;
 import com.github.ambersariya.booking.EmployeePolicy;
 import com.github.ambersariya.booking.InMemoryBookingPolicyRepository;
+import com.github.ambersariya.core.CompanyId;
 import com.github.ambersariya.hotel.RoomType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class InMemoryBookingPolicyRepositoryShould {
-    private static final int COMPANY_ID = 1;
+    private static final CompanyId COMPANY_ID = new CompanyId("5c02072a-1a2e-4731-86e2-ef18859ddfb6");
     private static final int EMPLOYEE_ID = 1;
     private static final List<RoomType> COMPANY_ROOM_TYPES = List.of(RoomType.STANDARD);
     private static final List<RoomType> EMPLOYEE_ROOM_TYPES = List.of(RoomType.STANDARD, RoomType.JUNIOR_SUITE);
     private static final CompanyPolicy COMPANY_POLICY = new CompanyPolicy(COMPANY_ID, COMPANY_ROOM_TYPES);
-    private static final EmployeePolicy EMPLOYEE_POLICY = new EmployeePolicy(COMPANY_ID, EMPLOYEE_ROOM_TYPES);
+    private static final EmployeePolicy EMPLOYEE_POLICY = new EmployeePolicy(EMPLOYEE_ID, EMPLOYEE_ROOM_TYPES);
     private InMemoryBookingPolicyRepository bookingPolicyRepository;
 
     @BeforeEach
@@ -66,7 +67,7 @@ public class InMemoryBookingPolicyRepositoryShould {
     public void update_existing_employee_policy_with_master_suite_room_type() {
         bookingPolicyRepository.save(EMPLOYEE_POLICY);
         var updatedPolicy = new EmployeePolicy(
-                COMPANY_ID,
+                EMPLOYEE_ID,
                 List.of(RoomType.STANDARD, RoomType.JUNIOR_SUITE, RoomType.MASTER_SUITE)
         );
         bookingPolicyRepository.save(updatedPolicy);

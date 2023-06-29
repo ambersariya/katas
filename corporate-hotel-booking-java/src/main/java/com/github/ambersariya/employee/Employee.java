@@ -1,4 +1,6 @@
 package com.github.ambersariya.employee;
 
-public record Employee(int employeeId, int companyId) {
+import com.github.ambersariya.core.CompanyId;
+
+public record Employee(int employeeId, CompanyId companyId) {
 }

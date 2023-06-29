@@ -1,5 +1,6 @@
 package com.github.ambersariya.booking;
 
+import com.github.ambersariya.core.CompanyId;
 import com.github.ambersariya.employee.EmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
 
@@ -9,12 +10,13 @@ public class BookingPolicyService {
     private final BookingPolicyRepository bookingPolicyRepository;
     private final EmployeeRepository employeeRepository;
 
-    public BookingPolicyService(BookingPolicyRepository bookingPolicyRepository, EmployeeRepository employeeRepository) {
+    public BookingPolicyService(BookingPolicyRepository bookingPolicyRepository,
+            EmployeeRepository employeeRepository) {
         this.bookingPolicyRepository = bookingPolicyRepository;
         this.employeeRepository = employeeRepository;
     }
 
-    public void setCompanyPolicy(int companyId, List<RoomType> companyRoomTypes) {
+    public void setCompanyPolicy(CompanyId companyId, List<RoomType> companyRoomTypes) {
         var companyPolicy = new CompanyPolicy(companyId, companyRoomTypes);
         bookingPolicyRepository.save(companyPolicy);
     }

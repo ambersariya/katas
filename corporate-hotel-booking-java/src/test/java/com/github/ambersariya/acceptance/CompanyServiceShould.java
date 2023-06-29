@@ -1,6 +1,7 @@
 package com.github.ambersariya.acceptance;
 
 import com.github.ambersariya.CompanyService;
+import com.github.ambersariya.core.CompanyId;
 import com.github.ambersariya.employee.InMemoryEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class CompanyServiceShould {
     private static final int EMPLOYEE_ID = 1;
-    private static final int COMPANY_ID = 1;
+    private static final CompanyId COMPANY_ID = new CompanyId("5c02072a-1a2e-4731-86e2-ef18859ddfb6");
     private InMemoryEmployeeRepository employeeRepository;
     private CompanyService companyService;
 

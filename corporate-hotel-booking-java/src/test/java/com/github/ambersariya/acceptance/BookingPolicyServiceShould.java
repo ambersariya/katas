@@ -2,6 +2,7 @@ package com.github.ambersariya.acceptance;
 
 import com.github.ambersariya.booking.BookingPolicyService;
 import com.github.ambersariya.booking.InMemoryBookingPolicyRepository;
+import com.github.ambersariya.core.CompanyId;
 import com.github.ambersariya.employee.Employee;
 import com.github.ambersariya.employee.InMemoryEmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookingPolicyServiceShould {
-    private static final int COMPANY_ID = 1;
+    private static final CompanyId COMPANY_ID = new CompanyId("5c02072a-1a2e-4731-86e2-ef18859ddfb6");
     private static final int EMPLOYEE_ID = 1;
     private static final Employee EMPLOYEE = new Employee(EMPLOYEE_ID, COMPANY_ID);
     private InMemoryBookingPolicyRepository bookingPolicyRepository;

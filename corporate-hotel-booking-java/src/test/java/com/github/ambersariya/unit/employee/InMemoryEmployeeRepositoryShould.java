@@ -1,5 +1,6 @@
 package com.github.ambersariya.unit.employee;
 
+import com.github.ambersariya.core.CompanyId;
 import com.github.ambersariya.employee.Employee;
 import com.github.ambersariya.employee.InMemoryEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class InMemoryEmployeeRepositoryShould {
     private static final int EMPLOYEE_ID = 1;
-    private static final int COMPANY_ID = 1;
+    private static final CompanyId COMPANY_ID = new CompanyId("5c02072a-1a2e-4731-86e2-ef18859ddfb6");
 
     private static final Employee employee = new Employee(EMPLOYEE_ID, COMPANY_ID);
     private InMemoryEmployeeRepository employeeRepository;

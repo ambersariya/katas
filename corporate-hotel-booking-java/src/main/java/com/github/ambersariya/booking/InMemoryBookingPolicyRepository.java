@@ -2,8 +2,10 @@ package com.github.ambersariya.booking;
 
 import java.util.HashMap;
 
+import com.github.ambersariya.core.CompanyId;
+
 public class InMemoryBookingPolicyRepository implements BookingPolicyRepository {
-    private final HashMap<Integer, CompanyPolicy> companyPolicies = new HashMap<>();
+    private final HashMap<CompanyId, CompanyPolicy> companyPolicies = new HashMap<>();
     private final HashMap<Integer, EmployeePolicy> employeePolicies = new HashMap<>();
     @Override
     public void save(CompanyPolicy companyPolicy) {
@@ -16,7 +18,7 @@ public class InMemoryBookingPolicyRepository implements BookingPolicyRepository 
     }
 
     @Override
-    public CompanyPolicy findCompanyPolicyBy(int companyId) {
+    public CompanyPolicy findCompanyPolicyBy(CompanyId companyId) {
         return companyPolicies.get(companyId);
     }
 
