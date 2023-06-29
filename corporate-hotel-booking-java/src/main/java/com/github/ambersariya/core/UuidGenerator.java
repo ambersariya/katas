@@ -1,11 +1,11 @@
-package com.github.ambersariya;
+package com.github.ambersariya.core;
 
-import com.github.ambersariya.booking.IdGenerator;
+import java.util.UUID;
 
 public class UuidGenerator implements IdGenerator {
 
     @Override
     public String nextId() {
-        throw new UnsupportedOperationException();
+        return UUID.randomUUID().toString();
     }
 }

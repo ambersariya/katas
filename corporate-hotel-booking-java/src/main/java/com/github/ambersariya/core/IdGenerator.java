@@ -1,4 +1,4 @@
-package com.github.ambersariya.booking;
+package com.github.ambersariya.core;
 
 public interface IdGenerator {
 

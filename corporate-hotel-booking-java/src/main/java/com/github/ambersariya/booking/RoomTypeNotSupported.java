@@ -1,4 +1,7 @@
 package com.github.ambersariya.booking;
 
-public class UnsupportedRoomType extends RuntimeException {
+public class RoomTypeNotSupported extends RuntimeException {
+    public RoomTypeNotSupported(String message) {
+        super(message);
+    }
 }

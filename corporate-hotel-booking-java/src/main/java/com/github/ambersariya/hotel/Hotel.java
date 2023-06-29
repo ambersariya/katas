@@ -6,11 +6,13 @@ import java.util.List;
 public class Hotel {
     public final int id;
     public final String name;
+    private final List<RoomType> supportedRoomTypes;
     private final HashMap<Integer, Room> rooms;
 
-    public Hotel(int id, String name) {
+    public Hotel(int id, String name, List<RoomType> supportedRoomTypes) {
         this.id = id;
         this.name = name;
+        this.supportedRoomTypes = supportedRoomTypes;
         rooms = new HashMap<>();
     }
 
@@ -39,5 +41,9 @@ public class Hotel {
 
     public int numberOfRooms() {
         return rooms.size();
+    }
+
+    public boolean supportsRoomType(RoomType roomType) {
+        return supportedRoomTypes.contains(roomType);
     }
 }

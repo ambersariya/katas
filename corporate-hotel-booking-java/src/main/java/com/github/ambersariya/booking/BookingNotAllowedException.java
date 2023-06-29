@@ -1,4 +1,4 @@
-package com.github.ambersariya;
+package com.github.ambersariya.booking;
 
 public class BookingNotAllowedException extends RuntimeException {
 }

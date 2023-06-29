@@ -11,7 +11,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HotelShould {
-    private static final Hotel hotel = new Hotel(1, "premier inn");
+    private static final List<RoomType> SUPPORTED_ROOM_TYPES = List.of(RoomType.STANDARD, RoomType.MASTER_SUITE);
+    private static final Hotel hotel = new Hotel(1, "premier inn", SUPPORTED_ROOM_TYPES);
     private static final List<Room> rooms = new ArrayList<Room>();
     private static final Room STANDARD_ROOM = new Room(1, RoomType.STANDARD);
 

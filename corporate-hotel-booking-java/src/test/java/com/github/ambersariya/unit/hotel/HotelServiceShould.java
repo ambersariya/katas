@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
@@ -17,7 +19,8 @@ import static org.mockito.Mockito.when;
 public class HotelServiceShould {
     private static final String HOTEL_NAME = "premier inn";
     private static final int HOTEL_ID = 2;
-    private static final Hotel HOTEL = new Hotel(HOTEL_ID, HOTEL_NAME);
+    private static final List<RoomType> SUPPORTED_ROOM_TYPES = List.of(RoomType.STANDARD, RoomType.MASTER_SUITE);
+    private static final Hotel HOTEL = new Hotel(HOTEL_ID, HOTEL_NAME, SUPPORTED_ROOM_TYPES);
     @InjectMocks
     private HotelService hotelService;
     @Mock
