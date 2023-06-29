@@ -5,6 +5,7 @@ import com.github.ambersariya.booking.BookingPolicyService;
 import com.github.ambersariya.booking.CompanyPolicy;
 import com.github.ambersariya.booking.EmployeePolicy;
 import com.github.ambersariya.core.CompanyId;
+import com.github.ambersariya.core.EmployeeId;
 import com.github.ambersariya.employee.Employee;
 import com.github.ambersariya.employee.EmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class BookingPolicyServiceShould {
     private static final CompanyId COMPANY_ID = new CompanyId("5c02072a-1a2e-4731-86e2-ef18859ddfb6");
-    private static final int EMPLOYEE_ID = 1;
+    private static final EmployeeId EMPLOYEE_ID = new EmployeeId("a3a42ad5-8610-4d63-81a8-44915281332c");
     private static final Employee EMPLOYEE = new Employee(EMPLOYEE_ID, COMPANY_ID);
     @Mock
     private BookingPolicyRepository companyBookingPolicyRepository;

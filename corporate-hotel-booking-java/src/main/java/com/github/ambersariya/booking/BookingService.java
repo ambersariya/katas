@@ -1,5 +1,6 @@
 package com.github.ambersariya.booking;
 
+import com.github.ambersariya.core.EmployeeId;
 import com.github.ambersariya.core.IdGenerator;
 import com.github.ambersariya.hotel.HotelNotFound;
 import com.github.ambersariya.hotel.HotelService;
@@ -20,7 +21,7 @@ public class BookingService {
         this.hotelService = hotelService;
     }
 
-    public Booking book(int employeeId, int hotelId, RoomType roomType, Date checkIn, Date checkOut) {
+    public Booking book(EmployeeId employeeId, int hotelId, RoomType roomType, Date checkIn, Date checkOut) {
         validateBookingDates(checkIn, checkOut);
         validateHotelExists(hotelId);
         validateRoomTypeIsSupported(hotelId, roomType);
@@ -29,7 +30,7 @@ public class BookingService {
         if (!isBookingAllowed) {
             throw new BookingNotAllowedException();
         }
-        var booking = new Booking(idGenerator.nextId(), employeeId, hotelId, roomType, checkIn, checkOut);
+        var booking = new Booking(idGenerator.nextId(), hotelId, employeeId, roomType, checkIn, checkOut);
         this.bookingRepository.saveBooking(booking);
 
         return booking;

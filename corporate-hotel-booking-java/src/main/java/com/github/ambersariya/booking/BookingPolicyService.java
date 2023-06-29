@@ -1,6 +1,7 @@
 package com.github.ambersariya.booking;
 
 import com.github.ambersariya.core.CompanyId;
+import com.github.ambersariya.core.EmployeeId;
 import com.github.ambersariya.employee.EmployeeRepository;
 import com.github.ambersariya.hotel.RoomType;
 
@@ -21,12 +22,12 @@ public class BookingPolicyService {
         bookingPolicyRepository.save(companyPolicy);
     }
 
-    public void setEmployeePolicy(int employeeId, List<RoomType> employeeRoomTypes) {
+    public void setEmployeePolicy(EmployeeId employeeId, List<RoomType> employeeRoomTypes) {
         var employeePolicy = new EmployeePolicy(employeeId, employeeRoomTypes);
         bookingPolicyRepository.save(employeePolicy);
     }
 
-    public boolean isBookingAllowed(int employeeId, RoomType roomType) {
+    public boolean isBookingAllowed(EmployeeId employeeId, RoomType roomType) {
         var employeePolicy = bookingPolicyRepository.findEmployeePolicyBy(employeeId);
         if (employeePolicy != null) {
             return employeePolicy.roomTypes().contains(roomType);

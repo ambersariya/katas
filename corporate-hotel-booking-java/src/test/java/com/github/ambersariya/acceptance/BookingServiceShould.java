@@ -2,6 +2,7 @@ package com.github.ambersariya.acceptance;
 
 import com.github.ambersariya.booking.*;
 import com.github.ambersariya.core.CompanyId;
+import com.github.ambersariya.core.EmployeeId;
 import com.github.ambersariya.core.IdGenerator;
 import com.github.ambersariya.core.UuidGenerator;
 import com.github.ambersariya.employee.InMemoryEmployeeRepository;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class BookingServiceShould {
-    private static final int EMPLOYEE_ID = 1;
+    private static final EmployeeId EMPLOYEE_ID = new EmployeeId("d4bd3200-3d27-4e92-936d-e8f1c47f5f21");
     private static final int HOTEL_ID = 1;
     private static final RoomType ROOM_TYPE = RoomType.STANDARD;
     private static final Date CHECK_IN = new Date(2020, 8, 5);
