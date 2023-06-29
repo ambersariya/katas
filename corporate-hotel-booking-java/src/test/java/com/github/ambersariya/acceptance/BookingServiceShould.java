@@ -23,8 +23,11 @@ class BookingServiceShould {
     private static final EmployeeId EMPLOYEE_ID = new EmployeeId("d4bd3200-3d27-4e92-936d-e8f1c47f5f21");
     private static final int HOTEL_ID = 1;
     private static final RoomType ROOM_TYPE = RoomType.STANDARD;
-    private static final Date CHECK_IN = new Date(2020, 8, 5);
-    private static final Date CHECK_OUT = new Date(2020, 8, 6);
+    private static final Date BOOKIN1_CHECK_IN = new Date(2020, 8, 5);
+    private static final Date BOOKING1_CHECK_OUT = new Date(2020, 8, 6);
+
+    private static final Date BOOKING2_CHECK_IN = new Date(2020, 9, 5);
+    private static final Date BOOKING2_CHECK_OUT = new Date(2020, 9, 6);
     private static final CompanyId COMPANY_ID = new CompanyId("d4bd3200-3d27-4e92-936d-e8f1c47f5f21");
     private BookingPolicyService bookingPolicyService;
     private IdGenerator idGenerator;
@@ -52,14 +55,41 @@ class BookingServiceShould {
         hotelService.addHotel(HOTEL_ID, "Hotel Casablanca");
         hotelService.setRoom(HOTEL_ID, 10, ROOM_TYPE);
 
-        var booking = bookingService.book(EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, CHECK_IN, CHECK_OUT);
+        var booking = bookingService.book(EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, BOOKIN1_CHECK_IN, BOOKING1_CHECK_OUT);
 
         assertInstanceOf(Booking.class, booking);
         assertNotNull(booking.id());
         assertEquals(EMPLOYEE_ID, booking.employeeId());
         assertEquals(HOTEL_ID, booking.hotelId());
         assertEquals(ROOM_TYPE, booking.roomType());
-        assertEquals(CHECK_IN, booking.checkIn());
-        assertEquals(CHECK_OUT, booking.checkOut());
+        assertEquals(BOOKIN1_CHECK_IN, booking.checkIn());
+        assertEquals(BOOKING1_CHECK_OUT, booking.checkOut());
+    }
+
+    // suggest test case to make two bookings by the same employee but they cannot overlap
+    @Test
+    void make_two_bookings_by_the_same_employee_but_they_cannot_overlap() {
+        var bookingService = new BookingService(bookingPolicyService, idGenerator, bookingRepository, hotelService);
+        hotelService.addHotel(HOTEL_ID, "Hotel Casablanca");
+        hotelService.setRoom(HOTEL_ID, 10, ROOM_TYPE);
+
+        var booking = bookingService.book(EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, BOOKIN1_CHECK_IN, BOOKING1_CHECK_OUT);
+        var booking2 = bookingService.book(EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, BOOKING2_CHECK_IN, BOOKING2_CHECK_OUT);
+
+        assertInstanceOf(Booking.class, booking);
+        assertNotNull(booking.id());
+        assertEquals(EMPLOYEE_ID, booking.employeeId());
+        assertEquals(HOTEL_ID, booking.hotelId());
+        assertEquals(ROOM_TYPE, booking.roomType());
+        assertEquals(BOOKIN1_CHECK_IN, booking.checkIn());
+        assertEquals(BOOKING1_CHECK_OUT, booking.checkOut());
+
+        assertInstanceOf(Booking.class, booking2);
+        assertNotNull(booking2.id());
+        assertEquals(EMPLOYEE_ID, booking2.employeeId());
+        assertEquals(HOTEL_ID, booking2.hotelId());
+        assertEquals(ROOM_TYPE, booking2.roomType());
+        assertEquals(BOOKING2_CHECK_IN, booking2.checkIn());
+        assertEquals(BOOKING2_CHECK_OUT, booking2.checkOut());
     }
 }
