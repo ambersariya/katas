@@ -28,7 +28,7 @@ public class InMemoryBookingPolicyRepositoryShould {
 
     @Test
     public void find_a_company_booking_policy_by_id() {
-        bookingPolicyRepository.saveCompanyPolicy(COMPANY_POLICY);
+        bookingPolicyRepository.save(COMPANY_POLICY);
         var result = bookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID);
 
         assertEquals(COMPANY_POLICY, result);
@@ -36,7 +36,7 @@ public class InMemoryBookingPolicyRepositoryShould {
 
     @Test
     public void find_an_employee_policy_by_id() {
-        bookingPolicyRepository.saveEmployeePolicy(EMPLOYEE_POLICY);
+        bookingPolicyRepository.save(EMPLOYEE_POLICY);
         var result = bookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID);
 
         assertEquals(EMPLOYEE_POLICY, result);
@@ -54,9 +54,9 @@ public class InMemoryBookingPolicyRepositoryShould {
 
     @Test
     public void update_existing_company_policy_with_junior_suite_room_type() {
-        bookingPolicyRepository.saveCompanyPolicy(COMPANY_POLICY);
+        bookingPolicyRepository.save(COMPANY_POLICY);
         var updatedPolicy = new CompanyPolicy(COMPANY_ID, List.of(RoomType.STANDARD, RoomType.JUNIOR_SUITE));
-        bookingPolicyRepository.saveCompanyPolicy(updatedPolicy);
+        bookingPolicyRepository.save(updatedPolicy);
 
         var result = bookingPolicyRepository.findCompanyPolicyBy(COMPANY_ID);
         assertEquals(updatedPolicy, result);
@@ -64,12 +64,12 @@ public class InMemoryBookingPolicyRepositoryShould {
 
     @Test
     public void update_existing_employee_policy_with_master_suite_room_type() {
-        bookingPolicyRepository.saveEmployeePolicy(EMPLOYEE_POLICY);
+        bookingPolicyRepository.save(EMPLOYEE_POLICY);
         var updatedPolicy = new EmployeePolicy(
                 COMPANY_ID,
                 List.of(RoomType.STANDARD, RoomType.JUNIOR_SUITE, RoomType.MASTER_SUITE)
         );
-        bookingPolicyRepository.saveEmployeePolicy(updatedPolicy);
+        bookingPolicyRepository.save(updatedPolicy);
 
         var result = bookingPolicyRepository.findEmployeePolicyBy(EMPLOYEE_ID);
         assertEquals(updatedPolicy, result);

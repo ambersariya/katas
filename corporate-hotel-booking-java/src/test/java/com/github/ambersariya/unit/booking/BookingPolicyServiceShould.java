@@ -42,7 +42,7 @@ public class BookingPolicyServiceShould {
 
         bookingPolicyService.setCompanyPolicy(COMPANY_ID, companyRoomTypes);
 
-        verify(companyBookingPolicyRepository).saveCompanyPolicy(companyPolicy);
+        verify(companyBookingPolicyRepository).save(companyPolicy);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class BookingPolicyServiceShould {
 
         bookingPolicyService.setEmployeePolicy(EMPLOYEE_ID, employeeRoomTypes);
 
-        verify(companyBookingPolicyRepository).saveEmployeePolicy(employeePolicy);
+        verify(companyBookingPolicyRepository).save(employeePolicy);
     }
 
     @Test

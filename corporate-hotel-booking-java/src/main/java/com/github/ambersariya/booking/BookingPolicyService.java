@@ -16,12 +16,12 @@ public class BookingPolicyService {
 
     public void setCompanyPolicy(int companyId, List<RoomType> companyRoomTypes) {
         var companyPolicy = new CompanyPolicy(companyId, companyRoomTypes);
-        bookingPolicyRepository.saveCompanyPolicy(companyPolicy);
+        bookingPolicyRepository.save(companyPolicy);
     }
 
     public void setEmployeePolicy(int employeeId, List<RoomType> employeeRoomTypes) {
         var employeePolicy = new EmployeePolicy(employeeId, employeeRoomTypes);
-        bookingPolicyRepository.saveEmployeePolicy(employeePolicy);
+        bookingPolicyRepository.save(employeePolicy);
     }
 
     public boolean isBookingAllowed(int employeeId, RoomType roomType) {
