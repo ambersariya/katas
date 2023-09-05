@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "shopping-cart-kata"
+version = "0.1.0"
+description = ""
+authors = ["ambersariya <1080238+ambersariya@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.1"
+pytest-mock = "^3.11.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
