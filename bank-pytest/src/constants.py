@@ -1,0 +1,1 @@
+TRANSACTION_DATE_FORMAT = '%d/%m/%Y'

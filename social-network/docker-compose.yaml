@@ -1,0 +1,10 @@
+version: '3.0'
+
+services:
+  social-network-api:
+    image: social-network-api:latest
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+

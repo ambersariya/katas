@@ -1,0 +1,9 @@
+title Payments
+
+Bob->PaymentService: make_payment(user_id, shopping_basket_id, payment_details)
+PaymentService->ShoppingBasketService: find_basket_by_id()
+PaymentService<--ShoppingBasketService: basket
+PaymentService-->PaymentService: Order.from_basket(basket)
+PaymentService->PaymentGateway: pay(order, user_id, payment_details)
+PaymentGateway->PaymentProvider: pay(paydetails)
+PaymentGateway->OrderRepository: save(order(paydetails.ref))

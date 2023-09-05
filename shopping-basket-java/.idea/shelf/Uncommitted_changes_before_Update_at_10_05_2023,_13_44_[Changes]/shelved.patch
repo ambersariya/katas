@@ -1,0 +1,17 @@
+Index: src/main/java/shopping_basket/ShoppingBasketService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package shopping_basket;\n\npublic class ShoppingBasketService {\n    public void addItem(UserID userId, ProductID productID, int quantity) {\n    }\n\n    public ShoppingBasket basketFor(UserID userId) {\n        return null;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/shopping_basket/ShoppingBasketService.java b/src/main/java/shopping_basket/ShoppingBasketService.java
+--- a/src/main/java/shopping_basket/ShoppingBasketService.java	(revision 409406668ed99b57b83c6a07cc9a9411ebc98631)
++++ b/src/main/java/shopping_basket/ShoppingBasketService.java	(date 1683722635339)
+@@ -5,6 +5,5 @@
+     }
+ 
+     public ShoppingBasket basketFor(UserID userId) {
+-        return null;
+     }
+ }

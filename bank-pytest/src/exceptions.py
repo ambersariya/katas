@@ -1,0 +1,2 @@
+class NoTransactionsToPrint(RuntimeError):
+    pass

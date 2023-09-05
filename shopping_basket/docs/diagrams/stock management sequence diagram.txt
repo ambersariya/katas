@@ -1,0 +1,13 @@
+title Out of stock product (final)
+
+Bob->ShoppingBasketService: add_item(product_id, user_id, quantity)
+ShoppingBasketService->ProductService: find_and_reserve(product_id, quantity)
+
+ProductService-->ProductRepository: find_by_id(product_id)
+ProductRepository-->ProductService: < Product
+ProductService-->StockManagementService: reserve(product_id, quantity)
+StockManagementService-->StockRepository: update(Stock(reserved=1, available=1, product_id=1))
+ProductService-->ShoppingBasketService: < Product
+
+ShoppingBasketService->ShoppingBasket: add_item(shopping_basket_item)
+ShoppingBasket-->ShoppingBasketRepository: add_item()
