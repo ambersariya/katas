@@ -1,6 +1,6 @@
 import pytest
 
-from shopping_cart_kata.shopping_cart import ShoppingCart, APrinter
+from shopping_cart_kata.shopping_cart import ShoppingCart, CartItems
 
 PRODUCT_ICEBERG = "iceberg"
 PRODUCT_TOMATO = "tomato"
@@ -25,20 +25,15 @@ PRINTED_CART = """-
 | Total price: 11.71 |
 -"""
 
-
-@pytest.fixture
-def cart_printer():
-    return APrinter()
+CART_ITEMS = CartItems()
 
 
 @pytest.fixture
-def shopping_cart(cart_printer):
-    return ShoppingCart(
-        cart_printer=cart_printer
-    )
+def shopping_cart():
+    return ShoppingCart()
 
 
-def test_print_shopping_cart_contents(cart_printer, shopping_cart):
+def test_print_shopping_cart_contents(shopping_cart):
     shopping_cart.add_item(PRODUCT_ICEBERG)
     shopping_cart.add_item(PRODUCT_ICEBERG)
     shopping_cart.add_item(PRODUCT_ICEBERG)
@@ -48,6 +43,6 @@ def test_print_shopping_cart_contents(cart_printer, shopping_cart):
     shopping_cart.add_item(PRODUCT_BREAD)
     shopping_cart.add_item(PRODUCT_CORN)
     shopping_cart.apply_discount(PROMO_5)
-    shopping_cart.print_shopping_cart()
+    shopping_cart_items = shopping_cart.print_shopping_cart()
 
-    assert PRINTED_CART == cart_printer.print()
+    assert CART_ITEMS == shopping_cart_items

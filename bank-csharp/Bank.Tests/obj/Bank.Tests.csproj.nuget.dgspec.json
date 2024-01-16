@@ -1,0 +1,148 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank.Tests/Bank.Tests.csproj": {}
+  },
+  "projects": {
+    "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank.Tests/Bank.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank.Tests/Bank.Tests.csproj",
+        "projectName": "Bank.Tests",
+        "projectPath": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank.Tests/Bank.Tests.csproj",
+        "packagesPath": "/Users/danishjaved/.nuget/packages/",
+        "outputPath": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/danishjaved/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank/Bank.csproj": {
+                "projectPath": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank/Bank.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2023.3.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.6.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.2, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank/Bank.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank/Bank.csproj",
+        "projectName": "Bank",
+        "projectPath": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank/Bank.csproj",
+        "packagesPath": "/Users/danishjaved/.nuget/packages/",
+        "outputPath": "/Users/danishjaved/development/github.com/katas/bank-csharp/Bank/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/danishjaved/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
