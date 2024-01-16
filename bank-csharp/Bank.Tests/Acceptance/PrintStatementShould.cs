@@ -18,8 +18,7 @@ public class PrintStatementShould
         mockedDatetimeProvider.SetupSequence(m => m.Today())
             .Returns("2012-01-10")
             .Returns("2012-01-13")
-            .Returns("2012-01-14")
-            ;
+            .Returns("2012-01-14");
 
         var statementPrinter = new ConsoleStatementPrinter();
         var accountService = new AccountService(
