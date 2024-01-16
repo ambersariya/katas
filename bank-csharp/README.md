@@ -36,16 +36,16 @@ public interface AccountService
 Here's the specification for an acceptance test that expresses the desired behaviour for this
 
 ```gherkin
-Given a client makes a deposit of 1000 on 10-01-2012
-And a deposit of 2000 on 13-01-2012
-And a withdrawal of 500 on 14-01-2012
+Given a client makes a deposit of 1000 on 2012-01-10
+And a deposit of 2000 on 2012-01-13
+And a withdrawal of 500 on 2012-01-14
 When they print their bank statement
 Then they would see:
 
 Date       || Amount || Balance
-14/01/2012 || -500   || 2500
-13/01/2012 || 2000   || 3000
-10/01/2012 || 1000   || 1000
+2012-01-14 || -500   || 2500
+2012-01-13 || 2000   || 3000
+2012-01-10 || 1000   || 1000
 ```
 
 We're using ints for the money amounts to keep the auxiliaries as simple as possible. In a real system, we would always
