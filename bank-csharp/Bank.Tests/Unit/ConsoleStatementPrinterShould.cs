@@ -1,8 +1,5 @@
-using JetBrains.Annotations;
-
 namespace Bank.Tests.Unit;
 
-[TestSubject(typeof(ConsoleStatementPrinter))]
 public class ConsoleStatementPrinterShould
 {
     [Fact]
