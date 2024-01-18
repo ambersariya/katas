@@ -45,7 +45,7 @@ public class AccountServiceShould
     }
 
     [Fact]
-    void Print_Statement()
+    public void Print_Statement()
     {
         _accountService.PrintStatement();
 
