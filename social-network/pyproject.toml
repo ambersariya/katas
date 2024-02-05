@@ -10,7 +10,7 @@ packages = [{include = "src"}]
 python = "^3.10"
 pydantic = "^1.10.2"
 lagom = "^2.2.0"
-fastapi = "^0.95.0"
+fastapi = "^0.109.1"
 uvicorn = "^0.20.0"
 httpx = "^0.23.2"
 pymessagebus = "^1.2.3"
