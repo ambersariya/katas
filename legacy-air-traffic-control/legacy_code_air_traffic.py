@@ -1,16 +1,18 @@
-from typing import List, Tuple
-
-Decision = Tuple[str, str, List[str]]
-
-def air_traffic_control_system(
-        flight_number, aircraft_type, scheduled_time, current_time, weather, emergency) -> Decision:
-    decision: str = "Hold"
+def air_traffic_control_system(flight_number, aircraft_type, scheduled_time, current_time, weather, emergency):
+    decision = "Hold"
     runway = None
-    instructions: list[str] = []
+    instructions = []
 
     # Handling emergencies
     if emergency:
-        return handle_emergency(decision, emergency, flight_number, instructions, runway)
+        if emergency == "medical":
+            decision = "Priority Landing"
+            runway = "Runway 1"
+        elif emergency == "mechanical":
+            decision = "Immediate Landing"
+            runway = "Runway 2"
+        instructions.append("Clear all paths for " + flight_number)
+        return decision, runway, instructions
 
     # Weather considerations
     if weather == "clear":
@@ -49,15 +51,4 @@ def air_traffic_control_system(
         instructions.append("Approach " + runway + " from the north")
         instructions.append("Maintain altitude until further notice")
 
-    return decision, runway, instructions
-
-
-def handle_emergency(decision, emergency, flight_number, instructions, runway) -> Decision:
-    if emergency == "medical":
-        decision = "Priority Landing"
-        runway = "Runway 1"
-    elif emergency == "mechanical":
-        decision = "Immediate Landing"
-        runway = "Runway 2"
-    instructions.append("Clear all paths for " + flight_number)
     return decision, runway, instructions
